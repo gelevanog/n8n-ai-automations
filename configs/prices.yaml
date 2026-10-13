@@ -1,0 +1,7 @@
+# USD per million tokens, used for the cost-per-item metric. OpenRouter ":free" models cost nothing; paid models are
+# refused unless RELAY_ALLOW_PAID_MODELS=true. Unknown paid models are counted at `default` so cost is never hidden.
+free: {input: 0.0, output: 0.0}
+default: {input: 3.0, output: 15.0}
+models:
+  openai/gpt-5-mini: {input: 0.25, output: 2.0}
+  qwen/qwen3.7-plus: {input: 0.4, output: 1.2}

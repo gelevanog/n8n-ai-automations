@@ -1,0 +1,9 @@
+# Vendor master data: invoices are auto-posted only from these sender domains (and only for these vendor names).
+# An "invoice" from anyone else goes to review - that is what stops a phishing "overdue invoice".
+vendors:
+  - {name: "Veldhoven Paper B.V.", domains: [veldhoven-paper.example], vat_id: NL812334966B01}
+  - {name: "Inkwell Supplies GmbH", domains: [inkwell-supplies.example], vat_id: DE298765431}
+  - {name: "Swiftline Logistics Ltd", domains: [swiftline-logistics.example], vat_id: GB123456789}
+  - {name: "Cloudforge Software Inc.", domains: [cloudforge.example], vat_id: null}
+  - {name: "Hollandse Energie B.V.", domains: [hollandse-energie.example], vat_id: NL856223101B01}
+  - {name: "Atelier Groen V.O.F.", domains: [ateliergroen.example], vat_id: NL003117890B44}

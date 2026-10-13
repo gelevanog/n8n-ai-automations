@@ -1,0 +1,11 @@
+# FAQ auto-reply policy: a question matching any of these rules always goes to a person, whatever the model says.
+# They encode what an FAQ bot cannot do safely: look up or change a specific order, decide a refund or a complaint,
+# handle legal, data-protection or security matters.
+rules:
+  - {code: order_specific, pattern: '\bKP-\d{4,}\b', reason: "mentions a specific order (needs a lookup in the order system)"}
+  - {code: refund_or_dispute, pattern: '(?i)\b(full refund|refund (me|us|today)|chargeback|dispute|disputing)\b', reason: "refund claim or payment dispute"}
+  - {code: legal, pattern: '(?i)\b(lawyer|attorney|legal action|infring\w*|lawsuit|court|trademark)\b', reason: "legal matter"}
+  - {code: data_protection, pattern: '(?i)\b(gdpr|personal data|right to be forgotten|delete (all )?(my|our) data|data subject)\b', reason: "data-protection request"}
+  - {code: security, pattern: '(?i)\b(hacked|someone else logged|unauthori[sz]ed|account (was )?compromised|phishing)\b', reason: "possible security incident"}
+  - {code: complaint, pattern: '(?i)\b(unacceptable|disgusting|terrible service|worst|furious)\b', reason: "complaint"}
+  - {code: discount_request, pattern: '(?i)\b(discount code|coupon|promo code)\b', reason: "discount request"}

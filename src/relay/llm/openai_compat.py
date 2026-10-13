@@ -15,7 +15,7 @@ Kind = Literal["openrouter", "qwen", "openai", "compat"]
 GUARDED_KINDS = frozenset({"openrouter", "compat"})
 
 OPENROUTER_HEADERS = {
-    "HTTP-Referer": "https://github.com/gelevanog/ai-web-scraper",
+    "HTTP-Referer": "https://github.com/gelevanog/n8n-ai-automations",
     "X-Title": "Relay",
 }
 _KEY_NAMES = {

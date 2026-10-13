@@ -1,0 +1,38 @@
+# Ideal customer profile for Kestrel Print Co. (fictional): the lead score is computed from these rules in code,
+# from the facts enrichment found on the company's site plus the quantity in the form. The model never sets the score.
+industry:
+  food_beverage: 30
+  cosmetics_beauty: 30
+  fashion_apparel: 30
+  home_lifestyle: 25
+  pets: 25
+  health_wellness: 15
+  agency: 20
+  technology: 5
+  education: 0
+  other: 5
+employees_band:
+  "1-10": 5
+  "11-50": 20
+  "51-200": 25
+  "201-500": 20
+  "500+": 15
+country:
+  # EU/EEA, UK and Switzerland ship from Utrecht in days; North America by sea-air.
+  near: [AT, BE, BG, HR, CY, CZ, DK, EE, FI, FR, DE, GR, HU, IE, IT, LV, LT, LU, MT, NL, PL, PT, RO, SK, SI, ES, SE, GB, NO, CH]
+  near_points: 15
+  far: [US, CA]
+  far_points: 5
+sells_online: 5
+quantity:
+  # first matching threshold wins; null (not stated) gets `unknown`
+  - {min: 10000, points: 25}
+  - {min: 2000, points: 20}
+  - {min: 1000, points: 15}
+  - {min: 250, points: 5}
+  - {min: 0, points: 0}
+quantity_unknown: 5
+disqualify_industries: [printing_packaging]
+tiers:
+  hot: 70
+  warm: 40
