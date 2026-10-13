@@ -125,7 +125,7 @@ def check_invoice(
 
     def check(code: str, ok: bool, detail: str = "", issue: str | None = None) -> None:
         checks.append(Check(code=code, ok=ok, detail=detail))
-        if not ok:
+        if not ok and (issue or code) not in issues:
             issues.append(issue or code)
 
     issue_date = parse_date(invoice.issue_date)
