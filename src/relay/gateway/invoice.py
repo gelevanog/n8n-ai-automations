@@ -125,9 +125,7 @@ def check_invoice(
         invoice.due_date = due_date.isoformat()
 
     check("has_invoice_number", bool(invoice.invoice_number), issue="missing_invoice_number")
-    missing = [
-        name for name in ("vendor", "issue_date", "currency", "total") if getattr(invoice, name) in (None, "")
-    ]
+    missing = [name for name in ("vendor", "issue_date", "currency", "total") if getattr(invoice, name) in (None, "")]
     check("required_fields", not missing, ", ".join(missing), issue="missing_fields")
 
     # Arithmetic, in code.
@@ -142,24 +140,42 @@ def check_invoice(
     check("line_math", not bad_lines, "; ".join(bad_lines), issue="line_math_mismatch")
     if lines and invoice.subtotal is not None:
         line_sum = float(sum(Decimal(str(line.amount)) for line in lines))
-        check("lines_sum_to_subtotal", _close(line_sum, invoice.subtotal, tol),
-              f"lines {line_sum:.2f} vs subtotal {invoice.subtotal:.2f}", issue="subtotal_mismatch")
+        check(
+            "lines_sum_to_subtotal",
+            _close(line_sum, invoice.subtotal, tol),
+            f"lines {line_sum:.2f} vs subtotal {invoice.subtotal:.2f}",
+            issue="subtotal_mismatch",
+        )
     if invoice.subtotal is not None and invoice.vat_amount is not None and invoice.vat_rate is not None:
         expected_vat = round(invoice.subtotal * invoice.vat_rate, 2)
-        check("vat_amount", _close(expected_vat, invoice.vat_amount, tol),
-              f"{invoice.vat_rate:.0%} of {invoice.subtotal:.2f} = {expected_vat:.2f}, printed {invoice.vat_amount:.2f}",
-              issue="vat_mismatch")
+        check(
+            "vat_amount",
+            _close(expected_vat, invoice.vat_amount, tol),
+            f"{invoice.vat_rate:.0%} of {invoice.subtotal:.2f} = {expected_vat:.2f}, printed {invoice.vat_amount:.2f}",
+            issue="vat_mismatch",
+        )
     if invoice.subtotal is not None and invoice.total is not None:
         expected_total = (invoice.subtotal or 0) + (invoice.vat_amount or 0)
-        check("total", _close(expected_total, invoice.total, tol),
-              f"subtotal + VAT = {expected_total:.2f}, printed {invoice.total:.2f}", issue="total_mismatch")
+        check(
+            "total",
+            _close(expected_total, invoice.total, tol),
+            f"subtotal + VAT = {expected_total:.2f}, printed {invoice.total:.2f}",
+            issue="total_mismatch",
+        )
     if issue_date and due_date:
-        check("due_after_issue", due_date >= issue_date, f"{invoice.issue_date} -> {invoice.due_date}",
-              issue="due_before_issue")
+        check(
+            "due_after_issue",
+            due_date >= issue_date,
+            f"{invoice.issue_date} -> {invoice.due_date}",
+            issue="due_before_issue",
+        )
 
     # Grounding: the key values must be printed in the document.
-    check("total_in_document", grounded_number(invoice.total, text) if invoice.total is not None else False,
-          issue="ungrounded_total")
+    check(
+        "total_in_document",
+        grounded_number(invoice.total, text) if invoice.total is not None else False,
+        issue="ungrounded_total",
+    )
     if invoice.invoice_number:
         check("number_in_document", grounded_text(invoice.invoice_number, text), issue="ungrounded_invoice_number")
 
@@ -177,10 +193,18 @@ def check_invoice(
 
     # Approval policy and confidence.
     if invoice.total is not None:
-        check("below_auto_post_limit", invoice.total <= settings.invoice_auto_post_limit,
-              f"{invoice.total:.2f} vs limit {settings.invoice_auto_post_limit:.2f}", issue="over_limit")
-    check("confidence", invoice.confidence >= settings.invoice_min_confidence,
-          f"{invoice.confidence:.2f} vs {settings.invoice_min_confidence:.2f}", issue="low_confidence")
+        check(
+            "below_auto_post_limit",
+            invoice.total <= settings.invoice_auto_post_limit,
+            f"{invoice.total:.2f} vs limit {settings.invoice_auto_post_limit:.2f}",
+            issue="over_limit",
+        )
+    check(
+        "confidence",
+        invoice.confidence >= settings.invoice_min_confidence,
+        f"{invoice.confidence:.2f} vs {settings.invoice_min_confidence:.2f}",
+        issue="low_confidence",
+    )
 
     return InvoiceResponse(
         invoice=invoice,

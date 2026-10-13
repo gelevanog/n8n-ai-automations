@@ -1,0 +1,480 @@
+{
+  "id": "RelaySupportFaq",
+  "name": "Relay - 04 Support FAQ auto-reply",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "cf34aede-823c-5a30-bb85-1a5795794aea",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -420
+      ],
+      "parameters": {
+        "content": "## Support FAQ auto-reply\nThe **AI gateway** retrieves knowledge-base articles (BM25), answers with **citations**, and gates the answer: escalation rules (orders, refunds, legal, privacy, security, complaints), retrieval coverage, model confidence, cited articles only and **no number that is not in the cited article**.\n\nPassed: emailed to the customer and logged as a solved ticket. Otherwise: an open ticket with the reasons, the draft and the suggested articles.",
+        "height": 240,
+        "width": 520,
+        "color": 4
+      }
+    },
+    {
+      "id": "0d4054dc-a0aa-5076-91fa-df7cbfff4c8c",
+      "name": "Customer question",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "support-faq",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "1e62b393-24b7-56ce-8c12-787345d70cf1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayWebhookAuth",
+          "name": "Relay webhook secret"
+        }
+      }
+    },
+    {
+      "id": "11c9f5e9-dcc9-5486-86cb-fb4a0b4b9fb7",
+      "name": "Start run (idempotency)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/start",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ workflow: 'faq', idempotency_key: $('Customer question').first().json.body.message_id || ((($('Customer question').first().json.body.customer_email || '') + '|' + ($('Customer question').first().json.body.question || '')).slice(0, 300)), execution_id: $execution.id, input: $('Customer question').first().json.body, source: $('Customer question').first().json.body.channel || 'email', title: ($('Customer question').first().json.body.question || '').slice(0, 120) }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Same key twice = duplicate: answered from the first run",
+      "notesInFlow": true
+    },
+    {
+      "id": "a1e14173-51ba-5d98-b286-9ce9377d2885",
+      "name": "Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "22b79179-d8fb-5373-919e-2fd988bc8cdb",
+              "leftValue": "={{ $json.duplicate }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "a855ea40-9012-5842-b93c-e0c040501002",
+      "name": "Respond: duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        -180
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'duplicate', run_id: $json.run_id, previous_status: $json.status, output: $json.output }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "e6519fe9-e479-5b6b-ac83-473bd2c9fd33",
+      "name": "Answer from knowledge base (AI gateway)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ai/v1/answer-faq",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ question: $('Customer question').first().json.body.question, customer_email: $('Customer question').first().json.body.customer_email, channel: $('Customer question').first().json.body.channel || 'email', run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "RAG + gate",
+      "notesInFlow": true
+    },
+    {
+      "id": "39609b3d-467b-533d-88b4-010e52e09de7",
+      "name": "Safe to auto-reply?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9002ea1a-3780-594d-936d-f5f537d1ae2c",
+              "leftValue": "={{ $('Answer from knowledge base (AI gateway)').first().json.decision }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "auto_reply"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "8bd172da-d50c-5a0e-92e1-44c992e42c54",
+      "name": "Email the answer",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1100,
+        -120
+      ],
+      "parameters": {
+        "fromEmail": "support@kestrelprint.example",
+        "toEmail": "={{ $('Customer question').first().json.body.customer_email }}",
+        "subject": "=Re: your question to Kestrel Print Co.",
+        "emailFormat": "text",
+        "text": "={{ $('Answer from knowledge base (AI gateway)').first().json.answer }}\n\nSources: {{ $('Answer from knowledge base (AI gateway)').first().json.citations.join(', ') }}\n\nThis answer was sent automatically from our help centre. Reply to this email to reach a person.\nKestrel Print Co. support",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "credentials": {
+        "smtp": {
+          "id": "mailpitSmtp",
+          "name": "Mailpit SMTP"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "20c8edbd-12ff-5b9a-af6e-b8fdd83229b5",
+      "name": "Log solved ticket",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/helpdesk/tickets",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ subject: ($('Customer question').first().json.body.question || '').slice(0, 120), requester_email: $('Customer question').first().json.body.customer_email, status: 'solved', channel: $('Customer question').first().json.body.channel || 'email', answer: $('Answer from knowledge base (AI gateway)').first().json.answer, citations: $('Answer from knowledge base (AI gateway)').first().json.citations, auto_replied: true }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "50ededb4-049e-5024-a5d6-bce63b0ef2bc",
+      "name": "Escalate to helpdesk",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/helpdesk/tickets",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ subject: ($('Customer question').first().json.body.question || '').slice(0, 120), requester_email: $('Customer question').first().json.body.customer_email, status: 'open', priority: $('Answer from knowledge base (AI gateway)').first().json.reasons.some(r => /legal|security|refund|complaint/i.test(r)) ? 'high' : 'normal', body: $('Customer question').first().json.body.question, escalation_reasons: $('Answer from knowledge base (AI gateway)').first().json.reasons, draft_answer: $('Answer from knowledge base (AI gateway)').first().json.answer, suggested_articles: $('Answer from knowledge base (AI gateway)').first().json.retrieved.map(r => r.id) }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "c847c033-d7a6-517d-adde-eaec5d0dcce4",
+      "name": "Finish run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: $('Answer from knowledge base (AI gateway)').first().json.decision === 'auto_reply' ? 'auto' : 'escalated', route: $('Answer from knowledge base (AI gateway)').first().json.decision, output: { decision: $('Answer from knowledge base (AI gateway)').first().json.decision, answerable: $('Answer from knowledge base (AI gateway)').first().json.answerable, confidence: $('Answer from knowledge base (AI gateway)').first().json.confidence, citations: $('Answer from knowledge base (AI gateway)').first().json.citations, reasons: $('Answer from knowledge base (AI gateway)').first().json.reasons, ticket: $json.number } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "97009afa-81df-52bf-a276-b291da0a65aa",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1760,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: $('Answer from knowledge base (AI gateway)').first().json.decision, run_id: $('Start run (idempotency)').first().json.run_id, answer: $('Answer from knowledge base (AI gateway)').first().json.answer, citations: $('Answer from knowledge base (AI gateway)').first().json.citations, confidence: $('Answer from knowledge base (AI gateway)').first().json.confidence, reasons: $('Answer from knowledge base (AI gateway)').first().json.reasons, retrieved: $('Answer from knowledge base (AI gateway)').first().json.retrieved, ticket: $('Finish run').first().json.output.ticket }) }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Customer question": {
+      "main": [
+        [
+          {
+            "node": "Start run (idempotency)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start run (idempotency)": {
+      "main": [
+        [
+          {
+            "node": "Duplicate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate?": {
+      "main": [
+        [
+          {
+            "node": "Respond: duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Answer from knowledge base (AI gateway)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer from knowledge base (AI gateway)": {
+      "main": [
+        [
+          {
+            "node": "Safe to auto-reply?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Safe to auto-reply?": {
+      "main": [
+        [
+          {
+            "node": "Email the answer",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Escalate to helpdesk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email the answer": {
+      "main": [
+        [
+          {
+            "node": "Log solved ticket",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log solved ticket": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Escalate to helpdesk": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finish run": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "RelayErrorHandler"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "description": "Customer question -> retrieval over the knowledge base -> cited answer -> confidence gate -> auto-reply by email, or escalation to the helpdesk with the draft and articles."
+  },
+  "tags": [
+    {
+      "id": "relayTagRelay001",
+      "name": "relay"
+    },
+    {
+      "id": "relayTagAi000001",
+      "name": "ai"
+    },
+    {
+      "id": "relayTagSupport1",
+      "name": "support"
+    }
+  ],
+  "versionId": "04ac9862-3314-56ff-9ed6-fe58fb37c3e5"
+}

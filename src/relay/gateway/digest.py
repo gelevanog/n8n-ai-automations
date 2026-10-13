@@ -27,11 +27,14 @@ def _allowed(metrics: dict[str, float | int | str]) -> set[Decimal]:
     for value in metrics.values():
         if isinstance(value, int | float):
             exact = Decimal(str(value))
-            allowed |= {exact.normalize(), round(exact).normalize() if exact == exact else exact}
-            allowed |= {Decimal(str(round(float(value), 1))).normalize(), Decimal(str(round(float(value), 2))).normalize()}
+            allowed |= {exact.normalize(), Decimal(round(exact)).normalize()}
+            allowed |= {
+                Decimal(str(round(float(value), 1))).normalize(),
+                Decimal(str(round(float(value), 2))).normalize(),
+            }
             if 0 < float(value) <= 1:  # a fraction may be written as a percentage
                 pct = Decimal(str(float(value) * 100))
-                allowed |= {round(pct).normalize(), Decimal(str(round(float(pct), 1))).normalize()}
+                allowed |= {Decimal(round(pct)).normalize(), Decimal(str(round(float(pct), 1))).normalize()}
         else:
             allowed |= numbers_in(str(value))
     return allowed

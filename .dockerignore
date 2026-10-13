@@ -1,0 +1,12 @@
+.git
+.venv
+.cache
+web/node_modules
+web/.next
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.pytest_cache
+docs
+results/raw
+n8n/.data

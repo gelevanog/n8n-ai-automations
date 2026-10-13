@@ -322,15 +322,58 @@ def render_pdf(invoice: Invoice, path: Path) -> None:
     vendor = next(v for v in VENDORS if v.key == invoice.vendor_key)
     layout = invoice.layout
     labels = {
-        "A": ("INVOICE", "Invoice number", "Invoice date", "Due date", "Description", "Qty", "Unit price", "Amount",
-              "Subtotal", "VAT", "Total due"),
-        "B": ("RECHNUNG / INVOICE", "Rechnungsnummer / Invoice no.", "Rechnungsdatum / Date", "Faellig am / Due",
-              "Beschreibung / Description", "Menge", "Einzelpreis", "Betrag", "Zwischensumme / Net",
-              "MwSt. / VAT", "Gesamtbetrag / Total"),
-        "C": ("TAX INVOICE", "Invoice #", "Date", "Payment due", "Service", "Qty", "Rate", "Line total",
-              "Net amount", "VAT", "Amount payable"),
-        "D": ("Invoice", "Invoice ID", "Issued", "Due", "Item", "Qty", "Price", "Amount", "Subtotal", "Tax",
-              "Amount due"),
+        "A": (
+            "INVOICE",
+            "Invoice number",
+            "Invoice date",
+            "Due date",
+            "Description",
+            "Qty",
+            "Unit price",
+            "Amount",
+            "Subtotal",
+            "VAT",
+            "Total due",
+        ),
+        "B": (
+            "RECHNUNG / INVOICE",
+            "Rechnungsnummer / Invoice no.",
+            "Rechnungsdatum / Date",
+            "Faellig am / Due",
+            "Beschreibung / Description",
+            "Menge",
+            "Einzelpreis",
+            "Betrag",
+            "Zwischensumme / Net",
+            "MwSt. / VAT",
+            "Gesamtbetrag / Total",
+        ),
+        "C": (
+            "TAX INVOICE",
+            "Invoice #",
+            "Date",
+            "Payment due",
+            "Service",
+            "Qty",
+            "Rate",
+            "Line total",
+            "Net amount",
+            "VAT",
+            "Amount payable",
+        ),
+        "D": (
+            "Invoice",
+            "Invoice ID",
+            "Issued",
+            "Due",
+            "Item",
+            "Qty",
+            "Price",
+            "Amount",
+            "Subtotal",
+            "Tax",
+            "Amount due",
+        ),
     }[layout]
     pdf = _PDF(format="A4")
     pdf.set_auto_page_break(auto=True, margin=15)
@@ -350,9 +393,19 @@ def render_pdf(invoice: Invoice, path: Path) -> None:
         pdf.set_font("Helvetica", "", 9)
         pdf.cell(0, 5, f"{vendor.name} | {vendor.address}", new_x="LMARGIN", new_y="NEXT")
         if vendor.vat_id:
-            pdf.cell(0, 5, ("USt-IdNr. / VAT no.: " if layout == "B" else "VAT Reg No: ") + vendor.vat_id,
-                     new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(
+                0,
+                5,
+                ("USt-IdNr. / VAT no.: " if layout == "B" else "VAT Reg No: ") + vendor.vat_id,
+                new_x="LMARGIN",
+                new_y="NEXT",
+            )
         pdf.ln(4)
+    if invoice.duplicate_of:
+        # A vendor re-sending an invoice ("copy" stamp): same number and amounts, different file bytes, so only the
+        # accounting duplicate check (vendor + number) can catch it, not the file fingerprint.
+        pdf.set_font("Helvetica", "B", 10)
+        pdf.cell(0, 6, "COPY - resent at your request", new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("Helvetica", "", 10)
     pdf.cell(0, 5, "Bill to: " + BUYER[0], new_x="LMARGIN", new_y="NEXT")
     pdf.cell(0, 5, BUYER[1], new_x="LMARGIN", new_y="NEXT")
@@ -360,10 +413,12 @@ def render_pdf(invoice: Invoice, path: Path) -> None:
     pdf.ln(3)
     if invoice.invoice_number:
         pdf.cell(0, 5, f"{labels[1]}: {invoice.invoice_number}", new_x="LMARGIN", new_y="NEXT")
-    pdf.cell(0, 5, f"{labels[2]}: {_date(dt.date.fromisoformat(invoice.issue_date), layout)}",
-             new_x="LMARGIN", new_y="NEXT")
-    pdf.cell(0, 5, f"{labels[3]}: {_date(dt.date.fromisoformat(invoice.due_date), layout)}",
-             new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(
+        0, 5, f"{labels[2]}: {_date(dt.date.fromisoformat(invoice.issue_date), layout)}", new_x="LMARGIN", new_y="NEXT"
+    )
+    pdf.cell(
+        0, 5, f"{labels[3]}: {_date(dt.date.fromisoformat(invoice.due_date), layout)}", new_x="LMARGIN", new_y="NEXT"
+    )
     pdf.cell(0, 5, f"Currency: {invoice.currency}", new_x="LMARGIN", new_y="NEXT")
     pdf.ln(4)
     widths = (95, 20, 30, 35)
@@ -395,7 +450,13 @@ def render_pdf(invoice: Invoice, path: Path) -> None:
         "D": "Charged to the card on file is NOT enabled for this account; pay by wire. Thank you for your business!",
     }[layout]
     pdf.multi_cell(0, 4, terms, new_x="LMARGIN", new_y="NEXT")
-    pdf.multi_cell(0, 4, "Synthetic document generated for the Relay demo. All companies are fictional.", new_x="LMARGIN", new_y="NEXT")
+    pdf.multi_cell(
+        0,
+        4,
+        "Synthetic document generated for the Relay demo. All companies are fictional.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
     path.parent.mkdir(parents=True, exist_ok=True)
     pdf.output(str(path))
 

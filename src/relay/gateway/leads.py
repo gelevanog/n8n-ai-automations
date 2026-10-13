@@ -29,7 +29,7 @@ from relay.gateway.schemas import (
     SiteInfo,
 )
 from relay.gateway.sites import SiteFetcher, SiteRefusedError
-from relay.gateway.structured import complete_structured
+from relay.gateway.structured import StructuredOutputError, complete_structured
 from relay.gateway.textutil import numbers_in
 from relay.llm.base import ChatModel, Message
 
@@ -140,7 +140,11 @@ def enrich_lead(
             {"role": "system", "content": ENRICH_SYSTEM},
             {"role": "user", "content": f"{render_lead(request)}\n<website>\n{site_text}\n</website>"},
         ]
-        profile, meta = complete_structured(model, messages, CompanyProfile, settings, task=ENRICH_TASK)
+        try:
+            profile, meta = complete_structured(model, messages, CompanyProfile, settings, task=ENRICH_TASK)
+        except StructuredOutputError as exc:
+            profile, meta = CompanyProfile(confidence=0.0), exc.meta
+            reasons.append("the model's profile did not match the schema")
     else:
         profile = CompanyProfile(confidence=0.0, summary="")
         reasons.append(f"no company website to enrich from ({site.error})")
@@ -157,7 +161,7 @@ def enrich_lead(
         site=site,
         profile=profile,
         score=score,
-        tier=tier,  # type: ignore[arg-type]
+        tier=tier,
         disqualified=disqualified,
         score_breakdown=breakdown,
         decision="review" if reasons else "draft_reply",
@@ -192,9 +196,7 @@ def check_draft(output: DraftOutput, request: DraftRequest, meta: CallMeta | Non
     placeholders = _PLACEHOLDER.findall(body + " " + output.subject)
     checks.append(Check(code="no_placeholders", ok=not placeholders, detail=", ".join(placeholders)[:120]))
     allowed = numbers_in(SALES_FACTS) | numbers_in(render_lead(lead)) | numbers_in(request.profile.summary)
-    unsupported = sorted(
-        {str(n) for n in numbers_in(body) if n not in allowed and not (1 <= n <= 31 and n == int(n))}
-    )
+    unsupported = sorted({str(n) for n in numbers_in(body) if n not in allowed and not (1 <= n <= 31 and n == int(n))})
     checks.append(Check(code="numbers_grounded", ok=not unsupported, detail=", ".join(unsupported)[:120]))
     words = len(body.split())
     checks.append(Check(code="length", ok=40 <= words <= 260, detail=f"{words} words"))

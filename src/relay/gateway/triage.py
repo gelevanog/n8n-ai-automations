@@ -79,9 +79,7 @@ def render_email(request: TriageRequest) -> str:
     )
 
 
-def classify_email(
-    model: ChatModel, request: TriageRequest, settings: Settings, vendors: VendorBook
-) -> TriageResponse:
+def classify_email(model: ChatModel, request: TriageRequest, settings: Settings, vendors: VendorBook) -> TriageResponse:
     messages: list[Message] = [
         {"role": "system", "content": SYSTEM},
         {"role": "user", "content": render_email(request)},
@@ -99,28 +97,28 @@ def decide(
 
     # 1. Grounding: drop any value the email does not contain.
     data = output.model_copy(deep=True)
-    for label, ok, clear in (
-        ("support.order_id", grounded_text(data.support.order_id, source), lambda: setattr(data.support, "order_id", None)),
-        ("contact.phone", grounded_text(data.contact.phone, source), lambda: setattr(data.contact, "phone", None)),
-        ("contact.email", grounded_text(data.contact.email, source), lambda: setattr(data.contact, "email", None)),
-        ("lead.quantity", grounded_number(data.lead.quantity, source), lambda: setattr(data.lead, "quantity", None)),
-    ):
+
+    def grounded(label: str, ok: bool) -> bool:
         checks.append(Check(code=f"grounded:{label}", ok=ok, detail="" if ok else "not in the email; dropped"))
-        if not ok:
-            clear()
+        return ok
+
+    if not grounded("support.order_id", grounded_text(data.support.order_id, source)):
+        data.support.order_id = None
+    if not grounded("contact.phone", grounded_text(data.contact.phone, source)):
+        data.contact.phone = None
+    if not grounded("contact.email", grounded_text(data.contact.email, source)):
+        data.contact.email = None
+    if not grounded("lead.quantity", grounded_number(data.lead.quantity, source)):
+        data.lead.quantity = None
     pdf_attached = any(
         a.filename.lower().endswith(".pdf") or a.content_type == "application/pdf" for a in request.attachments
     )
     if not pdf_attached:
-        for label, ok, clear in (
-            ("invoice.invoice_number", grounded_text(data.invoice.invoice_number, source),
-             lambda: setattr(data.invoice, "invoice_number", None)),
-            ("invoice.amount", grounded_number(data.invoice.amount, source),
-             lambda: setattr(data.invoice, "amount", None)),
-        ):
-            checks.append(Check(code=f"grounded:{label}", ok=ok, detail="" if ok else "not in the email; dropped"))
-            if not ok:
-                clear()
+        # With a PDF the number and amount may come from the attachment; invoice intake checks them there.
+        if not grounded("invoice.invoice_number", grounded_text(data.invoice.invoice_number, source)):
+            data.invoice.invoice_number = None
+        if not grounded("invoice.amount", grounded_number(data.invoice.amount, source)):
+            data.invoice.amount = None
     if not data.contact.email:
         data.contact.email = request.sender.email or None
     if not data.contact.name and request.sender.name:

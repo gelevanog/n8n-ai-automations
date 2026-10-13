@@ -1,0 +1,749 @@
+{
+  "id": "RelayLeadEnrichment",
+  "name": "Relay - 03 Lead enrichment and reply draft",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "daf21472-c8fd-565b-8cc0-916987bf0888",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -420
+      ],
+      "parameters": {
+        "content": "## Lead enrichment\nA web-form lead is **enriched from the company's own website** (fixture sites only; hidden text and text addressed to AI are removed first), **scored in code** against the ideal customer profile (configs/icp.yaml) and saved to the **CRM**. Hot leads ping #sales.\n\nThe AI gateway drafts a reply; **a person approves or edits it** in the dashboard before *Send reply* runs. Leads without a usable site, competitors and non-buyers go to research instead.",
+        "height": 260,
+        "width": 520,
+        "color": 4
+      }
+    },
+    {
+      "id": "234b9644-5c84-5396-b1c6-eb49e9344740",
+      "name": "Web form lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-enrichment",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "46d81fc2-a9db-5cb6-97e9-1923845cc2b1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayWebhookAuth",
+          "name": "Relay webhook secret"
+        }
+      }
+    },
+    {
+      "id": "8534c4f2-a4bf-5a57-930b-67acc98d31d7",
+      "name": "Start run (idempotency)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/start",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ workflow: 'lead', idempotency_key: $('Web form lead').first().json.body.submission_id || ((($('Web form lead').first().json.body.email || '') + '|' + ($('Web form lead').first().json.body.message || '')).slice(0, 300)), execution_id: $execution.id, input: $('Web form lead').first().json.body, source: $('Web form lead').first().json.body.source || 'web_form', title: ($('Web form lead').first().json.body.company || $('Web form lead').first().json.body.name || 'Lead') }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Same key twice = duplicate: answered from the first run",
+      "notesInFlow": true
+    },
+    {
+      "id": "e88297f6-80c9-5387-a9d5-a454d5722d7c",
+      "name": "Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8b91519c-9933-54f1-a4fb-4d15ce5135b3",
+              "leftValue": "={{ $json.duplicate }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "0018a815-dba0-53e8-b96a-614303284b67",
+      "name": "Respond: duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        -180
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'duplicate', run_id: $json.run_id, previous_status: $json.status, output: $json.output }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "4ffafe17-adb8-59c5-9f1c-0bb9332bc114",
+      "name": "Enrich and score (AI gateway)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ai/v1/enrich-lead",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $('Web form lead').first().json.body.name, email: $('Web form lead').first().json.body.email, company: $('Web form lead').first().json.body.company, website: $('Web form lead').first().json.body.website, message: $('Web form lead').first().json.body.message, product: $('Web form lead').first().json.body.product, quantity: $('Web form lead').first().json.body.quantity, run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Site facts by AI, score by rules",
+      "notesInFlow": true
+    },
+    {
+      "id": "b1281ed3-b38f-57be-80d7-e298ee607acb",
+      "name": "Save lead to CRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/crm/leads",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $('Web form lead').first().json.body.name, email: $('Web form lead').first().json.body.email, company: $('Web form lead').first().json.body.company, website: $('Enrich and score (AI gateway)').first().json.site.url, source: 'web_form', product: $('Web form lead').first().json.body.product, quantity: $('Web form lead').first().json.body.quantity, message: $('Web form lead').first().json.body.message, industry: $('Enrich and score (AI gateway)').first().json.profile.industry, employees_band: $('Enrich and score (AI gateway)').first().json.profile.employees_band, country: $('Enrich and score (AI gateway)').first().json.profile.country, score: $('Enrich and score (AI gateway)').first().json.score, tier: $('Enrich and score (AI gateway)').first().json.tier, disqualified: $('Enrich and score (AI gateway)').first().json.disqualified, status: 'enriched' }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "8953a208-8a8e-5948-ac78-9179cb8cfd22",
+      "name": "Hot lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4a8961fa-9d93-5b56-8b8c-3cb2a6105e76",
+              "leftValue": "={{ $('Enrich and score (AI gateway)').first().json.tier }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "hot"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "119a7368-b2e3-5ae1-aa9d-a13c9c2717c5",
+      "name": "Alert #sales (hot lead)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        -140
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/chat/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id + '-hot' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: '#sales', text: `:fire: Hot lead: ${$('Web form lead').first().json.body.name} at ${$('Web form lead').first().json.body.company} - score ${$('Enrich and score (AI gateway)').first().json.score}, ${$('Enrich and score (AI gateway)').first().json.profile.industry}, ${$('Enrich and score (AI gateway)').first().json.profile.employees_band} people, ${$('Enrich and score (AI gateway)').first().json.profile.country}. Reply draft waiting for approval in Relay.` }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "e3418571-d2d2-5fbf-a322-14faeb44a236",
+      "name": "Ready for a reply draft?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1540,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3c5e3838-3def-5764-8f29-95b067bceaec",
+              "leftValue": "={{ $('Enrich and score (AI gateway)').first().json.decision }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "draft_reply"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "d0dd8658-5f9a-5b6e-ab5e-8008974ec6fa",
+      "name": "Draft reply (AI gateway)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        -100
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ai/v1/draft-reply",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ lead: { name: $('Web form lead').first().json.body.name, email: $('Web form lead').first().json.body.email, company: $('Web form lead').first().json.body.company, website: $('Web form lead').first().json.body.website, message: $('Web form lead').first().json.body.message, product: $('Web form lead').first().json.body.product, quantity: $('Web form lead').first().json.body.quantity }, profile: $('Enrich and score (AI gateway)').first().json.profile, tier: $('Enrich and score (AI gateway)').first().json.tier, run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "27fe33da-d6e8-5661-bcf0-2316b4c45227",
+      "name": "Queue reply for approval",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        -100
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/review",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $('Start run (idempotency)').first().json.run_id, kind: 'lead_reply', title: 'Reply to ' + $('Web form lead').first().json.body.name + ' (' + ($('Web form lead').first().json.body.company || '-') + ')', reasons: ['every first reply is approved by a person', ...$json.checks.filter(c => !c.ok).map(c => 'check failed: ' + c.code)], proposal: { to: $('Web form lead').first().json.body.email, subject: $json.subject, body: $json.body, checks: $json.checks, tier: $('Enrich and score (AI gateway)').first().json.tier, score: $('Enrich and score (AI gateway)').first().json.score, profile: $('Enrich and score (AI gateway)').first().json.profile, lead: $('Web form lead').first().json.body }, resume_url: $execution.resumeUrl }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "3ed67809-95c1-51d3-977b-039be7dde3d5",
+      "name": "Queue for research",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1980,
+        120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/review",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $('Start run (idempotency)').first().json.run_id, kind: 'lead_research', title: 'Research lead ' + ($('Web form lead').first().json.body.company || $('Web form lead').first().json.body.name), reasons: $('Enrich and score (AI gateway)').first().json.reasons, proposal: { tier: $('Enrich and score (AI gateway)').first().json.tier, score: $('Enrich and score (AI gateway)').first().json.score, profile: $('Enrich and score (AI gateway)').first().json.profile, site: $('Enrich and score (AI gateway)').first().json.site, lead: $('Web form lead').first().json.body }, resume_url: $execution.resumeUrl }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "90ed17e1-6e08-56a3-9177-993405587cec",
+      "name": "Respond: queued",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2200,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'review', run_id: $('Start run (idempotency)').first().json.run_id, review_id: $json.id, kind: $json.kind, tier: $('Enrich and score (AI gateway)').first().json.tier, score: $('Enrich and score (AI gateway)').first().json.score, score_breakdown: $('Enrich and score (AI gateway)').first().json.score_breakdown, profile: $('Enrich and score (AI gateway)').first().json.profile, site: $('Enrich and score (AI gateway)').first().json.site, decision: $('Enrich and score (AI gateway)').first().json.decision, reasons: $('Enrich and score (AI gateway)').first().json.reasons }) }}",
+        "options": {
+          "responseCode": 202
+        }
+      }
+    },
+    {
+      "id": "1a68fdb5-08e7-582f-8723-a2d2fbd4cf59",
+      "name": "Wait for reviewer",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2420,
+        0
+      ],
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "webhookId": "dd491cb0-ad0c-5eae-a9f4-30a3fca63b20"
+    },
+    {
+      "id": "6bf24a5b-afc7-59e1-a932-908734695f73",
+      "name": "Approved with a reply?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2640,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "089113e5-3b3d-541a-90f4-0dbd72fa714b",
+              "leftValue": "={{ $json.body.decision }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "approve"
+            },
+            {
+              "id": "637e3642-0887-5fb9-8954-f8ee101b7495",
+              "leftValue": "={{ $('Draft reply (AI gateway)').isExecuted }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "7abd5189-2e30-51a1-b87f-e05880e1292a",
+      "name": "Send reply",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2860,
+        -100
+      ],
+      "parameters": {
+        "fromEmail": "sales@kestrelprint.example",
+        "toEmail": "={{ ($json.body.edits || {}).to || $('Queue reply for approval').first().json.proposal.to }}",
+        "subject": "={{ ($json.body.edits || {}).subject || $('Queue reply for approval').first().json.proposal.subject }}",
+        "emailFormat": "text",
+        "text": "={{ ($json.body.edits || {}).body || $('Queue reply for approval').first().json.proposal.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "credentials": {
+        "smtp": {
+          "id": "mailpitSmtp",
+          "name": "Mailpit SMTP"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "4d4f901d-41d7-5925-bf40-7c90da80c0e5",
+      "name": "Finish run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3080,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: $('Wait for reviewer').first().json.body.decision === 'approve' ? 'approved' : 'rejected', route: $('Send reply').isExecuted ? 'email_sent' : 'crm', output: { tier: $('Enrich and score (AI gateway)').first().json.tier, score: $('Enrich and score (AI gateway)').first().json.score, profile: $('Enrich and score (AI gateway)').first().json.profile, reply_sent: $('Send reply').isExecuted } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    }
+  ],
+  "connections": {
+    "Web form lead": {
+      "main": [
+        [
+          {
+            "node": "Start run (idempotency)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start run (idempotency)": {
+      "main": [
+        [
+          {
+            "node": "Duplicate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate?": {
+      "main": [
+        [
+          {
+            "node": "Respond: duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enrich and score (AI gateway)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich and score (AI gateway)": {
+      "main": [
+        [
+          {
+            "node": "Save lead to CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save lead to CRM": {
+      "main": [
+        [
+          {
+            "node": "Hot lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hot lead?": {
+      "main": [
+        [
+          {
+            "node": "Alert #sales (hot lead)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ready for a reply draft?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert #sales (hot lead)": {
+      "main": [
+        [
+          {
+            "node": "Ready for a reply draft?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ready for a reply draft?": {
+      "main": [
+        [
+          {
+            "node": "Draft reply (AI gateway)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Queue for research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft reply (AI gateway)": {
+      "main": [
+        [
+          {
+            "node": "Queue reply for approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue reply for approval": {
+      "main": [
+        [
+          {
+            "node": "Respond: queued",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue for research": {
+      "main": [
+        [
+          {
+            "node": "Respond: queued",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond: queued": {
+      "main": [
+        [
+          {
+            "node": "Wait for reviewer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for reviewer": {
+      "main": [
+        [
+          {
+            "node": "Approved with a reply?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approved with a reply?": {
+      "main": [
+        [
+          {
+            "node": "Send reply",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send reply": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "RelayErrorHandler"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "description": "Web-form lead -> enrichment from the company's own site -> ICP score in code -> CRM -> AI reply draft -> human approval -> email."
+  },
+  "tags": [
+    {
+      "id": "relayTagRelay001",
+      "name": "relay"
+    },
+    {
+      "id": "relayTagAi000001",
+      "name": "ai"
+    },
+    {
+      "id": "relayTagSales001",
+      "name": "sales"
+    }
+  ],
+  "versionId": "d3f76fbf-9c28-526c-88ec-5036224d7504"
+}

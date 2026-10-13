@@ -29,6 +29,10 @@ T = TypeVar("T", bound=BaseModel)
 class StructuredOutputError(LLMError):
     """The model did not produce a valid object, even after the corrective retry."""
 
+    def __init__(self, message: str, meta: CallMeta | None = None) -> None:
+        super().__init__(message)
+        self.meta = meta or CallMeta(schema_valid=False)
+
 
 @dataclass
 class Prices:
@@ -68,7 +72,7 @@ def schema_hint(model: type[BaseModel]) -> str:
     return json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
 
 
-def complete_structured(
+def complete_structured[T: BaseModel](
     model: ChatModel,
     messages: list[Message],
     output: type[T],
@@ -124,7 +128,20 @@ def complete_structured(
             schema_valid=True,
         )
         return value, meta
-    raise StructuredOutputError(f"{task}: no valid {output.__name__} after {attempts} attempt(s): {last_error}")
+    meta = CallMeta(
+        call_id=uuid.uuid4().hex[:12],
+        task=task,
+        model=model.label,
+        served_model=served,
+        latency_ms=int((time.monotonic() - started) * 1000),
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
+        cost_usd=load_prices(settings.prices_file).cost(served or model.label, input_tokens, output_tokens),
+        cached=False,
+        attempts=attempts,
+        schema_valid=False,
+    )
+    raise StructuredOutputError(f"{task}: no valid {output.__name__} after {attempts} attempt(s): {last_error}", meta)
 
 
 def _short_error(exc: Exception) -> str:

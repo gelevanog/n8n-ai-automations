@@ -12,9 +12,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 Category = Literal["sales_lead", "support", "invoice", "spam", "other"]
-Product = Literal[
-    "mailer_boxes", "folding_cartons", "paper_bags", "labels", "stickers", "tissue_paper", "other"
-]
+Product = Literal["mailer_boxes", "folding_cartons", "paper_bags", "labels", "stickers", "tissue_paper", "other"]
 Issue = Literal["shipping", "damage", "artwork", "billing", "account", "order_change", "quality", "other"]
 Industry = Literal[
     "food_beverage",

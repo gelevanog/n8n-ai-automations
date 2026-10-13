@@ -1,0 +1,1071 @@
+{
+  "id": "RelayInboxTriage",
+  "name": "Relay - 01 Inbox triage",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "d8a2108b-7824-551d-9431-395d441259eb",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -420
+      ],
+      "parameters": {
+        "content": "## Inbox triage\nInbound email (Postmark-style JSON; the Mailpit bridge sends it for mail to hello@kestrelprint.example) is **classified by the AI gateway**: sales lead, support, invoice, spam or other, with the fields each queue needs.\n\nThe gateway **checks every value against the email**, only routes invoices from known vendors, and sends anything unsure, unknown or suspicious (text addressed to an AI) to the **review queue**. A reviewer's decision resumes this execution at *Wait for reviewer*.",
+        "height": 260,
+        "width": 520,
+        "color": 4
+      }
+    },
+    {
+      "id": "c0945e1b-ef25-5e31-a3c1-d39fd7408e5b",
+      "name": "Inbound email",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "inbox-triage",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "77a56c7d-03e4-5e14-924f-d38458b62ff8",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayWebhookAuth",
+          "name": "Relay webhook secret"
+        }
+      }
+    },
+    {
+      "id": "fc610f8a-5b96-5cc2-8898-34a2b19c1c08",
+      "name": "Start run (idempotency)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/start",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ workflow: 'triage', idempotency_key: $('Inbound email').first().json.body.message_id || ($('Inbound email').first().json.body.from.email + '|' + $('Inbound email').first().json.body.subject), execution_id: $execution.id, input: $('Inbound email').first().json.body, source: $('Inbound email').first().json.body.source || 'webhook', title: $('Inbound email').first().json.body.subject || '' }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Same key twice = duplicate: answered from the first run",
+      "notesInFlow": true
+    },
+    {
+      "id": "00ab1143-0866-572c-8508-70e35c007990",
+      "name": "Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c77d1811-61f6-5e47-8498-1b4cdae48c73",
+              "leftValue": "={{ $json.duplicate }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "c7c3a57b-4086-5000-9280-1eb2cf099284",
+      "name": "Respond: duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        660,
+        -180
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'duplicate', run_id: $json.run_id, route: $json.route, previous_status: $json.status }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "8b2f21c2-83dd-51aa-acec-49958e3ecfb3",
+      "name": "Classify email (AI gateway)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ai/v1/classify-email",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ message_id: $('Inbound email').first().json.body.message_id, from: $('Inbound email').first().json.body.from, subject: $('Inbound email').first().json.body.subject, text: $('Inbound email').first().json.body.text, attachments: ($('Inbound email').first().json.body.attachments || []).map(a => ({ filename: a.filename, content_type: a.content_type })), run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Category + fields, grounded and gated",
+      "notesInFlow": true
+    },
+    {
+      "id": "c97b4c0b-290d-5c60-a271-48d938442b50",
+      "name": "Triage decision",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify({ ...$json, run_id: $('Start run (idempotency)').first().json.run_id, reviewed: false }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "b301534a-e520-5de2-95e4-98c2debad016",
+      "name": "Route",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7c34179f-397f-5f96-86fc-74aced30a06a",
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "crm"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "crm"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8af70743-2286-5350-83c3-4f0ddfe60223",
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "helpdesk"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "helpdesk"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e576424d-a927-5592-a28d-c9453abbcd68",
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "accounting"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "accounting"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a6132f8e-226a-5055-b078-ff4aa7c34d65",
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "archive"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "archive"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "9623b2b4-9a4d-5c05-b009-42b7f83a0c12",
+                    "leftValue": "={{ $json.route }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "rightValue": "review"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "review"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "865141fb-d053-55b4-aa9f-7d8771398605",
+      "name": "Create CRM lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        -360
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/crm/leads",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.name, email: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.email, company: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.company, phone: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.phone, source: 'email', product: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).lead.product, quantity: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).lead.quantity, deadline: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).lead.deadline, summary: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).summary, message_id: $('Inbound email').first().json.body.message_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "547667e0-9c1a-5630-8e0d-af61b33b5cd9",
+      "name": "Notify #sales",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1580,
+        -360
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/chat/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id + '-sales' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: '#sales', text: `New lead from email: ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.name || ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.email} (${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.company || 'no company'}) - ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).summary}` }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "d61a7edb-4a6f-5ecc-8f99-1214691b3f23",
+      "name": "Create helpdesk ticket",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        -180
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/helpdesk/tickets",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ subject: $('Inbound email').first().json.body.subject, requester_name: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.name, requester_email: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.email, order_id: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).support.order_id, issue: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).support.issue, priority: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).urgency === 'high' ? 'high' : 'normal', summary: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).summary, language: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).language, body: $('Inbound email').first().json.body.text, message_id: $('Inbound email').first().json.body.message_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "4b2f27f5-81ff-5155-b222-d9eb124e3a3e",
+      "name": "Invoice PDF attached?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1360,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3ff5cd56-da4a-50d6-bbe5-005dabebcb18",
+              "leftValue": "={{ ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).has_invoice_attachment }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "80c54ae6-d7a8-50be-8c69-a43cd9826c55",
+      "name": "Forward PDF to invoice intake",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1580,
+        -40
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.N8N_INTERNAL_URL }}/webhook/invoice-intake",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ source: 'email', message_id: $('Inbound email').first().json.body.message_id, sender: $('Inbound email').first().json.body.from, filename: ($('Inbound email').first().json.body.attachments || []).find(a => (a.filename || '').toLowerCase().endsWith('.pdf')).filename, content_base64: ($('Inbound email').first().json.body.attachments || []).find(a => (a.filename || '').toLowerCase().endsWith('.pdf')).content_base64 }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayWebhookAuth",
+          "name": "Relay webhook secret"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Runs workflow 02 and waits for its result",
+      "notesInFlow": true
+    },
+    {
+      "id": "88e257d8-1d22-507d-ac29-a56b348a3aae",
+      "name": "Notify #finance (no PDF)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1580,
+        120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/chat/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id + '-finance' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: '#finance', text: `Supplier email without a PDF from ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).invoice.vendor || ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact.email}: ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).summary} (invoice ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).invoice.invoice_number || '-'}, ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).invoice.currency || ''} ${($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).invoice.amount ?? '-'})` }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "6dfffb41-ab8c-5d0d-8b7d-72fe0f47b5af",
+      "name": "Archive (spam / other)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1360,
+        260
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify({ archived: true, category: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).category }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "ce7564fa-c647-5139-a4e1-5046a32c21d3",
+      "name": "Queue for review",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        480
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/review",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $('Start run (idempotency)').first().json.run_id, kind: 'triage', title: $('Inbound email').first().json.body.subject, reasons: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).reasons, proposal: { category: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).category, confidence: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).confidence, summary: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).summary, contact: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact, lead: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).lead, support: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).support, invoice: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).invoice, from: $('Inbound email').first().json.body.from, text: ($('Inbound email').first().json.body.text || '').slice(0, 4000), checks: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).checks }, resume_url: $execution.resumeUrl }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Resume URL of this execution",
+      "notesInFlow": true
+    },
+    {
+      "id": "f8a4ff31-a2f0-56e8-a3f6-f72c7ed86725",
+      "name": "Respond: queued for review",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1580,
+        480
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'review', run_id: $('Start run (idempotency)').first().json.run_id, review_id: $json.id, category: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).category, confidence: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).confidence, reasons: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).reasons }) }}",
+        "options": {
+          "responseCode": 202
+        }
+      }
+    },
+    {
+      "id": "533d46fc-ca62-5285-bfd1-4216d6a1b6eb",
+      "name": "Wait for reviewer",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1800,
+        480
+      ],
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "webhookId": "9e5d61f4-ee6d-5017-a93b-905b8c621d2a"
+    },
+    {
+      "id": "4e6c91bd-8db3-5b6a-90aa-dce5476006b9",
+      "name": "Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2020,
+        480
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "75755386-d7e9-59ed-98aa-2a461a64e70c",
+              "leftValue": "={{ $json.body.decision }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "approve"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "edc7b316-4c96-5d4b-a25f-90e7bfe819c0",
+      "name": "Apply review decision",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2240,
+        400
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify({ ...$('Triage decision').first().json, ...($json.body.edits || {}), route: ({ sales_lead: 'crm', support: 'helpdesk', invoice: 'accounting', spam: 'archive', other: 'archive' })[($json.body.edits || {}).category || $('Triage decision').first().json.category], reviewed: true }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "0ff5365f-a309-5a70-9cdb-a02c3d52cc3e",
+      "name": "Finish run: rejected",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2240,
+        600
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: 'rejected', route: 'none', output: { reviewer: $json.body.reviewer } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "56f4419b-74ab-579d-993d-b4decad5eefc",
+      "name": "Finish run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1800,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).reviewed ? 'approved' : 'auto', route: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).route, output: { category: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).category, confidence: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).confidence, route: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).route, contact: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).contact, lead: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).lead, support: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).support, invoice: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).invoice, downstream: $json.id || $json.number || null } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "3d1a4b00-adf6-57cb-9bff-3091f31dbed2",
+      "name": "Reviewed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2020,
+        -120
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e3270215-b7fd-50d9-80f4-d04af877ddbf",
+              "leftValue": "={{ ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).reviewed }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "f61cb14b-3d8f-580c-8abb-09d3e8dd8f5b",
+      "name": "Respond: routed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2240,
+        -40
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'routed', run_id: $('Start run (idempotency)').first().json.run_id, route: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).route, category: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).category, confidence: ($('Apply review decision').isExecuted ? $('Apply review decision').first().json : $('Triage decision').first().json).confidence, result: $('Finish run').first().json }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "9d3bfb4c-aeb9-5ea8-be28-1193a6e0f6de",
+      "name": "Done (after review)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        -200
+      ],
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "Inbound email": {
+      "main": [
+        [
+          {
+            "node": "Start run (idempotency)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start run (idempotency)": {
+      "main": [
+        [
+          {
+            "node": "Duplicate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate?": {
+      "main": [
+        [
+          {
+            "node": "Respond: duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Classify email (AI gateway)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify email (AI gateway)": {
+      "main": [
+        [
+          {
+            "node": "Triage decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Triage decision": {
+      "main": [
+        [
+          {
+            "node": "Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route": {
+      "main": [
+        [
+          {
+            "node": "Create CRM lead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create helpdesk ticket",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Invoice PDF attached?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Archive (spam / other)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Queue for review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create CRM lead": {
+      "main": [
+        [
+          {
+            "node": "Notify #sales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify #sales": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create helpdesk ticket": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invoice PDF attached?": {
+      "main": [
+        [
+          {
+            "node": "Forward PDF to invoice intake",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify #finance (no PDF)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Forward PDF to invoice intake": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify #finance (no PDF)": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Archive (spam / other)": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue for review": {
+      "main": [
+        [
+          {
+            "node": "Respond: queued for review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond: queued for review": {
+      "main": [
+        [
+          {
+            "node": "Wait for reviewer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for reviewer": {
+      "main": [
+        [
+          {
+            "node": "Approved?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approved?": {
+      "main": [
+        [
+          {
+            "node": "Apply review decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finish run: rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply review decision": {
+      "main": [
+        [
+          {
+            "node": "Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finish run": {
+      "main": [
+        [
+          {
+            "node": "Reviewed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reviewed?": {
+      "main": [
+        [
+          {
+            "node": "Done (after review)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond: routed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "RelayErrorHandler"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "description": "Inbound email -> AI classification and field extraction -> CRM / helpdesk / accounting / archive; low confidence -> human review."
+  },
+  "tags": [
+    {
+      "id": "relayTagRelay001",
+      "name": "relay"
+    },
+    {
+      "id": "relayTagAi000001",
+      "name": "ai"
+    },
+    {
+      "id": "relayTagEmail001",
+      "name": "email"
+    }
+  ],
+  "versionId": "ac4b11a8-4b40-5eb9-a33b-3ac4a8650d37"
+}

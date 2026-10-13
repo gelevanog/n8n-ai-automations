@@ -72,5 +72,8 @@ def grounded_number(value: float | int | None, text: str) -> bool:
 def grounded_text(value: str | None, text: str) -> bool:
     if not value:
         return True
-    normalize = lambda s: re.sub(r"[\s\-_.]", "", s).lower()  # noqa: E731
-    return normalize(value) in normalize(text)
+    return _squash(value) in _squash(text)
+
+
+def _squash(text: str) -> str:
+    return re.sub(r"[\s\-_.]", "", text).lower()

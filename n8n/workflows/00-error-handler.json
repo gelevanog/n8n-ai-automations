@@ -1,0 +1,145 @@
+{
+  "id": "RelayErrorHandler",
+  "name": "Relay - Error handler",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "04f9ec08-3c14-5f34-a6f6-80c36f63d9fd",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -260
+      ],
+      "parameters": {
+        "content": "## Error handler\nSet as the **error workflow** of every Relay workflow.\n\n1. Records the failed execution in Relay's **dead-letter queue** (with the run's original input, so it can be replayed from the dashboard or MCP).\n2. Posts an alert to **#ops-alerts**.",
+        "height": 200,
+        "width": 420,
+        "color": 3
+      }
+    },
+    {
+      "id": "d7edb993-0a30-59ed-81a4-5616b5e30979",
+      "name": "Workflow failed",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "8360351c-33dd-5bc5-a50a-c61429ee0d9b",
+      "name": "Record dead letter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/dead-letters",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ workflow: $json.workflow.name, execution_id: String($json.execution.id || ''), node: $json.execution.lastNodeExecuted || '', error: ($json.execution.error || {}).message || 'unknown error' }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "50121a29-c660-5158-9ce8-1f260036969a",
+      "name": "Alert #ops-alerts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/chat/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ 'dlq-' + $('Record dead letter').first().json.id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: '#ops-alerts', text: `:rotating_light: ${$('Workflow failed').first().json.workflow.name} failed at \"${$('Workflow failed').first().json.execution.lastNodeExecuted}\": ${($('Workflow failed').first().json.execution.error || {}).message}. Dead letter ${$json.id} - replay it from the Relay dashboard.` }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    }
+  ],
+  "connections": {
+    "Workflow failed": {
+      "main": [
+        [
+          {
+            "node": "Record dead letter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Record dead letter": {
+      "main": [
+        [
+          {
+            "node": "Alert #ops-alerts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "description": "Runs when any Relay workflow fails after its retries: dead-letter queue entry + team alert."
+  },
+  "tags": [
+    {
+      "id": "relayTagRelay001",
+      "name": "relay"
+    },
+    {
+      "id": "relayTagOps00001",
+      "name": "ops"
+    }
+  ],
+  "versionId": "a7706230-999e-51b0-a461-a807c14216b5"
+}

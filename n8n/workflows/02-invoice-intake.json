@@ -1,0 +1,886 @@
+{
+  "id": "RelayInvoiceIntake",
+  "name": "Relay - 02 Invoice intake",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "69e33e51-f626-5c16-a8a7-00dfee24c422",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -420
+      ],
+      "parameters": {
+        "content": "## Invoice intake\nA PDF (from inbox triage, an upload or an API call) is decoded and read with n8n's **Extract from File**; the **AI gateway** extracts the fields and checks them like a bookkeeper: line math, VAT, totals, dates, vendor and VAT ID against master data, the total printed in the document, the auto-posting limit.\n\nThe workflow then asks **accounting** whether the invoice is already booked. Clean invoices are posted; anything else waits for an approval.",
+        "height": 260,
+        "width": 520,
+        "color": 4
+      }
+    },
+    {
+      "id": "6b5fba81-17a5-5856-a173-0e3be470f413",
+      "name": "Invoice received",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoice-intake",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "80ecf179-565d-530e-82e8-3c1d815bfba8",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayWebhookAuth",
+          "name": "Relay webhook secret"
+        }
+      }
+    },
+    {
+      "id": "50ce2506-7130-5958-8a82-5764845e06ee",
+      "name": "Fingerprint PDF",
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [
+        200,
+        0
+      ],
+      "parameters": {
+        "action": "hash",
+        "type": "SHA256",
+        "value": "={{ $('Invoice received').first().json.body.content_base64 }}",
+        "dataPropertyName": "fingerprint",
+        "encoding": "hex"
+      }
+    },
+    {
+      "id": "b32a10bc-7094-5d7a-a649-51ca65c788d7",
+      "name": "Start run (idempotency)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/start",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ workflow: 'invoice', idempotency_key: 'pdf:' + $json.fingerprint, execution_id: $execution.id, input: $('Invoice received').first().json.body, source: $('Invoice received').first().json.body.source || 'webhook', title: $('Invoice received').first().json.body.filename || 'invoice.pdf' }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Same key twice = duplicate: answered from the first run",
+      "notesInFlow": true
+    },
+    {
+      "id": "c363d9e1-46f6-5961-a6f7-9ec59a62a756",
+      "name": "Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        600,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "83fdd84d-dde2-58e4-a624-d3c0801c1c28",
+              "leftValue": "={{ $json.duplicate }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "c6b93211-8870-5b0d-aa4d-37c5b090f5b3",
+      "name": "Respond: duplicate",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        -180
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'duplicate', run_id: $json.run_id, previous_status: $json.status, output: $json.output }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "987ff6ad-9d1b-5e8a-a557-2cc83e4add60",
+      "name": "Attachment",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify({ content_base64: $('Invoice received').first().json.body.content_base64, filename: $('Invoice received').first().json.body.filename || 'invoice.pdf' }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "0e127636-60c7-562b-81a0-cabf21726bf2",
+      "name": "Decode PDF",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1000,
+        0
+      ],
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "content_base64",
+        "binaryPropertyName": "data",
+        "options": {
+          "fileName": "={{ $json.filename }}",
+          "mimeType": "application/pdf"
+        }
+      }
+    },
+    {
+      "id": "983852c4-10ee-5177-a00a-cec8966a6bbc",
+      "name": "Extract PDF text",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "data",
+        "options": {}
+      }
+    },
+    {
+      "id": "27bcfb92-6bfc-5e66-886a-f2b54667e27b",
+      "name": "Extract invoice (AI gateway)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ai/v1/extract-invoice",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ text: $json.text || '', filename: $('Attachment').first().json.filename, source: $('Invoice received').first().json.body.source || 'webhook', run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Fields + bookkeeping checks",
+      "notesInFlow": true
+    },
+    {
+      "id": "bf33c9a8-ccf4-5ba3-b62d-b5f88ca11ea0",
+      "name": "Already booked? (accounting)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.MOCKS_URL }}/accounting/bills?dedupe_key={{ $json.dedupe_key }}",
+        "options": {
+          "timeout": 120000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": false
+            }
+          }
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Duplicate check by vendor + invoice number",
+      "notesInFlow": true
+    },
+    {
+      "id": "f4e76be8-c47c-5fb3-9c2b-ba7db4b2bcca",
+      "name": "Invoice decision",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1800,
+        0
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify({ ...$('Extract invoice (AI gateway)').first().json, run_id: $('Start run (idempotency)').first().json.run_id, duplicate: ($json.body || []).length > 0, issues: [...$('Extract invoice (AI gateway)').first().json.issues, ...(($json.body || []).length > 0 ? ['duplicate'] : [])], post: $('Extract invoice (AI gateway)').first().json.decision === 'auto_post' && ($json.body || []).length === 0, reviewed: false }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "82d981fc-ebe4-591d-aa6b-9ff5005338fa",
+      "name": "Post automatically?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2000,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f6467a3c-4b03-5e4e-964b-f61d2363b554",
+              "leftValue": "={{ $json.post }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "3dc7cbb6-a38c-5602-8a13-981206c50027",
+      "name": "Post bill to accounting",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2240,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/accounting/bills",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ ...($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).invoice, dedupe_key: ($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).dedupe_key, status: ($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).reviewed ? 'approved_by_reviewer' : 'approved', source: $('Invoice received').first().json.body.source || 'webhook', run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "1cc0b9fe-d909-5e20-a62f-18ed56fd9962",
+      "name": "Notify #finance",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2460,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/chat/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id + '-finance' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: '#finance', text: `Bill ${$json.number} posted: ${$json.vendor} ${$json.invoice_number}, ${$json.currency} ${$json.total} due ${$json.due_date}` }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "139ef885-07b5-57f7-b624-b5b883f852c3",
+      "name": "Finish run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2680,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: ($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).reviewed ? 'approved' : 'auto', route: 'accounting', output: { invoice: ($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).invoice, issues: ($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).issues, bill: $('Post bill to accounting').first().json.number } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "f775fe07-ab52-5ca9-ae51-2fd9c2d9d0fd",
+      "name": "Reviewed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2900,
+        -120
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e3161815-4dba-578c-b603-212f9712623a",
+              "leftValue": "={{ ($('Apply approval').isExecuted ? $('Apply approval').first().json : $('Invoice decision').first().json).reviewed }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "923d52eb-0ec1-5052-8e9a-7595de9acb97",
+      "name": "Done (after review)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        3120,
+        -200
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "54a14c72-462d-532e-990a-011e497aad5f",
+      "name": "Respond: posted",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        3120,
+        -40
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'posted', run_id: $('Start run (idempotency)').first().json.run_id, bill: $('Post bill to accounting').first().json, issues: [] }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "86312086-a29b-5053-ad7c-c15698237a56",
+      "name": "Queue for approval",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2240,
+        160
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/review",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ run_id: $('Start run (idempotency)').first().json.run_id, kind: 'invoice', title: ($('Invoice decision').first().json.invoice.vendor || 'Unknown vendor') + ' ' + ($('Invoice decision').first().json.invoice.invoice_number || '(no number)'), reasons: $('Invoice decision').first().json.issues, proposal: { invoice: $('Invoice decision').first().json.invoice, checks: $('Invoice decision').first().json.checks, issues: $('Invoice decision').first().json.issues, dedupe_key: $('Invoice decision').first().json.dedupe_key, filename: $('Attachment').first().json.filename }, resume_url: $execution.resumeUrl }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "5636474d-5322-5912-aa57-b1e42b80239c",
+      "name": "Respond: needs approval",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2460,
+        160
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'review', run_id: $('Start run (idempotency)').first().json.run_id, review_id: $json.id, issues: $('Invoice decision').first().json.issues, invoice: $('Invoice decision').first().json.invoice }) }}",
+        "options": {
+          "responseCode": 202
+        }
+      }
+    },
+    {
+      "id": "dfb0762a-940a-5bda-ac94-81cfe1fc478b",
+      "name": "Wait for approval",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2680,
+        160
+      ],
+      "parameters": {
+        "resume": "webhook",
+        "httpMethod": "POST",
+        "options": {}
+      },
+      "webhookId": "36e2b0ff-eab5-5146-aae1-b9bc843071cc"
+    },
+    {
+      "id": "5657fb3e-2b23-5cba-bf20-51b68af0fa1a",
+      "name": "Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2900,
+        160
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "751be72a-b135-5f59-8e5e-e4e7207d3a3d",
+              "leftValue": "={{ $json.body.decision }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "approve"
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      }
+    },
+    {
+      "id": "09cbb2bb-56de-5323-ac29-6c6e2c6836ff",
+      "name": "Apply approval",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3120,
+        120
+      ],
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ JSON.stringify({ ...$('Invoice decision').first().json, invoice: { ...$('Invoice decision').first().json.invoice, ...(($json.body.edits || {}).invoice || {}) }, reviewed: true }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "8fb098c2-6393-5f54-96c9-4dc0cd1158db",
+      "name": "Finish run: rejected",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3120,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: 'rejected', route: 'none', output: { reviewer: $json.body.reviewer, issues: $('Invoice decision').first().json.issues } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    }
+  ],
+  "connections": {
+    "Invoice received": {
+      "main": [
+        [
+          {
+            "node": "Fingerprint PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fingerprint PDF": {
+      "main": [
+        [
+          {
+            "node": "Start run (idempotency)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start run (idempotency)": {
+      "main": [
+        [
+          {
+            "node": "Duplicate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Duplicate?": {
+      "main": [
+        [
+          {
+            "node": "Respond: duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Attachment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Attachment": {
+      "main": [
+        [
+          {
+            "node": "Decode PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decode PDF": {
+      "main": [
+        [
+          {
+            "node": "Extract PDF text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract PDF text": {
+      "main": [
+        [
+          {
+            "node": "Extract invoice (AI gateway)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract invoice (AI gateway)": {
+      "main": [
+        [
+          {
+            "node": "Already booked? (accounting)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Already booked? (accounting)": {
+      "main": [
+        [
+          {
+            "node": "Invoice decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invoice decision": {
+      "main": [
+        [
+          {
+            "node": "Post automatically?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post automatically?": {
+      "main": [
+        [
+          {
+            "node": "Post bill to accounting",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Queue for approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post bill to accounting": {
+      "main": [
+        [
+          {
+            "node": "Notify #finance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify #finance": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finish run": {
+      "main": [
+        [
+          {
+            "node": "Reviewed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reviewed?": {
+      "main": [
+        [
+          {
+            "node": "Done (after review)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond: posted",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Queue for approval": {
+      "main": [
+        [
+          {
+            "node": "Respond: needs approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond: needs approval": {
+      "main": [
+        [
+          {
+            "node": "Wait for approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for approval": {
+      "main": [
+        [
+          {
+            "node": "Approved?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approved?": {
+      "main": [
+        [
+          {
+            "node": "Apply approval",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finish run: rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply approval": {
+      "main": [
+        [
+          {
+            "node": "Post bill to accounting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "RelayErrorHandler"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "description": "PDF invoice -> text -> AI extraction -> arithmetic, VAT and vendor checks -> duplicate check in accounting -> post the bill (or approval queue) -> #finance."
+  },
+  "tags": [
+    {
+      "id": "relayTagRelay001",
+      "name": "relay"
+    },
+    {
+      "id": "relayTagAi000001",
+      "name": "ai"
+    },
+    {
+      "id": "relayTagFinance1",
+      "name": "finance"
+    }
+  ],
+  "versionId": "87ef8fbf-9d75-539b-9ec4-8c6277a80921"
+}

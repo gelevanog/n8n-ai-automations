@@ -35,20 +35,104 @@ def _first(pattern: str, text: str, flags: int = re.I) -> str | None:
 # ------------------------------------------------------------------------------------------------ triage
 
 KEYWORDS: dict[str, tuple[str, ...]] = {
-    "spam": ("click", "claim", "verify your password", "btc", "guarantee", "pre-approved", "offshore", "gift card",
-             "survey to claim", "bank details", "per hour", "/hour", "seo", "email lists", "discounts on toner",
-             "suspension", "customs fee", "keep your current password", "redesign", "directory", "loan",
-             "legal action", "http://"),
-    "invoice": ("invoice", "rechnung", "factuur", "facture", "statement", "kontoauszug", "payment reminder",
-                "unpaid", "zahlbar", "amount payable", "receipt"),
-    "support": ("order kp-", "tracking", "damaged", "crushed", "log in", "password reset", "proof", "cancel",
-                "refund", "wrong", "missing", "doesn't scan", "stuck", "error", "access", "pedido", "beschädigt",
-                "colour", "delivery address", "copy of the invoice", "corrected invoice", "got 1,000"),
-    "sales_lead": ("quote", "pricing", "price", "offerte", "angebot", "looking for", "interested", "reorder",
-                   "we need", "we'd like", "would like", "need about", "partner", "samples", "call me", "budget",
-                   "order again", "go ahead"),
-    "other": ("newsletter", "out of the office", "out of office", "apply for", "position", "invited", "invitation",
-              "undeliverable", "delivery has failed", "survey", "fire drill", "road works", "unsubscribe", "thesis"),
+    "spam": (
+        "click",
+        "claim",
+        "verify your password",
+        "btc",
+        "guarantee",
+        "pre-approved",
+        "offshore",
+        "gift card",
+        "survey to claim",
+        "bank details",
+        "per hour",
+        "/hour",
+        "seo",
+        "email lists",
+        "discounts on toner",
+        "suspension",
+        "customs fee",
+        "keep your current password",
+        "redesign",
+        "directory",
+        "loan",
+        "legal action",
+        "http://",
+    ),
+    "invoice": (
+        "invoice",
+        "rechnung",
+        "factuur",
+        "facture",
+        "statement",
+        "kontoauszug",
+        "payment reminder",
+        "unpaid",
+        "zahlbar",
+        "amount payable",
+        "receipt",
+    ),
+    "support": (
+        "order kp-",
+        "tracking",
+        "damaged",
+        "crushed",
+        "log in",
+        "password reset",
+        "proof",
+        "cancel",
+        "refund",
+        "wrong",
+        "missing",
+        "doesn't scan",
+        "stuck",
+        "error",
+        "access",
+        "pedido",
+        "beschädigt",
+        "colour",
+        "delivery address",
+        "copy of the invoice",
+        "corrected invoice",
+        "got 1,000",
+    ),
+    "sales_lead": (
+        "quote",
+        "pricing",
+        "price",
+        "offerte",
+        "angebot",
+        "looking for",
+        "interested",
+        "reorder",
+        "we need",
+        "we'd like",
+        "would like",
+        "need about",
+        "partner",
+        "samples",
+        "call me",
+        "budget",
+        "order again",
+        "go ahead",
+    ),
+    "other": (
+        "newsletter",
+        "out of the office",
+        "out of office",
+        "apply for",
+        "position",
+        "invited",
+        "invitation",
+        "undeliverable",
+        "delivery has failed",
+        "survey",
+        "fire drill",
+        "road works",
+        "unsubscribe",
+        "thesis",
+    ),
 }
 PRODUCTS = (
     ("tissue_paper", ("tissue",)),
@@ -92,8 +176,12 @@ def fake_triage(messages: Sequence[Message]) -> str:
     else:
         confidence = round(min(0.97, 0.55 + 0.12 * (top - second)), 2)
     quantity = None
-    match = re.search(r"(\d{1,3}(?:[.,]\d{3})+|\d{3,6})\s*(?:\w+\s){0,4}?(?:boxes|cartons|bags|labels|stickers|"
-                      r"sheets|units|pieces|mailers|tassen|faltschachteln|cajas|boxes)", text, re.I)
+    match = re.search(
+        r"(\d{1,3}(?:[.,]\d{3})+|\d{3,6})\s*(?:\w+\s){0,4}?(?:boxes|cartons|bags|labels|stickers|"
+        r"sheets|units|pieces|mailers|tassen|faltschachteln|cajas|boxes)",
+        text,
+        re.I,
+    )
     if match:
         value = parse_number(match.group(1))
         quantity = int(value) if value is not None else None
@@ -113,12 +201,22 @@ def fake_triage(messages: Sequence[Message]) -> str:
         "summary": subject[:200] or "email",
         "language": "en",
         "urgency": "high" if "urgent" in low else "normal",
-        "contact": {"name": sender or None, "company": company, "email": None,
-                    "phone": _first(r"(\+?\d[\d ()-]{8,}\d)", body)},
+        "contact": {
+            "name": sender or None,
+            "company": company,
+            "email": None,
+            "phone": _first(r"(\+?\d[\d ()-]{8,}\d)", body),
+        },
         "lead": {"product": product, "quantity": quantity, "deadline": None} if category == "sales_lead" else {},
         "support": {"order_id": _first(r"\b(KP-\d{5})\b", text), "issue": issue} if category == "support" else {},
-        "invoice": {"vendor": None, "invoice_number": invoice_number, "amount": amount,
-                    "currency": _first(r"\b(EUR|GBP|USD)\b", text, 0)} if category == "invoice" else {},
+        "invoice": {
+            "vendor": None,
+            "invoice_number": invoice_number,
+            "amount": amount,
+            "currency": _first(r"\b(EUR|GBP|USD)\b", text, 0),
+        }
+        if category == "invoice"
+        else {},
     }
     return json.dumps(reply)
 
@@ -167,9 +265,14 @@ def fake_invoice(messages: Sequence[Message]) -> str:
         if re.match(r"(?i)(description|beschreibung|service|item)\b.*\b(qty|menge)\b", match.group(0)):
             continue
         quantity, unit, amount = (parse_number(match.group(i)) for i in (2, 3, 4))
-        lines.append({"description": description, "quantity": float(quantity) if quantity is not None else None,
-                      "unit_price": float(unit) if unit is not None else None,
-                      "amount": float(amount) if amount is not None else None})
+        lines.append(
+            {
+                "description": description,
+                "quantity": float(quantity) if quantity is not None else None,
+                "unit_price": float(unit) if unit is not None else None,
+                "amount": float(amount) if amount is not None else None,
+            }
+        )
     rate = num("vat_rate")
     reply = {
         "vendor": vendor,
@@ -204,16 +307,44 @@ INDUSTRY_WORDS = (
 )
 NUMBER_WORDS = {"four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "twelve": 12}
 COUNTRIES = {
-    "austria": "AT", "ireland": "IE", "denmark": "DK", "united kingdom": "GB", "uk": "GB", "scotland": "GB",
-    "netherlands": "NL", "germany": "DE", "belgium": "BE", "usa": "US", "united states": "US", "france": "FR",
-    "sweden": "SE", "italy": "IT", "poland": "PL", "spain": "ES", "czech": "CZ", "portugal": "PT", "finland": "FI",
-    "eindhoven": "NL", "munich": "DE", "hamburg": "DE", "berlin": "DE", "rotterdam": "NL", "utrecht": "NL",
+    "austria": "AT",
+    "ireland": "IE",
+    "denmark": "DK",
+    "united kingdom": "GB",
+    "uk": "GB",
+    "scotland": "GB",
+    "netherlands": "NL",
+    "germany": "DE",
+    "belgium": "BE",
+    "usa": "US",
+    "united states": "US",
+    "france": "FR",
+    "sweden": "SE",
+    "italy": "IT",
+    "poland": "PL",
+    "spain": "ES",
+    "czech": "CZ",
+    "portugal": "PT",
+    "finland": "FI",
+    "eindhoven": "NL",
+    "munich": "DE",
+    "hamburg": "DE",
+    "berlin": "DE",
+    "rotterdam": "NL",
+    "utrecht": "NL",
 }
 
 
 def _band(count: int) -> str:
-    return "1-10" if count <= 10 else "11-50" if count <= 50 else "51-200" if count <= 200 else (
-        "201-500" if count <= 500 else "500+")
+    return (
+        "1-10"
+        if count <= 10
+        else "11-50"
+        if count <= 50
+        else "51-200"
+        if count <= 200
+        else ("201-500" if count <= 500 else "500+")
+    )
 
 
 def fake_enrich(messages: Sequence[Message]) -> str:
@@ -222,9 +353,12 @@ def fake_enrich(messages: Sequence[Message]) -> str:
     form = _block(user, "form").lower()
     industry = next((name for name, words in INDUSTRY_WORDS if any(w in site for w in words)), "other")
     count = None
-    match = re.search(r"(?:team of|employs|around|roughly|about|more than|over)?\s*(\d[\d,]*)\s*(?:-strong team|"
-                      r"people|employees|colleagues|makers|potters|florists|therapists|teachers|engineers|bakers|"
-                      r"friends|groomers)", site)
+    match = re.search(
+        r"(?:team of|employs|around|roughly|about|more than|over)?\s*(\d[\d,]*)\s*(?:-strong team|"
+        r"people|employees|colleagues|makers|potters|florists|therapists|teachers|engineers|bakers|"
+        r"friends|groomers)",
+        site,
+    )
     if match:
         count = int(match.group(1).replace(",", ""))
     else:
@@ -269,8 +403,9 @@ def fake_faq(messages: Sequence[Message]) -> str:
     question = _block(user, "question")
     articles = re.findall(r'<article id="([^"]+)">\n# (.*?)\n(.*?)\n</article>', user, re.S)
     if not articles:
-        return json.dumps({"answerable": False, "answer": "", "citations": [], "confidence": 0.0,
-                           "escalation_reason": "no articles"})
+        return json.dumps(
+            {"answerable": False, "answer": "", "citations": [], "confidence": 0.0, "escalation_reason": "no articles"}
+        )
     q_terms = set(tokens(question))
     article_id, _title, text = articles[0]
     sentences = [s.strip(" -*") for s in re.split(r"(?<=[.!?])\s+|\n+", text) if len(s.strip()) > 12]
@@ -278,11 +413,25 @@ def fake_faq(messages: Sequence[Message]) -> str:
     best = [s for s in scored[:2] if q_terms & set(tokens(s))]
     coverage = len(q_terms & set(tokens(text))) / max(1, len(q_terms))
     if not best or coverage < 0.5:
-        return json.dumps({"answerable": False, "answer": "", "citations": [], "confidence": round(coverage, 2),
-                           "escalation_reason": "the articles do not cover the question"})
+        return json.dumps(
+            {
+                "answerable": False,
+                "answer": "",
+                "citations": [],
+                "confidence": round(coverage, 2),
+                "escalation_reason": "the articles do not cover the question",
+            }
+        )
     answer = "Thanks for your question! " + " ".join(s.replace("**", "") for s in best)
-    return json.dumps({"answerable": True, "answer": answer, "citations": [article_id],
-                       "confidence": round(min(0.95, 0.5 + coverage / 2), 2), "escalation_reason": None})
+    return json.dumps(
+        {
+            "answerable": True,
+            "answer": answer,
+            "citations": [article_id],
+            "confidence": round(min(0.95, 0.5 + coverage / 2), 2),
+            "escalation_reason": None,
+        }
+    )
 
 
 def fake_digest(messages: Sequence[Message]) -> str:

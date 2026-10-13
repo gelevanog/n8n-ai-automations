@@ -1,0 +1,313 @@
+{
+  "id": "RelayKpiDigest",
+  "name": "Relay - 05 Weekly KPI digest",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "id": "132f299a-b496-5ec3-8ee2-06c4b6bf68d0",
+      "name": "About",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -400
+      ],
+      "parameters": {
+        "content": "## Weekly KPI digest\nThe **numbers come from SQL** (the Postgres node reads Relay's run log); the **AI gateway only writes the sentences** and every number in its text is checked against the query result. A digest with an unsupported number is replaced by a plain template.",
+        "height": 200,
+        "width": 460,
+        "color": 4
+      }
+    },
+    {
+      "id": "e0142f68-3a11-5eaf-9b05-f3c344ce5405",
+      "name": "Every Monday 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -100
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "19490197-103b-5d1a-b638-188e499104a7",
+      "name": "Run now (webhook)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        100
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kpi-digest",
+        "authentication": "headerAuth",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "webhookId": "97f83c6e-6db5-5c24-9228-e83c4141cedc",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayWebhookAuth",
+          "name": "Relay webhook secret"
+        }
+      }
+    },
+    {
+      "id": "d1d4bd3d-8b50-5ae8-bacb-7a0912ae2908",
+      "name": "Weekly KPIs (PostgreSQL)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "WITH w AS (\n  SELECT * FROM runs WHERE started_at >= now() - interval '7 days'\n)\nSELECT\n  to_char(now() - interval '7 days', 'YYYY-MM-DD') || ' to ' || to_char(now(), 'YYYY-MM-DD') AS period,\n  (SELECT count(*) FROM w WHERE workflow = 'triage') AS emails_triaged,\n  (SELECT count(*) FROM w WHERE workflow = 'triage' AND status = 'auto') AS emails_routed_automatically,\n  (SELECT count(*) FROM w WHERE workflow = 'triage' AND route = 'crm') AS sales_leads_from_email,\n  (SELECT count(*) FROM w WHERE workflow = 'invoice' AND status IN ('auto', 'approved')) AS invoices_posted,\n  (SELECT coalesce(round(sum((output -> 'invoice' ->> 'total')::numeric), 2), 0) FROM w\n     WHERE workflow = 'invoice' AND status IN ('auto', 'approved')\n       AND output -> 'invoice' ->> 'currency' = 'EUR') AS invoice_total_posted_eur,\n  (SELECT count(*) FROM w WHERE workflow = 'lead') AS web_leads,\n  (SELECT count(*) FROM w WHERE workflow = 'lead' AND output ->> 'tier' = 'hot') AS hot_leads,\n  (SELECT count(*) FROM w WHERE workflow = 'faq' AND status = 'auto') AS faq_answered_automatically,\n  (SELECT count(*) FROM w WHERE workflow = 'faq' AND status = 'escalated') AS faq_escalated,\n  (SELECT count(*) FROM review_items WHERE status = 'pending') AS reviews_pending,\n  (SELECT count(*) FROM dead_letters WHERE status = 'open') AS dead_letters_open,\n  (SELECT count(*) FROM w WHERE status = 'error') AS failed_runs;",
+        "options": {}
+      },
+      "credentials": {
+        "postgres": {
+          "id": "relayPostgres",
+          "name": "Relay Postgres"
+        }
+      },
+      "alwaysOutputData": true
+    },
+    {
+      "id": "010e5d30-1112-5d3b-babc-e8389ca520e5",
+      "name": "Start run (idempotency)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/start",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ workflow: 'digest', idempotency_key: $('Run now (webhook)').isExecuted ? 'manual:' + $execution.id : 'week:' + $json.period, execution_id: $execution.id, input: $json, source: $('Run now (webhook)').isExecuted ? 'webhook' : 'schedule', title: 'Digest ' + $json.period }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "4e46c371-82f4-5407-b407-6a41afc14a7d",
+      "name": "Write digest (AI gateway)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ai/v1/write-digest",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ period: $('Weekly KPIs (PostgreSQL)').first().json.period, metrics: Object.fromEntries(Object.entries($('Weekly KPIs (PostgreSQL)').first().json).filter(([k]) => k !== 'period').map(([k, v]) => [k, Number(v)])), run_id: $('Start run (idempotency)').first().json.run_id }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "notes": "Numbers checked against the SQL result",
+      "notesInFlow": true
+    },
+    {
+      "id": "c7297553-1fbf-5355-83b1-70ee8f61a1b2",
+      "name": "Post to #ops",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.MOCKS_URL }}/chat/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Idempotency-Key",
+              "value": "={{ $('Start run (idempotency)').first().json.run_id + '-digest' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: '#ops', text: '*' + $json.headline + '*\\n' + $json.bullets.map(b => '- ' + b).join('\\n') }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "id": "0cae4d2f-6ebd-56fc-aab8-13be03946149",
+      "name": "Finish run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RELAY_API_URL }}/ops/runs/{{ $('Start run (idempotency)').first().json.run_id }}/finish",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ status: 'auto', route: 'chat', output: { headline: $('Write digest (AI gateway)').first().json.headline, numbers_ok: $('Write digest (AI gateway)').first().json.numbers_ok, text: $('Write digest (AI gateway)').first().json.text } }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "relayApiToken",
+          "name": "Relay API token"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    }
+  ],
+  "connections": {
+    "Every Monday 08:00": {
+      "main": [
+        [
+          {
+            "node": "Weekly KPIs (PostgreSQL)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run now (webhook)": {
+      "main": [
+        [
+          {
+            "node": "Weekly KPIs (PostgreSQL)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weekly KPIs (PostgreSQL)": {
+      "main": [
+        [
+          {
+            "node": "Start run (idempotency)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start run (idempotency)": {
+      "main": [
+        [
+          {
+            "node": "Write digest (AI gateway)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write digest (AI gateway)": {
+      "main": [
+        [
+          {
+            "node": "Post to #ops",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to #ops": {
+      "main": [
+        [
+          {
+            "node": "Finish run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "RelayErrorHandler"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "description": "Every Monday 08:00 (or on demand): KPIs from PostgreSQL -> AI-written digest with every number checked -> #ops."
+  },
+  "tags": [
+    {
+      "id": "relayTagRelay001",
+      "name": "relay"
+    },
+    {
+      "id": "relayTagAi000001",
+      "name": "ai"
+    },
+    {
+      "id": "relayTagReport01",
+      "name": "reporting"
+    }
+  ],
+  "versionId": "d1f07882-e55a-5f97-9b02-103417308db2"
+}

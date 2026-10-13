@@ -52,7 +52,9 @@ def load_rules(path: Path) -> tuple[EscalationRule, ...]:
 
 
 def render_articles(hits: list[Hit]) -> str:
-    return "\n\n".join(f'<article id="{h.article.id}">\n# {h.article.title}\n{h.article.text}\n</article>' for h in hits)
+    return "\n\n".join(
+        f'<article id="{h.article.id}">\n# {h.article.title}\n{h.article.text}\n</article>' for h in hits
+    )
 
 
 def answer_faq(
@@ -67,8 +69,13 @@ def answer_faq(
     meta = CallMeta(task=TASK)
     if matched or not hits:
         # A policy rule or an empty retrieval escalates without spending a model call.
-        output = FaqOutput(answerable=False, answer="", citations=[], confidence=0.0,
-                           escalation_reason=matched[0].reason if matched else "no knowledge-base article matches")
+        output = FaqOutput(
+            answerable=False,
+            answer="",
+            citations=[],
+            confidence=0.0,
+            escalation_reason=matched[0].reason if matched else "no knowledge-base article matches",
+        )
     else:
         messages: list[Message] = [
             {"role": "system", "content": SYSTEM},
@@ -95,32 +102,53 @@ def gate(
         if not ok:
             reasons.append(reason)
 
-    check("policy_rules", not matched, ", ".join(r.code for r in matched),
-          "; ".join(r.reason for r in matched) or "policy rule")
+    check(
+        "policy_rules",
+        not matched,
+        ", ".join(r.code for r in matched),
+        "; ".join(r.reason for r in matched) or "policy rule",
+    )
     injected = ai_directed_sentences(request.question)
     check("no_ai_directed_text", not injected, "; ".join(injected)[:160], "the question addresses the AI system")
     best = max((h.coverage for h in hits[:1]), default=0.0)
-    check("retrieval", best >= settings.faq_min_retrieval_score,
-          f"coverage {best:.2f} vs {settings.faq_min_retrieval_score:.2f}", "no article covers the question well")
+    check(
+        "retrieval",
+        best >= settings.faq_min_retrieval_score,
+        f"coverage {best:.2f} vs {settings.faq_min_retrieval_score:.2f}",
+        "no article covers the question well",
+    )
     if not matched and hits:
-        check("model_answerable", output.answerable, output.escalation_reason or "",
-              f"model: {output.escalation_reason or 'not answerable from the articles'}")
-        check("confidence", output.confidence >= settings.faq_min_confidence,
-              f"{output.confidence:.2f} vs {settings.faq_min_confidence:.2f}",
-              f"confidence {output.confidence:.2f} below {settings.faq_min_confidence:.2f}")
+        check(
+            "model_answerable",
+            output.answerable,
+            output.escalation_reason or "",
+            f"model: {output.escalation_reason or 'not answerable from the articles'}",
+        )
+        check(
+            "confidence",
+            output.confidence >= settings.faq_min_confidence,
+            f"{output.confidence:.2f} vs {settings.faq_min_confidence:.2f}",
+            f"confidence {output.confidence:.2f} below {settings.faq_min_confidence:.2f}",
+        )
         retrieved_ids = {h.article.id for h in hits}
         citations = [c for c in output.citations if c in retrieved_ids]
         foreign = [c for c in output.citations if c not in retrieved_ids]
         if output.answerable:
-            check("citations", bool(citations) and not foreign, ", ".join(output.citations) or "none",
-                  "the answer cites no retrieved article" if not citations else "the answer cites unknown articles")
-            cited_text = " ".join(
-                f"{a.title} {a.text}" for a in (kb.get(c) for c in citations) if a is not None
+            check(
+                "citations",
+                bool(citations) and not foreign,
+                ", ".join(output.citations) or "none",
+                "the answer cites no retrieved article" if not citations else "the answer cites unknown articles",
             )
+            cited_text = " ".join(f"{a.title} {a.text}" for a in (kb.get(c) for c in citations) if a is not None)
             allowed = numbers_in(cited_text) | numbers_in(request.question)
             unsupported = sorted({str(n) for n in numbers_in(output.answer) if n not in allowed})
-            check("numbers_grounded", not unsupported, ", ".join(unsupported),
-                  f"numbers not in the cited articles: {', '.join(unsupported)}")
+            check(
+                "numbers_grounded",
+                not unsupported,
+                ", ".join(unsupported),
+                f"numbers not in the cited articles: {', '.join(unsupported)}",
+            )
     decision = "auto_reply" if not reasons and output.answerable else "escalate"
     return FaqResponse(
         **output.model_dump(),
