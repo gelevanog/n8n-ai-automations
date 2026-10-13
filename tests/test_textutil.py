@@ -52,3 +52,7 @@ def test_ai_directed_text_is_detected(text: str) -> None:
 
 def test_ordinary_text_is_not_flagged() -> None:
     assert not ai_directed_sentences("Please send a quote for 2,000 mailer boxes. Our assistant will call you.")
+
+
+def test_ranges_read_the_same_with_any_dash() -> None:
+    assert numbers_in("5,000–9,999 units") == numbers_in("5,000-9,999 units")

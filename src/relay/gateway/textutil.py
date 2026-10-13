@@ -51,6 +51,8 @@ def parse_number(token: str) -> Decimal | None:
 
 def numbers_in(text: str) -> set[Decimal]:
     values: set[Decimal] = set()
+    # "5,000–9,999" and "5,000-9,999" must read the same (models often write ranges with an en dash).
+    text = text.replace("\u2013", "-").replace("\u2014", "-").replace("\u2011", "-").replace("\u202f", " ")
     for match in _NUMBER.finditer(text):
         value = parse_number(match.group(1))
         if value is not None:
