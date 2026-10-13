@@ -129,7 +129,22 @@ def make_engine(url: str) -> Engine:
     return create_engine(url, pool_pre_ping=True)
 
 
+def add_missing_columns(engine: Engine, metadata: Any) -> None:
+    """A minimal forward migration for the demo: nullable columns added in a later version are created on start."""
+    from sqlalchemy import inspect, text
+
+    inspector = inspect(engine)
+    with engine.begin() as connection:
+        for table in metadata.sorted_tables:
+            existing = {c["name"] for c in inspector.get_columns(table.name)}
+            for column in table.columns:
+                if column.name not in existing and column.nullable:
+                    kind = column.type.compile(dialect=engine.dialect)
+                    connection.execute(text(f'ALTER TABLE {table.name} ADD COLUMN "{column.name}" {kind}'))
+
+
 def make_sessionmaker(url: str) -> sessionmaker[Any]:
     engine = make_engine(url)
     Base.metadata.create_all(engine)
+    add_missing_columns(engine, Base.metadata)
     return sessionmaker(engine, expire_on_commit=False)

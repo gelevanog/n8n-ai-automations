@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import httpx
 import pytest
 
@@ -153,3 +155,24 @@ def test_reset_empties_everything(store: OpsStore) -> None:
     store.create_review(run["run_id"], "triage")
     store.reset()
     assert store.list_runs() == [] and store.list_reviews(status=None) == []
+
+
+def test_new_nullable_columns_are_added_to_an_existing_database(tmp_path: Path) -> None:
+    import sqlite3
+
+    from relay.ops.db import make_sessionmaker
+
+    path = tmp_path / "old.db"
+    make_sessionmaker(f"sqlite:///{path}")
+    with sqlite3.connect(path) as db:
+        db.execute("ALTER TABLE runs DROP COLUMN queued_ms")
+    make_sessionmaker(f"sqlite:///{path}")
+    with sqlite3.connect(path) as db:
+        assert "queued_ms" in {row[1] for row in db.execute("PRAGMA table_info(runs)")}
+
+
+def test_queued_time_counts_for_review_runs(store: OpsStore) -> None:
+    run = store.start_run("lead", "q-time")
+    store.create_review(run["run_id"], "lead_reply")
+    assert store.get_run(run["run_id"])["queued_ms"] is not None
+    assert store.metrics()["workflows"]["lead"]["latency_p50_ms"] is not None

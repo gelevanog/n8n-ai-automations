@@ -290,6 +290,8 @@ class OpsStore:
                 existing.proposal = proposal or existing.proposal
                 existing.reasons = reasons or existing.reasons
                 return review_dict(existing)
+            started = run.started_at if run.started_at.tzinfo else run.started_at.replace(tzinfo=dt.UTC)
+            run.queued_ms = int((now() - started).total_seconds() * 1000)
             item = ReviewItem(
                 run_id=run_id,
                 workflow=run.workflow,
