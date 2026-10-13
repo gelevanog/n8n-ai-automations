@@ -16,25 +16,31 @@ ICP = load_icp(Path("configs/icp.yaml"))
 FETCHER = SiteFetcher(Path("data/leads/sites"))
 
 
-@pytest.mark.parametrize(("website", "domain"), [
-    ("https://www.tidepool-coffee.example/about", "tidepool-coffee.example"),
-    ("tidepool-coffee.example", "tidepool-coffee.example"),
-    ("HTTPS://North-Loom.example", "north-loom.example"),
-])
+@pytest.mark.parametrize(
+    ("website", "domain"),
+    [
+        ("https://www.tidepool-coffee.example/about", "tidepool-coffee.example"),
+        ("tidepool-coffee.example", "tidepool-coffee.example"),
+        ("HTTPS://North-Loom.example", "north-loom.example"),
+    ],
+)
 def test_domains_are_normalised(website: str, domain: str) -> None:
     assert normalize_domain(website) == domain
 
 
-@pytest.mark.parametrize("website", ["https://google.com", "http://127.0.0.1/admin", "", "file:///etc/passwd",
-                                     "https://evil.example.com.attacker.io"])
+@pytest.mark.parametrize(
+    "website",
+    ["https://google.com", "http://127.0.0.1/admin", "", "file:///etc/passwd", "https://evil.example.com.attacker.io"],
+)
 def test_anything_but_fixture_sites_is_refused(website: str) -> None:
     with pytest.raises(SiteRefusedError):
         normalize_domain(website)
 
 
 def test_hidden_elements_are_dropped() -> None:
-    text, hidden = visible_text('<p>Visible</p><p style="display:none">Secret</p><div hidden>Also</div>'
-                                "<script>var x=1</script>")
+    text, hidden = visible_text(
+        '<p>Visible</p><p style="display:none">Secret</p><div hidden>Also</div><script>var x=1</script>'
+    )
     assert text == "Visible" and hidden == 2
 
 
@@ -63,10 +69,18 @@ def test_competitors_and_non_buyers_are_disqualified() -> None:
 
 
 def lead(**extra: object) -> LeadRequest:
-    return LeadRequest.model_validate({"name": "Sean Murphy", "email": "sean@tidepool-coffee.example",
-                                       "company": "Tidepool Coffee", "website": "tidepool-coffee.example",
-                                       "message": "1,500 mailer boxes", "product": "mailer_boxes",
-                                       "quantity": 1500, **extra})
+    return LeadRequest.model_validate(
+        {
+            "name": "Sean Murphy",
+            "email": "sean@tidepool-coffee.example",
+            "company": "Tidepool Coffee",
+            "website": "tidepool-coffee.example",
+            "message": "1,500 mailer boxes",
+            "product": "mailer_boxes",
+            "quantity": 1500,
+            **extra,
+        }
+    )
 
 
 def test_enrichment_with_the_rules_model(gateway: Gateway) -> None:
@@ -89,10 +103,12 @@ def draft(body: str, subject: str = "Your enquiry") -> DraftOutput:
     return DraftOutput(subject=subject, body=body)
 
 
-GOOD = ("Hi Sean, thank you for your enquiry about 1,500 mailer boxes for Tidepool Coffee. Production takes 10 "
-        "business days after proof approval and volume discounts start at 1,000 units, so your order qualifies "
-        "for 5% off. We can send a free sample pack first. Would a short call this week work? "
-        "The Kestrel Print Co. sales team")
+GOOD = (
+    "Hi Sean, thank you for your enquiry about 1,500 mailer boxes for Tidepool Coffee. Production takes 10 "
+    "business days after proof approval and volume discounts start at 1,000 units, so your order qualifies "
+    "for 5% off. We can send a free sample pack first. Would a short call this week work? "
+    "The Kestrel Print Co. sales team"
+)
 
 
 def test_good_draft_passes_every_check() -> None:

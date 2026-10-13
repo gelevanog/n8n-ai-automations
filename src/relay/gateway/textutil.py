@@ -14,7 +14,9 @@ _AI_DIRECTED = re.compile(
     r"(?:classify|label|rate|mark|route) (?:this|the) (?:email|message|lead|invoice) as)"
 )
 # Not inside identifiers: "RE-2026-03295" and "KP-41870" carry no amounts (letter- or digit-dash prefixes).
-_NUMBER = re.compile(r"(?<![\w.,])(?<![A-Za-z]-)(?<!\d-)(\d{1,3}(?:[.,\s']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)(?![\w])")
+_NUMBER = re.compile(
+    r"(?<![\w.,])(?<![A-Za-z]-)(?<!\d-)(\d{1,3}(?:[.,\s']\d{3})+(?:[.,]\d{1,2})?|\d+(?:[.,]\d{1,2})?)(?![\w])"
+)
 
 
 def ai_directed_sentences(text: str) -> list[str]:

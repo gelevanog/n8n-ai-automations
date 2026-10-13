@@ -42,8 +42,11 @@ def client_with(settings: Settings, store: OpsStore, behaviour: str) -> TestClie
     return TestClient(create_app(settings, gateway=gateway, store=store))
 
 
-EMAIL = {"from": {"name": "Lena", "email": "lena@fernway-tea.example"}, "subject": "Quote",
-         "text": "We need 1,500 mailer boxes, please send a quote."}
+EMAIL = {
+    "from": {"name": "Lena", "email": "lena@fernway-tea.example"},
+    "subject": "Quote",
+    "text": "We need 1,500 mailer boxes, please send a quote.",
+}
 
 
 def test_health(api: TestClient) -> None:
@@ -92,8 +95,15 @@ def test_token_is_required_when_configured(store: OpsStore) -> None:
 
 def test_ops_flow_over_http(api: TestClient, poster: Poster) -> None:
     run = api.post("/ops/runs/start", json={"workflow": "lead", "idempotency_key": "s1", "input": {"x": 1}}).json()
-    item = api.post("/ops/review", json={"run_id": run["run_id"], "kind": "lead_reply", "reasons": ["approve"],
-                                          "resume_url": "http://localhost:5678/webhook-waiting/3"}).json()
+    item = api.post(
+        "/ops/review",
+        json={
+            "run_id": run["run_id"],
+            "kind": "lead_reply",
+            "reasons": ["approve"],
+            "resume_url": "http://localhost:5678/webhook-waiting/3",
+        },
+    ).json()
     assert api.get("/ops/review").json()[0]["id"] == item["id"]
     decided = api.post(f"/ops/review/{item['id']}/decision", json={"decision": "approve"}).json()
     assert decided["status"] == "approved" and poster.calls[-1][0].startswith("http://n8n:5678/webhook-waiting/3")
@@ -115,10 +125,13 @@ def test_reset_can_be_disabled(store: OpsStore) -> None:
 
 def test_mailpit_bridge_forwards_only_inbox_mail(settings: Settings, store: OpsStore, poster: Poster) -> None:
     pages: dict[str, Any] = {
-        "/api/v1/message/abc": {"MessageID": "<m@x>", "From": {"Name": "Lena", "Address": "lena@x.example"},
-                                "Subject": "Quote", "Text": "1,500 boxes",
-                                "Attachments": [{"PartID": "2", "FileName": "inv.pdf",
-                                                 "ContentType": "application/pdf"}]},
+        "/api/v1/message/abc": {
+            "MessageID": "<m@x>",
+            "From": {"Name": "Lena", "Address": "lena@x.example"},
+            "Subject": "Quote",
+            "Text": "1,500 boxes",
+            "Attachments": [{"PartID": "2", "FileName": "inv.pdf", "ContentType": "application/pdf"}],
+        },
     }
 
     def fetch(url: str) -> httpx.Response:

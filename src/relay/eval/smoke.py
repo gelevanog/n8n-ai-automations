@@ -23,32 +23,44 @@ def smoke(settings: Settings, models: list[str]) -> dict[str, Any]:
     email = emails["em-018"]  # a complaint and a new order in one email (gold: sales_lead)
     text = "\n".join(p.extract_text() for p in PdfReader(Path("data/invoices/pdf/inv-002.pdf")).pages)
     rows = []
+    triage_request = TriageRequest.model_validate(
+        {"from": {"name": email.from_name, "email": email.from_email}, "subject": email.subject, "text": email.body}
+    )
     for name in models:
-        model = budgeted(build_chat_model(settings, provider="openrouter", model=name, fallback_models=[]),
-                         settings, tag=f"smoke:{name}")
+        model = budgeted(
+            build_chat_model(settings, provider="openrouter", model=name, fallback_models=[]),
+            settings,
+            tag=f"smoke:{name}",
+        )
         gateway = Gateway(settings, model=model)
         row: dict[str, Any] = {"model": name}
-        for task, call in (
-            ("triage", lambda g=gateway: g.classify_email(TriageRequest.model_validate(
-                {"from": {"name": email.from_name, "email": email.from_email}, "subject": email.subject,
-                 "text": email.body}))),
-            ("invoice", lambda g=gateway: g.extract_invoice(InvoiceRequest(text=text, filename="inv-002.pdf"))),
-            ("faq", lambda g=gateway: g.answer_faq(FaqRequest(question="How much bleed should I add?"))),
-        ):
+        for task in ("triage", "invoice", "faq"):
             started = time.monotonic()
             try:
-                result = call()
-                row[task] = {"ok": True, "seconds": round(time.monotonic() - started, 1),
-                             "schema_valid": result.meta.schema_valid}
+                entry: dict[str, Any] = {"ok": True}
                 if task == "triage":
-                    row[task]["category"] = result.category  # type: ignore[union-attr]
-                    row[task]["correct"] = result.category == "sales_lead"  # type: ignore[union-attr]
+                    triage = gateway.classify_email(triage_request)
+                    entry.update(
+                        category=triage.category,
+                        correct=triage.category == "sales_lead",
+                        schema_valid=triage.meta.schema_valid,
+                    )
                 elif task == "invoice":
-                    row[task]["total"] = result.invoice.total  # type: ignore[union-attr]
-                    row[task]["correct"] = result.invoice.total == 2205.18  # type: ignore[union-attr]
+                    invoice = gateway.extract_invoice(InvoiceRequest(text=text, filename="inv-002.pdf"))
+                    entry.update(
+                        total=invoice.invoice.total,
+                        correct=invoice.invoice.total == 2205.18,
+                        schema_valid=invoice.meta.schema_valid,
+                    )
                 else:
-                    row[task]["decision"] = result.decision  # type: ignore[union-attr]
-                    row[task]["correct"] = "3 mm" in result.answer or "3mm" in result.answer  # type: ignore[union-attr]
+                    faq = gateway.answer_faq(FaqRequest(question="How much bleed should I add?"))
+                    entry.update(
+                        decision=faq.decision,
+                        correct="3 mm" in faq.answer or "3mm" in faq.answer,
+                        schema_valid=faq.meta.schema_valid,
+                    )
+                entry["seconds"] = round(time.monotonic() - started, 1)
+                row[task] = entry
             except LLMError as exc:
                 row[task] = {"ok": False, "seconds": round(time.monotonic() - started, 1), "error": str(exc)[:200]}
         rows.append(row)

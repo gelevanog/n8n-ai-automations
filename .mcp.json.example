@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "relay": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--directory", "${CLAUDE_PROJECT_DIR:-.}", "relay", "mcp"],
+      "env": {
+        "RELAY_API_URL": "${RELAY_API_URL:-http://localhost:8100}",
+        "RELAY_N8N_PUBLIC_URL": "${RELAY_N8N_PUBLIC_URL:-http://localhost:5678}"
+      }
+    }
+  }
+}

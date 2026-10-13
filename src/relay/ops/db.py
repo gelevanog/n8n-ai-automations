@@ -51,6 +51,8 @@ class Run(Base):
     started_at: Mapped[dt.datetime] = mapped_column(DateTime(timezone=True), default=now, index=True)
     finished_at: Mapped[dt.datetime | None] = mapped_column(DateTime(timezone=True))
     latency_ms: Mapped[int | None] = mapped_column(Integer)
+    queued_ms: Mapped[int | None] = mapped_column(Integer)
+    """Time from start until the item was ready for a person (review runs); latency_ms includes the human wait."""
 
 
 class ReviewItem(Base):

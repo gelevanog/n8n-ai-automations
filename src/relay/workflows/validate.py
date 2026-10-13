@@ -17,10 +17,15 @@ from pathlib import Path
 from typing import Any
 
 CATALOG = Path("n8n/node-catalog.json")
-TRIGGERS = frozenset({
-    "n8n-nodes-base.webhook", "n8n-nodes-base.scheduleTrigger", "n8n-nodes-base.errorTrigger",
-    "n8n-nodes-base.manualTrigger", "n8n-nodes-base.executeWorkflowTrigger",
-})
+TRIGGERS = frozenset(
+    {
+        "n8n-nodes-base.webhook",
+        "n8n-nodes-base.scheduleTrigger",
+        "n8n-nodes-base.errorTrigger",
+        "n8n-nodes-base.manualTrigger",
+        "n8n-nodes-base.executeWorkflowTrigger",
+    }
+)
 STICKY = "n8n-nodes-base.stickyNote"
 CREDENTIALS = {
     "relayWebhookAuth": "httpHeaderAuth",
@@ -89,7 +94,9 @@ def validate_workflow(workflow: dict[str, Any], catalog: dict[str, Any]) -> list
             if unknown:
                 problems.append(f"{name}: unknown parameter(s) {sorted(unknown)}")
         position = node.get("position")
-        if not (isinstance(position, list) and len(position) == 2 and all(isinstance(p, int | float) for p in position)):
+        if not (
+            isinstance(position, list) and len(position) == 2 and all(isinstance(p, int | float) for p in position)
+        ):
             problems.append(f"{name}: position must be [x, y]")
         for cred_type, ref in (node.get("credentials") or {}).items():
             expected = CREDENTIALS.get(ref.get("id"))
@@ -163,7 +170,10 @@ def validate_workflow(workflow: dict[str, Any], catalog: dict[str, Any]) -> list
             problems.append(f"{node['name']}: no incoming connection")
 
     for node in nodes:
-        if node["type"] == "n8n-nodes-base.webhook" and (node.get("parameters") or {}).get("responseMode") == "responseNode":
+        if (
+            node["type"] == "n8n-nodes-base.webhook"
+            and (node.get("parameters") or {}).get("responseMode") == "responseNode"
+        ):
             seen: set[str] = set()
             queue = deque([node["name"]])
             found = False

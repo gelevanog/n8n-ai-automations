@@ -25,7 +25,9 @@ def test_validation(mocks: TestClient) -> None:
     assert mocks.post("/accounting/bills", json={"vendor": "x"}).status_code == 422
     assert mocks.post("/helpdesk/tickets", json={}).status_code == 422
     assert mocks.post("/chat/messages", json={"channel": "#x"}).status_code == 422
-    assert mocks.post("/crm/leads", content=b"not json", headers={"content-type": "application/json"}).status_code == 400
+    assert (
+        mocks.post("/crm/leads", content=b"not json", headers={"content-type": "application/json"}).status_code == 400
+    )
 
 
 def test_fail_first_then_succeed(mocks: TestClient) -> None:

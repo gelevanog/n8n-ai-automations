@@ -466,6 +466,111 @@
           "the email contains text addressed to an AI system": 1
         }
       }
+    },
+    "triage_pilot": {
+      "suite": "triage",
+      "name": "pilot",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:21:42+00:00",
+      "summary": {
+        "items": 8,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 12.13,
+        "latency_p95_s": 24.79,
+        "llm_seconds_p50": 11.83,
+        "llm_calls": 8,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "tokens": 14812,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "nvidia/nemotron-3-super-120b-a12b:free": 8
+        },
+        "category_accuracy": 0.875,
+        "auto_handled": 7,
+        "auto_handled_rate": 0.875,
+        "auto_handled_accuracy": 1.0,
+        "misrouted_automatically": 0,
+        "sent_to_review": 1,
+        "review_rate": 0.125,
+        "wrong_category": 1,
+        "wrong_caught_by_review": 1,
+        "hard_items": 4,
+        "hard_accuracy": 0.75,
+        "per_category": {
+          "sales_lead": {
+            "items": 8,
+            "correct": 7,
+            "routed": 7,
+            "routed_correct": 7
+          }
+        },
+        "confusion": {
+          "sales_lead->other": 1
+        },
+        "fields": {
+          "name": {
+            "scored": 7,
+            "correct": 7,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "company": {
+            "scored": 7,
+            "correct": 7,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "product": {
+            "scored": 6,
+            "correct": 6,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "quantity": {
+            "scored": 6,
+            "correct": 6,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "order_id": {
+            "scored": 0,
+            "correct": 0,
+            "accuracy": null,
+            "misses": []
+          },
+          "issue": {
+            "scored": 0,
+            "correct": 0,
+            "accuracy": null,
+            "misses": []
+          },
+          "invoice_number": {
+            "scored": 0,
+            "correct": 0,
+            "accuracy": null,
+            "misses": []
+          },
+          "amount": {
+            "scored": 0,
+            "correct": 0,
+            "accuracy": null,
+            "misses": []
+          }
+        },
+        "field_accuracy": 1.0,
+        "downstream_records": {
+          "crm": 7,
+          "helpdesk": 0,
+          "accounting": 0
+        },
+        "downstream_correct_system": "7/7",
+        "review_reasons": {
+          "category 'other' always goes to a person": 1
+        }
+      }
     }
   },
   "headline": [
@@ -528,6 +633,36 @@
       "run": "fake",
       "metric": "latency p50 (s)",
       "value": 0.22
+    },
+    {
+      "suite": "triage",
+      "run": "pilot",
+      "metric": "routing accuracy (all emails)",
+      "value": 0.875
+    },
+    {
+      "suite": "triage",
+      "run": "pilot",
+      "metric": "auto-handled",
+      "value": 0.875
+    },
+    {
+      "suite": "triage",
+      "run": "pilot",
+      "metric": "accuracy of auto-handled",
+      "value": 1.0
+    },
+    {
+      "suite": "triage",
+      "run": "pilot",
+      "metric": "field extraction accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "triage",
+      "run": "pilot",
+      "metric": "latency p50 (s)",
+      "value": 12.13
     }
   ]
 }

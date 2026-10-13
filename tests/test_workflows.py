@@ -81,8 +81,13 @@ def test_human_review_uses_wait_nodes_resumed_by_webhook() -> None:
 
 def test_reply_is_only_sent_after_approval() -> None:
     workflow = BUILT["03-lead-enrichment.json"]
-    sources = [s for s, out in workflow["connections"].items() for branch in out["main"] for link in branch
-               if link["node"] == "Send reply"]
+    sources = [
+        s
+        for s, out in workflow["connections"].items()
+        for branch in out["main"]
+        for link in branch
+        if link["node"] == "Send reply"
+    ]
     assert sources == ["Approved with a reply?"]
 
 
@@ -100,7 +105,9 @@ def node(workflow: dict[str, Any], name: str) -> dict[str, Any]:
 
 
 def test_unknown_node_type() -> None:
-    assert any("unknown node type" in p for p in broken(lambda w: node(w, "Respond").update(type="n8n-nodes-base.nope")))
+    assert any(
+        "unknown node type" in p for p in broken(lambda w: node(w, "Respond").update(type="n8n-nodes-base.nope"))
+    )
 
 
 def test_unsupported_version() -> None:
@@ -112,8 +119,9 @@ def test_unknown_parameter() -> None:
 
 
 def test_dangling_connection() -> None:
-    problems = broken(lambda w: w["connections"]["Finish run"]["main"][0].append(
-        {"node": "Ghost", "type": "main", "index": 0}))
+    problems = broken(
+        lambda w: w["connections"]["Finish run"]["main"][0].append({"node": "Ghost", "type": "main", "index": 0})
+    )
     assert any("unknown node 'Ghost'" in p for p in problems)
 
 

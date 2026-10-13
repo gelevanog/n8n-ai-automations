@@ -74,8 +74,12 @@ def test_review_then_approval_resumes_the_execution() -> None:
     queued = hook("inbox-triage", email("em-073"))  # a supplier newsletter: category other -> review
     assert queued.status_code == 202 and queued.json()["status"] == "review"
     review_id = queued.json()["review_id"]
-    decided = httpx.post(f"{API}/ops/review/{review_id}/decision", headers=OPS, timeout=60,
-                         json={"decision": "approve", "edits": {"category": "support"}}).json()
+    decided = httpx.post(
+        f"{API}/ops/review/{review_id}/decision",
+        headers=OPS,
+        timeout=60,
+        json={"decision": "approve", "edits": {"category": "support"}},
+    ).json()
     assert decided["resume"]["delivered"] is True
     wait_for(lambda: httpx.get(f"{MOCKS}/helpdesk/tickets").json())
     run = httpx.get(f"{API}/ops/runs/{queued.json()['run_id']}", headers=OPS).json()

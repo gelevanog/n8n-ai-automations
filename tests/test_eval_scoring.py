@@ -26,22 +26,48 @@ def test_fact_alternatives() -> None:
 
 def test_gold_tier_uses_the_same_rules() -> None:
     icp = load_icp(Path("configs/icp.yaml"))
-    lead = {"quantity": 6000, "gold": {"site_found": True, "industry": "cosmetics_beauty", "employees_band": "11-50",
-                                       "country": "AT", "sells_online": True, "disqualified": None}}
+    lead = {
+        "quantity": 6000,
+        "gold": {
+            "site_found": True,
+            "industry": "cosmetics_beauty",
+            "employees_band": "11-50",
+            "country": "AT",
+            "sells_online": True,
+            "disqualified": None,
+        },
+    }
     assert sc.gold_tier(lead, icp, 70, 40) == "hot"
     assert sc.gold_tier({**lead, "gold": {**lead["gold"], "disqualified": "competitor"}}, icp, 70, 40) == "disqualified"
 
 
 def item(**kw: object) -> dict[str, object]:
-    base = {"id": "em-1", "gold_category": "support", "category": "support", "status": "routed", "reasons": [],
-            "fields": {"order_id": "KP-1"}, "gold_fields": {"order_id": "KP-1"}, "seconds": 1.0, "llm_calls": 1,
-            "llm_ms": 900, "tokens": 10, "cost_usd": 0.0, "models": ["m"], "schema_valid": True, "hard": None}
+    base = {
+        "id": "em-1",
+        "gold_category": "support",
+        "category": "support",
+        "status": "routed",
+        "reasons": [],
+        "fields": {"order_id": "KP-1"},
+        "gold_fields": {"order_id": "KP-1"},
+        "seconds": 1.0,
+        "llm_calls": 1,
+        "llm_ms": 900,
+        "tokens": 10,
+        "cost_usd": 0.0,
+        "models": ["m"],
+        "schema_valid": True,
+        "hard": None,
+    }
     return {**base, **kw}
 
 
 def test_triage_scoring_counts_automation_precision_and_catches() -> None:
-    items = [item(), item(id="em-2", category="sales_lead", status="review"),
-             item(id="em-3", gold_category="spam", category="spam", status="routed", fields={}, gold_fields={})]
+    items = [
+        item(),
+        item(id="em-2", category="sales_lead", status="review"),
+        item(id="em-3", gold_category="spam", category="spam", status="routed", fields={}, gold_fields={}),
+    ]
     summary = score_triage(items, {"crm": [], "helpdesk": [{"message_id": "<em-1@mail.kestrelprint.example>"}]})
     assert summary["category_accuracy"] == round(2 / 3, 4)
     assert summary["auto_handled"] == 2 and summary["auto_handled_accuracy"] == 1.0
@@ -50,13 +76,41 @@ def test_triage_scoring_counts_automation_precision_and_catches() -> None:
 
 
 def test_invoice_scoring_flags_bad_invoices_that_were_posted() -> None:
-    gold = {"vendor": "V", "invoice_number": "1", "issue_date": "2026-01-01", "due_date": "2026-01-31",
-            "currency": "EUR", "subtotal": 10.0, "vat_amount": 0.0, "total": 10.0}
+    gold = {
+        "vendor": "V",
+        "invoice_number": "1",
+        "issue_date": "2026-01-01",
+        "due_date": "2026-01-31",
+        "currency": "EUR",
+        "subtotal": 10.0,
+        "vat_amount": 0.0,
+        "total": 10.0,
+    }
     items = [
-        {"id": "a", "gold": gold, "gold_lines": 1, "expected": "review", "planted": ["vat_mismatch"],
-         "status": "posted", "issues": [], "extracted": gold, "lines": 1, "seconds": 1.0},
-        {"id": "b", "gold": gold, "gold_lines": 1, "expected": "auto_post", "planted": [], "status": "posted",
-         "issues": [], "extracted": {**gold, "total": 11.0}, "lines": 1, "seconds": 1.0},
+        {
+            "id": "a",
+            "gold": gold,
+            "gold_lines": 1,
+            "expected": "review",
+            "planted": ["vat_mismatch"],
+            "status": "posted",
+            "issues": [],
+            "extracted": gold,
+            "lines": 1,
+            "seconds": 1.0,
+        },
+        {
+            "id": "b",
+            "gold": gold,
+            "gold_lines": 1,
+            "expected": "auto_post",
+            "planted": [],
+            "status": "posted",
+            "issues": [],
+            "extracted": {**gold, "total": 11.0},
+            "lines": 1,
+            "seconds": 1.0,
+        },
     ]
     summary = score_invoices(items, [{"invoice_number": "1"}, {"invoice_number": "1"}])
     assert summary["problem_invoices_auto_posted"] == 1 and summary["double_posted"] == ["1"]
@@ -65,11 +119,30 @@ def test_invoice_scoring_flags_bad_invoices_that_were_posted() -> None:
 
 def test_faq_scoring() -> None:
     items = [
-        {"id": "f1", "expected": "auto_reply", "decision": "auto_reply", "answer": "Add 3 mm bleed",
-         "facts": ["3 mm"], "citations": ["kb-04"], "gold_articles": ["kb-04"], "retrieved": ["kb-04"], "reasons": [],
-         "seconds": 1.0},
-        {"id": "f2", "expected": "escalate", "decision": "auto_reply", "answer": "x", "facts": [], "citations": [],
-         "gold_articles": [], "retrieved": [], "reasons": [], "seconds": 1.0},
+        {
+            "id": "f1",
+            "expected": "auto_reply",
+            "decision": "auto_reply",
+            "answer": "Add 3 mm bleed",
+            "facts": ["3 mm"],
+            "citations": ["kb-04"],
+            "gold_articles": ["kb-04"],
+            "retrieved": ["kb-04"],
+            "reasons": [],
+            "seconds": 1.0,
+        },
+        {
+            "id": "f2",
+            "expected": "escalate",
+            "decision": "auto_reply",
+            "answer": "x",
+            "facts": [],
+            "citations": [],
+            "gold_articles": [],
+            "retrieved": [],
+            "reasons": [],
+            "seconds": 1.0,
+        },
     ]
     summary = score_faq(items, [])
     assert summary["unsafe_auto_replies"] == ["f2"] and summary["auto_replies_with_all_facts"] == "1/1"

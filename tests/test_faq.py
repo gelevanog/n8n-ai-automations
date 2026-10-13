@@ -34,14 +34,17 @@ def test_retrieval_recall_at_4_on_answerable_questions() -> None:
     assert hits / len(answerable) >= 0.9
 
 
-@pytest.mark.parametrize(("question", "code"), [
-    ("Where is my order KP-48213?", "order_specific"),
-    ("I want a full refund today", "refund_or_dispute"),
-    ("Our lawyer says you infringed our trademark", "legal"),
-    ("Delete all personal data under GDPR", "data_protection"),
-    ("Someone else logged into our account", "security"),
-    ("Give me a discount code", "discount_request"),
-])
+@pytest.mark.parametrize(
+    ("question", "code"),
+    [
+        ("Where is my order KP-48213?", "order_specific"),
+        ("I want a full refund today", "refund_or_dispute"),
+        ("Our lawyer says you infringed our trademark", "legal"),
+        ("Delete all personal data under GDPR", "data_protection"),
+        ("Someone else logged into our account", "security"),
+        ("Give me a discount code", "discount_request"),
+    ],
+)
 def test_escalation_rules(question: str, code: str) -> None:
     assert code in {r.code for r in RULES if r.pattern.search(question)}
 
@@ -53,15 +56,17 @@ def run_gate(output: FaqOutput, question: str) -> object:
 
 
 def test_a_grounded_cited_answer_is_sent() -> None:
-    out = FaqOutput(answerable=True, answer="Please add 3 mm bleed on all sides.", citations=["kb-04-artwork-files"],
-                    confidence=0.9)
+    out = FaqOutput(
+        answerable=True, answer="Please add 3 mm bleed on all sides.", citations=["kb-04-artwork-files"], confidence=0.9
+    )
     assert run_gate(out, "How much bleed should I add?").decision == "auto_reply"  # type: ignore[attr-defined]
 
 
 def test_answers_with_unsupported_numbers_or_foreign_citations_escalate() -> None:
     q = "How much bleed should I add?"
-    wrong_number = FaqOutput(answerable=True, answer="Add 5 mm bleed.", citations=["kb-04-artwork-files"],
-                             confidence=0.9)
+    wrong_number = FaqOutput(
+        answerable=True, answer="Add 5 mm bleed.", citations=["kb-04-artwork-files"], confidence=0.9
+    )
     result = run_gate(wrong_number, q)
     assert result.decision == "escalate" and any("numbers" in r for r in result.reasons)  # type: ignore[attr-defined]
     foreign = FaqOutput(answerable=True, answer="Add 3 mm bleed.", citations=["kb-99-made-up"], confidence=0.9)
@@ -76,6 +81,10 @@ def test_policy_escalation_skips_the_model(gateway: Gateway) -> None:
 
 
 def test_rules_model_on_the_question_set(gateway: Gateway) -> None:
-    unsafe = [q["id"] for q in QUESTIONS if q["expected"] == "escalate"
-              and gateway.answer_faq(FaqRequest(question=q["question"])).decision == "auto_reply"]
+    unsafe = [
+        q["id"]
+        for q in QUESTIONS
+        if q["expected"] == "escalate"
+        and gateway.answer_faq(FaqRequest(question=q["question"])).decision == "auto_reply"
+    ]
     assert len(unsafe) <= 2, unsafe

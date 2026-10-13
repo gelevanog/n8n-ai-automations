@@ -37,11 +37,14 @@ SETTINGS = Settings(llm_ledger=None)
 MSGS: list[Message] = [{"role": "system", "content": "RELAY_TASK: x"}, {"role": "user", "content": "y"}]
 
 
-@pytest.mark.parametrize("text", [
-    '```json\n{"answerable": true, "citations": []}\n```',
-    '<think>let me see</think>{"answerable": true, "citations": [],}',
-    'Sure! Here it is: {"answerable": true, "citations": []} Hope that helps.',
-])
+@pytest.mark.parametrize(
+    "text",
+    [
+        '```json\n{"answerable": true, "citations": []}\n```',
+        '<think>let me see</think>{"answerable": true, "citations": [],}',
+        'Sure! Here it is: {"answerable": true, "citations": []} Hope that helps.',
+    ],
+)
 def test_lenient_parsing(text: str) -> None:
     assert parse_json_object(text)["answerable"] is True
 
@@ -59,8 +62,9 @@ def test_valid_reply_first_time() -> None:
 
 
 def test_invalid_reply_gets_one_corrective_retry_with_the_errors() -> None:
-    model = Replies('{"category": "lead", "confidence": 2}', '{"category": "sales_lead", "confidence": 0.9, '
-                    '"summary": "a quote"}')
+    model = Replies(
+        '{"category": "lead", "confidence": 2}', '{"category": "sales_lead", "confidence": 0.9, "summary": "a quote"}'
+    )
     value, meta = complete_structured(model, MSGS, TriageOutput, SETTINGS, task="classify_email")
     assert value.category == "sales_lead" and meta.attempts == 2
     correction = model.seen[1][-1]["content"]
@@ -86,4 +90,5 @@ def test_prices_free_models_cost_nothing_and_unknown_paid_models_do() -> None:
     assert prices.cost("fake/rules", 10, 10) == 0.0
     assert prices.cost("openai/gpt-5-mini", 1_000_000, 0) == 0.25
     assert prices.cost("someone/unknown-model", 1_000_000, 0) == Prices(
-        free=(0, 0), default=(3.0, 15.0), models={}).cost("x/y", 1_000_000, 0)
+        free=(0, 0), default=(3.0, 15.0), models={}
+    ).cost("x/y", 1_000_000, 0)

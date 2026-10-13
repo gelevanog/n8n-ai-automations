@@ -24,8 +24,14 @@ os.chdir(ROOT)  # configs/ and data/ are read relative to the repository root
 
 @pytest.fixture
 def settings() -> Settings:
-    return Settings(database_url="sqlite://", mocks_database_url="sqlite://", llm_ledger=None, llm_cache=False,
-                    api_token="", llm_provider="fake")
+    return Settings(
+        database_url="sqlite://",
+        mocks_database_url="sqlite://",
+        llm_ledger=None,
+        llm_cache=False,
+        api_token="",
+        llm_provider="fake",
+    )
 
 
 @pytest.fixture
@@ -53,8 +59,9 @@ def poster() -> Poster:
 
 @pytest.fixture
 def store(poster: Poster) -> OpsStore:
-    return OpsStore(make_sessionmaker("sqlite://"), n8n_url="http://n8n:5678", webhook_token="hook-secret",
-                    poster=poster)
+    return OpsStore(
+        make_sessionmaker("sqlite://"), n8n_url="http://n8n:5678", webhook_token="hook-secret", poster=poster
+    )
 
 
 @pytest.fixture

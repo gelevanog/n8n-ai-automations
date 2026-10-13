@@ -104,9 +104,17 @@ def run_eval(
     unknown = set(chosen) - set(SUITES)
     if unknown:
         raise typer.BadParameter(f"unknown suites: {sorted(unknown)}")
-    harness = Harness(settings, Endpoints(n8n=n8n_url, api=api_url, mocks=mocks_url, mailpit=mailpit_url,
-                                          webhook_token=settings.n8n_webhook_token,
-                                          api_token=settings.api_token or "relay-local-api-token"))
+    harness = Harness(
+        settings,
+        Endpoints(
+            n8n=n8n_url,
+            api=api_url,
+            mocks=mocks_url,
+            mailpit=mailpit_url,
+            webhook_token=settings.n8n_webhook_token,
+            api_token=settings.api_token or "relay-local-api-token",
+        ),
+    )
     health = harness.health()
     meta = {"model": health.get("model"), "free_only": health.get("free_only"), "transport": "n8n webhooks"}
     console.print(f"model: [bold]{meta['model']}[/bold]  free-only guard: {meta['free_only']}")
@@ -117,8 +125,12 @@ def run_eval(
             result = getattr(harness, suite)(limit=limit)
         path = write_result(result, out, name, meta)
         console.print(f"[green]{suite}[/green] -> {path}")
-        console.print_json(json.dumps({k: v for k, v in result["summary"].items()
-                                       if not isinstance(v, dict | list) or k in {"per_issue"}}, default=str))
+        console.print_json(
+            json.dumps(
+                {k: v for k, v in result["summary"].items() if not isinstance(v, dict | list) or k in {"per_issue"}},
+                default=str,
+            )
+        )
     write_summary(out)
 
 

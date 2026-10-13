@@ -24,9 +24,27 @@ def text_of(invoice_id: str) -> str:
 
 
 def as_output(gold: dict[str, Any], confidence: float = 0.95) -> InvoiceOutput:
-    return InvoiceOutput.model_validate({**{k: gold[k] for k in (
-        "vendor", "vendor_vat_id", "invoice_number", "issue_date", "due_date", "currency", "subtotal", "vat_rate",
-        "vat_amount", "total")}, "lines": gold["lines"], "confidence": confidence})
+    return InvoiceOutput.model_validate(
+        {
+            **{
+                k: gold[k]
+                for k in (
+                    "vendor",
+                    "vendor_vat_id",
+                    "invoice_number",
+                    "issue_date",
+                    "due_date",
+                    "currency",
+                    "subtotal",
+                    "vat_rate",
+                    "vat_amount",
+                    "total",
+                )
+            },
+            "lines": gold["lines"],
+            "confidence": confidence,
+        }
+    )
 
 
 @pytest.mark.parametrize("gold", GOLD, ids=[g["id"] for g in GOLD])
@@ -62,8 +80,15 @@ def test_vat_id_mismatch_is_flagged() -> None:
     assert "vat_id_mismatch" in check_invoice(changed, text_of(gold["id"]), SETTINGS, VENDORS).issues
 
 
-@pytest.mark.parametrize(("value", "iso"), [("2026-06-06", "2026-06-06"), ("06.06.2026", "2026-06-06"),
-                                             ("06/06/2026", "2026-06-06"), ("Jun 06, 2026", "2026-06-06")])
+@pytest.mark.parametrize(
+    ("value", "iso"),
+    [
+        ("2026-06-06", "2026-06-06"),
+        ("06.06.2026", "2026-06-06"),
+        ("06/06/2026", "2026-06-06"),
+        ("Jun 06, 2026", "2026-06-06"),
+    ],
+)
 def test_dates_in_every_layout(value: str, iso: str) -> None:
     parsed = parse_date(value)
     assert parsed is not None and parsed.isoformat() == iso

@@ -21,8 +21,9 @@ KEY = "test-" + "key"  # built at runtime: no key-shaped literal in the reposito
 MESSAGES: list[Message] = [{"role": "user", "content": "hi"}]
 
 
-@pytest.mark.parametrize("model", ["openai/gpt-5-mini", "nvidia/nemotron:free:online", "anthropic/claude-sonnet-5",
-                                   "qwen/qwen3-coder"])
+@pytest.mark.parametrize(
+    "model", ["openai/gpt-5-mini", "nvidia/nemotron:free:online", "anthropic/claude-sonnet-5", "qwen/qwen3-coder"]
+)
 def test_guard_refuses_non_free_ids(model: str) -> None:
     with pytest.raises(PolicyViolationError):
         ensure_free_models([model])
@@ -49,15 +50,21 @@ def test_guard_rejects_a_paid_served_model() -> None:
 
 
 def test_factory_refuses_paid_openrouter_model_before_reading_a_key() -> None:
-    settings = Settings(llm_provider="openrouter", llm_model="openai/gpt-5-mini", openrouter_api_key=None,
-                        llm_ledger=None)
+    settings = Settings(
+        llm_provider="openrouter", llm_model="openai/gpt-5-mini", openrouter_api_key=None, llm_ledger=None
+    )
     with pytest.raises(PolicyViolationError):
         build_chat_model(settings)
 
 
 def test_paid_models_need_the_explicit_opt_in() -> None:
-    settings = Settings(llm_provider="openrouter", llm_model="openai/gpt-5-mini", openrouter_api_key=KEY,
-                        allow_paid_models=True, llm_ledger=None)
+    settings = Settings(
+        llm_provider="openrouter",
+        llm_model="openai/gpt-5-mini",
+        openrouter_api_key=KEY,
+        allow_paid_models=True,
+        llm_ledger=None,
+    )
     assert settings.free_only is False
     model = build_chat_model(settings)
     assert model.label == "openrouter/openai/gpt-5-mini"
@@ -65,15 +72,22 @@ def test_paid_models_need_the_explicit_opt_in() -> None:
 
 
 def test_compat_provider_is_guarded_too() -> None:
-    settings = Settings(llm_provider="compat", llm_model="some-model", llm_base_url="http://x/v1", llm_api_key=KEY,
-                        llm_ledger=None)
+    settings = Settings(
+        llm_provider="compat", llm_model="some-model", llm_base_url="http://x/v1", llm_api_key=KEY, llm_ledger=None
+    )
     with pytest.raises(PolicyViolationError):
         build_chat_model(settings)
 
 
 def test_openrouter_body_has_fallbacks_and_reasoning() -> None:
-    model = OpenAICompatibleModel(kind="openrouter", base_url="https://openrouter.ai/api/v1", model="a/b:free",
-                                  api_key=KEY, fallback_models=["c/d:free"], reasoning_effort="low")
+    model = OpenAICompatibleModel(
+        kind="openrouter",
+        base_url="https://openrouter.ai/api/v1",
+        model="a/b:free",
+        api_key=KEY,
+        fallback_models=["c/d:free"],
+        reasoning_effort="low",
+    )
     body = model.body(MESSAGES, max_tokens=100, temperature=0)
     assert body["models"] == ["a/b:free", "c/d:free"]
     assert body["reasoning"] == {"effort": "low"}
@@ -90,12 +104,25 @@ def _transport(*responses: httpx.Response) -> httpx.MockTransport:
 
 
 def test_openai_compat_parses_a_reply_and_classifies_errors() -> None:
-    ok = httpx.Response(200, json={"model": "a/b:free", "choices": [{"message": {"content": "{}"},
-                                                                     "finish_reason": "stop"}],
-                                   "usage": {"prompt_tokens": 5, "completion_tokens": 2}})
-    model = OpenAICompatibleModel(kind="openrouter", base_url="http://x", model="a/b:free", api_key=KEY,
-                                  transport=_transport(ok, httpx.Response(429, json={"error": {"message": "slow"}}),
-                                                       httpx.Response(400, json={"error": {"message": "bad"}})))
+    ok = httpx.Response(
+        200,
+        json={
+            "model": "a/b:free",
+            "choices": [{"message": {"content": "{}"}, "finish_reason": "stop"}],
+            "usage": {"prompt_tokens": 5, "completion_tokens": 2},
+        },
+    )
+    model = OpenAICompatibleModel(
+        kind="openrouter",
+        base_url="http://x",
+        model="a/b:free",
+        api_key=KEY,
+        transport=_transport(
+            ok,
+            httpx.Response(429, json={"error": {"message": "slow"}}),
+            httpx.Response(400, json={"error": {"message": "bad"}}),
+        ),
+    )
     completion = model.complete(MESSAGES, max_tokens=10)
     assert (completion.text, completion.input_tokens, completion.output_tokens) == ("{}", 5, 2)
     with pytest.raises(RetryableLLMError):
@@ -106,8 +133,9 @@ def test_openai_compat_parses_a_reply_and_classifies_errors() -> None:
 
 def test_openai_compat_rejects_answer_from_paid_model() -> None:
     paid = httpx.Response(200, json={"model": "openai/gpt-5", "choices": [{"message": {"content": "x"}}]})
-    model = OpenAICompatibleModel(kind="openrouter", base_url="http://x", model="a/b:free", api_key=KEY,
-                                  transport=_transport(paid))
+    model = OpenAICompatibleModel(
+        kind="openrouter", base_url="http://x", model="a/b:free", api_key=KEY, transport=_transport(paid)
+    )
     with pytest.raises(PolicyViolationError):
         model.complete(MESSAGES, max_tokens=10)
 
@@ -139,8 +167,9 @@ class Scripted:
 def test_budget_wrapper_retries_records_and_caches(tmp_path: Path) -> None:
     ledger = CallLedger(tmp_path / "calls.jsonl", max_calls=10)
     inner = Scripted(RetryableLLMError("rate limited", retry_after=0.0), "answer")
-    model = BudgetedModel(inner, ledger=ledger, cache=DiskCache(tmp_path / "cache"), throttle=None,
-                          retry_base_seconds=0.0, tag="t")
+    model = BudgetedModel(
+        inner, ledger=ledger, cache=DiskCache(tmp_path / "cache"), throttle=None, retry_base_seconds=0.0, tag="t"
+    )
     assert model.complete(MESSAGES, max_tokens=5).text == "answer"
     again = model.complete(MESSAGES, max_tokens=5)
     assert again.cached and inner.calls == 2  # second call served from the disk cache
@@ -160,8 +189,14 @@ def test_budget_wrapper_enforces_the_call_budget(tmp_path: Path) -> None:
 def test_budget_wrapper_asks_the_fallback_after_a_provider_403(tmp_path: Path) -> None:
     ledger = CallLedger(None, max_calls=10)
     fallback = BudgetedModel(Scripted("from fallback"), ledger=ledger, cache=None, throttle=None, tag="f")
-    model = BudgetedModel(Scripted(LLMError("upstream 403: Access denied by security policy")), ledger=ledger,
-                          cache=None, throttle=None, tag="t", policy_fallback=fallback)
+    model = BudgetedModel(
+        Scripted(LLMError("upstream 403: Access denied by security policy")),
+        ledger=ledger,
+        cache=None,
+        throttle=None,
+        tag="t",
+        policy_fallback=fallback,
+    )
     assert model.complete(MESSAGES, max_tokens=5).text == "from fallback"
 
 

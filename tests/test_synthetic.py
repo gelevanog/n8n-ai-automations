@@ -16,9 +16,15 @@ def test_regenerating_gives_the_committed_files(tmp_path: Path) -> None:
     invoices.write_dataset(tmp_path / "invoices")
     emails.write_dataset(tmp_path / "emails")
     leads.write_dataset(tmp_path / "leads")
-    for relative in ("invoices/gold.jsonl", "emails/emails.jsonl", "leads/leads.jsonl", "leads/profiles.jsonl",
-                     "invoices/pdf/inv-001.pdf", "invoices/pdf/inv-040.pdf",
-                     "leads/sites/bloom-box-flowers.example/about.html"):
+    for relative in (
+        "invoices/gold.jsonl",
+        "emails/emails.jsonl",
+        "leads/leads.jsonl",
+        "leads/profiles.jsonl",
+        "invoices/pdf/inv-001.pdf",
+        "invoices/pdf/inv-040.pdf",
+        "leads/sites/bloom-box-flowers.example/about.html",
+    ):
         assert (tmp_path / relative).read_bytes() == (Path("data") / relative).read_bytes(), relative
 
 
@@ -40,8 +46,11 @@ def test_category_mix() -> None:
 def test_clean_invoices_add_up_and_problem_invoices_do_not_all() -> None:
     for invoice in invoices.build_invoices():
         line_sum = sum((line.amount for line in invoice.lines), Decimal(0))
-        consistent = (line_sum == invoice.subtotal and invoice.subtotal + invoice.vat_amount == invoice.total
-                      and all(invoices.money(line.quantity * line.unit_price) == line.amount for line in invoice.lines))
+        consistent = (
+            line_sum == invoice.subtotal
+            and invoice.subtotal + invoice.vat_amount == invoice.total
+            and all(invoices.money(line.quantity * line.unit_price) == line.amount for line in invoice.lines)
+        )
         if invoice.expected_decision == "auto_post":
             assert consistent and invoice.total <= invoices.AUTO_POST_LIMIT, invoice.id
         assert (invoice.expected_decision == "review") == bool(invoice.issues)
@@ -58,8 +67,10 @@ def test_every_address_and_site_is_fictional() -> None:
 
 
 def test_attachments_exist_and_gold_matches_the_pdf() -> None:
-    gold = {json.loads(line)["id"]: json.loads(line)
-            for line in Path("data/invoices/gold.jsonl").read_text(encoding="utf-8").splitlines()}
+    gold = {
+        json.loads(line)["id"]: json.loads(line)
+        for line in Path("data/invoices/gold.jsonl").read_text(encoding="utf-8").splitlines()
+    }
     for email in emails.build_emails():
         if email.attachment:
             assert (Path("data/invoices/pdf") / f"{email.attachment}.pdf").is_file()

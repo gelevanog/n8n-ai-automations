@@ -12,6 +12,7 @@ then a dead-letter replay). Each suite starts from an empty ops store and empty 
 from __future__ import annotations
 
 import base64
+import contextlib
 import datetime as dt
 import json
 import time
@@ -65,8 +66,11 @@ class Harness:
     def webhook(self, path: str, body: dict[str, Any]) -> Posted:
         started = time.monotonic()
         try:
-            response = self.client.post(f"{self.endpoints.n8n}/webhook/{path}", json=body,
-                                        headers={"X-Relay-Token": self.endpoints.webhook_token})
+            response = self.client.post(
+                f"{self.endpoints.n8n}/webhook/{path}",
+                json=body,
+                headers={"X-Relay-Token": self.endpoints.webhook_token},
+            )
         except httpx.HTTPError as exc:
             return Posted(0, {}, round(time.monotonic() - started, 3), str(exc)[:200])
         seconds = round(time.monotonic() - started, 3)
@@ -80,8 +84,9 @@ class Harness:
         return Posted(response.status_code, data, seconds, error)
 
     def api(self, method: str, path: str, **kwargs: Any) -> Any:
-        response = self.client.request(method, f"{self.endpoints.api}{path}",
-                                       headers={"X-Relay-Token": self.endpoints.api_token}, **kwargs)
+        response = self.client.request(
+            method, f"{self.endpoints.api}{path}", headers={"X-Relay-Token": self.endpoints.api_token}, **kwargs
+        )
         response.raise_for_status()
         return response.json()
 
@@ -93,10 +98,8 @@ class Harness:
     def reset(self) -> None:
         self.api("POST", "/ops/admin/reset")
         self.mocks("POST", "/admin/reset")
-        try:
+        with contextlib.suppress(httpx.HTTPError):
             self.client.delete(f"{self.endpoints.mailpit}/api/v1/messages")
-        except httpx.HTTPError:
-            pass
 
     def run_detail(self, run_id: str | None) -> dict[str, Any]:
         if not run_id:
@@ -141,35 +144,43 @@ class Harness:
             output = detail.get("output") or {}
             proposal = review.get("proposal") or {}
             fields = output if output.get("category") else proposal
-            items.append({
-                "id": email.id,
-                "gold_category": email.category,
-                "hard": email.hard,
-                "language": email.language,
-                "http": posted.status_code,
-                "error": posted.error,
-                "status": posted.body.get("status"),
-                "category": posted.body.get("category") or fields.get("category"),
-                "confidence": posted.body.get("confidence"),
-                "route": posted.body.get("route") or ("review" if posted.body.get("status") == "review" else None),
-                "reasons": posted.body.get("reasons") or review.get("reasons") or [],
-                "fields": {
-                    "name": (fields.get("contact") or {}).get("name"),
-                    "company": (fields.get("contact") or {}).get("company"),
-                    "product": (fields.get("lead") or {}).get("product"),
-                    "quantity": (fields.get("lead") or {}).get("quantity"),
-                    "order_id": (fields.get("support") or {}).get("order_id"),
-                    "issue": (fields.get("support") or {}).get("issue"),
-                    "invoice_number": (fields.get("invoice") or {}).get("invoice_number"),
-                    "amount": (fields.get("invoice") or {}).get("amount"),
-                },
-                "gold_fields": email.fields,
-                "seconds": posted.seconds,
-                "run_id": posted.body.get("run_id"),
-                **self.call_stats(detail),
-            })
-            log.info("eval.triage", id=email.id, gold=email.category, got=items[-1]["category"],
-                     status=items[-1]["status"], seconds=posted.seconds)
+            items.append(
+                {
+                    "id": email.id,
+                    "gold_category": email.category,
+                    "hard": email.hard,
+                    "language": email.language,
+                    "http": posted.status_code,
+                    "error": posted.error,
+                    "status": posted.body.get("status"),
+                    "category": posted.body.get("category") or fields.get("category"),
+                    "confidence": posted.body.get("confidence"),
+                    "route": posted.body.get("route") or ("review" if posted.body.get("status") == "review" else None),
+                    "reasons": posted.body.get("reasons") or review.get("reasons") or [],
+                    "fields": {
+                        "name": (fields.get("contact") or {}).get("name"),
+                        "company": (fields.get("contact") or {}).get("company"),
+                        "product": (fields.get("lead") or {}).get("product"),
+                        "quantity": (fields.get("lead") or {}).get("quantity"),
+                        "order_id": (fields.get("support") or {}).get("order_id"),
+                        "issue": (fields.get("support") or {}).get("issue"),
+                        "invoice_number": (fields.get("invoice") or {}).get("invoice_number"),
+                        "amount": (fields.get("invoice") or {}).get("amount"),
+                    },
+                    "gold_fields": email.fields,
+                    "seconds": posted.seconds,
+                    "run_id": posted.body.get("run_id"),
+                    **self.call_stats(detail),
+                }
+            )
+            log.info(
+                "eval.triage",
+                id=email.id,
+                gold=email.category,
+                got=items[-1]["category"],
+                status=items[-1]["status"],
+                seconds=posted.seconds,
+            )
         self.wait_idle()
         downstream = {
             "crm": self.mocks("GET", "/crm/leads"),
@@ -187,33 +198,69 @@ class Harness:
         items = []
         for invoice in gold:
             pdf = self.data_dir / "invoices" / "pdf" / f"{invoice['id']}.pdf"
-            body = {"filename": pdf.name, "content_base64": base64.b64encode(pdf.read_bytes()).decode(),
-                    "source": "eval"}
+            body = {
+                "filename": pdf.name,
+                "content_base64": base64.b64encode(pdf.read_bytes()).decode(),
+                "source": "eval",
+            }
             posted = self.webhook("invoice-intake", body)
             detail = self.run_detail(posted.body.get("run_id"))
             review = (detail.get("reviews") or [{}])[0]
-            extracted = (posted.body.get("bill") or posted.body.get("invoice")
-                         or (review.get("proposal") or {}).get("invoice") or {})
-            items.append({
-                "id": invoice["id"],
-                "gold": {k: invoice[k] for k in ("vendor", "invoice_number", "issue_date", "due_date", "currency",
-                                                 "subtotal", "vat_amount", "total")},
-                "gold_lines": len(invoice["lines"]),
-                "expected": invoice["expected_decision"],
-                "planted": invoice["issues"],
-                "http": posted.status_code,
-                "error": posted.error,
-                "status": posted.body.get("status"),
-                "issues": posted.body.get("issues") or (review.get("proposal") or {}).get("issues") or [],
-                "extracted": {k: extracted.get(k) for k in ("vendor", "invoice_number", "issue_date", "due_date",
-                                                            "currency", "subtotal", "vat_amount", "total")},
-                "lines": len(extracted.get("lines") or []),
-                "seconds": posted.seconds,
-                "run_id": posted.body.get("run_id"),
-                **self.call_stats(detail),
-            })
-            log.info("eval.invoice", id=invoice["id"], expected=invoice["expected_decision"],
-                     status=items[-1]["status"], issues=items[-1]["issues"])
+            extracted = (
+                posted.body.get("bill")
+                or posted.body.get("invoice")
+                or (review.get("proposal") or {}).get("invoice")
+                or {}
+            )
+            items.append(
+                {
+                    "id": invoice["id"],
+                    "gold": {
+                        k: invoice[k]
+                        for k in (
+                            "vendor",
+                            "invoice_number",
+                            "issue_date",
+                            "due_date",
+                            "currency",
+                            "subtotal",
+                            "vat_amount",
+                            "total",
+                        )
+                    },
+                    "gold_lines": len(invoice["lines"]),
+                    "expected": invoice["expected_decision"],
+                    "planted": invoice["issues"],
+                    "http": posted.status_code,
+                    "error": posted.error,
+                    "status": posted.body.get("status"),
+                    "issues": posted.body.get("issues") or (review.get("proposal") or {}).get("issues") or [],
+                    "extracted": {
+                        k: extracted.get(k)
+                        for k in (
+                            "vendor",
+                            "invoice_number",
+                            "issue_date",
+                            "due_date",
+                            "currency",
+                            "subtotal",
+                            "vat_amount",
+                            "total",
+                        )
+                    },
+                    "lines": len(extracted.get("lines") or []),
+                    "seconds": posted.seconds,
+                    "run_id": posted.body.get("run_id"),
+                    **self.call_stats(detail),
+                }
+            )
+            log.info(
+                "eval.invoice",
+                id=invoice["id"],
+                expected=invoice["expected_decision"],
+                status=items[-1]["status"],
+                issues=items[-1]["issues"],
+            )
         bills = self.mocks("GET", "/accounting/bills")
         return {"suite": "invoices", "items": items, "summary": score_invoices(items, bills)}
 
@@ -234,42 +281,51 @@ class Harness:
             proposal = review.get("proposal") or {}
             profile = posted.body.get("profile") or proposal.get("profile") or {}
             checks = proposal.get("checks") or []
-            items.append({
-                "id": lead["id"],
-                "hard": lead.get("hard"),
-                "gold": lead["gold"],
-                "gold_tier": sc.gold_tier(lead, icp, self.settings.lead_hot_score, self.settings.lead_warm_score),
-                "http": posted.status_code,
-                "error": posted.error,
-                "status": posted.body.get("status"),
-                "kind": posted.body.get("kind"),
-                "tier": posted.body.get("tier"),
-                "score": posted.body.get("score"),
-                "profile": {k: profile.get(k) for k in ("industry", "employees_band", "country", "sells_online",
-                                                         "buyer")},
-                "site": posted.body.get("site") or {},
-                "reasons": posted.body.get("reasons") or [],
-                "draft_checks": {c["code"]: c["ok"] for c in checks},
-                "draft_words": len(str(proposal.get("body") or "").split()),
-                "review_id": review.get("id"),
-                "seconds": posted.seconds,
-                "run_id": posted.body.get("run_id"),
-                **self.call_stats(detail),
-            })
+            items.append(
+                {
+                    "id": lead["id"],
+                    "hard": lead.get("hard"),
+                    "gold": lead["gold"],
+                    "gold_tier": sc.gold_tier(lead, icp, self.settings.lead_hot_score, self.settings.lead_warm_score),
+                    "http": posted.status_code,
+                    "error": posted.error,
+                    "status": posted.body.get("status"),
+                    "kind": posted.body.get("kind"),
+                    "tier": posted.body.get("tier"),
+                    "score": posted.body.get("score"),
+                    "profile": {
+                        k: profile.get(k) for k in ("industry", "employees_band", "country", "sells_online", "buyer")
+                    },
+                    "site": posted.body.get("site") or {},
+                    "reasons": posted.body.get("reasons") or [],
+                    "draft_checks": {c["code"]: c["ok"] for c in checks},
+                    "draft_words": len(str(proposal.get("body") or "").split()),
+                    "review_id": review.get("id"),
+                    "seconds": posted.seconds,
+                    "run_id": posted.body.get("run_id"),
+                    **self.call_stats(detail),
+                }
+            )
             log.info("eval.lead", id=lead["id"], tier=items[-1]["tier"], gold=items[-1]["gold_tier"])
         sent = 0
         if approve:
             # A simulated reviewer approves every draft whose checks passed, so the Send reply path runs.
             for item in items:
                 if item["kind"] == "lead_reply" and item["review_id"] and all(item["draft_checks"].values()):
-                    result = self.api("POST", f"/ops/review/{item['review_id']}/decision",
-                                      json={"decision": "approve", "reviewer": "eval"})
+                    result = self.api(
+                        "POST",
+                        f"/ops/review/{item['review_id']}/decision",
+                        json={"decision": "approve", "reviewer": "eval"},
+                    )
                     item["approved"] = bool(result.get("resume", {}).get("delivered"))
             self.wait_idle(4.0)
             try:
                 messages = self.client.get(f"{self.endpoints.mailpit}/api/v1/messages?limit=200").json()
-                sent = sum(1 for m in messages.get("messages") or []
-                           if (m.get("From") or {}).get("Address") == "sales@kestrelprint.example")
+                sent = sum(
+                    1
+                    for m in messages.get("messages") or []
+                    if (m.get("From") or {}).get("Address") == "sales@kestrelprint.example"
+                )
             except (httpx.HTTPError, ValueError):
                 sent = -1
         crm = self.mocks("GET", "/crm/leads")
@@ -283,26 +339,30 @@ class Harness:
         questions = questions[:limit] if limit else questions
         items = []
         for q in questions:
-            posted = self.webhook("support-faq", {"question": q["question"], "message_id": q["id"],
-                                                  "customer_email": f"{q['id']}@customer.example"})
+            posted = self.webhook(
+                "support-faq",
+                {"question": q["question"], "message_id": q["id"], "customer_email": f"{q['id']}@customer.example"},
+            )
             detail = self.run_detail(posted.body.get("run_id"))
-            items.append({
-                "id": q["id"],
-                "expected": "auto_reply" if q["expected"] == "answer" else "escalate",
-                "gold_articles": q.get("articles") or [],
-                "facts": q.get("facts") or [],
-                "http": posted.status_code,
-                "error": posted.error,
-                "decision": posted.body.get("status"),
-                "answer": posted.body.get("answer") or "",
-                "citations": posted.body.get("citations") or [],
-                "confidence": posted.body.get("confidence"),
-                "reasons": posted.body.get("reasons") or [],
-                "retrieved": [r.get("id") for r in posted.body.get("retrieved") or []],
-                "seconds": posted.seconds,
-                "run_id": posted.body.get("run_id"),
-                **self.call_stats(detail),
-            })
+            items.append(
+                {
+                    "id": q["id"],
+                    "expected": "auto_reply" if q["expected"] == "answer" else "escalate",
+                    "gold_articles": q.get("articles") or [],
+                    "facts": q.get("facts") or [],
+                    "http": posted.status_code,
+                    "error": posted.error,
+                    "decision": posted.body.get("status"),
+                    "answer": posted.body.get("answer") or "",
+                    "citations": posted.body.get("citations") or [],
+                    "confidence": posted.body.get("confidence"),
+                    "reasons": posted.body.get("reasons") or [],
+                    "retrieved": [r.get("id") for r in posted.body.get("retrieved") or []],
+                    "seconds": posted.seconds,
+                    "run_id": posted.body.get("run_id"),
+                    **self.call_stats(detail),
+                }
+            )
             log.info("eval.faq", id=q["id"], expected=items[-1]["expected"], got=items[-1]["decision"])
         tickets = self.mocks("GET", "/helpdesk/tickets")
         return {"suite": "faq", "items": items, "summary": score_faq(items, tickets)}
@@ -315,12 +375,26 @@ class Harness:
         detail = self.run_detail((posted.body or {}).get("id"))
         output = (posted.body or {}).get("output") or {}
         messages = self.mocks("GET", "/chat/messages?channel=%23ops")
-        item = {"http": posted.status_code, "error": posted.error, "seconds": posted.seconds,
-                "numbers_ok": output.get("numbers_ok"), "text": output.get("text"),
-                "posted_to_chat": len(messages), **self.call_stats(detail)}
-        return {"suite": "digest", "items": [item], "summary": {
-            "runs": 1, "ok": posted.status_code == 200, "numbers_ok": output.get("numbers_ok"),
-            "seconds": posted.seconds, "posted_to_chat": len(messages) > 0}}
+        item = {
+            "http": posted.status_code,
+            "error": posted.error,
+            "seconds": posted.seconds,
+            "numbers_ok": output.get("numbers_ok"),
+            "text": output.get("text"),
+            "posted_to_chat": len(messages),
+            **self.call_stats(detail),
+        }
+        return {
+            "suite": "digest",
+            "items": [item],
+            "summary": {
+                "runs": 1,
+                "ok": posted.status_code == 200,
+                "numbers_ok": output.get("numbers_ok"),
+                "seconds": posted.seconds,
+                "posted_to_chat": len(messages) > 0,
+            },
+        }
 
     # ------------------------------------------------------------------------------------ idempotency
 
@@ -337,13 +411,26 @@ class Harness:
         deliveries += [("inbox-triage", email_payload(e, self.data_dir / "invoices")) for e in emails]
         for g in clean:
             pdf = self.data_dir / "invoices" / "pdf" / f"{g['id']}.pdf"
-            deliveries.append(("invoice-intake", {"filename": pdf.name, "source": "eval",
-                                                  "content_base64": base64.b64encode(pdf.read_bytes()).decode()}))
+            deliveries.append(
+                (
+                    "invoice-intake",
+                    {
+                        "filename": pdf.name,
+                        "source": "eval",
+                        "content_base64": base64.b64encode(pdf.read_bytes()).decode(),
+                    },
+                )
+            )
         for lead in leads:
             body = {k: lead[k] for k in ("name", "email", "company", "website", "message", "product", "quantity")}
             deliveries.append(("lead-enrichment", {**body, "submission_id": lead["id"]}))
-        deliveries += [("support-faq", {"question": q["question"], "message_id": q["id"],
-                                        "customer_email": "dup@customer.example"}) for q in questions]
+        deliveries += [
+            (
+                "support-faq",
+                {"question": q["question"], "message_id": q["id"], "customer_email": "dup@customer.example"},
+            )
+            for q in questions
+        ]
         first = [self.webhook(path, body) for path, body in deliveries]
         self.wait_idle()
         before = self.mocks("GET", "/admin/state")["counts"]
@@ -351,21 +438,32 @@ class Harness:
         self.wait_idle()
         after = self.mocks("GET", "/admin/state")["counts"]
         duplicates = sum(1 for p in second if p.body.get("status") == "duplicate")
-        same_run = sum(1 for a, b in zip(first, second, strict=True)
-                       if a.body.get("run_id") and a.body.get("run_id") == b.body.get("run_id"))
-        return {"suite": "idempotency", "items": [
-            {"path": path, "first": a.body.get("status"), "second": b.body.get("status"),
-             "same_run": a.body.get("run_id") == b.body.get("run_id")}
-            for (path, _), a, b in zip(deliveries, first, second, strict=True)
-        ], "summary": {
-            "deliveries": len(deliveries),
-            "second_delivery_answered_as_duplicate": duplicates,
-            "same_run_id": same_run,
-            "records_before_resend": before,
-            "records_after_resend": after,
-            "new_records_from_resend": sum(after[k] - before.get(k, 0) for k in after),
-            "duplicate_p50_seconds": sc.p50([p.seconds for p in second]),
-        }}
+        same_run = sum(
+            1
+            for a, b in zip(first, second, strict=True)
+            if a.body.get("run_id") and a.body.get("run_id") == b.body.get("run_id")
+        )
+        return {
+            "suite": "idempotency",
+            "items": [
+                {
+                    "path": path,
+                    "first": a.body.get("status"),
+                    "second": b.body.get("status"),
+                    "same_run": a.body.get("run_id") == b.body.get("run_id"),
+                }
+                for (path, _), a, b in zip(deliveries, first, second, strict=True)
+            ],
+            "summary": {
+                "deliveries": len(deliveries),
+                "second_delivery_answered_as_duplicate": duplicates,
+                "same_run_id": same_run,
+                "records_before_resend": before,
+                "records_after_resend": after,
+                "new_records_from_resend": sum(after[k] - before.get(k, 0) for k in after),
+                "duplicate_p50_seconds": sc.p50([p.seconds for p in second]),
+            },
+        }
 
     # ------------------------------------------------------------------------------------ chaos
 
@@ -382,8 +480,14 @@ class Harness:
 
         def send(invoice: dict[str, Any]) -> Posted:
             pdf = self.data_dir / "invoices" / "pdf" / f"{invoice['id']}.pdf"
-            return self.webhook("invoice-intake", {"filename": pdf.name, "source": "eval-chaos",
-                                                   "content_base64": base64.b64encode(pdf.read_bytes()).decode()})
+            return self.webhook(
+                "invoice-intake",
+                {
+                    "filename": pdf.name,
+                    "source": "eval-chaos",
+                    "content_base64": base64.b64encode(pdf.read_bytes()).decode(),
+                },
+            )
 
         self.mocks("POST", "/admin/chaos", json={"accounting": {"fail_first": 1, "rate": 0.25, "seed": 3}})
         p1 = [send(g) for g in phase1]
@@ -400,27 +504,32 @@ class Harness:
         bills = self.mocks("GET", "/accounting/bills")
         numbers = Counter(b.get("invoice_number") for b in bills)
         expected = {g["invoice_number"] for g in phase1 + phase2}
-        return {"suite": "chaos", "items": [
-            {"phase": 1, "id": g["id"], "http": p.status_code, "status": p.body.get("status")}
-            for g, p in zip(phase1, p1, strict=True)
-        ] + [
-            {"phase": 2, "id": g["id"], "http": p.status_code, "status": p.body.get("status")}
-            for g, p in zip(phase2, p2, strict=True)
-        ], "summary": {
-            "phase1_invoices": len(phase1),
-            "phase1_injected_503s": injected_1,
-            "phase1_posted": sum(1 for p in p1 if p.body.get("status") == "posted"),
-            "phase2_invoices": len(phase2),
-            "phase2_failed_runs": sum(1 for p in p2 if p.status_code >= 500),
-            "phase2_injected_503s": injected_2 - injected_1,
-            "dead_letters": len(dead),
-            "ops_alerts": len(alerts),
-            "replayed_ok": sum(1 for r in replays if r.get("ok")),
-            "bills_posted": len(bills),
-            "expected_bills": len(expected),
-            "missing_bills": sorted(expected - set(numbers)),
-            "double_posted": sorted(n for n, c in numbers.items() if c > 1),
-        }}
+        return {
+            "suite": "chaos",
+            "items": [
+                {"phase": 1, "id": g["id"], "http": p.status_code, "status": p.body.get("status")}
+                for g, p in zip(phase1, p1, strict=True)
+            ]
+            + [
+                {"phase": 2, "id": g["id"], "http": p.status_code, "status": p.body.get("status")}
+                for g, p in zip(phase2, p2, strict=True)
+            ],
+            "summary": {
+                "phase1_invoices": len(phase1),
+                "phase1_injected_503s": injected_1,
+                "phase1_posted": sum(1 for p in p1 if p.body.get("status") == "posted"),
+                "phase2_invoices": len(phase2),
+                "phase2_failed_runs": sum(1 for p in p2 if p.status_code >= 500),
+                "phase2_injected_503s": injected_2 - injected_1,
+                "dead_letters": len(dead),
+                "ops_alerts": len(alerts),
+                "replayed_ok": sum(1 for r in replays if r.get("ok")),
+                "bills_posted": len(bills),
+                "expected_bills": len(expected),
+                "missing_bills": sorted(expected - set(numbers)),
+                "double_posted": sorted(n for n, c in numbers.items() if c > 1),
+            },
+        }
 
 
 # ======================================================================================== scoring per suite
@@ -448,8 +557,14 @@ def _common(items: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 TRIAGE_FIELDS = {
-    "name": sc.same_text, "company": sc.same_text, "product": sc.same_value, "quantity": sc.same_number,
-    "order_id": sc.same_id, "issue": sc.same_value, "invoice_number": sc.same_id, "amount": sc.same_number,
+    "name": sc.same_text,
+    "company": sc.same_text,
+    "product": sc.same_value,
+    "quantity": sc.same_number,
+    "order_id": sc.same_id,
+    "issue": sc.same_value,
+    "invoice_number": sc.same_id,
+    "amount": sc.same_number,
 }
 
 
@@ -473,9 +588,16 @@ def score_triage(items: list[dict[str, Any]], downstream: dict[str, list[dict[st
     for name, same in TRIAGE_FIELDS.items():
         scored = [i for i in correct if (i["gold_fields"] or {}).get(name) is not None]
         hits = [i for i in scored if same(i["fields"].get(name), i["gold_fields"][name])]
-        fields[name] = {"scored": len(scored), "correct": len(hits), "accuracy": sc.rate(len(hits), len(scored)),
-                        "misses": [{"id": i["id"], "got": i["fields"].get(name), "gold": i["gold_fields"][name]}
-                                   for i in scored if i not in hits][:8]}
+        fields[name] = {
+            "scored": len(scored),
+            "correct": len(hits),
+            "accuracy": sc.rate(len(hits), len(scored)),
+            "misses": [
+                {"id": i["id"], "got": i["fields"].get(name), "gold": i["gold_fields"][name]}
+                for i in scored
+                if i not in hits
+            ][:8],
+        }
     total_fields = sum(f["scored"] for f in fields.values())
     total_hits = sum(f["correct"] for f in fields.values())
     # End to end: did each auto-routed email land in the system its gold category belongs to?
@@ -487,8 +609,11 @@ def score_triage(items: list[dict[str, Any]], downstream: dict[str, list[dict[st
                 landed[mid] = system
     expected_system = {"sales_lead": "crm", "support": "helpdesk"}
     e2e_scored = [i for i in routed if i["category"] in expected_system]
-    e2e_ok = [i for i in e2e_scored if landed.get(f"<{i['id']}@mail.kestrelprint.example>")
-              == expected_system.get(i["gold_category"])]
+    e2e_ok = [
+        i
+        for i in e2e_scored
+        if landed.get(f"<{i['id']}@mail.kestrelprint.example>") == expected_system.get(i["gold_category"])
+    ]
     hard = [i for i in items if i.get("hard")]
     return {
         **_common(items),
@@ -509,14 +634,23 @@ def score_triage(items: list[dict[str, Any]], downstream: dict[str, list[dict[st
         "field_accuracy": sc.rate(total_hits, total_fields),
         "downstream_records": {k: len(v) for k, v in downstream.items()},
         "downstream_correct_system": f"{len(e2e_ok)}/{len(e2e_scored)}",
-        "review_reasons": dict(Counter(r.split(" below ")[0] if "confidence" in r else r
-                                       for i in review for r in i["reasons"]).most_common(10)),
+        "review_reasons": dict(
+            Counter(
+                r.split(" below ")[0] if "confidence" in r else r for i in review for r in i["reasons"]
+            ).most_common(10)
+        ),
     }
 
 
 INVOICE_FIELDS = {
-    "vendor": sc.same_text, "invoice_number": sc.same_id, "issue_date": sc.same_value, "due_date": sc.same_value,
-    "currency": sc.same_value, "subtotal": sc.same_number, "vat_amount": sc.same_number, "total": sc.same_number,
+    "vendor": sc.same_text,
+    "invoice_number": sc.same_id,
+    "issue_date": sc.same_value,
+    "due_date": sc.same_value,
+    "currency": sc.same_value,
+    "subtotal": sc.same_number,
+    "vat_amount": sc.same_number,
+    "total": sc.same_number,
 }
 
 
@@ -525,11 +659,22 @@ def score_invoices(items: list[dict[str, Any]], bills: list[dict[str, Any]]) -> 
     for name, same in INVOICE_FIELDS.items():
         scored = [i for i in items if i["status"] in {"posted", "review"}]
         hits = [i for i in scored if same(i["extracted"].get(name), i["gold"][name])]
-        fields[name] = {"scored": len(scored), "correct": len(hits), "accuracy": sc.rate(len(hits), len(scored)),
-                        "misses": [{"id": i["id"], "got": i["extracted"].get(name), "gold": i["gold"][name]}
-                                   for i in scored if i not in hits][:6]}
-    all_right = [i for i in items if i["status"] in {"posted", "review"}
-                 and all(INVOICE_FIELDS[k](i["extracted"].get(k), i["gold"][k]) for k in INVOICE_FIELDS)]
+        fields[name] = {
+            "scored": len(scored),
+            "correct": len(hits),
+            "accuracy": sc.rate(len(hits), len(scored)),
+            "misses": [
+                {"id": i["id"], "got": i["extracted"].get(name), "gold": i["gold"][name]}
+                for i in scored
+                if i not in hits
+            ][:6],
+        }
+    all_right = [
+        i
+        for i in items
+        if i["status"] in {"posted", "review"}
+        and all(INVOICE_FIELDS[k](i["extracted"].get(k), i["gold"][k]) for k in INVOICE_FIELDS)
+    ]
     posted = [i for i in items if i["status"] == "posted"]
     bad = [i for i in items if i["expected"] == "review"]
     clean = [i for i in items if i["expected"] == "auto_post"]
@@ -547,10 +692,14 @@ def score_invoices(items: list[dict[str, Any]], bills: list[dict[str, Any]]) -> 
     return {
         **_common(items),
         "fields": fields,
-        "field_accuracy": sc.rate(sum(f["correct"] for f in fields.values()), sum(f["scored"] for f in fields.values())),
+        "field_accuracy": sc.rate(
+            sum(f["correct"] for f in fields.values()), sum(f["scored"] for f in fields.values())
+        ),
         "all_fields_right": f"{len(all_right)}/{len(items)}",
         "line_count_right": sum(1 for i in items if i["lines"] == i["gold_lines"]),
-        "decision_accuracy": sc.rate(sum(1 for i in items if (i["status"] == "posted") == (i["expected"] == "auto_post")), len(items)),
+        "decision_accuracy": sc.rate(
+            sum(1 for i in items if (i["status"] == "posted") == (i["expected"] == "auto_post")), len(items)
+        ),
         "auto_posted": len(posted),
         "auto_post_rate": sc.rate(len(posted), len(items)),
         "problem_invoices": len(bad),
@@ -567,12 +716,19 @@ def score_invoices(items: list[dict[str, Any]], bills: list[dict[str, Any]]) -> 
 
 def score_leads(items: list[dict[str, Any]], crm: list[dict[str, Any]], sent: int) -> dict[str, Any]:
     with_site = [i for i in items if i["gold"]["site_found"]]
-    fields = {}
+    fields: dict[str, dict[str, Any]] = {}
     for name in ("industry", "employees_band", "country", "sells_online"):
         hits = [i for i in with_site if i["profile"].get(name) == i["gold"][name]]
-        fields[name] = {"scored": len(with_site), "correct": len(hits), "accuracy": sc.rate(len(hits), len(with_site)),
-                        "misses": [{"id": i["id"], "got": i["profile"].get(name), "gold": i["gold"][name]}
-                                   for i in with_site if i not in hits][:6]}
+        fields[name] = {
+            "scored": len(with_site),
+            "correct": len(hits),
+            "accuracy": sc.rate(len(hits), len(with_site)),
+            "misses": [
+                {"id": i["id"], "got": i["profile"].get(name), "gold": i["gold"][name]}
+                for i in with_site
+                if i not in hits
+            ][:6],
+        }
     tier_hits = [i for i in items if i["tier"] == i["gold_tier"]]
     disq = [i for i in items if i["gold"].get("disqualified")]
     drafts = [i for i in items if i["kind"] == "lead_reply"]
@@ -582,7 +738,9 @@ def score_leads(items: list[dict[str, Any]], crm: list[dict[str, Any]], sent: in
     return {
         **_common(items),
         "fields": fields,
-        "profile_accuracy": sc.rate(sum(f["correct"] for f in fields.values()), sum(f["scored"] for f in fields.values())),
+        "profile_accuracy": sc.rate(
+            sum(f["correct"] for f in fields.values()), sum(f["scored"] for f in fields.values())
+        ),
         "tier_accuracy": sc.rate(len(tier_hits), len(items)),
         "tier_misses": [{"id": i["id"], "got": i["tier"], "gold": i["gold_tier"]} for i in items if i not in tier_hits],
         "tiers": dict(Counter(i["tier"] for i in items)),
@@ -592,9 +750,16 @@ def score_leads(items: list[dict[str, Any]], crm: list[dict[str, Any]], sent: in
         "drafts_passing_checks": len(drafts_ok),
         "draft_check_failures": dict(check_fail),
         "research_queue": sum(1 for i in items if i["kind"] == "lead_research"),
-        "injection_site": [{"id": i["id"], "tier": i["tier"], "gold": i["gold_tier"],
-                            "employees_band": i["profile"].get("employees_band"), "reasons": i["reasons"]}
-                           for i in injection],
+        "injection_site": [
+            {
+                "id": i["id"],
+                "tier": i["tier"],
+                "gold": i["gold_tier"],
+                "employees_band": i["profile"].get("employees_band"),
+                "reasons": i["reasons"],
+            }
+            for i in injection
+        ],
         "crm_records": len(crm),
         "replies_sent_after_approval": sent,
     }
@@ -625,8 +790,9 @@ def score_faq(items: list[dict[str, Any]], tickets: list[dict[str, Any]]) -> dic
         "over_escalation_reasons": dict(reasons),
         "auto_replies_with_all_facts": f"{len(facts_ok)}/{len(auto_good)}",
         "auto_replies_citing_gold_article": f"{len(cites_ok)}/{len(auto_good)}",
-        "fact_misses": [{"id": i["id"], "facts": i["facts"], "answer": i["answer"][:300]}
-                        for i in auto_good if i not in facts_ok],
+        "fact_misses": [
+            {"id": i["id"], "facts": i["facts"], "answer": i["answer"][:300]} for i in auto_good if i not in facts_ok
+        ],
         "retrieval_recall_at_4": sc.rate(len(recall), len(answerable)),
         "tickets": len(tickets),
     }
@@ -635,7 +801,13 @@ def score_faq(items: list[dict[str, Any]], tickets: list[dict[str, Any]]) -> dic
 def write_result(result: dict[str, Any], directory: Path, name: str, meta: dict[str, Any]) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / f"{result['suite']}_{name}.json"
-    payload = {"name": name, "suite": result["suite"], "run_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
-               **meta, "summary": result["summary"], "items": result["items"]}
+    payload = {
+        "name": name,
+        "suite": result["suite"],
+        "run_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
+        **meta,
+        "summary": result["summary"],
+        "items": result["items"],
+    }
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return path

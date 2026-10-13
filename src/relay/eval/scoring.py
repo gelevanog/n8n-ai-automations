@@ -71,8 +71,12 @@ def gold_tier(lead: dict[str, Any], icp: Icp, hot: int, warm: int) -> str:
     if not gold.get("site_found"):
         profile = CompanyProfile()
     else:
-        profile = CompanyProfile(industry=gold["industry"], employees_band=gold["employees_band"],
-                                 country=gold["country"], sells_online=gold["sells_online"])
+        profile = CompanyProfile(
+            industry=gold["industry"],
+            employees_band=gold["employees_band"],
+            country=gold["country"],
+            sells_online=gold["sells_online"],
+        )
     score, _ = icp.score(profile, lead.get("quantity"))
     return icp.tier(score, hot, warm)
 

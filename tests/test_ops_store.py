@@ -42,8 +42,13 @@ def test_finish_rejects_unknown_status(store: OpsStore) -> None:
 
 def test_review_resumes_the_waiting_execution_on_the_internal_url(store: OpsStore, poster: Poster) -> None:
     run = store.start_run("triage", "m2")
-    item = store.create_review(run["run_id"], "triage", title="Unsure", reasons=["confidence 0.5 below 0.75"],
-                               resume_url="http://localhost:5678/webhook-waiting/42?signature=abc")
+    item = store.create_review(
+        run["run_id"],
+        "triage",
+        title="Unsure",
+        reasons=["confidence 0.5 below 0.75"],
+        resume_url="http://localhost:5678/webhook-waiting/42?signature=abc",
+    )
     assert store.get_run(run["run_id"])["status"] == "review"
     result = store.decide(item["id"], "approve", edits={"category": "support"}, reviewer="ivan")
     url, body, _ = poster.calls[-1]
@@ -116,8 +121,19 @@ def test_metrics_per_workflow(store: OpsStore) -> None:
             store.dead_letter("triage", run_id=run["run_id"], node="n", error="e")
         else:
             store.finish_run(run["run_id"], status, route="crm")
-        store.record_call(CallMeta(call_id=f"c{index}", task="classify_email", model="fake/rules",
-                                   input_tokens=10, output_tokens=5, latency_ms=100), run["run_id"], "crm", {})
+        store.record_call(
+            CallMeta(
+                call_id=f"c{index}",
+                task="classify_email",
+                model="fake/rules",
+                input_tokens=10,
+                output_tokens=5,
+                latency_ms=100,
+            ),
+            run["run_id"],
+            "crm",
+            {},
+        )
     store.start_run("triage", "m0")  # a duplicate delivery
     metrics = store.metrics()
     triage = metrics["workflows"]["triage"]

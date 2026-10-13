@@ -69,6 +69,7 @@ def run_dict(run: Run, *, full: bool = False) -> dict[str, Any]:
         "started_at": iso(run.started_at),
         "finished_at": iso(run.finished_at),
         "latency_ms": run.latency_ms,
+        "queued_ms": run.queued_ms,
         "error_message": run.error,
     }
     if full:
@@ -345,7 +346,7 @@ class OpsStore:
             item = session.get(ReviewItem, review_id)
             if item is None:
                 raise NotFoundError(review_id)
-            if item.status != "pending":
+            if item.status not in {"pending", "failed"}:  # a failed resume may be retried
                 raise ConflictError(f"review {review_id} is already {item.status}")
             body = {
                 "decision": decision,
@@ -517,9 +518,8 @@ class OpsStore:
                 call_query = call_query.where(GatewayCall.created_at >= since)
             runs = list(session.scalars(run_query))
             calls = list(session.scalars(call_query))
-            pending = (
-                session.scalar(select(func.count()).select_from(ReviewItem).where(ReviewItem.status == "pending")) or 0
-            )
+            pending_items = list(session.scalars(select(ReviewItem).where(ReviewItem.status == "pending")))
+            pending = len(pending_items)
             open_dlq = (
                 session.scalar(select(func.count()).select_from(DeadLetter).where(DeadLetter.status == "open")) or 0
             )
@@ -531,7 +531,9 @@ class OpsStore:
         for name in WEBHOOK_PATHS:
             subset = [r for r in runs if r.workflow == name]
             done = [r for r in subset if r.status != "running"]
+            # Processing time without the human wait: until finished for automatic runs, until queued for reviews.
             latencies = [r.latency_ms for r in done if r.latency_ms is not None and r.status in {"auto", "escalated"}]
+            latencies += [r.queued_ms for r in subset if r.queued_ms is not None]
             run_calls = [c for r in subset for c in call_by_run.get(r.id, [])]
             count = len(subset)
             auto = sum(1 for r in subset if r.status == "auto")
@@ -540,7 +542,7 @@ class OpsStore:
                 "runs": count,
                 "auto": auto,
                 "review": human,
-                "pending_review": sum(1 for r in subset if r.status == "review"),
+                "pending_review": sum(1 for item in pending_items if item.workflow == name),
                 "errors": sum(1 for r in subset if r.status == "error"),
                 "duplicates": sum(r.duplicates for r in subset),
                 "auto_rate": round(auto / count, 3) if count else None,
