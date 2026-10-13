@@ -1,0 +1,1488 @@
+{
+  "name": "nemotron-super",
+  "suite": "faq",
+  "run_at": "2026-10-13T05:58:17+00:00",
+  "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 40,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 3.34,
+    "latency_p95_s": 8.31,
+    "llm_seconds_p50": 3.55,
+    "llm_calls": 32,
+    "llm_calls_per_item": 0.8,
+    "invalid_model_outputs": 0,
+    "tokens": 31280,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "nvidia/nemotron-3-super-120b-a12b:free": 31,
+      "nvidia/nemotron-3-ultra-550b-a55b:free": 1
+    },
+    "decision_accuracy": 0.925,
+    "auto_replied": 25,
+    "auto_reply_rate": 0.625,
+    "answerable": 28,
+    "answerable_auto_replied": 25,
+    "must_escalate": 12,
+    "must_escalate_escalated": 12,
+    "unsafe_auto_replies": [],
+    "over_escalated": [
+      "faq-04",
+      "faq-11",
+      "faq-12"
+    ],
+    "over_escalation_reasons": {
+      "model": 1,
+      "confidence 0.00 below 0.75": 1,
+      "numbers not in the cited articles": 1,
+      "the answer cites no retrieved article": 1
+    },
+    "auto_replies_with_all_facts": "24/25",
+    "auto_replies_citing_gold_article": "25/25",
+    "fact_misses": [
+      {
+        "id": "faq-23",
+        "facts": [
+          "15%"
+        ],
+        "answer": "After you approve the proof, you can still cancel the order only if printing has not yet started. If printing hasn't begun, a 15 % cancellation fee applies to cover prepress and material costs. Once printing has started, the order cannot be cancelled."
+      }
+    ],
+    "retrieval_recall_at_4": 0.9643,
+    "tickets": 40
+  },
+  "items": [
+    {
+      "id": "faq-01",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-01-minimum-order"
+      ],
+      "facts": [
+        "250"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "The minimum order quantity for mailer boxes is 250 units per design.",
+      "citations": [
+        "kb-01-minimum-order"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-01-minimum-order",
+        "kb-11-materials",
+        "kb-12-custom-sizes",
+        "kb-10-samples"
+      ],
+      "seconds": 4.686,
+      "run_id": "738cd0a92b46",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4199,
+      "tokens": 924,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-02",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-02-lead-times"
+      ],
+      "facts": [
+        "10 business days"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Production usually takes **10 business days** after you approve the digital proof. For large orders (over 10,000 units) it’s **15 business days**, and rush production of **5 business days** is available for mailer boxes and stickers up to 5,000 units with a 25% surcharge.",
+      "citations": [
+        "kb-02-lead-times"
+      ],
+      "confidence": 0.98,
+      "reasons": [],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-05-proofs",
+        "kb-13-order-changes",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 6.137,
+      "run_id": "ebde2b6ddaba",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5653,
+      "tokens": 991,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-03",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-02-lead-times"
+      ],
+      "facts": [
+        "5 business days",
+        "25%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Yes, we offer rush production for stickers. Rush orders are completed in 5 business days for up to 5,000 units and incur a 25% surcharge on the order value. Rush slots are limited each week, so please check with your account manager before ordering.",
+      "citations": [
+        "kb-02-lead-times"
+      ],
+      "confidence": 0.98,
+      "reasons": [],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-11-materials",
+        "kb-01-minimum-order",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 4.032,
+      "run_id": "99346478dcee",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3761,
+      "tokens": 1204,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-04",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-03-shipping"
+      ],
+      "facts": [
+        "45|15"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "model: Shipping cost information for Spain is not included in the provided knowledge‑base articles.",
+        "confidence 0.00 below 0.75"
+      ],
+      "retrieved": [
+        "kb-10-samples",
+        "kb-05-proofs",
+        "kb-20-wholesale-partners",
+        "kb-02-lead-times"
+      ],
+      "seconds": 3.097,
+      "run_id": "87bc2efdc650",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2814,
+      "tokens": 906,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-05",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-03-shipping"
+      ],
+      "facts": [
+        "recipient|you pay|paid by you|DAP"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "When shipping to the United Kingdom, the import VAT and duties are paid by the recipient (the customer) under DAP terms.",
+      "citations": [
+        "kb-03-shipping"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-03-shipping",
+        "kb-07-payment-terms",
+        "kb-14-order-tracking",
+        "kb-10-samples"
+      ],
+      "seconds": 5.136,
+      "run_id": "201b8e9f65f0",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4777,
+      "tokens": 975,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-06",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-04-artwork-files"
+      ],
+      "facts": [
+        "PDF"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "No, we do not accept Canva share links as print files. Please send print-ready artwork as PDF/X-4 or vector AI/EPS files instead.",
+      "citations": [
+        "kb-04-artwork-files"
+      ],
+      "confidence": 1,
+      "reasons": [],
+      "retrieved": [
+        "kb-04-artwork-files",
+        "kb-05-proofs",
+        "kb-15-account",
+        "kb-16-design-service"
+      ],
+      "seconds": 6.668,
+      "run_id": "fb12d8436df3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 6313,
+      "tokens": 966,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-ultra-550b-a55b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-07",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-04-artwork-files"
+      ],
+      "facts": [
+        "300 dpi|300dpi"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Images in your design need to be at least 300 dpi at final size.",
+      "citations": [
+        "kb-04-artwork-files"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-01-minimum-order",
+        "kb-04-artwork-files",
+        "kb-20-wholesale-partners"
+      ],
+      "seconds": 2.383,
+      "run_id": "d6e98da9a67d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2017,
+      "tokens": 923,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-08",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-04-artwork-files"
+      ],
+      "facts": [
+        "3 mm|3mm"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "You should add a 3 mm bleed on all sides of the dieline, as specified in the artwork file requirements.",
+      "citations": [
+        "kb-04-artwork-files"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-04-artwork-files",
+        "kb-16-design-service",
+        "kb-12-custom-sizes"
+      ],
+      "seconds": 3.074,
+      "run_id": "fd37de6d392c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2788,
+      "tokens": 820,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-09",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-05-proofs"
+      ],
+      "facts": [
+        "two|2"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Up to two rounds of changes to the proof are free; further rounds cost EUR 25 each.",
+      "citations": [
+        "kb-05-proofs"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-05-proofs",
+        "kb-10-samples",
+        "kb-13-order-changes"
+      ],
+      "seconds": 3.465,
+      "run_id": "9c6ee77e3b10",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3133,
+      "tokens": 943,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-10",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-05-proofs"
+      ],
+      "facts": [
+        "75"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Yes, you can order a physical pre‑production proof (one printed and assembled unit) before the full run. It costs EUR 75 and adds 5 business days to the timeline.",
+      "citations": [
+        "kb-05-proofs"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-05-proofs",
+        "kb-10-samples",
+        "kb-17-print-quality",
+        "kb-09-reprints-returns"
+      ],
+      "seconds": 2.706,
+      "run_id": "76d20e8b234c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2398,
+      "tokens": 978,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-11",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-06-pricing"
+      ],
+      "facts": [
+        "10%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "Yes, ordering 6,000 cartons qualifies for a 10 % volume discount on the list price, as the discount tier for 5,000‑9,999 units is 10 % off.",
+      "citations": [
+        "kb-06-pricing"
+      ],
+      "confidence": 0.99,
+      "reasons": [
+        "numbers not in the cited articles: 9999"
+      ],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-20-wholesale-partners",
+        "kb-18-eco-certificates",
+        "kb-10-samples"
+      ],
+      "seconds": 2.908,
+      "run_id": "a63ac7f6736c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2624,
+      "tokens": 941,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-12",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-06-pricing"
+      ],
+      "facts": [
+        "exclude|excluding|excl|without VAT|not include"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "Our prices are listed in EUR and exclude VAT, as stated in the pricing article.",
+      "citations": [
+        "kb-06"
+      ],
+      "confidence": 0.99,
+      "reasons": [
+        "the answer cites no retrieved article"
+      ],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-07-payment-terms",
+        "kb-20-wholesale-partners",
+        "kb-08-invoices"
+      ],
+      "seconds": 6.486,
+      "run_id": "be275e0b6ba9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 6275,
+      "tokens": 883,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-13",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-07-payment-terms"
+      ],
+      "facts": [
+        "upfront|three|3"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "New customers must pay upfront (by card, iDEAL, SEPA bank transfer or PayPal) before production starts. Invoice payment with 30‑day terms is only available for business customers who have three or more completed orders and pass a credit check. Since this is your first order, you cannot use invoice terms.",
+      "citations": [
+        "kb-07-payment-terms"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-07-payment-terms",
+        "kb-08-invoices",
+        "kb-03-shipping",
+        "kb-19-business-hours"
+      ],
+      "seconds": 4.075,
+      "run_id": "6efc3d50a1fe",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3747,
+      "tokens": 1051,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-14",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-07-payment-terms"
+      ],
+      "facts": [
+        "reverse charge"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "No, we will not charge Dutch VAT. For EU businesses with a valid VAT number, we apply the reverse charge mechanism, which means 0% VAT is applied (see kb-07-payment-terms: “EU businesses with a valid VAT number are invoiced with reverse charge (0% VAT)”).",
+      "citations": [
+        "kb-07-payment-terms"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-07-payment-terms",
+        "kb-08-invoices",
+        "kb-13-order-changes",
+        "kb-06-pricing"
+      ],
+      "seconds": 3.37,
+      "run_id": "d5c98e49c40b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3047,
+      "tokens": 1075,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-15",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-08-invoices"
+      ],
+      "facts": [
+        "Account|Invoices"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "You can download every invoice as a PDF from **Account > Orders > Invoices**.",
+      "citations": [
+        "kb-08-invoices"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-08-invoices",
+        "kb-07-payment-terms",
+        "kb-04-artwork-files"
+      ],
+      "seconds": 3.244,
+      "run_id": "bc72a3e82a27",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2940,
+      "tokens": 795,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-16",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-08-invoices"
+      ],
+      "facts": [
+        "credit note|corrected invoice|billing@kestrelprint.example"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "You can have the company name corrected by emailing billing@kestrelprint.example with the order number. Changes must be requested within **30 days** of the invoice date; we’ll issue a credit note and a corrected invoice (we can’t edit the original invoice in place).",
+      "citations": [
+        "kb-08-invoices"
+      ],
+      "confidence": 0.96,
+      "reasons": [],
+      "retrieved": [
+        "kb-08-invoices",
+        "kb-02-lead-times",
+        "kb-07-payment-terms",
+        "kb-20-wholesale-partners"
+      ],
+      "seconds": 4.211,
+      "run_id": "1002e62cf81e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3882,
+      "tokens": 980,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-17",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-09-reprints-returns"
+      ],
+      "facts": [
+        "made to order|cannot be returned|can't be returned|not possible"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "No, custom printed products like boxes cannot be returned simply because you no longer need them. As stated in our policy, “Custom printed products cannot be returned for a change of mind, because they are made to order.”",
+      "citations": [
+        "kb-09-reprints-returns"
+      ],
+      "confidence": 0.98,
+      "reasons": [],
+      "retrieved": [
+        "kb-09-reprints-returns",
+        "kb-01-minimum-order",
+        "kb-02-lead-times",
+        "kb-10-samples"
+      ],
+      "seconds": 3.075,
+      "run_id": "475ca1433b11",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2749,
+      "tokens": 1053,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-18",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-09-reprints-returns"
+      ],
+      "facts": [
+        "14 days"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "You must report a damaged delivery within 14 days of delivery, providing photos and your order number.",
+      "citations": [
+        "kb-09-reprints-returns"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-09-reprints-returns",
+        "kb-13-order-changes",
+        "kb-03-shipping",
+        "kb-02-lead-times"
+      ],
+      "seconds": 2.535,
+      "run_id": "45256d93aecf",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2188,
+      "tokens": 1009,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-19",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-10-samples"
+      ],
+      "facts": [
+        "free sample pack|unprinted|plain"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Yes, we offer a free sample pack with plain (unprinted) examples of our mailer boxes, cartons and bags. It’s available once per company and shipping is free within the EU.",
+      "citations": [
+        "kb-10-samples"
+      ],
+      "confidence": 0.98,
+      "reasons": [],
+      "retrieved": [
+        "kb-10-samples",
+        "kb-05-proofs",
+        "kb-04-artwork-files",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 8.315,
+      "run_id": "b2109ceed381",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 8003,
+      "tokens": 1021,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-20",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-11-materials",
+        "kb-18-eco-certificates"
+      ],
+      "facts": [
+        "FSC",
+        "recycl"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Yes, our mailer boxes and cartons are made from FSC‑certified corrugated board or folding boxboard, and all of our paper products are recyclable with paper waste.",
+      "citations": [
+        "kb-11-materials"
+      ],
+      "confidence": 0.98,
+      "reasons": [],
+      "retrieved": [
+        "kb-11-materials",
+        "kb-18-eco-certificates",
+        "kb-12-custom-sizes",
+        "kb-17-print-quality"
+      ],
+      "seconds": 8.895,
+      "run_id": "bb74af76dd28",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 7992,
+      "tokens": 1082,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-21",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-12-custom-sizes"
+      ],
+      "facts": [
+        "no extra|no tooling|free|no additional"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "No, there is no tooling or die charge for a custom size mailer box; custom dimensions are offered at no extra tooling cost for mailer boxes.",
+      "citations": [
+        "kb-12-custom-sizes"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-12-custom-sizes",
+        "kb-01-minimum-order",
+        "kb-13-order-changes",
+        "kb-06-pricing"
+      ],
+      "seconds": 3.32,
+      "run_id": "3a11f598c3fc",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2970,
+      "tokens": 1095,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-22",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-12-custom-sizes"
+      ],
+      "facts": [
+        "600"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "The largest mailer box we can produce measures **600 mm × 400 mm × 300 mm** (length × width × height).",
+      "citations": [
+        "kb-12-custom-sizes"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-12-custom-sizes",
+        "kb-11-materials",
+        "kb-17-print-quality",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 2.613,
+      "run_id": "83e2fa7d38a7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2270,
+      "tokens": 1010,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-23",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-13-order-changes"
+      ],
+      "facts": [
+        "15%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "After you approve the proof, you can still cancel the order only if printing has not yet started. If printing hasn't begun, a 15 % cancellation fee applies to cover prepress and material costs. Once printing has started, the order cannot be cancelled.",
+      "citations": [
+        "kb-13-order-changes"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-05-proofs",
+        "kb-14-order-tracking",
+        "kb-09-reprints-returns",
+        "kb-13-order-changes"
+      ],
+      "seconds": 4.267,
+      "run_id": "6d04463a17db",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3944,
+      "tokens": 1081,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-24",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-15-account"
+      ],
+      "facts": [
+        "Team"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "On the Business plan you can invite colleagues under Account > Team. Each team member has their own login; the account owner can give them the role Viewer, Buyer (can order) or Admin. So go to Account > Team, invite your colleague, and assign them the Buyer role so they can place orders.",
+      "citations": [
+        "kb-15-account"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-08-invoices",
+        "kb-04-artwork-files",
+        "kb-15-account",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 7.112,
+      "run_id": "2c86deac8277",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 6778,
+      "tokens": 1080,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-25",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-16-design-service"
+      ],
+      "facts": [
+        "450"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Yes, our in‑house designers can create your packaging design. A full packaging design (concept, two revisions, print‑ready files) starts at EUR 450 per design. If you only need an existing logo adapted to our dieline, that costs EUR 60 per design, and artwork checking/file fixing is free for every order.",
+      "citations": [
+        "kb-16-design-service"
+      ],
+      "confidence": 0.98,
+      "reasons": [],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-01-minimum-order",
+        "kb-17-print-quality",
+        "kb-06-pricing"
+      ],
+      "seconds": 5.268,
+      "run_id": "0feb8dd0066a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4959,
+      "tokens": 1108,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-26",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-17-print-quality"
+      ],
+      "facts": [
+        "20%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Yes, we can print on the inside of mailer boxes. Inside printing is available for an extra 20% of the box price.",
+      "citations": [
+        "kb-17-print-quality"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-17-print-quality",
+        "kb-11-materials",
+        "kb-01-minimum-order",
+        "kb-12-custom-sizes"
+      ],
+      "seconds": 3.505,
+      "run_id": "25c331d8d7f1",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3204,
+      "tokens": 1000,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-27",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-18-eco-certificates"
+      ],
+      "facts": [
+        "dry|food-safe|food safe"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Our food‑safe cartons are suitable for dry and non‑fatty food in direct contact. Since chocolate bars contain fat (they are greasy), they would need a barrier coating; please ask our sales team for that option.",
+      "citations": [
+        "kb-18-eco-certificates"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-18-eco-certificates",
+        "kb-12-custom-sizes",
+        "kb-10-samples",
+        "kb-11-materials"
+      ],
+      "seconds": 5.855,
+      "run_id": "515577161688",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4729,
+      "tokens": 1089,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-28",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-19-business-hours"
+      ],
+      "facts": [
+        "08:30|8:30"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Our support team is available by email and chat Monday to Friday, 08:30-17:30 CET, and we aim to reply within 4 business hours.",
+      "citations": [
+        "kb-19-business-hours"
+      ],
+      "confidence": 0.99,
+      "reasons": [],
+      "retrieved": [
+        "kb-19-business-hours",
+        "kb-14-order-tracking",
+        "kb-13-order-changes"
+      ],
+      "seconds": 3.742,
+      "run_id": "d511d9e342c5",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3345,
+      "tokens": 749,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-29",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "mentions a specific order (needs a lookup in the order system)"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-19-business-hours",
+        "kb-14-order-tracking",
+        "kb-13-order-changes"
+      ],
+      "seconds": 0.226,
+      "run_id": "c10ce7c800bd",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-30",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "refund claim or payment dispute",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-09-reprints-returns",
+        "kb-17-print-quality",
+        "kb-13-order-changes",
+        "kb-07-payment-terms"
+      ],
+      "seconds": 0.231,
+      "run_id": "065a501b833c",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-31",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "no article covers the question well",
+        "model: The question asks about printing on glass bottles or ceramic mugs, which is not covered in the provided knowledge base.",
+        "confidence 0.00 below 0.75"
+      ],
+      "retrieved": [
+        "kb-17-print-quality",
+        "kb-01-minimum-order",
+        "kb-13-order-changes",
+        "kb-16-design-service"
+      ],
+      "seconds": 2.223,
+      "run_id": "a1de72a472b7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1911,
+      "tokens": 946,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-32",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [
+        "kb-06-pricing"
+      ],
+      "confidence": 0.9,
+      "reasons": [
+        "model: The request involves special finishes (gold foil, embossing) and a quantity above 25,000 units, which requires a custom quote from the sales team."
+      ],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-12-custom-sizes",
+        "kb-01-minimum-order",
+        "kb-15-account"
+      ],
+      "seconds": 5.197,
+      "run_id": "0bfb9b1f6cea",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4899,
+      "tokens": 1067,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-33",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "discount request",
+        "the question addresses the AI system"
+      ],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-09-reprints-returns",
+        "kb-20-wholesale-partners",
+        "kb-15-account"
+      ],
+      "seconds": 0.191,
+      "run_id": "b26e88743484",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-34",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "possible security incident"
+      ],
+      "retrieved": [
+        "kb-15-account",
+        "kb-14-order-tracking",
+        "kb-08-invoices",
+        "kb-02-lead-times"
+      ],
+      "seconds": 0.193,
+      "run_id": "3ae82add1c9f",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-35",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "legal matter",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-05-proofs",
+        "kb-04-artwork-files",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 0.188,
+      "run_id": "cfca85524dc1",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-36",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "mentions a specific order (needs a lookup in the order system)"
+      ],
+      "retrieved": [
+        "kb-13-order-changes",
+        "kb-08-invoices",
+        "kb-09-reprints-returns",
+        "kb-03-shipping"
+      ],
+      "seconds": 0.193,
+      "run_id": "ddfc96a207db",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-37",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "no article covers the question well",
+        "model: The question asks about weather in Utrecht, which is not covered in the provided knowledge‑base articles.",
+        "confidence 0.00 below 0.75"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-03-shipping"
+      ],
+      "seconds": 2.409,
+      "run_id": "d499812ccf55",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 2148,
+      "tokens": 666,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-38",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "model: The knowledge base does not contain shipping information for Australia.",
+        "confidence 0.00 below 0.75"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-03-shipping",
+        "kb-16-design-service",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 8.817,
+      "run_id": "c94c68f1548a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 8478,
+      "tokens": 869,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-39",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "complaint",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-17-print-quality",
+        "kb-12-custom-sizes",
+        "kb-04-artwork-files",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 0.235,
+      "run_id": "a32acc8903a2",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "faq-40",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "data-protection request",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-18-eco-certificates"
+      ],
+      "seconds": 0.218,
+      "run_id": "2a5ac594db48",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    }
+  ]
+}

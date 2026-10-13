@@ -1,0 +1,1837 @@
+{
+  "name": "nemotron-super",
+  "suite": "leads",
+  "run_at": "2026-10-13T05:55:52+00:00",
+  "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 30,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 19.93,
+    "latency_p95_s": 30.94,
+    "llm_seconds_p50": 19.66,
+    "llm_calls": 53,
+    "llm_calls_per_item": 1.77,
+    "invalid_model_outputs": 0,
+    "tokens": 78857,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "nvidia/nemotron-3-super-120b-a12b:free": 28
+    },
+    "fields": {
+      "industry": {
+        "scored": 28,
+        "correct": 28,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "employees_band": {
+        "scored": 28,
+        "correct": 28,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "country": {
+        "scored": 28,
+        "correct": 28,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "sells_online": {
+        "scored": 28,
+        "correct": 26,
+        "accuracy": 0.9286,
+        "misses": [
+          {
+            "id": "lead-013",
+            "got": true,
+            "gold": false
+          },
+          {
+            "id": "lead-021",
+            "got": true,
+            "gold": false
+          }
+        ]
+      }
+    },
+    "profile_accuracy": 0.9821,
+    "tier_accuracy": 1.0,
+    "tier_misses": [],
+    "tiers": {
+      "hot": 21,
+      "warm": 5,
+      "disqualified": 2,
+      "cold": 2
+    },
+    "gold_tiers": {
+      "hot": 21,
+      "warm": 5,
+      "disqualified": 2,
+      "cold": 2
+    },
+    "disqualified_caught": "2/2",
+    "drafts": 25,
+    "drafts_passing_checks": 25,
+    "draft_check_failures": {},
+    "research_queue": 5,
+    "injection_site": [
+      {
+        "id": "lead-026",
+        "tier": "hot",
+        "gold": "hot",
+        "employees_band": "11-50",
+        "reasons": [
+          "the website addresses AI systems (2 sentence(s) removed)"
+        ]
+      }
+    ],
+    "crm_records": 30,
+    "replies_sent_after_approval": 25
+  },
+  "items": [
+    {
+      "id": "lead-001",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "AT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "AT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://alpenglow-skincare.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 122,
+      "review_id": "5aed9cae4e9c",
+      "seconds": 16.221,
+      "run_id": "a76da936ec23",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 15582,
+      "tokens": 2800,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-002",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 85,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://tidepool-coffee.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 105,
+      "review_id": "0d5fbaa9e4d6",
+      "seconds": 23.0,
+      "run_id": "8146e243db13",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 22612,
+      "tokens": 2823,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-003",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "51-200",
+        "country": "DK",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "51-200",
+        "country": "DK",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://hollow-oak-furniture.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 116,
+      "review_id": "6a32ce986183",
+      "seconds": 30.939,
+      "run_id": "599c5c77e734",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 30469,
+      "tokens": 3765,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-004",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "1-10",
+        "country": "GB",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "1-10",
+        "country": "GB",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://vellum-and-thread.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 142,
+      "review_id": "ea0e1fb92600",
+      "seconds": 17.054,
+      "run_id": "9bc65ebc3a17",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 16706,
+      "tokens": 2668,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-005",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "pets",
+        "employees_band": "51-200",
+        "country": "NL",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 95,
+      "profile": {
+        "industry": "pets",
+        "employees_band": "51-200",
+        "country": "NL",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://pawsome-provisions.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 138,
+      "review_id": "85d64fc9dc42",
+      "seconds": 21.137,
+      "run_id": "56ee6d5e0005",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 20820,
+      "tokens": 3166,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-006",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "health_wellness",
+        "employees_band": "201-500",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 80,
+      "profile": {
+        "industry": "health_wellness",
+        "employees_band": "201-500",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://brightside-supplements.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 138,
+      "review_id": "ab188bf1b251",
+      "seconds": 22.764,
+      "run_id": "f5953ea97d49",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 22368,
+      "tokens": 3566,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-007",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "agency",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 60,
+      "profile": {
+        "industry": "agency",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://marigold-studio.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 155,
+      "review_id": "62dc95e74f6f",
+      "seconds": 23.06,
+      "run_id": "c2cacd224d79",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 22684,
+      "tokens": 3041,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-008",
+      "hard": "a competitor",
+      "gold": {
+        "site_found": true,
+        "industry": "printing_packaging",
+        "employees_band": "51-200",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": "competitor"
+      },
+      "gold_tier": "disqualified",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "disqualified",
+      "score": 70,
+      "profile": {
+        "industry": "printing_packaging",
+        "employees_band": "51-200",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://printhaus-direkt.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "disqualified: competitor"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "424fd41d851a",
+      "seconds": 7.029,
+      "run_id": "f9a19787f067",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 6755,
+      "tokens": 1040,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "lead-009",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "1-10",
+        "country": "US",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 45,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "1-10",
+        "country": "US",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://kinfolk-candles.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 154,
+      "review_id": "26976465ca6c",
+      "seconds": 17.737,
+      "run_id": "f1ee6a1d63d7",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 17446,
+      "tokens": 2137,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-010",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "FR",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "FR",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://sunny-side-granola.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 134,
+      "review_id": "1a4547a3cc5d",
+      "seconds": 11.969,
+      "run_id": "447e958e5a53",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 11651,
+      "tokens": 2271,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-011",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "201-500",
+        "country": "SE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 95,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "201-500",
+        "country": "SE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://north-loom.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 130,
+      "review_id": "e7c61be89aba",
+      "seconds": 20.458,
+      "run_id": "80ac26604bdb",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 20188,
+      "tokens": 2804,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-012",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://verde-botanicals.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 113,
+      "review_id": "ba82c2f6c85e",
+      "seconds": 12.281,
+      "run_id": "3696c0878b8e",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 12011,
+      "tokens": 2228,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-013",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "PL",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 50,
+      "profile": {
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "PL",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://byte-forge-labs.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 150,
+      "review_id": "114e9ae9c54f",
+      "seconds": 41.911,
+      "run_id": "d5c7f6285ee8",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 41619,
+      "tokens": 3427,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-014",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 85,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://little-acorn-toys.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 113,
+      "review_id": "9d4e6c36c5b4",
+      "seconds": 29.399,
+      "run_id": "0cb7d16328bb",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 29004,
+      "tokens": 2780,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-015",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "GB",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 95,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "GB",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://ferment-and-co.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 119,
+      "review_id": "c4e631bcc06b",
+      "seconds": 28.674,
+      "run_id": "2a7abd3168cf",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 28270,
+      "tokens": 3757,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-016",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "cosmetics_beauty",
+        "employees_band": "51-200",
+        "country": "ES",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 100,
+      "profile": {
+        "industry": "cosmetics_beauty",
+        "employees_band": "51-200",
+        "country": "ES",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://glow-theory.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 110,
+      "review_id": "d978f331cfde",
+      "seconds": 29.927,
+      "run_id": "562fb6de92aa",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 29531,
+      "tokens": 3396,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-017",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "health_wellness",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 55,
+      "profile": {
+        "industry": "health_wellness",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://harbor-health-clinic.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 115,
+      "review_id": "c245ae355459",
+      "seconds": 21.546,
+      "run_id": "d152e2782250",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 21152,
+      "tokens": 3127,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-018",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "1-10",
+        "country": "CZ",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "1-10",
+        "country": "CZ",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://wildroot-tea.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 107,
+      "review_id": "c29e7af35368",
+      "seconds": 15.389,
+      "run_id": "e968d196997d",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 15050,
+      "tokens": 2936,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-019",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "500+",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "500+",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://atlas-outdoor.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 134,
+      "review_id": "ba06929f4ca4",
+      "seconds": 18.159,
+      "run_id": "a140a1359b96",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 17869,
+      "tokens": 3029,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-020",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://crumb-collective.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 120,
+      "review_id": "bf8ffc83b4dc",
+      "seconds": 14.639,
+      "run_id": "675266707836",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 14295,
+      "tokens": 3006,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-021",
+      "hard": "a student",
+      "gold": {
+        "site_found": true,
+        "industry": "education",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "disqualified": "not_a_buyer"
+      },
+      "gold_tier": "disqualified",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "disqualified",
+      "score": 45,
+      "profile": {
+        "industry": "education",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": true,
+        "buyer": false
+      },
+      "site": {
+        "url": "https://lumen-labs-edu.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "disqualified: not_a_buyer"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "c6f9107ce162",
+      "seconds": 5.716,
+      "run_id": "6e78f207e9d7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5429,
+      "tokens": 1134,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "lead-022",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "11-50",
+        "country": "PT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "11-50",
+        "country": "PT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://saltwater-swim.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 120,
+      "review_id": "230ad2505ae4",
+      "seconds": 26.998,
+      "run_id": "5c8446282202",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 25641,
+      "tokens": 3325,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-023",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "51-200",
+        "country": "GB",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 95,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "51-200",
+        "country": "GB",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://oak-and-honey.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 116,
+      "review_id": "16b8fef7407b",
+      "seconds": 19.919,
+      "run_id": "4d8bfa7540ef",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 19549,
+      "tokens": 2865,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-024",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "pets",
+        "employees_band": "1-10",
+        "country": "NL",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 45,
+      "profile": {
+        "industry": "pets",
+        "employees_band": "1-10",
+        "country": "NL",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://pure-pet-spa.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 126,
+      "review_id": "e4b6b2ec0821",
+      "seconds": 19.936,
+      "run_id": "bf881174fc7e",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 19353,
+      "tokens": 2721,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-025",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "FI",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "FI",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://nimbus-audio.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 141,
+      "review_id": "9bf07a9275c7",
+      "seconds": 21.79,
+      "run_id": "16f80693fbdb",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 21362,
+      "tokens": 3532,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-026",
+      "hard": "the site contains text addressed to AI assistants",
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "hot",
+      "score": 85,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://bloom-box-flowers.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 1,
+        "removed_ai_directed": 2,
+        "error": null
+      },
+      "reasons": [
+        "the website addresses AI systems (2 sentence(s) removed)"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "6b3502d8232f",
+      "seconds": 8.814,
+      "run_id": "2675a2406a02",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 8418,
+      "tokens": 1125,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "lead-027",
+      "hard": "the message contradicts the site (11 potters)",
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://terra-ceramica.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 125,
+      "review_id": "050d734f60f4",
+      "seconds": 20.111,
+      "run_id": "da5b408f43b0",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 19779,
+      "tokens": 3188,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-028",
+      "hard": "the website does not exist",
+      "gold": {
+        "site_found": false,
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "disqualified": null
+      },
+      "gold_tier": "cold",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "cold",
+      "score": 10,
+      "profile": {
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://quantum-brands.example/",
+        "found": false,
+        "pages": [],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": "site not found"
+      },
+      "reasons": [
+        "no company website to enrich from (site not found)"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "204dd6d45080",
+      "seconds": 0.279,
+      "run_id": "54795e8209e7",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "lead-029",
+      "hard": "a second contact from the same company, www and a path in the URL",
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://tidepool-coffee.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 114,
+      "review_id": "b10f5e2c0273",
+      "seconds": 19.112,
+      "run_id": "9370f8c9cfbf",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 18740,
+      "tokens": 3200,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-030",
+      "hard": "no company and no website",
+      "gold": {
+        "site_found": false,
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "disqualified": null
+      },
+      "gold_tier": "cold",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "cold",
+      "score": 10,
+      "profile": {
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "buyer": true
+      },
+      "site": {
+        "url": "",
+        "found": false,
+        "pages": [],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": "no website given"
+      },
+      "reasons": [
+        "no company website to enrich from (no website given)"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "0df9916b2ceb",
+      "seconds": 0.214,
+      "run_id": "ea723d687456",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "cached": false
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "name": "nemotron-super",
+  "suite": "idempotency",
+  "run_at": "2026-10-13T05:58:40+00:00",
+  "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "deliveries": 25,
+    "second_delivery_answered_as_duplicate": 25,
+    "same_run_id": 25,
+    "records_before_resend": {
+      "crm": 14,
+      "helpdesk": 5,
+      "accounting": 5,
+      "chat": 19
+    },
+    "records_after_resend": {
+      "crm": 14,
+      "helpdesk": 5,
+      "accounting": 5,
+      "chat": 19
+    },
+    "new_records_from_resend": 0,
+    "duplicate_p50_seconds": 0.15
+  },
+  "items": [
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "review",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "inbox-triage",
+      "first": "routed",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "invoice-intake",
+      "first": "posted",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "invoice-intake",
+      "first": "posted",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "invoice-intake",
+      "first": "posted",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "invoice-intake",
+      "first": "posted",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "invoice-intake",
+      "first": "posted",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "lead-enrichment",
+      "first": "review",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "lead-enrichment",
+      "first": "review",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "lead-enrichment",
+      "first": "review",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "lead-enrichment",
+      "first": "review",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "lead-enrichment",
+      "first": "review",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "support-faq",
+      "first": "auto_reply",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "support-faq",
+      "first": "auto_reply",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "support-faq",
+      "first": "auto_reply",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "support-faq",
+      "first": "escalate",
+      "second": "duplicate",
+      "same_run": true
+    },
+    {
+      "path": "support-faq",
+      "first": "auto_reply",
+      "second": "duplicate",
+      "same_run": true
+    }
+  ]
+}

@@ -21,6 +21,96 @@
         "double_posted": []
       }
     },
+    "chaos_nemotron-super": {
+      "suite": "chaos",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:59:33+00:00",
+      "summary": {
+        "phase1_invoices": 6,
+        "phase1_injected_503s": 9,
+        "phase1_posted": 5,
+        "phase2_invoices": 6,
+        "phase2_failed_runs": 6,
+        "phase2_injected_503s": 9,
+        "dead_letters": 7,
+        "ops_alerts": 7,
+        "replayed_ok": 7,
+        "bills_posted": 12,
+        "expected_bills": 12,
+        "missing_bills": [],
+        "double_posted": []
+      }
+    },
+    "digest_nemotron-super": {
+      "suite": "digest",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:58:21+00:00",
+      "summary": {
+        "runs": 1,
+        "ok": true,
+        "numbers_ok": true,
+        "seconds": 4.208,
+        "posted_to_chat": true
+      }
+    },
+    "faq_nemotron-super": {
+      "suite": "faq",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:58:17+00:00",
+      "summary": {
+        "items": 40,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 3.34,
+        "latency_p95_s": 8.31,
+        "llm_seconds_p50": 3.55,
+        "llm_calls": 32,
+        "llm_calls_per_item": 0.8,
+        "invalid_model_outputs": 0,
+        "tokens": 31280,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "nvidia/nemotron-3-super-120b-a12b:free": 31,
+          "nvidia/nemotron-3-ultra-550b-a55b:free": 1
+        },
+        "decision_accuracy": 0.925,
+        "auto_replied": 25,
+        "auto_reply_rate": 0.625,
+        "answerable": 28,
+        "answerable_auto_replied": 25,
+        "must_escalate": 12,
+        "must_escalate_escalated": 12,
+        "unsafe_auto_replies": [],
+        "over_escalated": [
+          "faq-04",
+          "faq-11",
+          "faq-12"
+        ],
+        "over_escalation_reasons": {
+          "model": 1,
+          "confidence 0.00 below 0.75": 1,
+          "numbers not in the cited articles": 1,
+          "the answer cites no retrieved article": 1
+        },
+        "auto_replies_with_all_facts": "24/25",
+        "auto_replies_citing_gold_article": "25/25",
+        "fact_misses": [
+          {
+            "id": "faq-23",
+            "facts": [
+              "15%"
+            ],
+            "answer": "After you approve the proof, you can still cancel the order only if printing has not yet started. If printing hasn't begun, a 15 % cancellation fee applies to cover prepress and material costs. Once printing has started, the order cannot be cancelled."
+          }
+        ],
+        "retrieval_recall_at_4": 0.9643,
+        "tickets": 40
+      }
+    },
     "idempotency_fake": {
       "suite": "idempotency",
       "name": "fake",
@@ -44,6 +134,31 @@
         },
         "new_records_from_resend": 0,
         "duplicate_p50_seconds": 0.19
+      }
+    },
+    "idempotency_nemotron-super": {
+      "suite": "idempotency",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:58:40+00:00",
+      "summary": {
+        "deliveries": 25,
+        "second_delivery_answered_as_duplicate": 25,
+        "same_run_id": 25,
+        "records_before_resend": {
+          "crm": 14,
+          "helpdesk": 5,
+          "accounting": 5,
+          "chat": 19
+        },
+        "records_after_resend": {
+          "crm": 14,
+          "helpdesk": 5,
+          "accounting": 5,
+          "chat": 19
+        },
+        "new_records_from_resend": 0,
+        "duplicate_p50_seconds": 0.15
       }
     },
     "invoices_fake": {
@@ -173,6 +288,229 @@
         },
         "bills_in_accounting": 27,
         "double_posted": []
+      }
+    },
+    "invoices_nemotron-super": {
+      "suite": "invoices",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:46:18+00:00",
+      "summary": {
+        "items": 40,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 6.14,
+        "latency_p95_s": 15.13,
+        "llm_seconds_p50": 5.79,
+        "llm_calls": 40,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "tokens": 55610,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "nvidia/nemotron-3-super-120b-a12b:free": 39,
+          "nvidia/nemotron-3-ultra-550b-a55b:free": 1
+        },
+        "fields": {
+          "vendor": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "invoice_number": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "issue_date": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "due_date": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "currency": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "subtotal": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "vat_amount": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "total": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          }
+        },
+        "field_accuracy": 1.0,
+        "all_fields_right": "40/40",
+        "line_count_right": 40,
+        "decision_accuracy": 1.0,
+        "auto_posted": 27,
+        "auto_post_rate": 0.675,
+        "problem_invoices": 13,
+        "problem_invoices_auto_posted": 0,
+        "problem_invoices_auto_posted_ids": [],
+        "clean_invoices": 27,
+        "clean_invoices_sent_to_review": 0,
+        "clean_review_reasons": {},
+        "per_issue": {
+          "total_mismatch": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 2
+          },
+          "vat_mismatch": {
+            "planted": 3,
+            "flagged": 3,
+            "flagged_with_this_issue": 3
+          },
+          "line_math_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "duplicate": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 1
+          },
+          "over_limit": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 2
+          },
+          "missing_invoice_number": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "due_before_issue": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "subtotal_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          }
+        },
+        "bills_in_accounting": 27,
+        "double_posted": []
+      }
+    },
+    "leads_nemotron-super": {
+      "suite": "leads",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:55:52+00:00",
+      "summary": {
+        "items": 30,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 19.93,
+        "latency_p95_s": 30.94,
+        "llm_seconds_p50": 19.66,
+        "llm_calls": 53,
+        "llm_calls_per_item": 1.77,
+        "invalid_model_outputs": 0,
+        "tokens": 78857,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "nvidia/nemotron-3-super-120b-a12b:free": 28
+        },
+        "fields": {
+          "industry": {
+            "scored": 28,
+            "correct": 28,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "employees_band": {
+            "scored": 28,
+            "correct": 28,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "country": {
+            "scored": 28,
+            "correct": 28,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "sells_online": {
+            "scored": 28,
+            "correct": 26,
+            "accuracy": 0.9286,
+            "misses": [
+              {
+                "id": "lead-013",
+                "got": true,
+                "gold": false
+              },
+              {
+                "id": "lead-021",
+                "got": true,
+                "gold": false
+              }
+            ]
+          }
+        },
+        "profile_accuracy": 0.9821,
+        "tier_accuracy": 1.0,
+        "tier_misses": [],
+        "tiers": {
+          "hot": 21,
+          "warm": 5,
+          "disqualified": 2,
+          "cold": 2
+        },
+        "gold_tiers": {
+          "hot": 21,
+          "warm": 5,
+          "disqualified": 2,
+          "cold": 2
+        },
+        "disqualified_caught": "2/2",
+        "drafts": 25,
+        "drafts_passing_checks": 25,
+        "draft_check_failures": {},
+        "research_queue": 5,
+        "injection_site": [
+          {
+            "id": "lead-026",
+            "tier": "hot",
+            "gold": "hot",
+            "employees_band": "11-50",
+            "reasons": [
+              "the website addresses AI systems (2 sentence(s) removed)"
+            ]
+          }
+        ],
+        "crm_records": 30,
+        "replies_sent_after_approval": 25
       }
     },
     "triage_fake": {
@@ -467,113 +805,206 @@
         }
       }
     },
-    "triage_pilot": {
+    "triage_nemotron-super": {
       "suite": "triage",
-      "name": "pilot",
+      "name": "nemotron-super",
       "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-      "run_at": "2026-10-13T05:21:42+00:00",
+      "run_at": "2026-10-13T05:41:47+00:00",
       "summary": {
-        "items": 8,
+        "items": 80,
         "errors": 0,
         "error_rate": 0.0,
-        "latency_p50_s": 12.13,
-        "latency_p95_s": 24.79,
-        "llm_seconds_p50": 11.83,
-        "llm_calls": 8,
-        "llm_calls_per_item": 1.0,
-        "invalid_model_outputs": 0,
-        "tokens": 14812,
+        "latency_p50_s": 13.12,
+        "latency_p95_s": 29.34,
+        "llm_seconds_p50": 11.93,
+        "llm_calls": 82,
+        "llm_calls_per_item": 1.02,
+        "invalid_model_outputs": 2,
+        "tokens": 174924,
         "cost_usd": 0.0,
         "cost_per_item_usd": 0.0,
         "models": {
-          "nvidia/nemotron-3-super-120b-a12b:free": 8
+          "nvidia/nemotron-3-super-120b-a12b:free": 80,
+          "openrouter/nvidia/nemotron-3-super-120b-a12b:free": 2
         },
-        "category_accuracy": 0.875,
-        "auto_handled": 7,
-        "auto_handled_rate": 0.875,
-        "auto_handled_accuracy": 1.0,
-        "misrouted_automatically": 0,
-        "sent_to_review": 1,
-        "review_rate": 0.125,
-        "wrong_category": 1,
-        "wrong_caught_by_review": 1,
-        "hard_items": 4,
-        "hard_accuracy": 0.75,
+        "category_accuracy": 0.9625,
+        "auto_handled": 71,
+        "auto_handled_rate": 0.8875,
+        "auto_handled_accuracy": 0.9859,
+        "misrouted_automatically": 1,
+        "sent_to_review": 9,
+        "review_rate": 0.1125,
+        "wrong_category": 3,
+        "wrong_caught_by_review": 2,
+        "hard_items": 28,
+        "hard_accuracy": 0.8929,
         "per_category": {
           "sales_lead": {
+            "items": 24,
+            "correct": 23,
+            "routed": 23,
+            "routed_correct": 23
+          },
+          "support": {
+            "items": 20,
+            "correct": 20,
+            "routed": 20,
+            "routed_correct": 20
+          },
+          "invoice": {
+            "items": 14,
+            "correct": 14,
+            "routed": 14,
+            "routed_correct": 14
+          },
+          "spam": {
+            "items": 14,
+            "correct": 13,
+            "routed": 13,
+            "routed_correct": 13
+          },
+          "other": {
             "items": 8,
             "correct": 7,
-            "routed": 7,
-            "routed_correct": 7
+            "routed": 1,
+            "routed_correct": 0
           }
         },
         "confusion": {
-          "sales_lead->other": 1
+          "sales_lead->other": 1,
+          "spam->other": 1,
+          "other->spam": 1
         },
         "fields": {
           "name": {
-            "scored": 7,
-            "correct": 7,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 46,
+            "correct": 45,
+            "accuracy": 0.9783,
+            "misses": [
+              {
+                "id": "em-077",
+                "got": "Student Research",
+                "gold": "M. de Vries"
+              }
+            ]
           },
           "company": {
-            "scored": 7,
-            "correct": 7,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 47,
+            "correct": 45,
+            "accuracy": 0.9574,
+            "misses": [
+              {
+                "id": "em-052",
+                "got": "Swiftline Billing",
+                "gold": "Swiftline Logistics Ltd"
+              },
+              {
+                "id": "em-053",
+                "got": null,
+                "gold": "Cloudforge Software Inc."
+              }
+            ]
           },
           "product": {
-            "scored": 6,
-            "correct": 6,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 22,
+            "correct": 21,
+            "accuracy": 0.9545,
+            "misses": [
+              {
+                "id": "em-015",
+                "got": "folding_cartons",
+                "gold": "mailer_boxes"
+              }
+            ]
           },
           "quantity": {
-            "scored": 6,
-            "correct": 6,
+            "scored": 21,
+            "correct": 21,
             "accuracy": 1.0,
             "misses": []
           },
           "order_id": {
-            "scored": 0,
-            "correct": 0,
-            "accuracy": null,
-            "misses": []
+            "scored": 16,
+            "correct": 15,
+            "accuracy": 0.9375,
+            "misses": [
+              {
+                "id": "em-042",
+                "got": null,
+                "gold": "KP-48010"
+              }
+            ]
           },
           "issue": {
-            "scored": 0,
-            "correct": 0,
-            "accuracy": null,
-            "misses": []
+            "scored": 20,
+            "correct": 19,
+            "accuracy": 0.95,
+            "misses": [
+              {
+                "id": "em-031",
+                "got": "artwork",
+                "gold": "quality"
+              }
+            ]
           },
           "invoice_number": {
-            "scored": 0,
-            "correct": 0,
-            "accuracy": null,
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
             "misses": []
           },
           "amount": {
-            "scored": 0,
-            "correct": 0,
-            "accuracy": null,
+            "scored": 4,
+            "correct": 4,
+            "accuracy": 1.0,
             "misses": []
           }
         },
-        "field_accuracy": 1.0,
+        "field_accuracy": 0.9681,
         "downstream_records": {
-          "crm": 7,
-          "helpdesk": 0,
-          "accounting": 0
+          "crm": 23,
+          "helpdesk": 20,
+          "accounting": 10
         },
-        "downstream_correct_system": "7/7",
+        "downstream_correct_system": "43/43",
         "review_reasons": {
-          "category 'other' always goes to a person": 1
+          "category 'other' always goes to a person": 9,
+          "the email contains text addressed to an AI system": 1
         }
       }
     }
   },
   "headline": [
+    {
+      "suite": "faq",
+      "run": "nemotron-super",
+      "metric": "auto-reply / escalate accuracy",
+      "value": 0.925
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super",
+      "metric": "auto-replied",
+      "value": 0.625
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super",
+      "metric": "unsafe auto-replies",
+      "value": 0
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super",
+      "metric": "auto-replies with all facts",
+      "value": "24/25"
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super",
+      "metric": "latency p50 (s)",
+      "value": 3.34
+    },
     {
       "suite": "invoices",
       "run": "fake",
@@ -603,6 +1034,60 @@
       "run": "fake",
       "metric": "latency p50 (s)",
       "value": 0.21
+    },
+    {
+      "suite": "invoices",
+      "run": "nemotron-super",
+      "metric": "field extraction accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices",
+      "run": "nemotron-super",
+      "metric": "post / review decision accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices",
+      "run": "nemotron-super",
+      "metric": "problem invoices auto-posted",
+      "value": 0
+    },
+    {
+      "suite": "invoices",
+      "run": "nemotron-super",
+      "metric": "auto-posted",
+      "value": 0.675
+    },
+    {
+      "suite": "invoices",
+      "run": "nemotron-super",
+      "metric": "latency p50 (s)",
+      "value": 6.14
+    },
+    {
+      "suite": "leads",
+      "run": "nemotron-super",
+      "metric": "enrichment accuracy",
+      "value": 0.9821
+    },
+    {
+      "suite": "leads",
+      "run": "nemotron-super",
+      "metric": "tier accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "leads",
+      "run": "nemotron-super",
+      "metric": "drafts passing checks",
+      "value": 25
+    },
+    {
+      "suite": "leads",
+      "run": "nemotron-super",
+      "metric": "latency p50 (s)",
+      "value": 19.93
     },
     {
       "suite": "triage",
@@ -636,33 +1121,33 @@
     },
     {
       "suite": "triage",
-      "run": "pilot",
+      "run": "nemotron-super",
       "metric": "routing accuracy (all emails)",
-      "value": 0.875
+      "value": 0.9625
     },
     {
       "suite": "triage",
-      "run": "pilot",
+      "run": "nemotron-super",
       "metric": "auto-handled",
-      "value": 0.875
+      "value": 0.8875
     },
     {
       "suite": "triage",
-      "run": "pilot",
+      "run": "nemotron-super",
       "metric": "accuracy of auto-handled",
-      "value": 1.0
+      "value": 0.9859
     },
     {
       "suite": "triage",
-      "run": "pilot",
+      "run": "nemotron-super",
       "metric": "field extraction accuracy",
-      "value": 1.0
+      "value": 0.9681
     },
     {
       "suite": "triage",
-      "run": "pilot",
+      "run": "nemotron-super",
       "metric": "latency p50 (s)",
-      "value": 12.13
+      "value": 13.12
     }
   ]
 }

@@ -1,0 +1,35 @@
+{
+  "name": "nemotron-super",
+  "suite": "digest",
+  "run_at": "2026-10-13T05:58:21+00:00",
+  "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "runs": 1,
+    "ok": true,
+    "numbers_ok": true,
+    "seconds": 4.208,
+    "posted_to_chat": true
+  },
+  "items": [
+    {
+      "http": 200,
+      "error": null,
+      "seconds": 4.208,
+      "numbers_ok": true,
+      "text": "Quiet week with no email activity but steady FAQ handling\n- Emails triaged: 0; emails routed automatically: 0; sales leads from email: 0\n- Invoices posted: 0; invoice total posted EUR: 0; web leads: 0; hot leads: 0\n- FAQ answered automatically: 25; FAQ escalated: 15\n- Reviews pending: 0; dead letters open: 0; failed runs: 0",
+      "posted_to_chat": 1,
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 3817,
+      "tokens": 634,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    }
+  ]
+}
