@@ -1,0 +1,97 @@
+{
+  "name": "fake",
+  "suite": "chaos",
+  "run_at": "2026-10-13T05:17:11+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "phase1_invoices": 6,
+    "phase1_injected_503s": 9,
+    "phase1_posted": 5,
+    "phase2_invoices": 6,
+    "phase2_failed_runs": 6,
+    "phase2_injected_503s": 9,
+    "dead_letters": 7,
+    "ops_alerts": 7,
+    "replayed_ok": 7,
+    "bills_posted": 12,
+    "expected_bills": 12,
+    "missing_bills": [],
+    "double_posted": []
+  },
+  "items": [
+    {
+      "phase": 1,
+      "id": "inv-001",
+      "http": 200,
+      "status": "posted"
+    },
+    {
+      "phase": 1,
+      "id": "inv-002",
+      "http": 200,
+      "status": "posted"
+    },
+    {
+      "phase": 1,
+      "id": "inv-003",
+      "http": 200,
+      "status": "posted"
+    },
+    {
+      "phase": 1,
+      "id": "inv-005",
+      "http": 200,
+      "status": "posted"
+    },
+    {
+      "phase": 1,
+      "id": "inv-006",
+      "http": 500,
+      "status": null
+    },
+    {
+      "phase": 1,
+      "id": "inv-007",
+      "http": 200,
+      "status": "posted"
+    },
+    {
+      "phase": 2,
+      "id": "inv-009",
+      "http": 500,
+      "status": null
+    },
+    {
+      "phase": 2,
+      "id": "inv-010",
+      "http": 500,
+      "status": null
+    },
+    {
+      "phase": 2,
+      "id": "inv-011",
+      "http": 500,
+      "status": null
+    },
+    {
+      "phase": 2,
+      "id": "inv-013",
+      "http": 500,
+      "status": null
+    },
+    {
+      "phase": 2,
+      "id": "inv-014",
+      "http": 500,
+      "status": null
+    },
+    {
+      "phase": 2,
+      "id": "inv-016",
+      "http": 500,
+      "status": null
+    }
+  ]
+}

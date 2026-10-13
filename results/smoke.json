@@ -1,0 +1,160 @@
+{
+  "models": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b:free",
+      "triage": {
+        "ok": true,
+        "seconds": 9.0,
+        "schema_valid": true,
+        "category": "sales_lead",
+        "correct": true
+      },
+      "invoice": {
+        "ok": true,
+        "seconds": 8.7,
+        "schema_valid": true,
+        "total": 2205.18,
+        "correct": true
+      },
+      "faq": {
+        "ok": true,
+        "seconds": 2.5,
+        "schema_valid": true,
+        "decision": "auto_reply",
+        "correct": false
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "triage": {
+        "ok": true,
+        "seconds": 25.2,
+        "schema_valid": true,
+        "category": "sales_lead",
+        "correct": true
+      },
+      "invoice": {
+        "ok": true,
+        "seconds": 25.3,
+        "schema_valid": true,
+        "total": 2205.18,
+        "correct": true
+      },
+      "faq": {
+        "ok": true,
+        "seconds": 4.7,
+        "schema_valid": true,
+        "decision": "auto_reply",
+        "correct": true
+      }
+    },
+    {
+      "model": "google/gemma-4-31b-it:free",
+      "triage": {
+        "ok": false,
+        "seconds": 57.0,
+        "error": "rate limited: google/gemma-4-31b-it:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"
+      },
+      "invoice": {
+        "ok": false,
+        "seconds": 68.0,
+        "error": "rate limited: google/gemma-4-31b-it:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"
+      },
+      "faq": {
+        "ok": false,
+        "seconds": 58.6,
+        "error": "rate limited: google/gemma-4-31b-it:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"
+      }
+    },
+    {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "triage": {
+        "ok": true,
+        "seconds": 69.3,
+        "schema_valid": true,
+        "category": "sales_lead",
+        "correct": true
+      },
+      "invoice": {
+        "ok": true,
+        "seconds": 29.1,
+        "schema_valid": true,
+        "total": 2205.18,
+        "correct": true
+      },
+      "faq": {
+        "ok": true,
+        "seconds": 18.2,
+        "schema_valid": true,
+        "decision": "auto_reply",
+        "correct": true
+      }
+    },
+    {
+      "model": "thinkingmachines/inkling:free",
+      "triage": {
+        "ok": false,
+        "seconds": 0.6,
+        "error": "upstream 403: thinkingmachines/inkling:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps"
+      },
+      "invoice": {
+        "ok": false,
+        "seconds": 2.7,
+        "error": "upstream 403: Access denied by security policy."
+      },
+      "faq": {
+        "ok": false,
+        "seconds": 3.3,
+        "error": "upstream 403: thinkingmachines/inkling:free is only available on agentic harnesses. Try plugging it into a coding agent or productivity app listed on https://openrouter.ai/apps"
+      }
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning:free",
+      "triage": {
+        "ok": true,
+        "seconds": 70.1,
+        "schema_valid": true,
+        "category": "sales_lead",
+        "correct": true
+      },
+      "invoice": {
+        "ok": true,
+        "seconds": 38.2,
+        "schema_valid": true,
+        "total": 2205.18,
+        "correct": true
+      },
+      "faq": {
+        "ok": true,
+        "seconds": 8.6,
+        "schema_valid": true,
+        "decision": "auto_reply",
+        "correct": true
+      }
+    },
+    {
+      "model": "apodex/apodex-1.1-mini:free",
+      "triage": {
+        "ok": true,
+        "seconds": 12.5,
+        "schema_valid": true,
+        "category": "sales_lead",
+        "correct": true
+      },
+      "invoice": {
+        "ok": true,
+        "seconds": 46.8,
+        "schema_valid": true,
+        "total": 2205.18,
+        "correct": true
+      },
+      "faq": {
+        "ok": true,
+        "seconds": 6.0,
+        "schema_valid": true,
+        "decision": "auto_reply",
+        "correct": true
+      }
+    }
+  ]
+}

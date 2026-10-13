@@ -93,6 +93,12 @@ services:
     environment:
       RELAY_DATABASE_URL: postgresql://relay:${POSTGRES_PASSWORD:-relay}@postgres:5432/relay
       RELAY_LLM_PROVIDER: ${RELAY_LLM_PROVIDER:-fake}
+      RELAY_LLM_MODEL: ${RELAY_LLM_MODEL:-}
+      RELAY_LLM_FALLBACK_MODELS: ${RELAY_LLM_FALLBACK_MODELS:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      # Every real model request is appended to results/calls.jsonl on the host (model ids, status, latency,
+      # tokens; never prompts), and the dashboard's Evaluation page reads results/summary.json from there.
+      RELAY_LLM_LEDGER: /app/results/calls.jsonl
       RELAY_N8N_URL: http://n8n:5678
       RELAY_N8N_WEBHOOK_TOKEN: ${RELAY_WEBHOOK_TOKEN:-relay-local-webhook-token}
       RELAY_API_TOKEN: ${RELAY_API_TOKEN:-relay-local-api-token}
@@ -102,6 +108,7 @@ services:
       RELAY_CORS_ORIGINS: http://localhost:${WEB_PORT:-3000}
     volumes:
       - llmcache:/home/app/.cache
+      - ./results:/app/results
     depends_on:
       postgres:
         condition: service_healthy

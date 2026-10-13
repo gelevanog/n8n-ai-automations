@@ -1,5 +1,51 @@
 {
   "runs": {
+    "chaos_fake": {
+      "suite": "chaos",
+      "name": "fake",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T05:17:11+00:00",
+      "summary": {
+        "phase1_invoices": 6,
+        "phase1_injected_503s": 9,
+        "phase1_posted": 5,
+        "phase2_invoices": 6,
+        "phase2_failed_runs": 6,
+        "phase2_injected_503s": 9,
+        "dead_letters": 7,
+        "ops_alerts": 7,
+        "replayed_ok": 7,
+        "bills_posted": 12,
+        "expected_bills": 12,
+        "missing_bills": [],
+        "double_posted": []
+      }
+    },
+    "idempotency_fake": {
+      "suite": "idempotency",
+      "name": "fake",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T05:16:19+00:00",
+      "summary": {
+        "deliveries": 25,
+        "second_delivery_answered_as_duplicate": 25,
+        "same_run_id": 25,
+        "records_before_resend": {
+          "crm": 13,
+          "helpdesk": 5,
+          "accounting": 5,
+          "chat": 18
+        },
+        "records_after_resend": {
+          "crm": 13,
+          "helpdesk": 5,
+          "accounting": 5,
+          "chat": 18
+        },
+        "new_records_from_resend": 0,
+        "duplicate_p50_seconds": 0.19
+      }
+    },
     "invoices_fake": {
       "suite": "invoices",
       "name": "fake",

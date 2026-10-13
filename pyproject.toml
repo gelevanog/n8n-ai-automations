@@ -40,6 +40,7 @@ packages = ["src/relay"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+pythonpath = ["."]
 markers = [
     "n8n: needs the docker compose stack with n8n running (RELAY_N8N_URL); skipped otherwise",
 ]

@@ -1,0 +1,189 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  UV_LINK_MODE: copy
+  NEXT_TELEMETRY_DISABLED: "1"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-lint:
+    name: Lint, typecheck and workflow JSON validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.2.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Ruff check
+        run: uv run ruff check src tests
+
+      - name: Ruff format check
+        run: uv run ruff format --check src tests
+
+      - name: mypy (strict)
+        run: uv run mypy
+
+      - name: Validate the n8n workflow JSON against the n8n 2.42.7 node catalog
+        run: uv run relay workflows check
+
+  backend-test:
+    name: Unit tests (offline model, no keys)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.2.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Run tests
+        run: uv run pytest --junitxml=report.xml
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: junit-report
+          path: report.xml
+
+  n8n-integration:
+    name: Workflows in a real n8n (docker compose)
+    runs-on: ubuntu-latest
+    needs: [backend-lint]
+    env:
+      RELAY_LLM_PROVIDER: fake
+      RELAY_N8N_URL: http://localhost:5678
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.2.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Start the stack (PostgreSQL, Mailpit, mocks, Relay API, n8n with the workflows imported)
+        run: |
+          docker compose up --build -d
+          for i in $(seq 1 120); do
+            if curl -fsS http://localhost:5678/healthz >/dev/null 2>&1 && curl -fsS http://localhost:8100/health >/dev/null 2>&1; then
+              echo "stack is up after ${i}x2 s"; sleep 5; exit 0
+            fi
+            sleep 2
+          done
+          docker compose ps; docker compose logs --no-color --tail 100; exit 1
+
+      - name: Integration tests through n8n webhooks
+        run: uv run pytest tests/test_integration_n8n.py -v
+
+      - name: Evaluation smoke run through n8n (offline model)
+        run: |
+          uv run relay eval triage invoices faq --limit 12 --name ci --out /tmp/results
+          uv run relay eval idempotency chaos --name ci --out /tmp/results
+
+      - name: Mail through SMTP reaches the triage workflow
+        run: |
+          uv run relay send-email em-025
+          for i in $(seq 1 30); do
+            if curl -fsS -H "X-Relay-Token: relay-local-api-token" "http://localhost:8100/ops/runs?workflow=triage" | grep -q "Where is my order"; then exit 0; fi
+            sleep 1
+          done
+          echo "the SMTP email never reached the triage workflow"; exit 1
+
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --no-color --tail 200
+
+      - name: Upload evaluation smoke results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: eval-smoke
+          path: /tmp/results
+
+  frontend:
+    name: Dashboard lint, typecheck and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+  docker:
+    name: Docker build
+    runs-on: ubuntu-latest
+    needs: [backend-test, frontend]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build Relay image (no push)
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          tags: relay-api:ci
+          cache-from: type=gha,scope=api
+          cache-to: type=gha,mode=max,scope=api
+
+      - name: Build dashboard image (no push)
+        uses: docker/build-push-action@v7
+        with:
+          context: web
+          push: false
+          tags: relay-web:ci
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,mode=max,scope=web
