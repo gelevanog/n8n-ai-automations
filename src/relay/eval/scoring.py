@@ -82,6 +82,11 @@ def gold_tier(lead: dict[str, Any], icp: Icp, hot: int, warm: int) -> str:
 
 
 def fact_hit(answer: str, fact: str) -> bool:
-    """A fact is "a|b|c": any alternative (case-insensitive) in the answer counts."""
-    text = answer.lower().replace(" ", " ").replace(" ", " ")
-    return any(alt.strip().lower() in text for alt in fact.split("|"))
+    """A fact is "a|b|c": any alternative (case-insensitive) in the answer counts. Whitespace is ignored, so
+    "10\u202f%" (a narrow no-break space) matches "10%" and "3mm" matches "3 mm"."""
+
+    def squash(value: str) -> str:
+        return re.sub(r"\s+", "", value.lower().replace("\u2011", "-"))
+
+    text = squash(answer)
+    return any(squash(alt) in text for alt in fact.split("|"))

@@ -52,7 +52,57 @@
         "ok": true,
         "numbers_ok": true,
         "seconds": 4.208,
-        "posted_to_chat": true
+        "posted_to_chat": true,
+        "fresh_items": 1,
+        "latency_fresh_p50_s": 4.21,
+        "latency_fresh_p95_s": 4.21
+      }
+    },
+    "faq_nemotron-super-after-fix": {
+      "suite": "faq",
+      "name": "nemotron-super-after-fix",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T07:23:44+00:00",
+      "summary": {
+        "items": 40,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 0.25,
+        "latency_p95_s": 1.0,
+        "llm_seconds_p50": 0.0,
+        "llm_calls": 32,
+        "llm_calls_per_item": 0.8,
+        "invalid_model_outputs": 0,
+        "provider_errors_retried": 0,
+        "tokens": 31280,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "nvidia/nemotron-3-super-120b-a12b:free": 31,
+          "nvidia/nemotron-3-ultra-550b-a55b:free": 1
+        },
+        "decision_accuracy": 0.95,
+        "auto_replied": 26,
+        "auto_reply_rate": 0.65,
+        "answerable": 28,
+        "answerable_auto_replied": 26,
+        "must_escalate": 12,
+        "must_escalate_escalated": 12,
+        "unsafe_auto_replies": [],
+        "over_escalated": [
+          "faq-04",
+          "faq-12"
+        ],
+        "over_escalation_reasons": {
+          "model": 1,
+          "confidence 0.00 below 0.75": 1,
+          "the answer cites no retrieved article": 1
+        },
+        "auto_replies_with_all_facts": "26/26",
+        "auto_replies_citing_gold_article": "26/26",
+        "fact_misses": [],
+        "retrieval_recall_at_4": 0.9643,
+        "tickets": 40
       }
     },
     "faq_nemotron-super": {
@@ -70,6 +120,7 @@
         "llm_calls": 32,
         "llm_calls_per_item": 0.8,
         "invalid_model_outputs": 0,
+        "provider_errors_retried": 0,
         "tokens": 31280,
         "cost_usd": 0.0,
         "cost_per_item_usd": 0.0,
@@ -96,19 +147,14 @@
           "numbers not in the cited articles": 1,
           "the answer cites no retrieved article": 1
         },
-        "auto_replies_with_all_facts": "24/25",
+        "auto_replies_with_all_facts": "25/25",
         "auto_replies_citing_gold_article": "25/25",
-        "fact_misses": [
-          {
-            "id": "faq-23",
-            "facts": [
-              "15%"
-            ],
-            "answer": "After you approve the proof, you can still cancel the order only if printing has not yet started. If printing hasn't begun, a 15 % cancellation fee applies to cover prepress and material costs. Once printing has started, the order cannot be cancelled."
-          }
-        ],
+        "fact_misses": [],
         "retrieval_recall_at_4": 0.9643,
-        "tickets": 40
+        "tickets": 40,
+        "fresh_items": 32,
+        "latency_fresh_p50_s": 3.89,
+        "latency_fresh_p95_s": 8.31
       }
     },
     "idempotency_fake": {
@@ -287,7 +333,10 @@
           }
         },
         "bills_in_accounting": 27,
-        "double_posted": []
+        "double_posted": [],
+        "fresh_items": 40,
+        "latency_fresh_p50_s": 0.21,
+        "latency_fresh_p95_s": 0.29
       }
     },
     "invoices_nemotron-super": {
@@ -417,7 +466,10 @@
           }
         },
         "bills_in_accounting": 27,
-        "double_posted": []
+        "double_posted": [],
+        "fresh_items": 28,
+        "latency_fresh_p50_s": 8.5,
+        "latency_fresh_p95_s": 15.84
       }
     },
     "leads_nemotron-super": {
@@ -510,7 +562,10 @@
           }
         ],
         "crm_records": 30,
-        "replies_sent_after_approval": 25
+        "replies_sent_after_approval": 25,
+        "fresh_items": 28,
+        "latency_fresh_p50_s": 20.02,
+        "latency_fresh_p95_s": 30.94
       }
     },
     "triage_fake": {
@@ -802,7 +857,10 @@
           "confidence 0.79": 2,
           "an invoice without an attachment, a number or an amount": 1,
           "the email contains text addressed to an AI system": 1
-        }
+        },
+        "fresh_items": 80,
+        "latency_fresh_p50_s": 0.22,
+        "latency_fresh_p95_s": 0.45
       }
     },
     "triage_nemotron-super": {
@@ -970,182 +1028,249 @@
         "review_reasons": {
           "category 'other' always goes to a person": 9,
           "the email contains text addressed to an AI system": 1
-        }
+        },
+        "fresh_items": 76,
+        "latency_fresh_p50_s": 13.46,
+        "latency_fresh_p95_s": 29.34
       }
     }
   },
   "headline": [
     {
       "suite": "faq",
+      "run": "nemotron-super-after-fix",
+      "key": "decision_accuracy",
+      "metric": "auto-reply / escalate accuracy",
+      "value": 0.95
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super-after-fix",
+      "key": "auto_reply_rate",
+      "metric": "auto-replied",
+      "value": 0.65
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super-after-fix",
+      "key": "unsafe_auto_replies",
+      "metric": "unsafe auto-replies",
+      "value": 0
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super-after-fix",
+      "key": "auto_replies_with_all_facts",
+      "metric": "auto-replies with all facts",
+      "value": "26/26"
+    },
+    {
+      "suite": "faq",
+      "run": "nemotron-super-after-fix",
+      "key": "latency_p50_s",
+      "metric": "latency p50 (s)",
+      "value": 0.25
+    },
+    {
+      "suite": "faq",
       "run": "nemotron-super",
+      "key": "decision_accuracy",
       "metric": "auto-reply / escalate accuracy",
       "value": 0.925
     },
     {
       "suite": "faq",
       "run": "nemotron-super",
+      "key": "auto_reply_rate",
       "metric": "auto-replied",
       "value": 0.625
     },
     {
       "suite": "faq",
       "run": "nemotron-super",
+      "key": "unsafe_auto_replies",
       "metric": "unsafe auto-replies",
       "value": 0
     },
     {
       "suite": "faq",
       "run": "nemotron-super",
+      "key": "auto_replies_with_all_facts",
       "metric": "auto-replies with all facts",
-      "value": "24/25"
+      "value": "25/25"
     },
     {
       "suite": "faq",
       "run": "nemotron-super",
+      "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 3.34
     },
     {
       "suite": "invoices",
       "run": "fake",
+      "key": "field_accuracy",
       "metric": "field extraction accuracy",
       "value": 1.0
     },
     {
       "suite": "invoices",
       "run": "fake",
+      "key": "decision_accuracy",
       "metric": "post / review decision accuracy",
       "value": 1.0
     },
     {
       "suite": "invoices",
       "run": "fake",
+      "key": "problem_invoices_auto_posted",
       "metric": "problem invoices auto-posted",
       "value": 0
     },
     {
       "suite": "invoices",
       "run": "fake",
+      "key": "auto_post_rate",
       "metric": "auto-posted",
       "value": 0.675
     },
     {
       "suite": "invoices",
       "run": "fake",
+      "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 0.21
     },
     {
       "suite": "invoices",
       "run": "nemotron-super",
+      "key": "field_accuracy",
       "metric": "field extraction accuracy",
       "value": 1.0
     },
     {
       "suite": "invoices",
       "run": "nemotron-super",
+      "key": "decision_accuracy",
       "metric": "post / review decision accuracy",
       "value": 1.0
     },
     {
       "suite": "invoices",
       "run": "nemotron-super",
+      "key": "problem_invoices_auto_posted",
       "metric": "problem invoices auto-posted",
       "value": 0
     },
     {
       "suite": "invoices",
       "run": "nemotron-super",
+      "key": "auto_post_rate",
       "metric": "auto-posted",
       "value": 0.675
     },
     {
       "suite": "invoices",
       "run": "nemotron-super",
+      "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 6.14
     },
     {
       "suite": "leads",
       "run": "nemotron-super",
+      "key": "profile_accuracy",
       "metric": "enrichment accuracy",
       "value": 0.9821
     },
     {
       "suite": "leads",
       "run": "nemotron-super",
+      "key": "tier_accuracy",
       "metric": "tier accuracy",
       "value": 1.0
     },
     {
       "suite": "leads",
       "run": "nemotron-super",
+      "key": "drafts_passing_checks",
       "metric": "drafts passing checks",
       "value": 25
     },
     {
       "suite": "leads",
       "run": "nemotron-super",
+      "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 19.93
     },
     {
       "suite": "triage",
       "run": "fake",
+      "key": "category_accuracy",
       "metric": "routing accuracy (all emails)",
       "value": 0.9125
     },
     {
       "suite": "triage",
       "run": "fake",
+      "key": "auto_handled_rate",
       "metric": "auto-handled",
       "value": 0.6
     },
     {
       "suite": "triage",
       "run": "fake",
+      "key": "auto_handled_accuracy",
       "metric": "accuracy of auto-handled",
       "value": 1.0
     },
     {
       "suite": "triage",
       "run": "fake",
+      "key": "field_accuracy",
       "metric": "field extraction accuracy",
       "value": 0.6796
     },
     {
       "suite": "triage",
       "run": "fake",
+      "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 0.22
     },
     {
       "suite": "triage",
       "run": "nemotron-super",
+      "key": "category_accuracy",
       "metric": "routing accuracy (all emails)",
       "value": 0.9625
     },
     {
       "suite": "triage",
       "run": "nemotron-super",
+      "key": "auto_handled_rate",
       "metric": "auto-handled",
       "value": 0.8875
     },
     {
       "suite": "triage",
       "run": "nemotron-super",
+      "key": "auto_handled_accuracy",
       "metric": "accuracy of auto-handled",
       "value": 0.9859
     },
     {
       "suite": "triage",
       "run": "nemotron-super",
+      "key": "field_accuracy",
       "metric": "field extraction accuracy",
       "value": 0.9681
     },
     {
       "suite": "triage",
       "run": "nemotron-super",
+      "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 13.12
     }

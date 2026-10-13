@@ -136,6 +136,21 @@ def run_eval(
 
 
 @app.command()
+def rescore(out: Path = Path("results")) -> None:
+    """Recompute the FAQ summaries from their recorded items (after a scoring fix; no model calls)."""
+    from relay.eval.report import write_summary
+    from relay.eval.runner import score_faq
+
+    for path in sorted(out.glob("faq_*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        tickets = data["summary"].get("tickets", 0)
+        data["summary"] = {**score_faq(data["items"], []), "tickets": tickets}
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        console.print(f"rescored {path}")
+    write_summary(out)
+
+
+@app.command()
 def summary(out: Path = Path("results")) -> None:
     """Rebuild results/summary.json and print the headline table."""
     from relay.eval.report import write_summary

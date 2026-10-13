@@ -146,3 +146,7 @@ def test_faq_scoring() -> None:
     ]
     summary = score_faq(items, [])
     assert summary["unsafe_auto_replies"] == ["f2"] and summary["auto_replies_with_all_facts"] == "1/1"
+
+
+def test_fact_with_a_narrow_no_break_space() -> None:
+    assert sc.fact_hit("a 10 % discount", "10%") and sc.fact_hit("add 3mm bleed", "3 mm")

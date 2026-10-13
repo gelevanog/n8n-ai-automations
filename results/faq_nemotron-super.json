@@ -15,6 +15,7 @@
     "llm_calls": 32,
     "llm_calls_per_item": 0.8,
     "invalid_model_outputs": 0,
+    "provider_errors_retried": 0,
     "tokens": 31280,
     "cost_usd": 0.0,
     "cost_per_item_usd": 0.0,
@@ -41,17 +42,9 @@
       "numbers not in the cited articles": 1,
       "the answer cites no retrieved article": 1
     },
-    "auto_replies_with_all_facts": "24/25",
+    "auto_replies_with_all_facts": "25/25",
     "auto_replies_citing_gold_article": "25/25",
-    "fact_misses": [
-      {
-        "id": "faq-23",
-        "facts": [
-          "15%"
-        ],
-        "answer": "After you approve the proof, you can still cancel the order only if printing has not yet started. If printing hasn't begun, a 15 % cancellation fee applies to cover prepress and material costs. Once printing has started, the order cannot be cancelled."
-      }
-    ],
+    "fact_misses": [],
     "retrieval_recall_at_4": 0.9643,
     "tickets": 40
   },
