@@ -9,11 +9,12 @@ from pathlib import Path
 
 import yaml
 
-from relay.synthetic import emails, invoices, leads
+from relay.synthetic import emails, invoices, invoices_hard, leads
 
 
 def test_regenerating_gives_the_committed_files(tmp_path: Path) -> None:
     invoices.write_dataset(tmp_path / "invoices")
+    invoices_hard.write_dataset(tmp_path / "invoices_hard")
     emails.write_dataset(tmp_path / "emails")
     leads.write_dataset(tmp_path / "leads")
     for relative in (

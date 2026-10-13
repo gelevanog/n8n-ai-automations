@@ -23,6 +23,11 @@ HEADLINE: dict[str, list[tuple[str, str]]] = {
         ("auto_post_rate", "auto-posted"),
         ("latency_p50_s", "latency p50 (s)"),
     ],
+    "invoices_hard": [
+        ("field_accuracy", "field extraction accuracy"),
+        ("decision_accuracy", "post / review decision accuracy"),
+        ("problem_invoices_auto_posted", "problem invoices auto-posted"),
+    ],
     "leads": [
         ("profile_accuracy", "enrichment accuracy"),
         ("tier_accuracy", "tier accuracy"),

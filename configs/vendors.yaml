@@ -7,3 +7,7 @@ vendors:
   - {name: "Cloudforge Software Inc.", domains: [cloudforge.example], vat_id: null}
   - {name: "Hollandse Energie B.V.", domains: [hollandse-energie.example], vat_id: NL856223101B01}
   - {name: "Atelier Groen V.O.F.", domains: [ateliergroen.example], vat_id: NL003117890B44}
+  - {name: "Papierhaus Nord GmbH", domains: [papierhaus-nord.example], vat_id: DE811907345}
+  - {name: "Lumen Facilities B.V.", domains: [lumen-facilities.example], vat_id: NL862004517B01}
+  - {name: "Brightwave Studio Ltd", domains: [brightwave-studio.example], vat_id: GB287441902}
+  - {name: "Rotterdam Freight Partners B.V.", domains: [rotterdam-freight.example], vat_id: NL859331220B01}

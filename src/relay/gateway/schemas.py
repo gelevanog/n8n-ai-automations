@@ -155,7 +155,31 @@ class InvoiceLine(Strict):
     amount: float | None = None
 
 
+class VatLine(Strict):
+    rate: float = Field(ge=0, le=1, description="fraction, 0.09 for 9%")
+    base: float
+    amount: float
+
+    @field_validator("rate", mode="before")
+    @classmethod
+    def _fraction(cls, value: object) -> object:
+        return _as_fraction(value)
+
+
+def _as_fraction(value: object) -> object:
+    """21 or "21%" -> 0.21 (models often answer in percent)."""
+    if isinstance(value, str):
+        value = value.strip().rstrip("%").strip() or None
+        if value is None:
+            return None
+        value = float(value)
+    if isinstance(value, int | float) and value > 1:
+        return round(float(value) / 100, 4)
+    return value
+
+
 class InvoiceOutput(Strict):
+    document_type: Literal["invoice", "credit_note", "statement", "reminder", "other"] = "invoice"
     vendor: str | None = None
     vendor_vat_id: str | None = None
     invoice_number: str | None = None
@@ -166,21 +190,16 @@ class InvoiceOutput(Strict):
     vat_rate: float | None = Field(default=None, ge=0, le=1, description="fraction, 0.21 for 21%")
     vat_amount: float | None = None
     total: float | None = None
+    vat_breakdown: list[VatLine] = Field(default_factory=list)
+    amount_paid: float | None = None
+    balance_due: float | None = None
     lines: list[InvoiceLine] = Field(default_factory=list)
     confidence: float = Field(default=0.5, ge=0, le=1)
 
     @field_validator("vat_rate", mode="before")
     @classmethod
     def _fraction(cls, value: object) -> object:
-        """21 or "21%" -> 0.21 (models often answer in percent)."""
-        if isinstance(value, str):
-            value = value.strip().rstrip("%").strip() or None
-            if value is None:
-                return None
-            value = float(value)
-        if isinstance(value, int | float) and value > 1:
-            return round(float(value) / 100, 4)
-        return value
+        return _as_fraction(value)
 
 
 class InvoiceResponse(Strict):

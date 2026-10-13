@@ -109,3 +109,42 @@ def test_rules_model_reads_all_four_layouts(gateway: Gateway) -> None:
         result = gateway.extract_invoice(InvoiceRequest(text=text_of(gold["id"]), filename=gold["id"]))
         assert result.invoice.total == gold["total"]
         assert result.invoice.invoice_number == gold["invoice_number"]
+
+
+HARD = [json.loads(line) for line in Path("data/invoices_hard/gold.jsonl").read_text(encoding="utf-8").splitlines()]
+
+
+def hard_text(invoice_id: str) -> str:
+    return "\n".join(p.extract_text() for p in PdfReader(f"data/invoices_hard/pdf/{invoice_id}.pdf").pages)
+
+
+@pytest.mark.parametrize("gold", HARD, ids=[g["id"] for g in HARD])
+def test_hard_set_checks_on_perfect_extraction(gold: dict[str, Any]) -> None:
+    output = InvoiceOutput.model_validate(
+        {
+            "document_type": "credit_note" if gold["style"] == "C" else "invoice",
+            **{
+                k: gold[k]
+                for k in (
+                    "vendor",
+                    "invoice_number",
+                    "issue_date",
+                    "due_date",
+                    "currency",
+                    "subtotal",
+                    "vat_rate",
+                    "vat_amount",
+                    "total",
+                    "vat_breakdown",
+                    "amount_paid",
+                )
+            },
+            "vendor_vat_id": gold["printed_vat_id"],
+            "lines": gold["lines"],
+            "confidence": 0.95,
+        }
+    )
+    result = check_invoice(output, hard_text(gold["id"]), SETTINGS, VENDORS)
+    assert result.decision == gold["expected_decision"], result.issues
+    for issue in gold["issues"]:
+        assert issue in result.issues

@@ -32,7 +32,7 @@ from relay.synthetic.emails import build_emails, email_payload
 
 log = get_logger(__name__)
 
-SUITES = ("triage", "invoices", "leads", "faq", "digest", "idempotency", "chaos")
+SUITES = ("triage", "invoices", "invoices_hard", "leads", "faq", "digest", "idempotency", "chaos")
 
 
 @dataclass
@@ -193,9 +193,12 @@ class Harness:
 
     # ------------------------------------------------------------------------------------ invoices
 
-    def invoices(self, limit: int | None = None) -> dict[str, Any]:
+    def invoices_hard(self, limit: int | None = None) -> dict[str, Any]:
+        return self.invoices(limit, dataset="invoices_hard")
+
+    def invoices(self, limit: int | None = None, dataset: str = "invoices") -> dict[str, Any]:
         self.reset()
-        gold = [json.loads(line) for line in (self.data_dir / "invoices" / "gold.jsonl").open(encoding="utf-8")]
+        gold = [json.loads(line) for line in (self.data_dir / dataset / "gold.jsonl").open(encoding="utf-8")]
         gold = gold[:limit] if limit else gold
         items = []
         for invoice in gold:
@@ -264,7 +267,7 @@ class Harness:
                 issues=items[-1]["issues"],
             )
         bills = self.mocks("GET", "/accounting/bills")
-        return {"suite": "invoices", "items": items, "summary": score_invoices(items, bills)}
+        return {"suite": dataset, "items": items, "summary": score_invoices(items, bills)}
 
     # ------------------------------------------------------------------------------------ leads
 

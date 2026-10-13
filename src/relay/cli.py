@@ -49,9 +49,10 @@ def mocks(host: str = "127.0.0.1", port: int = 8200) -> None:
 @app.command()
 def synth(data_dir: Path = Path("data")) -> None:
     """Regenerate the synthetic datasets (deterministic: the committed files are the output of this)."""
-    from relay.synthetic import emails, invoices, leads
+    from relay.synthetic import emails, invoices, invoices_hard, leads
 
     invoices.write_dataset(data_dir / "invoices")
+    invoices_hard.write_dataset(data_dir / "invoices_hard")
     emails.write_dataset(data_dir / "emails")
     leads.write_dataset(data_dir / "leads")
     console.print(f"[green]datasets written to {data_dir}[/green]")

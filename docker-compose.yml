@@ -105,7 +105,7 @@ services:
       RELAY_MOCKS_URL: http://mocks:8200
       RELAY_MAILPIT_URL: http://mailpit:8025
       RELAY_SITES_BASE_URL: http://mocks:8200/sites
-      RELAY_CORS_ORIGINS: http://localhost:${WEB_PORT:-3000}
+      RELAY_CORS_ORIGINS: http://localhost:${WEB_PORT:-3000},http://127.0.0.1:${WEB_PORT:-3000}
     volumes:
       - llmcache:/home/app/.cache
       - ./results:/app/results
