@@ -1,7 +1,7 @@
 {
-  "name": "fake",
+  "name": "offline",
   "suite": "triage",
-  "run_at": "2026-10-13T05:02:14+00:00",
+  "run_at": "2026-10-13T07:25:04+00:00",
   "model": "fake/rules",
   "free_only": true,
   "transport": "n8n webhooks",
@@ -10,11 +10,12 @@
     "errors": 0,
     "error_rate": 0.0,
     "latency_p50_s": 0.22,
-    "latency_p95_s": 0.45,
+    "latency_p95_s": 0.77,
     "llm_seconds_p50": 0.0,
     "llm_calls": 80,
     "llm_calls_per_item": 1.0,
     "invalid_model_outputs": 0,
+    "provider_errors_retried": 0,
     "tokens": 40837,
     "cost_usd": 0.0,
     "cost_per_item_usd": 0.0,
@@ -74,14 +75,9 @@
     "fields": {
       "name": {
         "scored": 41,
-        "correct": 39,
-        "accuracy": 0.9512,
+        "correct": 40,
+        "accuracy": 0.9756,
         "misses": [
-          {
-            "id": "em-020",
-            "got": "Elif Yilmaz",
-            "gold": "Elif Yılmaz"
-          },
           {
             "id": "em-077",
             "got": "Student Research",
@@ -214,66 +210,19 @@
         ]
       },
       "invoice_number": {
-        "scored": 13,
+        "scored": 12,
         "correct": 12,
-        "accuracy": 0.9231,
-        "misses": [
-          {
-            "id": "em-050",
-            "got": null,
-            "gold": "AG2026-03413"
-          }
-        ]
+        "accuracy": 1.0,
+        "misses": []
       },
       "amount": {
-        "scored": 14,
+        "scored": 4,
         "correct": 4,
-        "accuracy": 0.2857,
-        "misses": [
-          {
-            "id": "em-045",
-            "got": null,
-            "gold": 577.86
-          },
-          {
-            "id": "em-046",
-            "got": null,
-            "gold": 2205.18
-          },
-          {
-            "id": "em-048",
-            "got": null,
-            "gold": 1091.0
-          },
-          {
-            "id": "em-049",
-            "got": null,
-            "gold": 242.0
-          },
-          {
-            "id": "em-050",
-            "got": null,
-            "gold": 1187.45
-          },
-          {
-            "id": "em-051",
-            "got": null,
-            "gold": 3280.58
-          },
-          {
-            "id": "em-052",
-            "got": null,
-            "gold": 892.4
-          },
-          {
-            "id": "em-054",
-            "got": null,
-            "gold": 1370.2
-          }
-        ]
+        "accuracy": 1.0,
+        "misses": []
       }
     },
-    "field_accuracy": 0.6796,
+    "field_accuracy": 0.7294,
     "downstream_records": {
       "crm": 13,
       "helpdesk": 16,
@@ -320,17 +269,18 @@
         "product": "mailer_boxes",
         "quantity": 1500
       },
-      "seconds": 0.542,
-      "run_id": "7d9baa6d6fc7",
+      "seconds": 0.296,
+      "run_id": "332bde1f13e2",
       "llm_calls": 1,
       "llm_attempts": 1,
-      "llm_ms": 4,
+      "llm_ms": 2,
       "tokens": 564,
       "cost_usd": 0.0,
       "models": [
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -361,8 +311,8 @@
         "product": "folding_cartons",
         "quantity": 5000
       },
-      "seconds": 0.249,
-      "run_id": "99a657ac21ea",
+      "seconds": 0.267,
+      "run_id": "9de5197a2e49",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -372,6 +322,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -402,8 +353,8 @@
         "product": "mailer_boxes",
         "quantity": 2000
       },
-      "seconds": 0.257,
-      "run_id": "54ccf83d347b",
+      "seconds": 0.246,
+      "run_id": "4bc9ec281485",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -413,6 +364,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -443,17 +395,18 @@
         "product": "paper_bags",
         "quantity": 3000
       },
-      "seconds": 0.265,
-      "run_id": "86a7f66fe2c0",
+      "seconds": 0.247,
+      "run_id": "b80aa71ba71b",
       "llm_calls": 1,
       "llm_attempts": 1,
-      "llm_ms": 1,
+      "llm_ms": 0,
       "tokens": 525,
       "cost_usd": 0.0,
       "models": [
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -484,8 +437,8 @@
         "product": "mailer_boxes",
         "quantity": 4000
       },
-      "seconds": 0.326,
-      "run_id": "bde7fdabbe4f",
+      "seconds": 0.254,
+      "run_id": "6f180b80f416",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -495,6 +448,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -527,8 +481,8 @@
         "product": "mailer_boxes",
         "quantity": null
       },
-      "seconds": 0.309,
-      "run_id": "389c426d89fd",
+      "seconds": 0.215,
+      "run_id": "d42f00f343fd",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -538,6 +492,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -568,8 +523,8 @@
         "product": null,
         "quantity": null
       },
-      "seconds": 0.218,
-      "run_id": "b6477757e35b",
+      "seconds": 0.264,
+      "run_id": "36c09606ad73",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -579,6 +534,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -609,8 +565,8 @@
         "product": "tissue_paper",
         "quantity": 2000
       },
-      "seconds": 0.219,
-      "run_id": "cf169695da9d",
+      "seconds": 0.248,
+      "run_id": "b220764d34e5",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -620,6 +576,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -652,8 +609,8 @@
         "product": "folding_cartons",
         "quantity": 8000
       },
-      "seconds": 0.152,
-      "run_id": "07170d205878",
+      "seconds": 0.231,
+      "run_id": "1107028122a5",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -663,6 +620,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -693,8 +651,8 @@
         "product": "labels",
         "quantity": 20000
       },
-      "seconds": 0.237,
-      "run_id": "a8422cdb5a4f",
+      "seconds": 0.269,
+      "run_id": "f961c9dcee7b",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -704,6 +662,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -737,8 +696,8 @@
         "product": "mailer_boxes",
         "quantity": 1200
       },
-      "seconds": 0.173,
-      "run_id": "c442580caa40",
+      "seconds": 0.345,
+      "run_id": "0fe30a2a7410",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -748,6 +707,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -780,8 +740,8 @@
         "product": "folding_cartons",
         "quantity": 600
       },
-      "seconds": 0.223,
-      "run_id": "59ec4f0e136e",
+      "seconds": 1.332,
+      "run_id": "333a4fde390c",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -791,6 +751,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -821,8 +782,8 @@
         "product": "mailer_boxes",
         "quantity": 3000
       },
-      "seconds": 0.288,
-      "run_id": "8ff967155227",
+      "seconds": 0.275,
+      "run_id": "3dc8782c8d88",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -832,6 +793,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -862,8 +824,8 @@
         "product": "paper_bags",
         "quantity": 2500
       },
-      "seconds": 0.277,
-      "run_id": "b59ea609b0cd",
+      "seconds": 0.211,
+      "run_id": "c191ff711880",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -873,6 +835,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -905,8 +868,8 @@
         "product": "mailer_boxes",
         "quantity": 300
       },
-      "seconds": 0.276,
-      "run_id": "2aea55e10e72",
+      "seconds": 0.185,
+      "run_id": "7f826ab1848d",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -916,6 +879,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -948,8 +912,8 @@
         "product": "folding_cartons",
         "quantity": 12000
       },
-      "seconds": 0.308,
-      "run_id": "f296ac5ee4d1",
+      "seconds": 0.191,
+      "run_id": "cbb64191f800",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -959,6 +923,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -991,17 +956,18 @@
         "product": "labels",
         "quantity": 5000
       },
-      "seconds": 0.279,
-      "run_id": "29338ce2c4f3",
+      "seconds": 0.187,
+      "run_id": "4e4830ce8ac0",
       "llm_calls": 1,
       "llm_attempts": 1,
-      "llm_ms": 1,
+      "llm_ms": 0,
       "tokens": 518,
       "cost_usd": 0.0,
       "models": [
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1034,8 +1000,8 @@
         "product": "folding_cartons",
         "quantity": 4000
       },
-      "seconds": 0.273,
-      "run_id": "9d696f877c9d",
+      "seconds": 0.217,
+      "run_id": "2b7a4fc92346",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1045,6 +1011,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1077,8 +1044,8 @@
         "product": "labels",
         "quantity": 2000
       },
-      "seconds": 0.246,
-      "run_id": "b8f4afbe0881",
+      "seconds": 0.185,
+      "run_id": "c6d58286153c",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1088,6 +1055,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1120,8 +1088,8 @@
         "product": "other",
         "quantity": 10000
       },
-      "seconds": 0.313,
-      "run_id": "b8f0f286aedc",
+      "seconds": 0.186,
+      "run_id": "07165f07d86c",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1131,6 +1099,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1164,8 +1133,8 @@
         "product": "mailer_boxes",
         "quantity": 500
       },
-      "seconds": 0.244,
-      "run_id": "d1baca145e9b",
+      "seconds": 0.194,
+      "run_id": "75c3842d8550",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1175,6 +1144,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1205,8 +1175,8 @@
         "product": "mailer_boxes",
         "quantity": 1000
       },
-      "seconds": 0.268,
-      "run_id": "e1c3693ff8b0",
+      "seconds": 0.22,
+      "run_id": "0e8a0fd0547e",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1216,6 +1186,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1246,8 +1217,8 @@
         "product": "paper_bags",
         "quantity": 6000
       },
-      "seconds": 0.245,
-      "run_id": "0010d1048449",
+      "seconds": 0.218,
+      "run_id": "3e90a299b3e3",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1257,6 +1228,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1287,8 +1259,8 @@
         "product": "paper_bags",
         "quantity": null
       },
-      "seconds": 0.177,
-      "run_id": "03760fa36f05",
+      "seconds": 0.204,
+      "run_id": "a700ef5859f6",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1298,6 +1270,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1328,17 +1301,18 @@
         "order_id": "KP-47715",
         "issue": "shipping"
       },
-      "seconds": 0.208,
-      "run_id": "c55096ddd56a",
+      "seconds": 0.194,
+      "run_id": "5810f04d0563",
       "llm_calls": 1,
       "llm_attempts": 1,
-      "llm_ms": 0,
+      "llm_ms": 1,
       "tokens": 503,
       "cost_usd": 0.0,
       "models": [
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1369,8 +1343,8 @@
         "order_id": "KP-48102",
         "issue": "damage"
       },
-      "seconds": 0.165,
-      "run_id": "bdc62dbc93ec",
+      "seconds": 0.193,
+      "run_id": "8d6b63d17cac",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1380,6 +1354,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1413,8 +1388,8 @@
         "order_id": null,
         "issue": "artwork"
       },
-      "seconds": 0.151,
-      "run_id": "afafffe9383e",
+      "seconds": 0.204,
+      "run_id": "328d865e2de9",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1424,6 +1399,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1456,8 +1432,8 @@
         "order_id": "KP-46780",
         "issue": "billing"
       },
-      "seconds": 0.176,
-      "run_id": "1d3e65cd8307",
+      "seconds": 0.315,
+      "run_id": "a67f34b17da7",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1467,6 +1443,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1497,8 +1474,8 @@
         "order_id": null,
         "issue": "account"
       },
-      "seconds": 0.196,
-      "run_id": "183ce8f35fc8",
+      "seconds": 0.357,
+      "run_id": "b8a314847bdf",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1508,6 +1485,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1538,8 +1516,8 @@
         "order_id": "KP-48333",
         "issue": "order_change"
       },
-      "seconds": 0.17,
-      "run_id": "30bc17ff26f5",
+      "seconds": 0.962,
+      "run_id": "24201ca78f5d",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1549,6 +1527,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1579,8 +1558,8 @@
         "order_id": "KP-47201",
         "issue": "quality"
       },
-      "seconds": 0.215,
-      "run_id": "48ae60c33d39",
+      "seconds": 0.213,
+      "run_id": "273a7781c3db",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1590,6 +1569,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1620,8 +1600,8 @@
         "order_id": "KP-48410",
         "issue": "artwork"
       },
-      "seconds": 0.218,
-      "run_id": "203291c8ef2f",
+      "seconds": 0.203,
+      "run_id": "e62382544ecc",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1631,6 +1611,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1661,8 +1642,8 @@
         "order_id": "KP-47950",
         "issue": "damage"
       },
-      "seconds": 0.249,
-      "run_id": "17e9b015a395",
+      "seconds": 0.213,
+      "run_id": "032fa3f36b3e",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1672,6 +1653,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1702,8 +1684,8 @@
         "order_id": "KP-48501",
         "issue": "order_change"
       },
-      "seconds": 0.223,
-      "run_id": "be8317be6089",
+      "seconds": 0.209,
+      "run_id": "eb562dce304a",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1713,6 +1695,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1745,8 +1728,8 @@
         "order_id": "KP-45992",
         "issue": "billing"
       },
-      "seconds": 0.241,
-      "run_id": "3b19e5240ba9",
+      "seconds": 0.211,
+      "run_id": "f3809f5a9dae",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1756,6 +1739,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1786,8 +1770,8 @@
         "order_id": "KP-48288",
         "issue": "shipping"
       },
-      "seconds": 0.212,
-      "run_id": "96d41c004e44",
+      "seconds": 0.235,
+      "run_id": "af6cbedb2d0b",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1797,6 +1781,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1831,17 +1816,18 @@
         "order_id": null,
         "issue": "account"
       },
-      "seconds": 0.201,
-      "run_id": "2c5962d14be2",
+      "seconds": 0.23,
+      "run_id": "bd31f343cb9d",
       "llm_calls": 1,
       "llm_attempts": 1,
-      "llm_ms": 0,
+      "llm_ms": 1,
       "tokens": 509,
       "cost_usd": 0.0,
       "models": [
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1872,8 +1858,8 @@
         "order_id": "KP-48120",
         "issue": "shipping"
       },
-      "seconds": 0.147,
-      "run_id": "83fed6da347a",
+      "seconds": 0.322,
+      "run_id": "acd24a8b5849",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1883,6 +1869,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1913,8 +1900,8 @@
         "order_id": "KP-47833",
         "issue": "quality"
       },
-      "seconds": 0.178,
-      "run_id": "7a9af3c74251",
+      "seconds": 0.327,
+      "run_id": "0ff832dc1a8b",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1924,6 +1911,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1954,8 +1942,8 @@
         "order_id": "KP-48455",
         "issue": "billing"
       },
-      "seconds": 0.173,
-      "run_id": "7447196d23c8",
+      "seconds": 0.314,
+      "run_id": "06840ebdfd2a",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -1965,6 +1953,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -1995,8 +1984,8 @@
         "order_id": "KP-48490",
         "issue": "artwork"
       },
-      "seconds": 0.185,
-      "run_id": "46104080b1ad",
+      "seconds": 0.225,
+      "run_id": "5108ac1b23cf",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2006,6 +1995,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2036,8 +2026,8 @@
         "order_id": "KP-48010",
         "issue": "damage"
       },
-      "seconds": 0.179,
-      "run_id": "10643cc416ce",
+      "seconds": 0.198,
+      "run_id": "15ee8fc22fa4",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2047,6 +2037,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2077,8 +2068,8 @@
         "order_id": "KP-48177",
         "issue": "damage"
       },
-      "seconds": 0.168,
-      "run_id": "a514c864692f",
+      "seconds": 0.206,
+      "run_id": "5938d0fd6f82",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2088,6 +2079,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2118,8 +2110,8 @@
         "order_id": null,
         "issue": "other"
       },
-      "seconds": 0.129,
-      "run_id": "64e1a57f72e1",
+      "seconds": 0.197,
+      "run_id": "8f23b4b59530",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2129,6 +2121,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2156,11 +2149,11 @@
       "gold_fields": {
         "company": "Inkwell Supplies GmbH",
         "invoice_number": "RE-2026-03295",
-        "amount": 577.86,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.81,
-      "run_id": "29865eb9f400",
+      "seconds": 0.497,
+      "run_id": "4a9ee06b4341",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2170,6 +2163,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2197,11 +2191,11 @@
       "gold_fields": {
         "company": "Inkwell Supplies GmbH",
         "invoice_number": "RE-2026-03296",
-        "amount": 2205.18,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.445,
-      "run_id": "5b2ef237a48d",
+      "seconds": 0.766,
+      "run_id": "af8395c98def",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2211,6 +2205,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2241,8 +2236,8 @@
         "amount": 852.54,
         "currency": "GBP"
       },
-      "seconds": 0.449,
-      "run_id": "e6b7bb549136",
+      "seconds": 0.678,
+      "run_id": "be7d24b4c254",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2252,6 +2247,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2279,11 +2275,11 @@
       "gold_fields": {
         "company": "Cloudforge Software Inc.",
         "invoice_number": "CF-2026-02855",
-        "amount": 1091.0,
+        "amount": null,
         "currency": "USD"
       },
-      "seconds": 0.365,
-      "run_id": "edef03786fec",
+      "seconds": 0.427,
+      "run_id": "9d6b6c68f5b5",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2293,6 +2289,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2320,11 +2317,11 @@
       "gold_fields": {
         "company": "Hollandse Energie B.V.",
         "invoice_number": "HE-2026-03085",
-        "amount": 242.0,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.368,
-      "run_id": "21623e4b6693",
+      "seconds": 0.477,
+      "run_id": "4e3b6c7f17af",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2334,6 +2331,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2360,12 +2358,12 @@
       },
       "gold_fields": {
         "company": "Atelier Groen V.O.F.",
-        "invoice_number": "AG2026-03413",
-        "amount": 1187.45,
+        "invoice_number": null,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.365,
-      "run_id": "aa32bdfa19bd",
+      "seconds": 0.472,
+      "run_id": "a02750231cdf",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2375,6 +2373,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2402,11 +2401,11 @@
       "gold_fields": {
         "company": "Veldhoven Paper B.V.",
         "invoice_number": "VP-2026-02857",
-        "amount": 3280.58,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.396,
-      "run_id": "b71c78edead7",
+      "seconds": 0.433,
+      "run_id": "31f22a1efb49",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2416,6 +2415,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2443,11 +2443,11 @@
       "gold_fields": {
         "company": "Swiftline Logistics Ltd",
         "invoice_number": "SL2026-02912",
-        "amount": 892.4,
+        "amount": null,
         "currency": "GBP"
       },
-      "seconds": 0.334,
-      "run_id": "ab4a839999d9",
+      "seconds": 0.446,
+      "run_id": "c2d823007d95",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2457,6 +2457,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2487,8 +2488,8 @@
         "amount": 145.0,
         "currency": "USD"
       },
-      "seconds": 0.452,
-      "run_id": "162c7db0f355",
+      "seconds": 0.441,
+      "run_id": "b8cbfab3a2d7",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2498,6 +2499,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2525,11 +2527,11 @@
       "gold_fields": {
         "company": "Hollandse Energie B.V.",
         "invoice_number": "HE-2026-03086",
-        "amount": 1370.2,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.322,
-      "run_id": "88bad81fc85d",
+      "seconds": 0.465,
+      "run_id": "38781d91b368",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2539,6 +2541,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2569,8 +2572,8 @@
         "amount": 1946.2,
         "currency": "EUR"
       },
-      "seconds": 0.174,
-      "run_id": "bc852c8f508f",
+      "seconds": 0.225,
+      "run_id": "4c666b7d2a82",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2580,6 +2583,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2607,11 +2611,11 @@
       "gold_fields": {
         "company": "Atelier Groen V.O.F.",
         "invoice_number": "AG2026-03416",
-        "amount": 248.17,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.506,
-      "run_id": "5b23d7f5ed57",
+      "seconds": 0.532,
+      "run_id": "bef116cb4e7d",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2621,6 +2625,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2651,8 +2656,8 @@
         "amount": 2783.04,
         "currency": "EUR"
       },
-      "seconds": 0.238,
-      "run_id": "ed82ffe268d8",
+      "seconds": 0.395,
+      "run_id": "4c7dc4da311b",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2662,6 +2667,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2689,11 +2695,11 @@
       "gold_fields": {
         "company": "Veldhoven Paper B.V.",
         "invoice_number": "VP-2026-02864",
-        "amount": 3805.81,
+        "amount": null,
         "currency": "EUR"
       },
-      "seconds": 0.5,
-      "run_id": "4816566487db",
+      "seconds": 1.637,
+      "run_id": "79b83cf884f8",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2703,6 +2709,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2730,8 +2737,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.196,
-      "run_id": "add90e761d4a",
+      "seconds": 0.187,
+      "run_id": "235d66ec336f",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2741,6 +2748,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2766,8 +2774,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.177,
-      "run_id": "09b84ca35def",
+      "seconds": 0.201,
+      "run_id": "217bcca781cf",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2777,6 +2785,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2805,8 +2814,8 @@
         "amount": 4850
       },
       "gold_fields": {},
-      "seconds": 0.151,
-      "run_id": "9fceb075aa3d",
+      "seconds": 0.191,
+      "run_id": "7ce28322589e",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2816,6 +2825,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2843,8 +2853,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.117,
-      "run_id": "450d5a505a90",
+      "seconds": 0.199,
+      "run_id": "977f8471ed7a",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2854,6 +2864,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2879,8 +2890,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.158,
-      "run_id": "44244719823e",
+      "seconds": 0.197,
+      "run_id": "a7d5ca9ad0ba",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2890,6 +2901,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2917,8 +2929,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.149,
-      "run_id": "ced9bfdfe051",
+      "seconds": 0.195,
+      "run_id": "0c87ac8e0957",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2928,6 +2940,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2955,8 +2968,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.184,
-      "run_id": "0965d4016a4a",
+      "seconds": 0.19,
+      "run_id": "8cc90fb1e771",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -2966,6 +2979,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -2993,8 +3007,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.178,
-      "run_id": "cc0befc4f97d",
+      "seconds": 0.198,
+      "run_id": "da7357e663e3",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3004,6 +3018,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3031,17 +3046,18 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.19,
-      "run_id": "b5f160dd2a92",
+      "seconds": 0.206,
+      "run_id": "6da435d17e83",
       "llm_calls": 1,
       "llm_attempts": 1,
-      "llm_ms": 1,
+      "llm_ms": 0,
       "tokens": 502,
       "cost_usd": 0.0,
       "models": [
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3069,8 +3085,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.22,
-      "run_id": "6d7fa90ef12b",
+      "seconds": 0.202,
+      "run_id": "6f2d8c95f0d0",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3080,6 +3096,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3108,8 +3125,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.342,
-      "run_id": "199347bfb2a5",
+      "seconds": 0.194,
+      "run_id": "4d0f28d13a5e",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3119,6 +3136,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3144,8 +3162,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.172,
-      "run_id": "71b486258d72",
+      "seconds": 0.207,
+      "run_id": "596eafb9ffd5",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3155,6 +3173,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3180,8 +3199,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.134,
-      "run_id": "14d07314da77",
+      "seconds": 0.196,
+      "run_id": "736a04c3c3d0",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3191,6 +3210,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3216,8 +3236,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.14,
-      "run_id": "18a3990c1e90",
+      "seconds": 0.197,
+      "run_id": "83fff0534379",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3227,6 +3247,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3256,8 +3277,8 @@
       "gold_fields": {
         "company": "Veldhoven Paper B.V."
       },
-      "seconds": 0.173,
-      "run_id": "2baeaac96338",
+      "seconds": 0.187,
+      "run_id": "8848f69ea1d9",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3267,6 +3288,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3296,8 +3318,8 @@
       "gold_fields": {
         "name": "Tim Vos"
       },
-      "seconds": 0.164,
-      "run_id": "c21ec80a4670",
+      "seconds": 0.264,
+      "run_id": "c694a4348e56",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3307,6 +3329,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3337,8 +3360,8 @@
       "gold_fields": {
         "name": "Jonas Berg"
       },
-      "seconds": 0.161,
-      "run_id": "58d10ae40128",
+      "seconds": 0.345,
+      "run_id": "922f5fbf2e89",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3348,6 +3371,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3375,8 +3399,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.118,
-      "run_id": "49874b0d2833",
+      "seconds": 1.245,
+      "run_id": "3a94664f3636",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3386,6 +3410,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3415,8 +3440,8 @@
       "gold_fields": {
         "name": "M. de Vries"
       },
-      "seconds": 0.173,
-      "run_id": "51f7784b37e5",
+      "seconds": 0.197,
+      "run_id": "8e95fe072ada",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3426,6 +3451,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3453,8 +3479,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.16,
-      "run_id": "1262e6e04adc",
+      "seconds": 0.216,
+      "run_id": "fdc2d84d36c8",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3464,6 +3490,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3492,8 +3519,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.202,
-      "run_id": "2a74139fdbd9",
+      "seconds": 0.186,
+      "run_id": "de7d8507805c",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3503,6 +3530,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     },
     {
@@ -3530,8 +3558,8 @@
         "amount": null
       },
       "gold_fields": {},
-      "seconds": 0.186,
-      "run_id": "7509d4241ca4",
+      "seconds": 0.188,
+      "run_id": "652d33ad6d8a",
       "llm_calls": 1,
       "llm_attempts": 1,
       "llm_ms": 0,
@@ -3541,6 +3569,7 @@
         "fake/rules"
       ],
       "schema_valid": true,
+      "provider_errors": 0,
       "cached": false
     }
   ]

@@ -1,7 +1,7 @@
 {
-  "name": "fake",
+  "name": "offline",
   "suite": "idempotency",
-  "run_at": "2026-10-13T05:16:19+00:00",
+  "run_at": "2026-10-13T07:26:19+00:00",
   "model": "fake/rules",
   "free_only": true,
   "transport": "n8n webhooks",
@@ -22,7 +22,7 @@
       "chat": 18
     },
     "new_records_from_resend": 0,
-    "duplicate_p50_seconds": 0.19
+    "duplicate_p50_seconds": 0.14
   },
   "items": [
     {

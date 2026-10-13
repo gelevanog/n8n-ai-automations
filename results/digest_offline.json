@@ -1,0 +1,36 @@
+{
+  "name": "offline",
+  "suite": "digest",
+  "run_at": "2026-10-13T07:26:02+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "runs": 1,
+    "ok": true,
+    "numbers_ok": true,
+    "seconds": 0.257,
+    "posted_to_chat": true
+  },
+  "items": [
+    {
+      "http": 200,
+      "error": null,
+      "seconds": 0.257,
+      "numbers_ok": true,
+      "text": "Operations digest for 2026-10-06 to 2026-10-13\n- Emails triaged: 0\n- Emails routed automatically: 0\n- Sales leads from email: 0\n- Invoices posted: 0\n- Invoice total posted eur: 0\n- Web leads: 0",
+      "posted_to_chat": 1,
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 190,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    }
+  ]
+}

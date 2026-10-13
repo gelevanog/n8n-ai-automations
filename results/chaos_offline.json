@@ -1,7 +1,7 @@
 {
-  "name": "fake",
+  "name": "offline",
   "suite": "chaos",
-  "run_at": "2026-10-13T05:17:11+00:00",
+  "run_at": "2026-10-13T07:27:12+00:00",
   "model": "fake/rules",
   "free_only": true,
   "transport": "n8n webhooks",

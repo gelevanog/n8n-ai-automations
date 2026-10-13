@@ -1,0 +1,948 @@
+{
+  "name": "offline",
+  "suite": "invoices_hard",
+  "run_at": "2026-10-13T07:25:33+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 12,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 0.2,
+    "latency_p95_s": 0.2,
+    "llm_seconds_p50": 0.0,
+    "llm_calls": 12,
+    "llm_calls_per_item": 1.0,
+    "invalid_model_outputs": 0,
+    "provider_errors_retried": 0,
+    "tokens": 5120,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "fake/rules": 12
+    },
+    "fields": {
+      "vendor": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "invoice_number": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": "PN-26-0918"
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": "PN-26-0952"
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": "LF-2026-311"
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": "BW-0447"
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": "BW-0461"
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": "CN-2026-0042"
+          }
+        ]
+      },
+      "issue_date": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": "2026-09-03"
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": "2026-09-17"
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": "2026-09-30"
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": "2026-09-08"
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": "2026-09-24"
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": "2026-09-12"
+          }
+        ]
+      },
+      "due_date": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": "2026-10-03"
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": "2026-10-17"
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": "2026-10-30"
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": "2026-09-22"
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": "2026-10-08"
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": "2026-09-12"
+          }
+        ]
+      },
+      "currency": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": "EUR"
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": "EUR"
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": "EUR"
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": "GBP"
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": "GBP"
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": "EUR"
+          }
+        ]
+      },
+      "subtotal": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": 1839.0
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": 1472.5
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": 1274.4
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": 866.0
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": 1053.5
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": -240.0
+          }
+        ]
+      },
+      "vat_amount": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": 0.0
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": 0.0
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": 245.26
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": 0.0
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": 0.0
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": -50.4
+          }
+        ]
+      },
+      "total": {
+        "scored": 12,
+        "correct": 0,
+        "accuracy": 0.0,
+        "misses": [
+          {
+            "id": "hinv-01",
+            "got": null,
+            "gold": 1839.0
+          },
+          {
+            "id": "hinv-02",
+            "got": null,
+            "gold": 1472.5
+          },
+          {
+            "id": "hinv-03",
+            "got": null,
+            "gold": 1519.66
+          },
+          {
+            "id": "hinv-04",
+            "got": null,
+            "gold": 866.0
+          },
+          {
+            "id": "hinv-05",
+            "got": null,
+            "gold": 1053.5
+          },
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": -290.4
+          }
+        ]
+      }
+    },
+    "field_accuracy": 0.125,
+    "all_fields_right": "0/12",
+    "line_count_right": 0,
+    "decision_accuracy": 0.5,
+    "auto_posted": 0,
+    "auto_post_rate": 0.0,
+    "problem_invoices": 6,
+    "problem_invoices_auto_posted": 0,
+    "problem_invoices_auto_posted_ids": [],
+    "clean_invoices": 6,
+    "clean_invoices_sent_to_review": 6,
+    "clean_review_reasons": {
+      "missing_invoice_number": 6,
+      "missing_fields": 6,
+      "ungrounded_total": 6,
+      "low_confidence": 6
+    },
+    "per_issue": {
+      "credit_note": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 0
+      },
+      "total_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 0
+      },
+      "bank_details_changed": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "vat_id_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 0
+      },
+      "ai_directed_text": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "vat_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 0
+      }
+    },
+    "bills_in_accounting": 0,
+    "double_posted": []
+  },
+  "items": [
+    {
+      "id": "hinv-01",
+      "gold": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0918",
+        "issue_date": "2026-09-03",
+        "due_date": "2026-10-03",
+        "currency": "EUR",
+        "subtotal": 1839.0,
+        "vat_amount": 0.0,
+        "total": 1839.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.189,
+      "run_id": "5827c5903820",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 433,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-02",
+      "gold": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0952",
+        "issue_date": "2026-09-17",
+        "due_date": "2026-10-17",
+        "currency": "EUR",
+        "subtotal": 1472.5,
+        "vat_amount": 0.0,
+        "total": 1472.5
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.198,
+      "run_id": "9defb8da9173",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 435,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-03",
+      "gold": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-311",
+        "issue_date": "2026-09-30",
+        "due_date": "2026-10-30",
+        "currency": "EUR",
+        "subtotal": 1274.4,
+        "vat_amount": 245.26,
+        "total": 1519.66
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.212,
+      "run_id": "eeaf82d21200",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 435,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-04",
+      "gold": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0447",
+        "issue_date": "2026-09-08",
+        "due_date": "2026-09-22",
+        "currency": "GBP",
+        "subtotal": 866.0,
+        "vat_amount": 0.0,
+        "total": 866.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.191,
+      "run_id": "7ba33b28eb1e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 421,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-05",
+      "gold": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0461",
+        "issue_date": "2026-09-24",
+        "due_date": "2026-10-08",
+        "currency": "GBP",
+        "subtotal": 1053.5,
+        "vat_amount": 0.0,
+        "total": 1053.5
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.19,
+      "run_id": "bcbc3b5b4063",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 430,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-06",
+      "gold": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": "CN-2026-0042",
+        "issue_date": "2026-09-12",
+        "due_date": "2026-09-12",
+        "currency": "EUR",
+        "subtotal": -240.0,
+        "vat_amount": -50.4,
+        "total": -290.4
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "credit_note"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.205,
+      "run_id": "caba13725d6b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 418,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-07",
+      "gold": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0977",
+        "issue_date": "2026-09-29",
+        "due_date": "2026-10-29",
+        "currency": "EUR",
+        "subtotal": 1458.0,
+        "vat_amount": 0.0,
+        "total": 1508.0
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "total_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.205,
+      "run_id": "53067b6ccc95",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 427,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-08",
+      "gold": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": "RFP-26-1180",
+        "issue_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "currency": "EUR",
+        "subtotal": 855.0,
+        "vat_amount": 179.55,
+        "total": 1034.55
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "bank_details_changed"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "bank_details_changed",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.202,
+      "run_id": "0b31d0479fe6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 435,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-09",
+      "gold": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-318",
+        "issue_date": "2026-10-02",
+        "due_date": "2026-11-01",
+        "currency": "EUR",
+        "subtotal": 420.0,
+        "vat_amount": 88.2,
+        "total": 508.2
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "vat_id_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.201,
+      "run_id": "637c595d7146",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 408,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-10",
+      "gold": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0470",
+        "issue_date": "2026-10-01",
+        "due_date": "2026-10-15",
+        "currency": "GBP",
+        "subtotal": 420.0,
+        "vat_amount": 0.0,
+        "total": 420.0
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "ai_directed_text"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "ai_directed_text",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.201,
+      "run_id": "5ef69bae4824",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 422,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-11",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02901",
+        "issue_date": "2026-10-01",
+        "due_date": "2026-10-31",
+        "currency": "USD",
+        "subtotal": 644.0,
+        "vat_amount": 0.0,
+        "total": 644.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.196,
+      "run_id": "685a0ae59611",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 421,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-12",
+      "gold": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-324",
+        "issue_date": "2026-10-06",
+        "due_date": "2026-11-05",
+        "currency": "EUR",
+        "subtotal": 336.0,
+        "vat_amount": 64.88,
+        "total": 400.88
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "vat_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "missing_fields",
+        "ungrounded_total",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": null,
+        "issue_date": null,
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "vat_amount": null,
+        "total": null
+      },
+      "lines": 0,
+      "seconds": 0.201,
+      "run_id": "e0e4d1ee446d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 435,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    }
+  ]
+}

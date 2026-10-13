@@ -210,7 +210,7 @@ def demo(
     for email in picked:
         harness.webhook("inbox-triage", email_payload(email, Path("data/invoices")))
     gold = [json.loads(line) for line in Path("data/invoices/gold.jsonl").read_text(encoding="utf-8").splitlines()]
-    for invoice in gold[-invoices:]:
+    for invoice in gold[:invoices]:
         pdf = Path("data/invoices/pdf") / f"{invoice['id']}.pdf"
         harness.webhook(
             "invoice-intake",

@@ -1,0 +1,1897 @@
+{
+  "name": "offline",
+  "suite": "leads",
+  "run_at": "2026-10-13T07:25:51+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 30,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 0.28,
+    "latency_p95_s": 1.06,
+    "llm_seconds_p50": 0.0,
+    "llm_calls": 48,
+    "llm_calls_per_item": 1.6,
+    "invalid_model_outputs": 0,
+    "provider_errors_retried": 0,
+    "tokens": 21383,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "fake/rules": 28
+    },
+    "fields": {
+      "industry": {
+        "scored": 28,
+        "correct": 25,
+        "accuracy": 0.8929,
+        "misses": [
+          {
+            "id": "lead-013",
+            "got": "food_beverage",
+            "gold": "technology"
+          },
+          {
+            "id": "lead-021",
+            "got": "food_beverage",
+            "gold": "education"
+          },
+          {
+            "id": "lead-022",
+            "got": "food_beverage",
+            "gold": "fashion_apparel"
+          }
+        ]
+      },
+      "employees_band": {
+        "scored": 28,
+        "correct": 22,
+        "accuracy": 0.7857,
+        "misses": [
+          {
+            "id": "lead-001",
+            "got": null,
+            "gold": "11-50"
+          },
+          {
+            "id": "lead-005",
+            "got": null,
+            "gold": "51-200"
+          },
+          {
+            "id": "lead-007",
+            "got": null,
+            "gold": "11-50"
+          },
+          {
+            "id": "lead-008",
+            "got": null,
+            "gold": "51-200"
+          },
+          {
+            "id": "lead-015",
+            "got": null,
+            "gold": "11-50"
+          },
+          {
+            "id": "lead-022",
+            "got": null,
+            "gold": "11-50"
+          }
+        ]
+      },
+      "country": {
+        "scored": 28,
+        "correct": 27,
+        "accuracy": 0.9643,
+        "misses": [
+          {
+            "id": "lead-008",
+            "got": null,
+            "gold": "DE"
+          }
+        ]
+      },
+      "sells_online": {
+        "scored": 28,
+        "correct": 28,
+        "accuracy": 1.0,
+        "misses": []
+      }
+    },
+    "profile_accuracy": 0.9107,
+    "tier_accuracy": 0.9667,
+    "tier_misses": [
+      {
+        "id": "lead-013",
+        "got": "hot",
+        "gold": "warm"
+      }
+    ],
+    "tiers": {
+      "hot": 22,
+      "warm": 4,
+      "disqualified": 2,
+      "cold": 2
+    },
+    "gold_tiers": {
+      "hot": 21,
+      "warm": 5,
+      "disqualified": 2,
+      "cold": 2
+    },
+    "disqualified_caught": "2/2",
+    "drafts": 20,
+    "drafts_passing_checks": 20,
+    "draft_check_failures": {},
+    "research_queue": 10,
+    "injection_site": [
+      {
+        "id": "lead-026",
+        "tier": "hot",
+        "gold": "hot",
+        "employees_band": "11-50",
+        "reasons": [
+          "the website addresses AI systems (2 sentence(s) removed)"
+        ]
+      }
+    ],
+    "crm_records": 30,
+    "replies_sent_after_approval": 20
+  },
+  "items": [
+    {
+      "id": "lead-001",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "AT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "cosmetics_beauty",
+        "employees_band": null,
+        "country": "AT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://alpenglow-skincare.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "profile confidence 0.55 below 0.60"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "7f420b3ac6ba",
+      "seconds": 0.269,
+      "run_id": "9f778e6e34d9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 450,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-002",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 85,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://tidepool-coffee.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "c4bbb72b8850",
+      "seconds": 0.3,
+      "run_id": "c9d48d45be14",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 898,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-003",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "51-200",
+        "country": "DK",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "51-200",
+        "country": "DK",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://hollow-oak-furniture.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "f083ea04963b",
+      "seconds": 0.197,
+      "run_id": "4727ab919b90",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 905,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-004",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "1-10",
+        "country": "GB",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "1-10",
+        "country": "GB",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://vellum-and-thread.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "43a9499d5f97",
+      "seconds": 0.217,
+      "run_id": "4a9bfd797eed",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 902,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-005",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "pets",
+        "employees_band": "51-200",
+        "country": "NL",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "pets",
+        "employees_band": null,
+        "country": "NL",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://pawsome-provisions.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "profile confidence 0.55 below 0.60"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "51c6a8268bcb",
+      "seconds": 0.222,
+      "run_id": "9da3c79acb9c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 448,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-006",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "health_wellness",
+        "employees_band": "201-500",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 80,
+      "profile": {
+        "industry": "health_wellness",
+        "employees_band": "201-500",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://brightside-supplements.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 75,
+      "review_id": "de2710025639",
+      "seconds": 0.243,
+      "run_id": "3e8adca17551",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 897,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-007",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "agency",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "warm",
+      "score": 40,
+      "profile": {
+        "industry": "agency",
+        "employees_band": null,
+        "country": "BE",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://marigold-studio.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "profile confidence 0.55 below 0.60"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "41dd8862ddb8",
+      "seconds": 0.233,
+      "run_id": "a22e11fbcb4c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 429,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-008",
+      "hard": "a competitor",
+      "gold": {
+        "site_found": true,
+        "industry": "printing_packaging",
+        "employees_band": "51-200",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": "competitor"
+      },
+      "gold_tier": "disqualified",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "disqualified",
+      "score": 30,
+      "profile": {
+        "industry": "printing_packaging",
+        "employees_band": null,
+        "country": null,
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://printhaus-direkt.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "disqualified: competitor",
+        "profile confidence 0.55 below 0.60"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "3e2eca1059e4",
+      "seconds": 0.332,
+      "run_id": "e150656159a0",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 440,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-009",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "1-10",
+        "country": "US",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 45,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "1-10",
+        "country": "US",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://kinfolk-candles.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "ac83937b33d8",
+      "seconds": 0.3,
+      "run_id": "b6ca8dac5257",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 914,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-010",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "FR",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "FR",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://sunny-side-granola.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "270d0fbf1b1f",
+      "seconds": 0.272,
+      "run_id": "f87d74b244b2",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 913,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-011",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "201-500",
+        "country": "SE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 95,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "201-500",
+        "country": "SE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://north-loom.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "a2ed97020197",
+      "seconds": 0.21,
+      "run_id": "9231caf8c2cc",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 902,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-012",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "cosmetics_beauty",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://verde-botanicals.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 75,
+      "review_id": "8f15c490584b",
+      "seconds": 0.332,
+      "run_id": "c37264d9ccc7",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 5,
+      "tokens": 881,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-013",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "PL",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "51-200",
+        "country": "PL",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://byte-forge-labs.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "931ad2e22e35",
+      "seconds": 0.38,
+      "run_id": "0dd5dfd50edd",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 886,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-014",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 85,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://little-acorn-toys.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "c4d8f558cc0d",
+      "seconds": 0.321,
+      "run_id": "4f4e46da9d16",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 909,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-015",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "GB",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "hot",
+      "score": 75,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": null,
+        "country": "GB",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://ferment-and-co.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "profile confidence 0.55 below 0.60"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "a37c2c6769e2",
+      "seconds": 1.275,
+      "run_id": "b2a05a6c0f9c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 434,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-016",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "cosmetics_beauty",
+        "employees_band": "51-200",
+        "country": "ES",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 100,
+      "profile": {
+        "industry": "cosmetics_beauty",
+        "employees_band": "51-200",
+        "country": "ES",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://glow-theory.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "b71d70d2befd",
+      "seconds": 0.305,
+      "run_id": "6fa671446f36",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 885,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-017",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "health_wellness",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 55,
+      "profile": {
+        "industry": "health_wellness",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://harbor-health-clinic.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 75,
+      "review_id": "53570f0b1581",
+      "seconds": 0.266,
+      "run_id": "51ace2cd7444",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 874,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-018",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "1-10",
+        "country": "CZ",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "1-10",
+        "country": "CZ",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://wildroot-tea.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "34fd18fc7ed6",
+      "seconds": 0.281,
+      "run_id": "fea985f7f869",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 883,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-019",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "500+",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "fashion_apparel",
+        "employees_band": "500+",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://atlas-outdoor.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "cfb66ef2ab1b",
+      "seconds": 0.281,
+      "run_id": "e01cd360f7c7",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 915,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-020",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "BE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://crumb-collective.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "091e4c9dd185",
+      "seconds": 0.297,
+      "run_id": "4524fa20cd98",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 882,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-021",
+      "hard": "a student",
+      "gold": {
+        "site_found": true,
+        "industry": "education",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "disqualified": "not_a_buyer"
+      },
+      "gold_tier": "disqualified",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "disqualified",
+      "score": 70,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "NL",
+        "sells_online": false,
+        "buyer": false
+      },
+      "site": {
+        "url": "https://lumen-labs-edu.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "disqualified: not_a_buyer"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "67d385f93376",
+      "seconds": 0.239,
+      "run_id": "75db55dc3961",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 426,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-022",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "fashion_apparel",
+        "employees_band": "11-50",
+        "country": "PT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": null,
+        "country": "PT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://saltwater-swim.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [
+        "profile confidence 0.55 below 0.60"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "520a25205570",
+      "seconds": 0.256,
+      "run_id": "44c8e2affb43",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 424,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-023",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "51-200",
+        "country": "GB",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 95,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "51-200",
+        "country": "GB",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://oak-and-honey.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "b3b068c08c03",
+      "seconds": 0.38,
+      "run_id": "4a17615d9b6a",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 911,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-024",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "pets",
+        "employees_band": "1-10",
+        "country": "NL",
+        "sells_online": false,
+        "disqualified": null
+      },
+      "gold_tier": "warm",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "warm",
+      "score": 45,
+      "profile": {
+        "industry": "pets",
+        "employees_band": "1-10",
+        "country": "NL",
+        "sells_online": false,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://pure-pet-spa.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 77,
+      "review_id": "5caa165910f8",
+      "seconds": 1.061,
+      "run_id": "3ae6d7265465",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 17,
+      "tokens": 885,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-025",
+      "hard": null,
+      "gold": {
+        "site_found": true,
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "FI",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 70,
+      "profile": {
+        "industry": "technology",
+        "employees_band": "51-200",
+        "country": "FI",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://nimbus-audio.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "1faf978107d6",
+      "seconds": 0.421,
+      "run_id": "322d9b88cce5",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 878,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-026",
+      "hard": "the site contains text addressed to AI assistants",
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "DE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "hot",
+      "score": 85,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "DE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://bloom-box-flowers.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 1,
+        "removed_ai_directed": 2,
+        "error": null
+      },
+      "reasons": [
+        "the website addresses AI systems (2 sentence(s) removed)"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "fef0d0d53c31",
+      "seconds": 0.264,
+      "run_id": "0a9ef1d28ef3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 426,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-027",
+      "hard": "the message contradicts the site (11 potters)",
+      "gold": {
+        "site_found": true,
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "home_lifestyle",
+        "employees_band": "11-50",
+        "country": "IT",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://terra-ceramica.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 76,
+      "review_id": "68be2d451428",
+      "seconds": 0.279,
+      "run_id": "b44f9741bfc9",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 893,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-028",
+      "hard": "the website does not exist",
+      "gold": {
+        "site_found": false,
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "disqualified": null
+      },
+      "gold_tier": "cold",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "cold",
+      "score": 10,
+      "profile": {
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://quantum-brands.example/",
+        "found": false,
+        "pages": [],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": "site not found"
+      },
+      "reasons": [
+        "no company website to enrich from (site not found)"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "3ea646918b3d",
+      "seconds": 0.236,
+      "run_id": "2594625f0017",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "lead-029",
+      "hard": "a second contact from the same company, www and a path in the URL",
+      "gold": {
+        "site_found": true,
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "disqualified": null
+      },
+      "gold_tier": "hot",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_reply",
+      "tier": "hot",
+      "score": 90,
+      "profile": {
+        "industry": "food_beverage",
+        "employees_band": "11-50",
+        "country": "IE",
+        "sells_online": true,
+        "buyer": true
+      },
+      "site": {
+        "url": "https://tidepool-coffee.example/",
+        "found": true,
+        "pages": [
+          "index.html",
+          "about.html"
+        ],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": null
+      },
+      "reasons": [],
+      "draft_checks": {
+        "greets_by_name": true,
+        "no_placeholders": true,
+        "numbers_grounded": true,
+        "length": true
+      },
+      "draft_words": 74,
+      "review_id": "5454d2840af5",
+      "seconds": 0.296,
+      "run_id": "b6292af532bf",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 893,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false,
+      "approved": true
+    },
+    {
+      "id": "lead-030",
+      "hard": "no company and no website",
+      "gold": {
+        "site_found": false,
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "disqualified": null
+      },
+      "gold_tier": "cold",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "kind": "lead_research",
+      "tier": "cold",
+      "score": 10,
+      "profile": {
+        "industry": null,
+        "employees_band": null,
+        "country": null,
+        "sells_online": null,
+        "buyer": true
+      },
+      "site": {
+        "url": "",
+        "found": false,
+        "pages": [],
+        "removed_hidden": 0,
+        "removed_ai_directed": 0,
+        "error": "no website given"
+      },
+      "reasons": [
+        "no company website to enrich from (no website given)"
+      ],
+      "draft_checks": {},
+      "draft_words": 0,
+      "review_id": "ab7353631328",
+      "seconds": 0.217,
+      "run_id": "bfe9836ede01",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    }
+  ]
+}

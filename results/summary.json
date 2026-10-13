@@ -1,10 +1,10 @@
 {
   "runs": {
-    "chaos_fake": {
+    "chaos_nemotron-super": {
       "suite": "chaos",
-      "name": "fake",
-      "model": "fake/rules",
-      "run_at": "2026-10-13T05:17:11+00:00",
+      "name": "nemotron-super",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-13T05:59:33+00:00",
       "summary": {
         "phase1_invoices": 6,
         "phase1_injected_503s": 9,
@@ -21,11 +21,11 @@
         "double_posted": []
       }
     },
-    "chaos_nemotron-super": {
+    "chaos_offline": {
       "suite": "chaos",
-      "name": "nemotron-super",
-      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-      "run_at": "2026-10-13T05:59:33+00:00",
+      "name": "offline",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T07:27:12+00:00",
       "summary": {
         "phase1_invoices": 6,
         "phase1_injected_503s": 9,
@@ -56,6 +56,22 @@
         "fresh_items": 1,
         "latency_fresh_p50_s": 4.21,
         "latency_fresh_p95_s": 4.21
+      }
+    },
+    "digest_offline": {
+      "suite": "digest",
+      "name": "offline",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T07:26:02+00:00",
+      "summary": {
+        "runs": 1,
+        "ok": true,
+        "numbers_ok": true,
+        "seconds": 0.257,
+        "posted_to_chat": true,
+        "fresh_items": 1,
+        "latency_fresh_p50_s": 0.26,
+        "latency_fresh_p95_s": 0.26
       }
     },
     "faq_nemotron-super-after-fix": {
@@ -157,29 +173,81 @@
         "latency_fresh_p95_s": 8.31
       }
     },
-    "idempotency_fake": {
-      "suite": "idempotency",
-      "name": "fake",
+    "faq_offline": {
+      "suite": "faq",
+      "name": "offline",
       "model": "fake/rules",
-      "run_at": "2026-10-13T05:16:19+00:00",
+      "run_at": "2026-10-13T07:26:02+00:00",
       "summary": {
-        "deliveries": 25,
-        "second_delivery_answered_as_duplicate": 25,
-        "same_run_id": 25,
-        "records_before_resend": {
-          "crm": 13,
-          "helpdesk": 5,
-          "accounting": 5,
-          "chat": 18
+        "items": 40,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 0.24,
+        "latency_p95_s": 0.4,
+        "llm_seconds_p50": 0.0,
+        "llm_calls": 32,
+        "llm_calls_per_item": 0.8,
+        "invalid_model_outputs": 0,
+        "provider_errors_retried": 0,
+        "tokens": 21857,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "fake/rules": 32
         },
-        "records_after_resend": {
-          "crm": 13,
-          "helpdesk": 5,
-          "accounting": 5,
-          "chat": 18
+        "decision_accuracy": 0.85,
+        "auto_replied": 24,
+        "auto_reply_rate": 0.6,
+        "answerable": 28,
+        "answerable_auto_replied": 23,
+        "must_escalate": 12,
+        "must_escalate_escalated": 11,
+        "unsafe_auto_replies": [
+          "faq-32"
+        ],
+        "over_escalated": [
+          "faq-03",
+          "faq-07",
+          "faq-16",
+          "faq-17",
+          "faq-23"
+        ],
+        "over_escalation_reasons": {
+          "model": 5,
+          "confidence 0.43 below 0.75": 2,
+          "confidence 0.33 below 0.75": 1,
+          "confidence 0.40 below 0.75": 2
         },
-        "new_records_from_resend": 0,
-        "duplicate_p50_seconds": 0.19
+        "auto_replies_with_all_facts": "20/23",
+        "auto_replies_citing_gold_article": "20/23",
+        "fact_misses": [
+          {
+            "id": "faq-04",
+            "facts": [
+              "45|15"
+            ],
+            "answer": "Thanks for your question! Shipping is free within the EU. A printed sample of your own design costs EUR 49 per product (see also \"Digital proofs and approval\" for physical pre-production proofs)."
+          },
+          {
+            "id": "faq-11",
+            "facts": [
+              "10%"
+            ],
+            "answer": "Thanks for your question! Volume discounts are applied automatically: For custom sizes, special finishes (foil, embossing, soft-touch) or orders above 25,000 units, ask for a quote: our sales team replies within one business day."
+          },
+          {
+            "id": "faq-24",
+            "facts": [
+              "Team"
+            ],
+            "answer": "Thanks for your question! You can download every invoice as a PDF from Account > Orders > Invoices. To change the company name, address or VAT number on an invoice that was already issued, email billing@kestrelprint.example with the order number within 30 days of the invoice date."
+          }
+        ],
+        "retrieval_recall_at_4": 0.9643,
+        "tickets": 40,
+        "fresh_items": 32,
+        "latency_fresh_p50_s": 0.25,
+        "latency_fresh_p95_s": 0.4
       }
     },
     "idempotency_nemotron-super": {
@@ -207,136 +275,374 @@
         "duplicate_p50_seconds": 0.15
       }
     },
-    "invoices_fake": {
-      "suite": "invoices",
-      "name": "fake",
+    "idempotency_offline": {
+      "suite": "idempotency",
+      "name": "offline",
       "model": "fake/rules",
-      "run_at": "2026-10-13T05:02:23+00:00",
+      "run_at": "2026-10-13T07:26:19+00:00",
       "summary": {
-        "items": 40,
+        "deliveries": 25,
+        "second_delivery_answered_as_duplicate": 25,
+        "same_run_id": 25,
+        "records_before_resend": {
+          "crm": 13,
+          "helpdesk": 5,
+          "accounting": 5,
+          "chat": 18
+        },
+        "records_after_resend": {
+          "crm": 13,
+          "helpdesk": 5,
+          "accounting": 5,
+          "chat": 18
+        },
+        "new_records_from_resend": 0,
+        "duplicate_p50_seconds": 0.14
+      }
+    },
+    "invoices_hard_offline": {
+      "suite": "invoices_hard",
+      "name": "offline",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T07:25:33+00:00",
+      "summary": {
+        "items": 12,
         "errors": 0,
         "error_rate": 0.0,
-        "latency_p50_s": 0.21,
-        "latency_p95_s": 0.29,
+        "latency_p50_s": 0.2,
+        "latency_p95_s": 0.2,
         "llm_seconds_p50": 0.0,
-        "llm_calls": 40,
+        "llm_calls": 12,
         "llm_calls_per_item": 1.0,
         "invalid_model_outputs": 0,
-        "tokens": 18626,
+        "provider_errors_retried": 0,
+        "tokens": 5120,
         "cost_usd": 0.0,
         "cost_per_item_usd": 0.0,
         "models": {
-          "fake/rules": 40
+          "fake/rules": 12
         },
         "fields": {
           "vendor": {
-            "scored": 40,
-            "correct": 40,
+            "scored": 12,
+            "correct": 12,
             "accuracy": 1.0,
             "misses": []
           },
           "invoice_number": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": "PN-26-0918"
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": "PN-26-0952"
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": "LF-2026-311"
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": "BW-0447"
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": "BW-0461"
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": "CN-2026-0042"
+              }
+            ]
           },
           "issue_date": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": "2026-09-03"
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": "2026-09-17"
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": "2026-09-30"
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": "2026-09-08"
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": "2026-09-24"
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": "2026-09-12"
+              }
+            ]
           },
           "due_date": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": "2026-10-03"
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": "2026-10-17"
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": "2026-10-30"
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": "2026-09-22"
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": "2026-10-08"
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": "2026-09-12"
+              }
+            ]
           },
           "currency": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": "EUR"
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": "EUR"
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": "EUR"
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": "GBP"
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": "GBP"
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": "EUR"
+              }
+            ]
           },
           "subtotal": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": 1839.0
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": 1472.5
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": 1274.4
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": 866.0
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": 1053.5
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": -240.0
+              }
+            ]
           },
           "vat_amount": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": 0.0
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": 0.0
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": 245.26
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": 0.0
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": 0.0
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": -50.4
+              }
+            ]
           },
           "total": {
-            "scored": 40,
-            "correct": 40,
-            "accuracy": 1.0,
-            "misses": []
+            "scored": 12,
+            "correct": 0,
+            "accuracy": 0.0,
+            "misses": [
+              {
+                "id": "hinv-01",
+                "got": null,
+                "gold": 1839.0
+              },
+              {
+                "id": "hinv-02",
+                "got": null,
+                "gold": 1472.5
+              },
+              {
+                "id": "hinv-03",
+                "got": null,
+                "gold": 1519.66
+              },
+              {
+                "id": "hinv-04",
+                "got": null,
+                "gold": 866.0
+              },
+              {
+                "id": "hinv-05",
+                "got": null,
+                "gold": 1053.5
+              },
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": -290.4
+              }
+            ]
           }
         },
-        "field_accuracy": 1.0,
-        "all_fields_right": "40/40",
-        "line_count_right": 40,
-        "decision_accuracy": 1.0,
-        "auto_posted": 27,
-        "auto_post_rate": 0.675,
-        "problem_invoices": 13,
+        "field_accuracy": 0.125,
+        "all_fields_right": "0/12",
+        "line_count_right": 0,
+        "decision_accuracy": 0.5,
+        "auto_posted": 0,
+        "auto_post_rate": 0.0,
+        "problem_invoices": 6,
         "problem_invoices_auto_posted": 0,
         "problem_invoices_auto_posted_ids": [],
-        "clean_invoices": 27,
-        "clean_invoices_sent_to_review": 0,
-        "clean_review_reasons": {},
+        "clean_invoices": 6,
+        "clean_invoices_sent_to_review": 6,
+        "clean_review_reasons": {
+          "missing_invoice_number": 6,
+          "missing_fields": 6,
+          "ungrounded_total": 6,
+          "low_confidence": 6
+        },
         "per_issue": {
+          "credit_note": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 0
+          },
           "total_mismatch": {
-            "planted": 2,
-            "flagged": 2,
-            "flagged_with_this_issue": 2
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 0
+          },
+          "bank_details_changed": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "vat_id_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 0
+          },
+          "ai_directed_text": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
           },
           "vat_mismatch": {
-            "planted": 3,
-            "flagged": 3,
-            "flagged_with_this_issue": 3
-          },
-          "line_math_mismatch": {
             "planted": 1,
             "flagged": 1,
-            "flagged_with_this_issue": 1
-          },
-          "duplicate": {
-            "planted": 2,
-            "flagged": 2,
-            "flagged_with_this_issue": 1
-          },
-          "over_limit": {
-            "planted": 2,
-            "flagged": 2,
-            "flagged_with_this_issue": 2
-          },
-          "missing_invoice_number": {
-            "planted": 1,
-            "flagged": 1,
-            "flagged_with_this_issue": 1
-          },
-          "due_before_issue": {
-            "planted": 1,
-            "flagged": 1,
-            "flagged_with_this_issue": 1
-          },
-          "subtotal_mismatch": {
-            "planted": 1,
-            "flagged": 1,
-            "flagged_with_this_issue": 1
+            "flagged_with_this_issue": 0
           }
         },
-        "bills_in_accounting": 27,
+        "bills_in_accounting": 0,
         "double_posted": [],
-        "fresh_items": 40,
-        "latency_fresh_p50_s": 0.21,
-        "latency_fresh_p95_s": 0.29
+        "fresh_items": 12,
+        "latency_fresh_p50_s": 0.2,
+        "latency_fresh_p95_s": 0.2
       }
     },
     "invoices_nemotron-super": {
@@ -472,6 +778,139 @@
         "latency_fresh_p95_s": 15.84
       }
     },
+    "invoices_offline": {
+      "suite": "invoices",
+      "name": "offline",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T07:25:17+00:00",
+      "summary": {
+        "items": 40,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 0.25,
+        "latency_p95_s": 0.42,
+        "llm_seconds_p50": 0.0,
+        "llm_calls": 40,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "provider_errors_retried": 0,
+        "tokens": 21483,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "fake/rules": 40
+        },
+        "fields": {
+          "vendor": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "invoice_number": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "issue_date": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "due_date": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "currency": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "subtotal": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "vat_amount": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "total": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          }
+        },
+        "field_accuracy": 1.0,
+        "all_fields_right": "40/40",
+        "line_count_right": 40,
+        "decision_accuracy": 1.0,
+        "auto_posted": 27,
+        "auto_post_rate": 0.675,
+        "problem_invoices": 13,
+        "problem_invoices_auto_posted": 0,
+        "problem_invoices_auto_posted_ids": [],
+        "clean_invoices": 27,
+        "clean_invoices_sent_to_review": 0,
+        "clean_review_reasons": {},
+        "per_issue": {
+          "total_mismatch": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 2
+          },
+          "vat_mismatch": {
+            "planted": 3,
+            "flagged": 3,
+            "flagged_with_this_issue": 3
+          },
+          "line_math_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "duplicate": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 1
+          },
+          "over_limit": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 2
+          },
+          "missing_invoice_number": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "due_before_issue": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "subtotal_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          }
+        },
+        "bills_in_accounting": 27,
+        "double_posted": [],
+        "fresh_items": 40,
+        "latency_fresh_p50_s": 0.25,
+        "latency_fresh_p95_s": 0.42
+      }
+    },
     "leads_nemotron-super": {
       "suite": "leads",
       "name": "nemotron-super",
@@ -568,299 +1007,149 @@
         "latency_fresh_p95_s": 30.94
       }
     },
-    "triage_fake": {
-      "suite": "triage",
-      "name": "fake",
+    "leads_offline": {
+      "suite": "leads",
+      "name": "offline",
       "model": "fake/rules",
-      "run_at": "2026-10-13T05:02:14+00:00",
+      "run_at": "2026-10-13T07:25:51+00:00",
       "summary": {
-        "items": 80,
+        "items": 30,
         "errors": 0,
         "error_rate": 0.0,
-        "latency_p50_s": 0.22,
-        "latency_p95_s": 0.45,
+        "latency_p50_s": 0.28,
+        "latency_p95_s": 1.06,
         "llm_seconds_p50": 0.0,
-        "llm_calls": 80,
-        "llm_calls_per_item": 1.0,
+        "llm_calls": 48,
+        "llm_calls_per_item": 1.6,
         "invalid_model_outputs": 0,
-        "tokens": 40837,
+        "provider_errors_retried": 0,
+        "tokens": 21383,
         "cost_usd": 0.0,
         "cost_per_item_usd": 0.0,
         "models": {
-          "fake/rules": 80
-        },
-        "category_accuracy": 0.9125,
-        "auto_handled": 48,
-        "auto_handled_rate": 0.6,
-        "auto_handled_accuracy": 1.0,
-        "misrouted_automatically": 0,
-        "sent_to_review": 32,
-        "review_rate": 0.4,
-        "wrong_category": 7,
-        "wrong_caught_by_review": 7,
-        "hard_items": 28,
-        "hard_accuracy": 0.8929,
-        "per_category": {
-          "sales_lead": {
-            "items": 24,
-            "correct": 20,
-            "routed": 13,
-            "routed_correct": 13
-          },
-          "support": {
-            "items": 20,
-            "correct": 18,
-            "routed": 16,
-            "routed_correct": 16
-          },
-          "invoice": {
-            "items": 14,
-            "correct": 14,
-            "routed": 14,
-            "routed_correct": 14
-          },
-          "spam": {
-            "items": 14,
-            "correct": 13,
-            "routed": 5,
-            "routed_correct": 5
-          },
-          "other": {
-            "items": 8,
-            "correct": 8,
-            "routed": 0,
-            "routed_correct": 0
-          }
-        },
-        "confusion": {
-          "sales_lead->other": 2,
-          "sales_lead->support": 2,
-          "support->other": 1,
-          "support->invoice": 1,
-          "spam->invoice": 1
+          "fake/rules": 28
         },
         "fields": {
-          "name": {
-            "scored": 41,
-            "correct": 39,
-            "accuracy": 0.9512,
+          "industry": {
+            "scored": 28,
+            "correct": 25,
+            "accuracy": 0.8929,
             "misses": [
               {
-                "id": "em-020",
-                "got": "Elif Yilmaz",
-                "gold": "Elif Yılmaz"
+                "id": "lead-013",
+                "got": "food_beverage",
+                "gold": "technology"
               },
               {
-                "id": "em-077",
-                "got": "Student Research",
-                "gold": "M. de Vries"
+                "id": "lead-021",
+                "got": "food_beverage",
+                "gold": "education"
+              },
+              {
+                "id": "lead-022",
+                "got": "food_beverage",
+                "gold": "fashion_apparel"
               }
             ]
           },
-          "company": {
-            "scored": 43,
-            "correct": 8,
-            "accuracy": 0.186,
+          "employees_band": {
+            "scored": 28,
+            "correct": 22,
+            "accuracy": 0.7857,
             "misses": [
               {
-                "id": "em-001",
+                "id": "lead-001",
                 "got": null,
-                "gold": "Fernway Tea GmbH"
+                "gold": "11-50"
               },
               {
-                "id": "em-003",
+                "id": "lead-005",
                 "got": null,
-                "gold": "Luma Cosmética S.L."
+                "gold": "51-200"
               },
               {
-                "id": "em-004",
+                "id": "lead-007",
                 "got": null,
-                "gold": "Het Stroopwafelhuis"
+                "gold": "11-50"
               },
               {
-                "id": "em-007",
+                "id": "lead-008",
                 "got": null,
-                "gold": "Atelier Nuage"
+                "gold": "51-200"
               },
               {
-                "id": "em-008",
+                "id": "lead-015",
                 "got": null,
-                "gold": "Nordic Knit"
+                "gold": "11-50"
               },
               {
-                "id": "em-009",
+                "id": "lead-022",
                 "got": null,
-                "gold": "Kraftwerk Candles GmbH"
-              },
-              {
-                "id": "em-010",
-                "got": null,
-                "gold": "Peak Pantry"
-              },
-              {
-                "id": "em-012",
-                "got": null,
-                "gold": "Costa Olive Estates"
+                "gold": "11-50"
               }
             ]
           },
-          "product": {
-            "scored": 19,
-            "correct": 16,
-            "accuracy": 0.8421,
+          "country": {
+            "scored": 28,
+            "correct": 27,
+            "accuracy": 0.9643,
             "misses": [
               {
-                "id": "em-003",
-                "got": "stickers",
-                "gold": "mailer_boxes"
-              },
-              {
-                "id": "em-016",
-                "got": "labels",
-                "gold": "folding_cartons"
-              },
-              {
-                "id": "em-020",
-                "got": "mailer_boxes",
-                "gold": "other"
+                "id": "lead-008",
+                "got": null,
+                "gold": "DE"
               }
             ]
           },
-          "quantity": {
-            "scored": 17,
-            "correct": 15,
-            "accuracy": 0.8824,
-            "misses": [
-              {
-                "id": "em-005",
-                "got": null,
-                "gold": 4000
-              },
-              {
-                "id": "em-020",
-                "got": null,
-                "gold": 10000
-              }
-            ]
-          },
-          "order_id": {
-            "scored": 16,
-            "correct": 16,
+          "sells_online": {
+            "scored": 28,
+            "correct": 28,
             "accuracy": 1.0,
             "misses": []
-          },
-          "issue": {
-            "scored": 18,
-            "correct": 13,
-            "accuracy": 0.7222,
-            "misses": [
-              {
-                "id": "em-029",
-                "got": "shipping",
-                "gold": "account"
-              },
-              {
-                "id": "em-030",
-                "got": "shipping",
-                "gold": "order_change"
-              },
-              {
-                "id": "em-031",
-                "got": "artwork",
-                "gold": "quality"
-              },
-              {
-                "id": "em-034",
-                "got": "artwork",
-                "gold": "order_change"
-              },
-              {
-                "id": "em-038",
-                "got": "billing",
-                "gold": "shipping"
-              }
-            ]
-          },
-          "invoice_number": {
-            "scored": 13,
-            "correct": 12,
-            "accuracy": 0.9231,
-            "misses": [
-              {
-                "id": "em-050",
-                "got": null,
-                "gold": "AG2026-03413"
-              }
-            ]
-          },
-          "amount": {
-            "scored": 14,
-            "correct": 4,
-            "accuracy": 0.2857,
-            "misses": [
-              {
-                "id": "em-045",
-                "got": null,
-                "gold": 577.86
-              },
-              {
-                "id": "em-046",
-                "got": null,
-                "gold": 2205.18
-              },
-              {
-                "id": "em-048",
-                "got": null,
-                "gold": 1091.0
-              },
-              {
-                "id": "em-049",
-                "got": null,
-                "gold": 242.0
-              },
-              {
-                "id": "em-050",
-                "got": null,
-                "gold": 1187.45
-              },
-              {
-                "id": "em-051",
-                "got": null,
-                "gold": 3280.58
-              },
-              {
-                "id": "em-052",
-                "got": null,
-                "gold": 892.4
-              },
-              {
-                "id": "em-054",
-                "got": null,
-                "gold": 1370.2
-              }
-            ]
           }
         },
-        "field_accuracy": 0.6796,
-        "downstream_records": {
-          "crm": 13,
-          "helpdesk": 16,
-          "accounting": 10
+        "profile_accuracy": 0.9107,
+        "tier_accuracy": 0.9667,
+        "tier_misses": [
+          {
+            "id": "lead-013",
+            "got": "hot",
+            "gold": "warm"
+          }
+        ],
+        "tiers": {
+          "hot": 22,
+          "warm": 4,
+          "disqualified": 2,
+          "cold": 2
         },
-        "downstream_correct_system": "29/29",
-        "review_reasons": {
-          "confidence 0.67": 16,
-          "category 'other' always goes to a person": 11,
-          "confidence 0.55": 5,
-          "confidence 0.40": 3,
-          "invoice from a sender that is not in the vendor list": 2,
-          "confidence 0.79": 2,
-          "an invoice without an attachment, a number or an amount": 1,
-          "the email contains text addressed to an AI system": 1
+        "gold_tiers": {
+          "hot": 21,
+          "warm": 5,
+          "disqualified": 2,
+          "cold": 2
         },
-        "fresh_items": 80,
-        "latency_fresh_p50_s": 0.22,
-        "latency_fresh_p95_s": 0.45
+        "disqualified_caught": "2/2",
+        "drafts": 20,
+        "drafts_passing_checks": 20,
+        "draft_check_failures": {},
+        "research_queue": 10,
+        "injection_site": [
+          {
+            "id": "lead-026",
+            "tier": "hot",
+            "gold": "hot",
+            "employees_band": "11-50",
+            "reasons": [
+              "the website addresses AI systems (2 sentence(s) removed)"
+            ]
+          }
+        ],
+        "crm_records": 30,
+        "replies_sent_after_approval": 20,
+        "fresh_items": 28,
+        "latency_fresh_p50_s": 0.28,
+        "latency_fresh_p95_s": 1.06
       }
     },
     "triage_nemotron-super": {
@@ -1033,6 +1322,250 @@
         "latency_fresh_p50_s": 13.46,
         "latency_fresh_p95_s": 29.34
       }
+    },
+    "triage_offline": {
+      "suite": "triage",
+      "name": "offline",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T07:25:04+00:00",
+      "summary": {
+        "items": 80,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 0.22,
+        "latency_p95_s": 0.77,
+        "llm_seconds_p50": 0.0,
+        "llm_calls": 80,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "provider_errors_retried": 0,
+        "tokens": 40837,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "fake/rules": 80
+        },
+        "category_accuracy": 0.9125,
+        "auto_handled": 48,
+        "auto_handled_rate": 0.6,
+        "auto_handled_accuracy": 1.0,
+        "misrouted_automatically": 0,
+        "sent_to_review": 32,
+        "review_rate": 0.4,
+        "wrong_category": 7,
+        "wrong_caught_by_review": 7,
+        "hard_items": 28,
+        "hard_accuracy": 0.8929,
+        "per_category": {
+          "sales_lead": {
+            "items": 24,
+            "correct": 20,
+            "routed": 13,
+            "routed_correct": 13
+          },
+          "support": {
+            "items": 20,
+            "correct": 18,
+            "routed": 16,
+            "routed_correct": 16
+          },
+          "invoice": {
+            "items": 14,
+            "correct": 14,
+            "routed": 14,
+            "routed_correct": 14
+          },
+          "spam": {
+            "items": 14,
+            "correct": 13,
+            "routed": 5,
+            "routed_correct": 5
+          },
+          "other": {
+            "items": 8,
+            "correct": 8,
+            "routed": 0,
+            "routed_correct": 0
+          }
+        },
+        "confusion": {
+          "sales_lead->other": 2,
+          "sales_lead->support": 2,
+          "support->other": 1,
+          "support->invoice": 1,
+          "spam->invoice": 1
+        },
+        "fields": {
+          "name": {
+            "scored": 41,
+            "correct": 40,
+            "accuracy": 0.9756,
+            "misses": [
+              {
+                "id": "em-077",
+                "got": "Student Research",
+                "gold": "M. de Vries"
+              }
+            ]
+          },
+          "company": {
+            "scored": 43,
+            "correct": 8,
+            "accuracy": 0.186,
+            "misses": [
+              {
+                "id": "em-001",
+                "got": null,
+                "gold": "Fernway Tea GmbH"
+              },
+              {
+                "id": "em-003",
+                "got": null,
+                "gold": "Luma Cosmética S.L."
+              },
+              {
+                "id": "em-004",
+                "got": null,
+                "gold": "Het Stroopwafelhuis"
+              },
+              {
+                "id": "em-007",
+                "got": null,
+                "gold": "Atelier Nuage"
+              },
+              {
+                "id": "em-008",
+                "got": null,
+                "gold": "Nordic Knit"
+              },
+              {
+                "id": "em-009",
+                "got": null,
+                "gold": "Kraftwerk Candles GmbH"
+              },
+              {
+                "id": "em-010",
+                "got": null,
+                "gold": "Peak Pantry"
+              },
+              {
+                "id": "em-012",
+                "got": null,
+                "gold": "Costa Olive Estates"
+              }
+            ]
+          },
+          "product": {
+            "scored": 19,
+            "correct": 16,
+            "accuracy": 0.8421,
+            "misses": [
+              {
+                "id": "em-003",
+                "got": "stickers",
+                "gold": "mailer_boxes"
+              },
+              {
+                "id": "em-016",
+                "got": "labels",
+                "gold": "folding_cartons"
+              },
+              {
+                "id": "em-020",
+                "got": "mailer_boxes",
+                "gold": "other"
+              }
+            ]
+          },
+          "quantity": {
+            "scored": 17,
+            "correct": 15,
+            "accuracy": 0.8824,
+            "misses": [
+              {
+                "id": "em-005",
+                "got": null,
+                "gold": 4000
+              },
+              {
+                "id": "em-020",
+                "got": null,
+                "gold": 10000
+              }
+            ]
+          },
+          "order_id": {
+            "scored": 16,
+            "correct": 16,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "issue": {
+            "scored": 18,
+            "correct": 13,
+            "accuracy": 0.7222,
+            "misses": [
+              {
+                "id": "em-029",
+                "got": "shipping",
+                "gold": "account"
+              },
+              {
+                "id": "em-030",
+                "got": "shipping",
+                "gold": "order_change"
+              },
+              {
+                "id": "em-031",
+                "got": "artwork",
+                "gold": "quality"
+              },
+              {
+                "id": "em-034",
+                "got": "artwork",
+                "gold": "order_change"
+              },
+              {
+                "id": "em-038",
+                "got": "billing",
+                "gold": "shipping"
+              }
+            ]
+          },
+          "invoice_number": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "amount": {
+            "scored": 4,
+            "correct": 4,
+            "accuracy": 1.0,
+            "misses": []
+          }
+        },
+        "field_accuracy": 0.7294,
+        "downstream_records": {
+          "crm": 13,
+          "helpdesk": 16,
+          "accounting": 10
+        },
+        "downstream_correct_system": "29/29",
+        "review_reasons": {
+          "confidence 0.67": 16,
+          "category 'other' always goes to a person": 11,
+          "confidence 0.55": 5,
+          "confidence 0.40": 3,
+          "invoice from a sender that is not in the vendor list": 2,
+          "confidence 0.79": 2,
+          "an invoice without an attachment, a number or an amount": 1,
+          "the email contains text addressed to an AI system": 1
+        },
+        "fresh_items": 80,
+        "latency_fresh_p50_s": 0.22,
+        "latency_fresh_p95_s": 0.77
+      }
     }
   },
   "headline": [
@@ -1107,39 +1640,60 @@
       "value": 3.34
     },
     {
-      "suite": "invoices",
-      "run": "fake",
+      "suite": "faq",
+      "run": "offline",
+      "key": "decision_accuracy",
+      "metric": "auto-reply / escalate accuracy",
+      "value": 0.85
+    },
+    {
+      "suite": "faq",
+      "run": "offline",
+      "key": "auto_reply_rate",
+      "metric": "auto-replied",
+      "value": 0.6
+    },
+    {
+      "suite": "faq",
+      "run": "offline",
+      "key": "unsafe_auto_replies",
+      "metric": "unsafe auto-replies",
+      "value": 1
+    },
+    {
+      "suite": "faq",
+      "run": "offline",
+      "key": "auto_replies_with_all_facts",
+      "metric": "auto-replies with all facts",
+      "value": "20/23"
+    },
+    {
+      "suite": "faq",
+      "run": "offline",
+      "key": "latency_p50_s",
+      "metric": "latency p50 (s)",
+      "value": 0.24
+    },
+    {
+      "suite": "invoices_hard",
+      "run": "offline",
       "key": "field_accuracy",
       "metric": "field extraction accuracy",
-      "value": 1.0
+      "value": 0.125
     },
     {
-      "suite": "invoices",
-      "run": "fake",
+      "suite": "invoices_hard",
+      "run": "offline",
       "key": "decision_accuracy",
       "metric": "post / review decision accuracy",
-      "value": 1.0
+      "value": 0.5
     },
     {
-      "suite": "invoices",
-      "run": "fake",
+      "suite": "invoices_hard",
+      "run": "offline",
       "key": "problem_invoices_auto_posted",
       "metric": "problem invoices auto-posted",
       "value": 0
-    },
-    {
-      "suite": "invoices",
-      "run": "fake",
-      "key": "auto_post_rate",
-      "metric": "auto-posted",
-      "value": 0.675
-    },
-    {
-      "suite": "invoices",
-      "run": "fake",
-      "key": "latency_p50_s",
-      "metric": "latency p50 (s)",
-      "value": 0.21
     },
     {
       "suite": "invoices",
@@ -1177,6 +1731,41 @@
       "value": 6.14
     },
     {
+      "suite": "invoices",
+      "run": "offline",
+      "key": "field_accuracy",
+      "metric": "field extraction accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices",
+      "run": "offline",
+      "key": "decision_accuracy",
+      "metric": "post / review decision accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices",
+      "run": "offline",
+      "key": "problem_invoices_auto_posted",
+      "metric": "problem invoices auto-posted",
+      "value": 0
+    },
+    {
+      "suite": "invoices",
+      "run": "offline",
+      "key": "auto_post_rate",
+      "metric": "auto-posted",
+      "value": 0.675
+    },
+    {
+      "suite": "invoices",
+      "run": "offline",
+      "key": "latency_p50_s",
+      "metric": "latency p50 (s)",
+      "value": 0.25
+    },
+    {
       "suite": "leads",
       "run": "nemotron-super",
       "key": "profile_accuracy",
@@ -1205,39 +1794,32 @@
       "value": 19.93
     },
     {
-      "suite": "triage",
-      "run": "fake",
-      "key": "category_accuracy",
-      "metric": "routing accuracy (all emails)",
-      "value": 0.9125
+      "suite": "leads",
+      "run": "offline",
+      "key": "profile_accuracy",
+      "metric": "enrichment accuracy",
+      "value": 0.9107
     },
     {
-      "suite": "triage",
-      "run": "fake",
-      "key": "auto_handled_rate",
-      "metric": "auto-handled",
-      "value": 0.6
+      "suite": "leads",
+      "run": "offline",
+      "key": "tier_accuracy",
+      "metric": "tier accuracy",
+      "value": 0.9667
     },
     {
-      "suite": "triage",
-      "run": "fake",
-      "key": "auto_handled_accuracy",
-      "metric": "accuracy of auto-handled",
-      "value": 1.0
+      "suite": "leads",
+      "run": "offline",
+      "key": "drafts_passing_checks",
+      "metric": "drafts passing checks",
+      "value": 20
     },
     {
-      "suite": "triage",
-      "run": "fake",
-      "key": "field_accuracy",
-      "metric": "field extraction accuracy",
-      "value": 0.6796
-    },
-    {
-      "suite": "triage",
-      "run": "fake",
+      "suite": "leads",
+      "run": "offline",
       "key": "latency_p50_s",
       "metric": "latency p50 (s)",
-      "value": 0.22
+      "value": 0.28
     },
     {
       "suite": "triage",
@@ -1273,6 +1855,41 @@
       "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 13.12
+    },
+    {
+      "suite": "triage",
+      "run": "offline",
+      "key": "category_accuracy",
+      "metric": "routing accuracy (all emails)",
+      "value": 0.9125
+    },
+    {
+      "suite": "triage",
+      "run": "offline",
+      "key": "auto_handled_rate",
+      "metric": "auto-handled",
+      "value": 0.6
+    },
+    {
+      "suite": "triage",
+      "run": "offline",
+      "key": "auto_handled_accuracy",
+      "metric": "accuracy of auto-handled",
+      "value": 1.0
+    },
+    {
+      "suite": "triage",
+      "run": "offline",
+      "key": "field_accuracy",
+      "metric": "field extraction accuracy",
+      "value": 0.7294
+    },
+    {
+      "suite": "triage",
+      "run": "offline",
+      "key": "latency_p50_s",
+      "metric": "latency p50 (s)",
+      "value": 0.22
     }
   ]
 }

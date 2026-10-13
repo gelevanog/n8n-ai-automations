@@ -202,7 +202,7 @@ class Harness:
         gold = gold[:limit] if limit else gold
         items = []
         for invoice in gold:
-            pdf = self.data_dir / "invoices" / "pdf" / f"{invoice['id']}.pdf"
+            pdf = self.data_dir / dataset / "pdf" / f"{invoice['id']}.pdf"
             body = {
                 "filename": pdf.name,
                 "content_base64": base64.b64encode(pdf.read_bytes()).decode(),

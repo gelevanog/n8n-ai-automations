@@ -1,0 +1,1544 @@
+{
+  "name": "offline",
+  "suite": "faq",
+  "run_at": "2026-10-13T07:26:02+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 40,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 0.24,
+    "latency_p95_s": 0.4,
+    "llm_seconds_p50": 0.0,
+    "llm_calls": 32,
+    "llm_calls_per_item": 0.8,
+    "invalid_model_outputs": 0,
+    "provider_errors_retried": 0,
+    "tokens": 21857,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "fake/rules": 32
+    },
+    "decision_accuracy": 0.85,
+    "auto_replied": 24,
+    "auto_reply_rate": 0.6,
+    "answerable": 28,
+    "answerable_auto_replied": 23,
+    "must_escalate": 12,
+    "must_escalate_escalated": 11,
+    "unsafe_auto_replies": [
+      "faq-32"
+    ],
+    "over_escalated": [
+      "faq-03",
+      "faq-07",
+      "faq-16",
+      "faq-17",
+      "faq-23"
+    ],
+    "over_escalation_reasons": {
+      "model": 5,
+      "confidence 0.43 below 0.75": 2,
+      "confidence 0.33 below 0.75": 1,
+      "confidence 0.40 below 0.75": 2
+    },
+    "auto_replies_with_all_facts": "20/23",
+    "auto_replies_citing_gold_article": "20/23",
+    "fact_misses": [
+      {
+        "id": "faq-04",
+        "facts": [
+          "45|15"
+        ],
+        "answer": "Thanks for your question! Shipping is free within the EU. A printed sample of your own design costs EUR 49 per product (see also \"Digital proofs and approval\" for physical pre-production proofs)."
+      },
+      {
+        "id": "faq-11",
+        "facts": [
+          "10%"
+        ],
+        "answer": "Thanks for your question! Volume discounts are applied automatically: For custom sizes, special finishes (foil, embossing, soft-touch) or orders above 25,000 units, ask for a quote: our sales team replies within one business day."
+      },
+      {
+        "id": "faq-24",
+        "facts": [
+          "Team"
+        ],
+        "answer": "Thanks for your question! You can download every invoice as a PDF from Account > Orders > Invoices. To change the company name, address or VAT number on an invoice that was already issued, email billing@kestrelprint.example with the order number within 30 days of the invoice date."
+      }
+    ],
+    "retrieval_recall_at_4": 0.9643,
+    "tickets": 40
+  },
+  "items": [
+    {
+      "id": "faq-01",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-01-minimum-order"
+      ],
+      "facts": [
+        "250"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! The minimum order quantity (MOQ) depends on the product: Mailer boxes: 250 units per design.",
+      "citations": [
+        "kb-01-minimum-order"
+      ],
+      "confidence": 0.9,
+      "reasons": [],
+      "retrieved": [
+        "kb-01-minimum-order",
+        "kb-11-materials",
+        "kb-12-custom-sizes",
+        "kb-10-samples"
+      ],
+      "seconds": 0.26,
+      "run_id": "14171804af2c",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 686,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-02",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-02-lead-times"
+      ],
+      "facts": [
+        "10 business days"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Standard production takes 10 business days after you approve the digital proof. Large orders (above 10,000 units) take 15 business days.",
+      "citations": [
+        "kb-02-lead-times"
+      ],
+      "confidence": 0.9,
+      "reasons": [],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-05-proofs",
+        "kb-13-order-changes",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 0.251,
+      "run_id": "5493c1ccf387",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 709,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-03",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-02-lead-times"
+      ],
+      "facts": [
+        "5 business days",
+        "25%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.43,
+      "reasons": [
+        "model: the articles do not cover the question",
+        "confidence 0.43 below 0.75"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-11-materials",
+        "kb-01-minimum-order",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 0.198,
+      "run_id": "ffdf5a0a00d3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 667,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-04",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-03-shipping"
+      ],
+      "facts": [
+        "45|15"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Shipping is free within the EU. A printed sample of your own design costs EUR 49 per product (see also \"Digital proofs and approval\" for physical pre-production proofs).",
+      "citations": [
+        "kb-10-samples"
+      ],
+      "confidence": 0.83,
+      "reasons": [],
+      "retrieved": [
+        "kb-10-samples",
+        "kb-05-proofs",
+        "kb-20-wholesale-partners",
+        "kb-02-lead-times"
+      ],
+      "seconds": 0.263,
+      "run_id": "a40bd1de857f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 691,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-05",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-03-shipping"
+      ],
+      "facts": [
+        "recipient|you pay|paid by you|DAP"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! UK import VAT and duties are paid by the recipient (DAP terms). We ship from our factory in Utrecht, the Netherlands.",
+      "citations": [
+        "kb-03-shipping"
+      ],
+      "confidence": 0.79,
+      "reasons": [],
+      "retrieved": [
+        "kb-03-shipping",
+        "kb-07-payment-terms",
+        "kb-14-order-tracking",
+        "kb-10-samples"
+      ],
+      "seconds": 0.373,
+      "run_id": "f5037e743dad",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 691,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-06",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-04-artwork-files"
+      ],
+      "facts": [
+        "PDF"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Please send print-ready artwork as PDF/X-4 or vector AI/EPS files. We do not accept Word, PowerPoint or Canva share links as print files.",
+      "citations": [
+        "kb-04-artwork-files"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-04-artwork-files",
+        "kb-05-proofs",
+        "kb-15-account",
+        "kb-16-design-service"
+      ],
+      "seconds": 0.369,
+      "run_id": "70e5ef427a52",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 705,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-07",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-04-artwork-files"
+      ],
+      "facts": [
+        "300 dpi|300dpi"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.33,
+      "reasons": [
+        "model: the articles do not cover the question",
+        "confidence 0.33 below 0.75"
+      ],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-01-minimum-order",
+        "kb-04-artwork-files",
+        "kb-20-wholesale-partners"
+      ],
+      "seconds": 0.32,
+      "run_id": "d7f9cd986eb5",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 662,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-08",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-04-artwork-files"
+      ],
+      "facts": [
+        "3 mm|3mm"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Add 3 mm bleed on all sides. Use our dieline template for your product (download it from the product page).",
+      "citations": [
+        "kb-04-artwork-files"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-04-artwork-files",
+        "kb-16-design-service",
+        "kb-12-custom-sizes"
+      ],
+      "seconds": 0.367,
+      "run_id": "5c09860d3bcc",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 597,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-09",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-05-proofs"
+      ],
+      "facts": [
+        "two|2"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Artwork check and file fixing: free for every order. Full packaging design (concept, two revisions, print-ready files): from EUR 450 per design.",
+      "citations": [
+        "kb-16-design-service"
+      ],
+      "confidence": 0.75,
+      "reasons": [],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-05-proofs",
+        "kb-10-samples",
+        "kb-13-order-changes"
+      ],
+      "seconds": 0.246,
+      "run_id": "a39a4ed1bab9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 680,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-10",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-05-proofs"
+      ],
+      "facts": [
+        "75"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! A physical pre-production proof (one printed and assembled unit) costs EUR 75 and adds 5 business days. Up to two rounds of changes to the proof are free; further rounds cost EUR 25 each.",
+      "citations": [
+        "kb-05-proofs"
+      ],
+      "confidence": 0.8,
+      "reasons": [],
+      "retrieved": [
+        "kb-05-proofs",
+        "kb-10-samples",
+        "kb-17-print-quality",
+        "kb-09-reprints-returns"
+      ],
+      "seconds": 0.238,
+      "run_id": "e9995ed930b4",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 754,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-11",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-06-pricing"
+      ],
+      "facts": [
+        "10%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Volume discounts are applied automatically: For custom sizes, special finishes (foil, embossing, soft-touch) or orders above 25,000 units, ask for a quote: our sales team replies within one business day.",
+      "citations": [
+        "kb-06-pricing"
+      ],
+      "confidence": 0.75,
+      "reasons": [],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-20-wholesale-partners",
+        "kb-18-eco-certificates",
+        "kb-10-samples"
+      ],
+      "seconds": 0.234,
+      "run_id": "24a15836dd21",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 650,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-12",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-06-pricing"
+      ],
+      "facts": [
+        "exclude|excluding|excl|without VAT|not include"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! All prices are in EUR and exclude VAT. Prices depend on the product, size, material, print colours and quantity.",
+      "citations": [
+        "kb-06-pricing"
+      ],
+      "confidence": 0.83,
+      "reasons": [],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-07-payment-terms",
+        "kb-20-wholesale-partners",
+        "kb-08-invoices"
+      ],
+      "seconds": 0.244,
+      "run_id": "37c87ec4144a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 652,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-13",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-07-payment-terms"
+      ],
+      "facts": [
+        "upfront|three|3"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Business customers with three or more completed orders can apply for invoice payment with 30-day terms (net 30), subject to a credit check. New customers pay upfront by card, iDEAL, SEPA bank transfer or PayPal before production starts.",
+      "citations": [
+        "kb-07-payment-terms"
+      ],
+      "confidence": 0.86,
+      "reasons": [],
+      "retrieved": [
+        "kb-07-payment-terms",
+        "kb-08-invoices",
+        "kb-03-shipping",
+        "kb-19-business-hours"
+      ],
+      "seconds": 0.25,
+      "run_id": "dbdd69515ae8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 709,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-14",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-07-payment-terms"
+      ],
+      "facts": [
+        "reverse charge"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! We charge Dutch VAT (21%) to customers in the Netherlands and to EU consumers; EU businesses with a valid VAT number are invoiced with reverse charge (0% VAT). Customers outside the EU are invoiced without VAT.",
+      "citations": [
+        "kb-07-payment-terms"
+      ],
+      "confidence": 0.79,
+      "reasons": [],
+      "retrieved": [
+        "kb-07-payment-terms",
+        "kb-08-invoices",
+        "kb-13-order-changes",
+        "kb-06-pricing"
+      ],
+      "seconds": 0.242,
+      "run_id": "d228aaf6c263",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 718,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-15",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-08-invoices"
+      ],
+      "facts": [
+        "Account|Invoices"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! You can download every invoice as a PDF from Account > Orders > Invoices. To change the company name, address or VAT number on an invoice that was already issued, email billing@kestrelprint.example with the order number within 30 days of the invoice date.",
+      "citations": [
+        "kb-08-invoices"
+      ],
+      "confidence": 0.83,
+      "reasons": [],
+      "retrieved": [
+        "kb-08-invoices",
+        "kb-07-payment-terms",
+        "kb-04-artwork-files"
+      ],
+      "seconds": 0.238,
+      "run_id": "dd9c57792f59",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 628,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-16",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-08-invoices"
+      ],
+      "facts": [
+        "credit note|corrected invoice|billing@kestrelprint.example"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.43,
+      "reasons": [
+        "model: the articles do not cover the question",
+        "confidence 0.43 below 0.75"
+      ],
+      "retrieved": [
+        "kb-08-invoices",
+        "kb-02-lead-times",
+        "kb-07-payment-terms",
+        "kb-20-wholesale-partners"
+      ],
+      "seconds": 0.2,
+      "run_id": "47f0a2ff2557",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 644,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-17",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-09-reprints-returns"
+      ],
+      "facts": [
+        "made to order|cannot be returned|can't be returned|not possible"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.4,
+      "reasons": [
+        "model: the articles do not cover the question",
+        "confidence 0.40 below 0.75"
+      ],
+      "retrieved": [
+        "kb-09-reprints-returns",
+        "kb-01-minimum-order",
+        "kb-02-lead-times",
+        "kb-10-samples"
+      ],
+      "seconds": 0.199,
+      "run_id": "4567c376fbff",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 728,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-18",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-09-reprints-returns"
+      ],
+      "facts": [
+        "14 days"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! If your order arrives damaged, misprinted or short (fewer units than ordered), report it within 14 days of delivery with photos and your order number.",
+      "citations": [
+        "kb-09-reprints-returns"
+      ],
+      "confidence": 0.88,
+      "reasons": [],
+      "retrieved": [
+        "kb-09-reprints-returns",
+        "kb-13-order-changes",
+        "kb-03-shipping",
+        "kb-02-lead-times"
+      ],
+      "seconds": 0.241,
+      "run_id": "4b9c518aa094",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 790,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-19",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-10-samples"
+      ],
+      "facts": [
+        "free sample pack|unprinted|plain"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! A free sample pack with plain (unprinted) examples of our mailer boxes, cartons and bags is available once per company. Shipping is free within the EU.",
+      "citations": [
+        "kb-10-samples"
+      ],
+      "confidence": 0.83,
+      "reasons": [],
+      "retrieved": [
+        "kb-10-samples",
+        "kb-05-proofs",
+        "kb-04-artwork-files",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 0.255,
+      "run_id": "adb826fa8efb",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 738,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-20",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-11-materials",
+        "kb-18-eco-certificates"
+      ],
+      "facts": [
+        "FSC",
+        "recycl"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Our mailer boxes and cartons are made from FSC-certified corrugated board or folding boxboard. All our paper products are recyclable with paper waste, and our compostable mailer bags are certified to EN 13432.",
+      "citations": [
+        "kb-11-materials"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-11-materials",
+        "kb-18-eco-certificates",
+        "kb-12-custom-sizes",
+        "kb-17-print-quality"
+      ],
+      "seconds": 0.252,
+      "run_id": "7f9713ab2c0e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 678,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-21",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-12-custom-sizes"
+      ],
+      "facts": [
+        "no extra|no tooling|free|no additional"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Every product is available in custom dimensions at no extra tooling cost for mailer boxes. The maximum mailer box size is 600 x 400 x 300 mm.",
+      "citations": [
+        "kb-12-custom-sizes"
+      ],
+      "confidence": 0.93,
+      "reasons": [],
+      "retrieved": [
+        "kb-12-custom-sizes",
+        "kb-01-minimum-order",
+        "kb-13-order-changes",
+        "kb-06-pricing"
+      ],
+      "seconds": 0.243,
+      "run_id": "e72991e10aab",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 743,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-22",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-12-custom-sizes"
+      ],
+      "facts": [
+        "600"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Every product is available in custom dimensions at no extra tooling cost for mailer boxes. The maximum mailer box size is 600 x 400 x 300 mm.",
+      "citations": [
+        "kb-12-custom-sizes"
+      ],
+      "confidence": 0.88,
+      "reasons": [],
+      "retrieved": [
+        "kb-12-custom-sizes",
+        "kb-11-materials",
+        "kb-17-print-quality",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 0.254,
+      "run_id": "5c68a6e6dc1e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 714,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-23",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-13-order-changes"
+      ],
+      "facts": [
+        "15%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.4,
+      "reasons": [
+        "model: the articles do not cover the question",
+        "confidence 0.40 below 0.75"
+      ],
+      "retrieved": [
+        "kb-05-proofs",
+        "kb-14-order-tracking",
+        "kb-09-reprints-returns",
+        "kb-13-order-changes"
+      ],
+      "seconds": 0.193,
+      "run_id": "a7e7c7bf9867",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 692,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-24",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-15-account"
+      ],
+      "facts": [
+        "Team"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! You can download every invoice as a PDF from Account > Orders > Invoices. To change the company name, address or VAT number on an invoice that was already issued, email billing@kestrelprint.example with the order number within 30 days of the invoice date.",
+      "citations": [
+        "kb-08-invoices"
+      ],
+      "confidence": 0.8,
+      "reasons": [],
+      "retrieved": [
+        "kb-08-invoices",
+        "kb-04-artwork-files",
+        "kb-15-account",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 0.253,
+      "run_id": "ac1d2e854b27",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 702,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-25",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-16-design-service"
+      ],
+      "facts": [
+        "450"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Full packaging design (concept, two revisions, print-ready files): from EUR 450 per design. Our in-house designers can prepare it.",
+      "citations": [
+        "kb-16-design-service"
+      ],
+      "confidence": 0.8,
+      "reasons": [],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-01-minimum-order",
+        "kb-17-print-quality",
+        "kb-06-pricing"
+      ],
+      "seconds": 0.313,
+      "run_id": "a014fcd80dfd",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 712,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-26",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-17-print-quality"
+      ],
+      "facts": [
+        "20%"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Inside printing (on the inside of a mailer box) is available for an extra 20% of the box price. We print digitally for runs up to 2,000 units and offset (litho) for larger runs.",
+      "citations": [
+        "kb-17-print-quality"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-17-print-quality",
+        "kb-11-materials",
+        "kb-01-minimum-order",
+        "kb-12-custom-sizes"
+      ],
+      "seconds": 0.413,
+      "run_id": "bd8fcaa5157e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 724,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-27",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-18-eco-certificates"
+      ],
+      "facts": [
+        "dry|food-safe|food safe"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! On request we provide our FSC chain-of-custody certificate (FSC-C000000, fictional for this demo), material safety data for inks, and a declaration of compliance for food contact for our food-safe cartons. Food-safe cartons are suitable for dry and non-fatty food in direct contact.",
+      "citations": [
+        "kb-18-eco-certificates"
+      ],
+      "confidence": 0.8,
+      "reasons": [],
+      "retrieved": [
+        "kb-18-eco-certificates",
+        "kb-12-custom-sizes",
+        "kb-10-samples",
+        "kb-11-materials"
+      ],
+      "seconds": 0.402,
+      "run_id": "bf5e487a28f6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 681,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-28",
+      "expected": "auto_reply",
+      "gold_articles": [
+        "kb-19-business-hours"
+      ],
+      "facts": [
+        "08:30|8:30"
+      ],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! Our customer support team answers email and chat Monday to Friday, 08:30-17:30 CET. We aim to reply within 4 business hours.",
+      "citations": [
+        "kb-19-business-hours"
+      ],
+      "confidence": 0.95,
+      "reasons": [],
+      "retrieved": [
+        "kb-19-business-hours",
+        "kb-14-order-tracking",
+        "kb-13-order-changes"
+      ],
+      "seconds": 0.397,
+      "run_id": "2d7289a24562",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 525,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-29",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "mentions a specific order (needs a lookup in the order system)"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-19-business-hours",
+        "kb-14-order-tracking",
+        "kb-13-order-changes"
+      ],
+      "seconds": 0.27,
+      "run_id": "6df43cdf2f20",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-30",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "refund claim or payment dispute",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-09-reprints-returns",
+        "kb-17-print-quality",
+        "kb-13-order-changes",
+        "kb-07-payment-terms"
+      ],
+      "seconds": 0.188,
+      "run_id": "a707165ea3e0",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-31",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.2,
+      "reasons": [
+        "no article covers the question well",
+        "model: the articles do not cover the question",
+        "confidence 0.20 below 0.75"
+      ],
+      "retrieved": [
+        "kb-17-print-quality",
+        "kb-01-minimum-order",
+        "kb-13-order-changes",
+        "kb-16-design-service"
+      ],
+      "seconds": 0.201,
+      "run_id": "99fc183a80cd",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 670,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-32",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "auto_reply",
+      "answer": "Thanks for your question! For custom sizes, special finishes (foil, embossing, soft-touch) or orders above 25,000 units, ask for a quote: our sales team replies within one business day. The online configurator on our website gives an instant price for standard sizes.",
+      "citations": [
+        "kb-06-pricing"
+      ],
+      "confidence": 0.81,
+      "reasons": [],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-12-custom-sizes",
+        "kb-01-minimum-order",
+        "kb-15-account"
+      ],
+      "seconds": 0.251,
+      "run_id": "74695abc0b68",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 755,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-33",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "discount request",
+        "the question addresses the AI system"
+      ],
+      "retrieved": [
+        "kb-06-pricing",
+        "kb-09-reprints-returns",
+        "kb-20-wholesale-partners",
+        "kb-15-account"
+      ],
+      "seconds": 0.194,
+      "run_id": "15a5b8ead035",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-34",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "possible security incident"
+      ],
+      "retrieved": [
+        "kb-15-account",
+        "kb-14-order-tracking",
+        "kb-08-invoices",
+        "kb-02-lead-times"
+      ],
+      "seconds": 0.196,
+      "run_id": "99611df23724",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-35",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "legal matter",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-16-design-service",
+        "kb-05-proofs",
+        "kb-04-artwork-files",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 0.202,
+      "run_id": "b81bd475fed7",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-36",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "mentions a specific order (needs a lookup in the order system)"
+      ],
+      "retrieved": [
+        "kb-13-order-changes",
+        "kb-08-invoices",
+        "kb-09-reprints-returns",
+        "kb-03-shipping"
+      ],
+      "seconds": 0.193,
+      "run_id": "bf46f5a825c2",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-37",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.2,
+      "reasons": [
+        "no article covers the question well",
+        "model: the articles do not cover the question",
+        "confidence 0.20 below 0.75"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-03-shipping"
+      ],
+      "seconds": 0.205,
+      "run_id": "ad93ef6e3bb3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 494,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-38",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0.25,
+      "reasons": [
+        "model: the articles do not cover the question",
+        "confidence 0.25 below 0.75"
+      ],
+      "retrieved": [
+        "kb-02-lead-times",
+        "kb-03-shipping",
+        "kb-16-design-service",
+        "kb-14-order-tracking"
+      ],
+      "seconds": 0.206,
+      "run_id": "00652dd2887b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 668,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-39",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "complaint",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-17-print-quality",
+        "kb-12-custom-sizes",
+        "kb-04-artwork-files",
+        "kb-01-minimum-order"
+      ],
+      "seconds": 0.207,
+      "run_id": "54792b05e05a",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "faq-40",
+      "expected": "escalate",
+      "gold_articles": [],
+      "facts": [],
+      "http": 200,
+      "error": null,
+      "decision": "escalate",
+      "answer": "",
+      "citations": [],
+      "confidence": 0,
+      "reasons": [
+        "data-protection request",
+        "no article covers the question well"
+      ],
+      "retrieved": [
+        "kb-18-eco-certificates"
+      ],
+      "seconds": 0.203,
+      "run_id": "1317a3df1685",
+      "llm_calls": 0,
+      "llm_attempts": 0,
+      "llm_ms": 0,
+      "tokens": 0,
+      "cost_usd": 0,
+      "models": [],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    }
+  ]
+}
