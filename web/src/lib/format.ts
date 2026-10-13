@@ -120,3 +120,8 @@ export function attachmentNames(input: unknown): string[] {
   if (typeof obj.filename === "string" && obj.filename) names.push(obj.filename);
   return names;
 }
+
+export function clock(iso: string | null | undefined): string {
+  if (!iso) return DASH;
+  return new Date(iso).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+}

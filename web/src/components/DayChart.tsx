@@ -38,6 +38,7 @@ export function DayChart({ days, span, now }: { days: Record<string, DayBucket>;
     const d = new Date(`${last}T00:00:00Z`);
     d.setUTCDate(d.getUTCDate() - (span - 1));
     first = isoDay(d);
+    if (keys[0] && keys[0] < first) first = keys[0];
   } else {
     first = keys[0] ?? last;
     const minStart = new Date(`${last}T00:00:00Z`);
@@ -51,7 +52,7 @@ export function DayChart({ days, span, now }: { days: Record<string, DayBucket>;
   });
   const max = Math.max(1, ...rows.map((r) => r.runs));
   const ceiling = niceCeil(max);
-  const labelEvery = Math.ceil(rows.length / 8);
+  const labelEvery = Math.max(1, Math.ceil(rows.length / 6));
   const focus = rows.find((r) => r.day === hover) ?? null;
   const total = rows.reduce((s, r) => s + r.runs, 0);
 
@@ -106,7 +107,7 @@ export function DayChart({ days, span, now }: { days: Record<string, DayBucket>;
           <div className="absolute inset-x-0 bottom-0 flex h-4 gap-[3px] sm:gap-1">
             {rows.map((r, i) => (
               <div key={r.day} className="min-w-0 flex-1 overflow-visible text-center text-[10.5px] whitespace-nowrap text-faint">
-                {i % labelEvery === 0 || i === rows.length - 1 ? shortDate(r.day) : ""}
+                {(rows.length - 1 - i) % labelEvery === 0 ? shortDate(r.day) : ""}
               </div>
             ))}
           </div>

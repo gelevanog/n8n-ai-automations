@@ -42,7 +42,7 @@ export const WORKFLOWS: Record<WorkflowKey, WorkflowInfo> = {
     key: "invoice",
     name: "Invoice intake",
     n8nId: "RelayInvoiceIntake",
-    dot: "bg-emerald-500",
+    dot: "bg-teal-500",
     tagline: "Reads supplier invoice PDFs, checks them like a bookkeeper and posts clean bills to accounting.",
     trigger: "Webhook invoice-intake: a PDF from inbox triage, an upload or an API call (base64).",
     steps: [
@@ -63,7 +63,7 @@ export const WORKFLOWS: Record<WorkflowKey, WorkflowInfo> = {
     key: "lead",
     name: "Lead enrichment",
     n8nId: "RelayLeadEnrichment",
-    dot: "bg-amber-500",
+    dot: "bg-pink-500",
     tagline: "Researches web-form leads on their own website, scores them against the ideal customer profile and drafts a reply.",
     trigger: "Webhook lead-enrichment: the quote form on the website.",
     steps: [
@@ -84,7 +84,7 @@ export const WORKFLOWS: Record<WorkflowKey, WorkflowInfo> = {
     key: "faq",
     name: "Support FAQ",
     n8nId: "RelaySupportFaq",
-    dot: "bg-sky-500",
+    dot: "bg-orange-500",
     tagline: "Answers customer questions from the knowledge base with citations, and escalates anything it should not answer.",
     trigger: "Webhook support-faq: a customer question from email or the help widget.",
     steps: [
@@ -104,7 +104,7 @@ export const WORKFLOWS: Record<WorkflowKey, WorkflowInfo> = {
     key: "digest",
     name: "KPI digest",
     n8nId: "RelayKpiDigest",
-    dot: "bg-violet-500",
+    dot: "bg-slate-500",
     tagline: "A weekly summary of what the automations did, posted to #ops.",
     trigger: "Schedule: every Monday 08:00, or the run-now webhook kpi-digest.",
     steps: [
@@ -149,6 +149,20 @@ export const CATEGORIES: { key: Category; label: string; route: string }[] = [
   { key: "spam", label: "Spam", route: "Archive" },
   { key: "other", label: "Other", route: "Archive" },
 ];
+
+const INDUSTRIES: Record<string, string> = {
+  food_beverage: "Food and beverage",
+  cosmetics_beauty: "Cosmetics and beauty",
+  fashion_apparel: "Fashion and apparel",
+  home_lifestyle: "Home and lifestyle",
+  health_wellness: "Health and wellness",
+  printing_packaging: "Printing and packaging",
+};
+
+export function industryLabel(value: string | null | undefined): string {
+  if (!value) return "\u2014";
+  return INDUSTRIES[value] ?? value.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+}
 
 export const REVIEW_KINDS: Record<string, string> = {
   triage: "Email triage",

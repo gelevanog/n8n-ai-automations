@@ -202,8 +202,9 @@ export function Loading({ children = "Loading" }: { children?: ReactNode }) {
 
 export function Meter({ value, tone = "brand", className = "" }: { value: number | null | undefined; tone?: Tone; className?: string }) {
   const v = Math.max(0, Math.min(1, value ?? 0));
+  const width = /\bw-/.test(className) ? "" : "w-full";
   return (
-    <div className={`h-1.5 w-full overflow-hidden rounded-full bg-zinc-100 ${className}`}>
+    <div className={`h-1.5 shrink-0 overflow-hidden rounded-full bg-zinc-100 ${width} ${className}`}>
       <div className={`h-full rounded-full ${DOTS[tone]}`} style={{ width: `${v * 100}%` }} />
     </div>
   );
@@ -250,7 +251,7 @@ export function Tabs<T extends string>({ value, onChange, options }: { value: T;
 
 export function Select({ value, onChange, options, ariaLabel, className = "" }: { value: string; onChange: (v: string) => void; options: { value: string; label: string }[]; ariaLabel: string; className?: string }) {
   return (
-    <select aria-label={ariaLabel} value={value} onChange={(e) => onChange(e.target.value)} className={`field h-8 w-auto py-0 text-[12.5px] ${className}`}>
+    <select aria-label={ariaLabel} value={value} onChange={(e) => onChange(e.target.value)} className={`field h-8 w-auto py-0 text-[12.5px] font-normal ${className}`}>
       {options.map((o) => (
         <option key={o.value} value={o.value}>
           {o.label}

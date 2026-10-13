@@ -42,7 +42,7 @@ export default function OverviewPage() {
       {m && t ? (
         <div className="space-y-5">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
-            <Stat label="Runs" value={compact(t.runs)} hint={`${num(t.duplicates)} duplicate deliveries absorbed`} />
+            <Stat label="Runs" value={compact(t.runs)} hint={`${num(t.duplicates)} duplicates absorbed`} />
             <Stat label="Auto-handled" value={pct(autoRate)} tone="green" hint={`${num(t.auto)} of ${num(t.runs)} without a person`} />
             <Stat label="Waiting for review" value={num(t.pending_review)} tone={t.pending_review ? "amber" : undefined} hint="Open the review queue" href="/review" />
             <Stat label="Open dead letters" value={num(t.open_dead_letters)} tone={t.open_dead_letters ? "red" : undefined} hint={`${num(t.errors)} failed runs in range`} href="/dead-letters" />
