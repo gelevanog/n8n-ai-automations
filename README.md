@@ -13,7 +13,9 @@
 ![mypy strict](https://img.shields.io/badge/mypy-strict-2a6db2)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 
-<!-- demo-video -->
+https://github.com/user-attachments/assets/b157fb8f-5b44-47ca-967c-3ca4e3dea80f
+
+<sub>80-second walkthrough with voiceover. Can't play it? [Download the MP4](docs/demo.mp4).</sub>
 
 ![The review queue: an invoice held back because its VAT does not add up (9% of 223.58 is 20.12, the invoice says 24.59), with the extracted fields editable and the failed bookkeeping checks highlighted](docs/screenshots/hero.png)
 
