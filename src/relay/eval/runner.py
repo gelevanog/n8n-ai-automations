@@ -123,7 +123,9 @@ class Harness:
             "tokens": sum(int(c.get("input_tokens") or 0) + int(c.get("output_tokens") or 0) for c in calls),
             "cost_usd": round(sum(float(c.get("cost_usd") or 0) for c in calls), 6),
             "models": sorted({str(c.get("served_model") or c.get("model")) for c in calls}),
-            "schema_valid": all(c.get("schema_valid", True) for c in calls),
+            # A failed request (provider error, retried by n8n) is not an invalid output.
+            "schema_valid": all(c.get("schema_valid", True) for c in calls if not c.get("error_message")),
+            "provider_errors": sum(1 for c in calls if c.get("error_message")),
             "cached": bool(calls) and all(c.get("cached") for c in calls),
         }
 
@@ -549,6 +551,7 @@ def _common(items: list[dict[str, Any]]) -> dict[str, Any]:
         "llm_calls": sum(i.get("llm_calls", 0) for i in items),
         "llm_calls_per_item": round(sum(i.get("llm_calls", 0) for i in items) / max(1, len(items)), 2),
         "invalid_model_outputs": sum(1 for i in items if not i.get("schema_valid", True)),
+        "provider_errors_retried": sum(i.get("provider_errors", 0) for i in items),
         "tokens": sum(i.get("tokens", 0) for i in items),
         "cost_usd": round(sum(i.get("cost_usd", 0.0) for i in items), 6),
         "cost_per_item_usd": round(sum(i.get("cost_usd", 0.0) for i in items) / max(1, len(items)), 6),

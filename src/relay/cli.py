@@ -157,6 +157,62 @@ def mcp(
     run(http=http, port=port)
 
 
+@app.command()
+def demo(
+    emails: int = 30,
+    invoices: int = 12,
+    leads: int = 10,
+    questions: int = 16,
+    reset: Annotated[bool, typer.Option(help="Empty the ops store and the mock systems first")] = True,
+    n8n_url: str = "http://localhost:5678",
+    api_url: str = "http://localhost:8100",
+    mocks_url: str = "http://localhost:8200",
+) -> None:
+    """Send a mix of synthetic traffic through the n8n workflows so the dashboard has something to show."""
+    import base64
+
+    import yaml
+
+    from relay.eval.runner import Endpoints, Harness
+    from relay.synthetic.emails import build_emails, email_payload
+
+    settings = get_settings()
+    harness = Harness(
+        settings,
+        Endpoints(
+            n8n=n8n_url,
+            api=api_url,
+            mocks=mocks_url,
+            webhook_token=settings.n8n_webhook_token,
+            api_token=settings.api_token or "relay-local-api-token",
+        ),
+    )
+    if reset:
+        harness.reset()
+    every = build_emails()
+    picked = every[:: max(1, len(every) // emails)][:emails]
+    for email in picked:
+        harness.webhook("inbox-triage", email_payload(email, Path("data/invoices")))
+    gold = [json.loads(line) for line in Path("data/invoices/gold.jsonl").read_text(encoding="utf-8").splitlines()]
+    for invoice in gold[-invoices:]:
+        pdf = Path("data/invoices/pdf") / f"{invoice['id']}.pdf"
+        harness.webhook(
+            "invoice-intake",
+            {"filename": pdf.name, "source": "upload", "content_base64": base64.b64encode(pdf.read_bytes()).decode()},
+        )
+    lead_rows = [json.loads(line) for line in Path("data/leads/leads.jsonl").read_text(encoding="utf-8").splitlines()]
+    for lead in lead_rows[:leads]:
+        body = {k: lead[k] for k in ("name", "email", "company", "website", "message", "product", "quantity")}
+        harness.webhook("lead-enrichment", {**body, "submission_id": lead["id"]})
+    faq = yaml.safe_load(Path("data/faq/questions.yaml").read_text(encoding="utf-8"))
+    for q in faq[:: max(1, len(faq) // questions)][:questions]:
+        harness.webhook(
+            "support-faq",
+            {"question": q["question"], "message_id": q["id"], "customer_email": f"{q['id']}@customer.example"},
+        )
+    console.print(harness.api("GET", "/ops/metrics")["totals"])
+
+
 @app.command("send-email")
 def send_email(
     email_id: Annotated[str, typer.Argument(help="An id from data/emails/emails.jsonl, e.g. em-001")],

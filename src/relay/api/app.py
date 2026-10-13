@@ -155,7 +155,7 @@ def create_app(
 
     def _failed(task: str, run_id: str | None, exc: Exception) -> None:
         store.record_call(
-            CallMeta(task=task, model=gateway.model.label, schema_valid=False),
+            CallMeta(task=task, model=gateway.model.label),
             run_id,
             "error",
             {},

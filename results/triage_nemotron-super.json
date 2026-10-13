@@ -1,0 +1,3371 @@
+{
+  "name": "nemotron-super",
+  "suite": "triage",
+  "run_at": "2026-10-13T05:41:47+00:00",
+  "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 80,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 13.12,
+    "latency_p95_s": 29.34,
+    "llm_seconds_p50": 11.93,
+    "llm_calls": 82,
+    "llm_calls_per_item": 1.02,
+    "invalid_model_outputs": 2,
+    "tokens": 174924,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "nvidia/nemotron-3-super-120b-a12b:free": 80,
+      "openrouter/nvidia/nemotron-3-super-120b-a12b:free": 2
+    },
+    "category_accuracy": 0.9625,
+    "auto_handled": 71,
+    "auto_handled_rate": 0.8875,
+    "auto_handled_accuracy": 0.9859,
+    "misrouted_automatically": 1,
+    "sent_to_review": 9,
+    "review_rate": 0.1125,
+    "wrong_category": 3,
+    "wrong_caught_by_review": 2,
+    "hard_items": 28,
+    "hard_accuracy": 0.8929,
+    "per_category": {
+      "sales_lead": {
+        "items": 24,
+        "correct": 23,
+        "routed": 23,
+        "routed_correct": 23
+      },
+      "support": {
+        "items": 20,
+        "correct": 20,
+        "routed": 20,
+        "routed_correct": 20
+      },
+      "invoice": {
+        "items": 14,
+        "correct": 14,
+        "routed": 14,
+        "routed_correct": 14
+      },
+      "spam": {
+        "items": 14,
+        "correct": 13,
+        "routed": 13,
+        "routed_correct": 13
+      },
+      "other": {
+        "items": 8,
+        "correct": 7,
+        "routed": 1,
+        "routed_correct": 0
+      }
+    },
+    "confusion": {
+      "sales_lead->other": 1,
+      "spam->other": 1,
+      "other->spam": 1
+    },
+    "fields": {
+      "name": {
+        "scored": 46,
+        "correct": 45,
+        "accuracy": 0.9783,
+        "misses": [
+          {
+            "id": "em-077",
+            "got": "Student Research",
+            "gold": "M. de Vries"
+          }
+        ]
+      },
+      "company": {
+        "scored": 47,
+        "correct": 45,
+        "accuracy": 0.9574,
+        "misses": [
+          {
+            "id": "em-052",
+            "got": "Swiftline Billing",
+            "gold": "Swiftline Logistics Ltd"
+          },
+          {
+            "id": "em-053",
+            "got": null,
+            "gold": "Cloudforge Software Inc."
+          }
+        ]
+      },
+      "product": {
+        "scored": 22,
+        "correct": 21,
+        "accuracy": 0.9545,
+        "misses": [
+          {
+            "id": "em-015",
+            "got": "folding_cartons",
+            "gold": "mailer_boxes"
+          }
+        ]
+      },
+      "quantity": {
+        "scored": 21,
+        "correct": 21,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "order_id": {
+        "scored": 16,
+        "correct": 15,
+        "accuracy": 0.9375,
+        "misses": [
+          {
+            "id": "em-042",
+            "got": null,
+            "gold": "KP-48010"
+          }
+        ]
+      },
+      "issue": {
+        "scored": 20,
+        "correct": 19,
+        "accuracy": 0.95,
+        "misses": [
+          {
+            "id": "em-031",
+            "got": "artwork",
+            "gold": "quality"
+          }
+        ]
+      },
+      "invoice_number": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "amount": {
+        "scored": 4,
+        "correct": 4,
+        "accuracy": 1.0,
+        "misses": []
+      }
+    },
+    "field_accuracy": 0.9681,
+    "downstream_records": {
+      "crm": 23,
+      "helpdesk": 20,
+      "accounting": 10
+    },
+    "downstream_correct_system": "43/43",
+    "review_reasons": {
+      "category 'other' always goes to a person": 9,
+      "the email contains text addressed to an AI system": 1
+    }
+  },
+  "items": [
+    {
+      "id": "em-001",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Lena Fischer",
+        "company": "Fernway Tea GmbH",
+        "product": "mailer_boxes",
+        "quantity": 1500,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Lena Fischer",
+        "company": "Fernway Tea GmbH",
+        "product": "mailer_boxes",
+        "quantity": 1500
+      },
+      "seconds": 0.362,
+      "run_id": "598e7bdd364a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 1126,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": true
+    },
+    {
+      "id": "em-002",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Marcus Oyelaran",
+        "company": "Brightbark Ltd",
+        "product": "folding_cartons",
+        "quantity": 5000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Marcus Oyelaran",
+        "company": "Brightbark Ltd",
+        "product": "folding_cartons",
+        "quantity": 5000
+      },
+      "seconds": 0.239,
+      "run_id": "42a1ff4436f1",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 996,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": true
+    },
+    {
+      "id": "em-003",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Sofia Marín",
+        "company": "Luma Cosmética S.L.",
+        "product": "mailer_boxes",
+        "quantity": 2000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Sofia Marín",
+        "company": "Luma Cosmética S.L.",
+        "product": "mailer_boxes",
+        "quantity": 2000
+      },
+      "seconds": 0.241,
+      "run_id": "af15db32e4b8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 1604,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": true
+    },
+    {
+      "id": "em-004",
+      "gold_category": "sales_lead",
+      "hard": "Dutch",
+      "language": "nl",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Daan de Vries",
+        "company": "Het Stroopwafelhuis",
+        "product": "paper_bags",
+        "quantity": 3000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Daan de Vries",
+        "company": "Het Stroopwafelhuis",
+        "product": "paper_bags",
+        "quantity": 3000
+      },
+      "seconds": 0.275,
+      "run_id": "efcc0daccb5e",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 2505,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-005",
+      "gold_category": "sales_lead",
+      "hard": "a reorder quoting an order number looks like support",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.98,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Priya Raman",
+        "company": "Orbit Brew Coffee Co.",
+        "product": "mailer_boxes",
+        "quantity": 4000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Priya Raman",
+        "company": "Orbit Brew Coffee Co.",
+        "product": "mailer_boxes",
+        "quantity": 4000
+      },
+      "seconds": 0.27,
+      "run_id": "02368b34ce08",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 2556,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-006",
+      "gold_category": "sales_lead",
+      "hard": "one-line lead with no details",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.9,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Tom Becker",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Tom Becker",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": null
+      },
+      "seconds": 0.191,
+      "run_id": "0ccd6ef6e086",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 0,
+      "tokens": 2397,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-007",
+      "gold_category": "sales_lead",
+      "hard": "partnership enquiry, no product",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Amélie Laurent",
+        "company": "Atelier Nuage",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Amélie Laurent",
+        "company": "Atelier Nuage",
+        "product": null,
+        "quantity": null
+      },
+      "seconds": 0.299,
+      "run_id": "4a5279df17d3",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 2,
+      "tokens": 2267,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-008",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Jonas Lindqvist",
+        "company": "Nordic Knit",
+        "product": "tissue_paper",
+        "quantity": 2000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Jonas Lindqvist",
+        "company": "Nordic Knit",
+        "product": "tissue_paper",
+        "quantity": 2000
+      },
+      "seconds": 0.283,
+      "run_id": "e54db7b5bd69",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 1361,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": true
+    },
+    {
+      "id": "em-009",
+      "gold_category": "sales_lead",
+      "hard": "German",
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.98,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Hannah Weber",
+        "company": "Kraftwerk Candles GmbH",
+        "product": "folding_cartons",
+        "quantity": 8000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Hannah Weber",
+        "company": "Kraftwerk Candles GmbH",
+        "product": "folding_cartons",
+        "quantity": 8000
+      },
+      "seconds": 10.798,
+      "run_id": "29b16e3d34bf",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 10520,
+      "tokens": 2749,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-010",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Ethan Cole",
+        "company": "Peak Pantry",
+        "product": "labels",
+        "quantity": 20000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Ethan Cole",
+        "company": "Peak Pantry",
+        "product": "labels",
+        "quantity": 20000
+      },
+      "seconds": 12.786,
+      "run_id": "f04ec4cf9b9d",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12530,
+      "tokens": 2756,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-011",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Chloé Martin",
+        "company": "Petit Pois",
+        "product": "mailer_boxes",
+        "quantity": 1200,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Chloé Martin",
+        "company": "Petit Pois",
+        "product": "mailer_boxes",
+        "quantity": 1200
+      },
+      "seconds": 13.844,
+      "run_id": "acc7b83bb913",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13618,
+      "tokens": 2627,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-012",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Rafael Costa",
+        "company": "Costa Olive Estates",
+        "product": "folding_cartons",
+        "quantity": 600,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Rafael Costa",
+        "company": "Costa Olive Estates",
+        "product": "folding_cartons",
+        "quantity": 600
+      },
+      "seconds": 7.637,
+      "run_id": "753bbaec1bfb",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 7380,
+      "tokens": 1579,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-013",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.96,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Mia Johansson",
+        "company": "Greenloop Apparel",
+        "product": "mailer_boxes",
+        "quantity": 3000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Mia Johansson",
+        "company": "Greenloop Apparel ApS",
+        "product": "mailer_boxes",
+        "quantity": 3000
+      },
+      "seconds": 25.667,
+      "run_id": "2d868d1b0729",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 25328,
+      "tokens": 2599,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-014",
+      "gold_category": "sales_lead",
+      "hard": "negotiation in a reply thread",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Oliver Grant",
+        "company": "Grant & Sons Bakery",
+        "product": "paper_bags",
+        "quantity": 2500,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Oliver Grant",
+        "company": "Grant & Sons Bakery",
+        "product": "paper_bags",
+        "quantity": 2500
+      },
+      "seconds": 13.713,
+      "run_id": "bf40983823bc",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13436,
+      "tokens": 2735,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-015",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Yuki Tanaka",
+        "company": "Matcha Mori",
+        "product": "folding_cartons",
+        "quantity": 300,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Yuki Tanaka",
+        "company": "Matcha Mori",
+        "product": "mailer_boxes",
+        "quantity": 300
+      },
+      "seconds": 16.165,
+      "run_id": "f5d1592391fb",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 15937,
+      "tokens": 2813,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-016",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Grace Okafor",
+        "company": "Okafor Skin Ltd",
+        "product": "folding_cartons",
+        "quantity": 12000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Grace Okafor",
+        "company": "Okafor Skin Ltd",
+        "product": "folding_cartons",
+        "quantity": 12000
+      },
+      "seconds": 33.235,
+      "run_id": "bb061ffbc026",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 32950,
+      "tokens": 3081,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-017",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Lukas Novák",
+        "company": "Prague Roasters s.r.o.",
+        "product": "labels",
+        "quantity": 5000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Lukas Novák",
+        "company": "Prague Roasters s.r.o.",
+        "product": "labels",
+        "quantity": 5000
+      },
+      "seconds": 26.688,
+      "run_id": "5565a6051e77",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 26415,
+      "tokens": 2419,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-018",
+      "gold_category": "sales_lead",
+      "hard": "a complaint and a new order in one email (the order wins)",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Isabella Rossi",
+        "company": "Rossi Pasta Fresca",
+        "product": "folding_cartons",
+        "quantity": 4000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Isabella Rossi",
+        "company": "Rossi Pasta Fresca",
+        "product": "folding_cartons",
+        "quantity": 4000
+      },
+      "seconds": 20.551,
+      "run_id": "fcac42cca686",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 20298,
+      "tokens": 3177,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-019",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Noah Williams",
+        "company": "Urban Hive",
+        "product": "labels",
+        "quantity": 2000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Noah Williams",
+        "company": "Urban Hive",
+        "product": "labels",
+        "quantity": 2000
+      },
+      "seconds": 20.894,
+      "run_id": "d48cd29212eb",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 20540,
+      "tokens": 2216,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-020",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Elif Yılmaz",
+        "company": "Anatolia Spice Co.",
+        "product": "other",
+        "quantity": 10000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Elif Yılmaz",
+        "company": "Anatolia Spice Co.",
+        "product": "other",
+        "quantity": 10000
+      },
+      "seconds": 19.756,
+      "run_id": "b96be4416ec2",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 19434,
+      "tokens": 2768,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-021",
+      "gold_category": "sales_lead",
+      "hard": "a size the KB says is too large",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Ben Carter",
+        "company": "Carter Bikes (Leeds)",
+        "product": "mailer_boxes",
+        "quantity": 500,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Ben Carter",
+        "company": "Carter Bikes",
+        "product": "mailer_boxes",
+        "quantity": 500
+      },
+      "seconds": 18.938,
+      "run_id": "b11cff1e85c3",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 18559,
+      "tokens": 2602,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-022",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Anna Kowalska",
+        "company": "Kowalska Ceramics",
+        "product": "mailer_boxes",
+        "quantity": 1000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Anna Kowalska",
+        "company": "Kowalska Ceramics",
+        "product": "mailer_boxes",
+        "quantity": 1000
+      },
+      "seconds": 5.715,
+      "run_id": "3e8084cfa987",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5404,
+      "tokens": 1085,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-023",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Felix Braun",
+        "company": "Braun Events",
+        "product": "paper_bags",
+        "quantity": 6000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Felix Braun",
+        "company": "Braun Events",
+        "product": "paper_bags",
+        "quantity": 6000
+      },
+      "seconds": 27.585,
+      "run_id": "f72451a74f9f",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 27317,
+      "tokens": 2281,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-024",
+      "gold_category": "sales_lead",
+      "hard": "vague; asks for products partly outside the range",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.95,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Zara Ahmed",
+        "company": "Zest Juice",
+        "product": "paper_bags",
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Zara Ahmed",
+        "company": "Zest Juice",
+        "product": "paper_bags",
+        "quantity": null
+      },
+      "seconds": 29.335,
+      "run_id": "ea2650b6a40a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 29034,
+      "tokens": 1553,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-025",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Kevin Moreau",
+        "company": "Moreau Wines",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47715",
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Kevin Moreau",
+        "company": "Moreau Wines",
+        "order_id": "KP-47715",
+        "issue": "shipping"
+      },
+      "seconds": 18.95,
+      "run_id": "71635814dac7",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 18530,
+      "tokens": 2516,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-026",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Sara Lindgren",
+        "company": "Lindgren Home",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48102",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Sara Lindgren",
+        "company": "Lindgren Home",
+        "order_id": "KP-48102",
+        "issue": "damage"
+      },
+      "seconds": 15.439,
+      "run_id": "c675807a423e",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 15076,
+      "tokens": 2329,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-027",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Paul Dubois",
+        "company": "Dubois Bakery",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Paul Dubois",
+        "company": null,
+        "order_id": null,
+        "issue": "artwork"
+      },
+      "seconds": 9.964,
+      "run_id": "f512d4338e0f",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 9669,
+      "tokens": 2330,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-028",
+      "gold_category": "support",
+      "hard": "a question about our invoice to a customer, not a supplier bill",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Laura Bianchi",
+        "company": "Bianchi Design S.r.l.",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-46780",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Laura Bianchi",
+        "company": "Bianchi Design S.r.l.",
+        "order_id": "KP-46780",
+        "issue": "billing"
+      },
+      "seconds": 11.53,
+      "run_id": "d4532dc0a577",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 11283,
+      "tokens": 2730,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-029",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Mark Jansen",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "account",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Mark Jansen",
+        "company": null,
+        "order_id": null,
+        "issue": "account"
+      },
+      "seconds": 9.989,
+      "run_id": "ca02fff75e4d",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 9680,
+      "tokens": 2427,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-030",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.98,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Eva Horvath",
+        "company": "horvath-tea.example",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48333",
+        "issue": "order_change",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Eva Horvath",
+        "company": null,
+        "order_id": "KP-48333",
+        "issue": "order_change"
+      },
+      "seconds": 18.925,
+      "run_id": "53bd28d87292",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 18608,
+      "tokens": 2592,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-031",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.9,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "James O'Neill",
+        "company": "O'Neill Distillery",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47201",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "James O'Neill",
+        "company": "O'Neill Distillery",
+        "order_id": "KP-47201",
+        "issue": "quality"
+      },
+      "seconds": 10.83,
+      "run_id": "01efa9383840",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 10476,
+      "tokens": 2536,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-032",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Nina Petrova",
+        "company": "petrova-studio.example",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48410",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Nina Petrova",
+        "company": null,
+        "order_id": "KP-48410",
+        "issue": "artwork"
+      },
+      "seconds": 18.639,
+      "run_id": "adbc1c3a3b24",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 18317,
+      "tokens": 2734,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-033",
+      "gold_category": "support",
+      "hard": "Spanish; a short delivery",
+      "language": "es",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Carlos Ruiz",
+        "company": "Ruiz Chocolates",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47950",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Carlos Ruiz",
+        "company": "Ruiz Chocolates",
+        "order_id": "KP-47950",
+        "issue": "damage"
+      },
+      "seconds": 12.838,
+      "run_id": "0641f263c939",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 12562,
+      "tokens": 1157,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-034",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Emma Schulz",
+        "company": "Schulz Optik",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48501",
+        "issue": "order_change",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Emma Schulz",
+        "company": "Schulz Optik",
+        "order_id": "KP-48501",
+        "issue": "order_change"
+      },
+      "seconds": 12.857,
+      "run_id": "3420679b73f9",
+      "llm_calls": 2,
+      "llm_attempts": 2,
+      "llm_ms": 7319,
+      "tokens": 1228,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "openrouter/nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": false,
+      "cached": false
+    },
+    {
+      "id": "em-035",
+      "gold_category": "support",
+      "hard": "mentions an invoice but is a customer request",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Victor Lambert",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-45992",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Victor Lambert",
+        "company": null,
+        "order_id": "KP-45992",
+        "issue": "billing"
+      },
+      "seconds": 12.66,
+      "run_id": "f73b2ecdaef2",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12333,
+      "tokens": 2748,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-036",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.96,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Olga Smirnova",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48288",
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Olga Smirnova",
+        "company": null,
+        "order_id": "KP-48288",
+        "issue": "shipping"
+      },
+      "seconds": 10.595,
+      "run_id": "99c36012ef7b",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 10319,
+      "tokens": 2513,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-037",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Henrik Dahl",
+        "company": "Dahl Audio",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "account",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Henrik Dahl",
+        "company": "Dahl Audio",
+        "order_id": null,
+        "issue": "account"
+      },
+      "seconds": 13.824,
+      "run_id": "5587be6f9cd2",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13621,
+      "tokens": 2447,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-038",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Fatima Zahra",
+        "company": "Zahra Argan Ltd",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48120",
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Fatima Zahra",
+        "company": "Zahra Argan Ltd",
+        "order_id": "KP-48120",
+        "issue": "shipping"
+      },
+      "seconds": 5.395,
+      "run_id": "7201afc64263",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5119,
+      "tokens": 1292,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-039",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Peter Novak",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47833",
+        "issue": "quality",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Peter Novak",
+        "company": null,
+        "order_id": "KP-47833",
+        "issue": "quality"
+      },
+      "seconds": 14.838,
+      "run_id": "d61c42decfca",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 14538,
+      "tokens": 2622,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-040",
+      "gold_category": "support",
+      "hard": "mentions an amount and a refund",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.96,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Ines Duarte",
+        "company": "Duarte Surf",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48455",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Ines Duarte",
+        "company": "Duarte Surf",
+        "order_id": "KP-48455",
+        "issue": "billing"
+      },
+      "seconds": 8.25,
+      "run_id": "eefee9338bd6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 7938,
+      "tokens": 1099,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-041",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Robert King",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48490",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Robert King",
+        "company": null,
+        "order_id": "KP-48490",
+        "issue": "artwork"
+      },
+      "seconds": 13.577,
+      "run_id": "ac42f8020208",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13178,
+      "tokens": 2443,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-042",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Aisha Bello",
+        "company": "bello-hair",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Aisha Bello",
+        "company": null,
+        "order_id": "KP-48010",
+        "issue": "damage"
+      },
+      "seconds": 8.366,
+      "run_id": "4049e158a764",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 7932,
+      "tokens": 1223,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-043",
+      "gold_category": "support",
+      "hard": "German",
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Martin Keller",
+        "company": "Keller Uhren",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48177",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Martin Keller",
+        "company": "Keller Uhren",
+        "order_id": "KP-48177",
+        "issue": "damage"
+      },
+      "seconds": 16.171,
+      "run_id": "c39a2784c89e",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 15882,
+      "tokens": 2661,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-044",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.95,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Julia Novak",
+        "company": "novak-kids.example",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "other",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Julia Novak",
+        "company": null,
+        "order_id": null,
+        "issue": "other"
+      },
+      "seconds": 19.147,
+      "run_id": "a02d0926d94d",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 18828,
+      "tokens": 2848,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-045",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Inkwell Accounts",
+        "company": "Inkwell Supplies GmbH",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "RE-2026-03295",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03295",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 15.486,
+      "run_id": "ffeb1bb9ed94",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 8262,
+      "tokens": 1309,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-046",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Inkwell Accounts",
+        "company": "Inkwell Supplies GmbH",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "RE-2026-03296",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03296",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 25.883,
+      "run_id": "4e82867ff276",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13783,
+      "tokens": 2860,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-047",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.99,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Swiftline Billing",
+        "company": "Swiftline Logistics Ltd",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "SL2026-02911",
+        "amount": 852.54
+      },
+      "gold_fields": {
+        "company": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02911",
+        "amount": 852.54,
+        "currency": "GBP"
+      },
+      "seconds": 21.762,
+      "run_id": "9fa34e8d4510",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13929,
+      "tokens": 2639,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-048",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.99,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Cloudforge Billing",
+        "company": "Cloudforge",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "CF-2026-02855",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02855",
+        "amount": null,
+        "currency": "USD"
+      },
+      "seconds": 14.68,
+      "run_id": "a42f9570fbd6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5782,
+      "tokens": 999,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-049",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "nl",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.99,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Hollandse Energie",
+        "company": "Hollandse Energie",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "HE-2026-03085",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03085",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 15.445,
+      "run_id": "f8c598e9aa1c",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 11319,
+      "tokens": 2731,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-050",
+      "gold_category": "invoice",
+      "hard": "informal, no number in the email (only in the PDF)",
+      "language": "nl",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Atelier Groen",
+        "company": "Atelier Groen",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "inv-006",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Atelier Groen V.O.F.",
+        "invoice_number": null,
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 23.9,
+      "run_id": "06968bd4b51c",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13367,
+      "tokens": 2427,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-051",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper",
+        "company": "Veldhoven Paper B.V.",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "VP-2026-02857",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02857",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 19.944,
+      "run_id": "907a8614592f",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 11833,
+      "tokens": 2664,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-052",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Swiftline Billing",
+        "company": "Swiftline Billing",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "SL2026-02912",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02912",
+        "amount": null,
+        "currency": "GBP"
+      },
+      "seconds": 27.165,
+      "run_id": "cdcf20af264a",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13210,
+      "tokens": 2399,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-053",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.96,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Cloudforge Billing",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "CF-2026-02857",
+        "amount": 145
+      },
+      "gold_fields": {
+        "company": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02857",
+        "amount": 145.0,
+        "currency": "USD"
+      },
+      "seconds": 9.253,
+      "run_id": "e996bd6f41d6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4925,
+      "tokens": 993,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-054",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Hollandse Energie",
+        "company": "Hollandse Energie",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "HE-2026-03086",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03086",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 16.326,
+      "run_id": "3779f7b84298",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 7260,
+      "tokens": 1182,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-055",
+      "gold_category": "invoice",
+      "hard": "a reminder without an attachment",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper",
+        "company": "Veldhoven Paper B.V.",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "VP-2026-02790",
+        "amount": 1946.2
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02790",
+        "amount": 1946.2,
+        "currency": "EUR"
+      },
+      "seconds": 28.665,
+      "run_id": "f994b09af95c",
+      "llm_calls": 2,
+      "llm_attempts": 3,
+      "llm_ms": 5155,
+      "tokens": 2443,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "openrouter/nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": false,
+      "cached": false
+    },
+    {
+      "id": "em-056",
+      "gold_category": "invoice",
+      "hard": "French",
+      "language": "fr",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Atelier Groen",
+        "company": "Atelier Groen",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "AG2026-03416",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03416",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 38.447,
+      "run_id": "a12b3b9ff849",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 29107,
+      "tokens": 2350,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-057",
+      "gold_category": "invoice",
+      "hard": "a statement of account, not a single invoice",
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.98,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Inkwell Accounts",
+        "company": "Inkwell Supplies GmbH",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": 2783.04
+      },
+      "gold_fields": {
+        "company": "Inkwell Supplies GmbH",
+        "invoice_number": null,
+        "amount": 2783.04,
+        "currency": "EUR"
+      },
+      "seconds": 56.44,
+      "run_id": "f302a81aa0c7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 55146,
+      "tokens": 1927,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-058",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.95,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper",
+        "company": "Veldhoven Paper",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "VP-2026-02864",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02864",
+        "amount": null,
+        "currency": "EUR"
+      },
+      "seconds": 27.372,
+      "run_id": "8900b148fa27",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 17907,
+      "tokens": 2710,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-059",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Rank Rocket SEO",
+        "company": "Rank Rocket SEO",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 9.672,
+      "run_id": "4578dd10f5c7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 9307,
+      "tokens": 1246,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-060",
+      "gold_category": "spam",
+      "hard": "phishing",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Microsoft 365 Team",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 6.874,
+      "run_id": "1c5052e277d8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 6704,
+      "tokens": 1305,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-061",
+      "gold_category": "spam",
+      "hard": "phishing disguised as an invoice",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.96,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Accounts Department",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 12.281,
+      "run_id": "13cfb8850313",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12022,
+      "tokens": 2689,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-062",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.96,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Lisa",
+        "company": "LeadGenix",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 13.004,
+      "run_id": "908087867cae",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12680,
+      "tokens": 2366,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-063",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Crypto Wealth",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 13.339,
+      "run_id": "5e40876f68b6",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12690,
+      "tokens": 2397,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-064",
+      "gold_category": "spam",
+      "hard": "phishing that mimics a carrier",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.98,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "DHL Express",
+        "company": "DHL Express",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 29.477,
+      "run_id": "05688542913c",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 29193,
+      "tokens": 2438,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-065",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Web Design Pro",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 14.017,
+      "run_id": "0be7acd93489",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 13659,
+      "tokens": 2461,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-066",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Prince Adewale",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 10.97,
+      "run_id": "0bef05856724",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 10641,
+      "tokens": 2244,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-067",
+      "gold_category": "spam",
+      "hard": "a directory scam that mentions invoices",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Packaging Expo",
+        "company": "Packaging Expo",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 12.621,
+      "run_id": "a1c9bf63b287",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12324,
+      "tokens": 2591,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-068",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.98,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Office Supplies Deals",
+        "company": "Office Supplies Deals",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 11.697,
+      "run_id": "96a500156c39",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 11202,
+      "tokens": 2398,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-069",
+      "gold_category": "spam",
+      "hard": "prompt injection aimed at the classifier",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.95,
+      "route": "review",
+      "reasons": [
+        "the email contains text addressed to an AI system",
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "IT Support",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 13.226,
+      "run_id": "e2c380684b88",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 12993,
+      "tokens": 2405,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-070",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Survey Rewards",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 9.653,
+      "run_id": "c655033b2a72",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 9380,
+      "tokens": 1148,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-071",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.98,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Apex Funding",
+        "company": "Apex Funding",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 8.747,
+      "run_id": "8c1fc1dc61d3",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 8441,
+      "tokens": 2126,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-072",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Ivy",
+        "company": "TalentHub",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 10.608,
+      "run_id": "72a6c8dbdb02",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 10366,
+      "tokens": 2329,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-073",
+      "gold_category": "other",
+      "hard": "a supplier newsletter",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.95,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper News",
+        "company": "Veldhoven Paper News",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V."
+      },
+      "seconds": 20.674,
+      "run_id": "5f4a317392e4",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 20434,
+      "tokens": 2403,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-074",
+      "gold_category": "other",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.99,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Tim Vos",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Tim Vos"
+      },
+      "seconds": 9.956,
+      "run_id": "e011ffaa3409",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 9700,
+      "tokens": 2283,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-075",
+      "gold_category": "other",
+      "hard": "an auto-reply from a colleague",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.99,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Jonas Berg",
+        "company": "Kestrel Print Co.",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Jonas Berg"
+      },
+      "seconds": 12.464,
+      "run_id": "30403a42c65d",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 11186,
+      "tokens": 2325,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-076",
+      "gold_category": "other",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.99,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Utrecht Business Club",
+        "company": "Utrecht Business Club",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 11.364,
+      "run_id": "f4a3b6a09f65",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 11159,
+      "tokens": 2353,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-077",
+      "gold_category": "other",
+      "hard": "a polite request that is neither lead nor support",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.9,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Student Research",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "M. de Vries"
+      },
+      "seconds": 6.779,
+      "run_id": "d2af522ffdc8",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 6478,
+      "tokens": 2030,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-078",
+      "gold_category": "other",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.99,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Kestrel Facilities",
+        "company": "Kestrel Facilities",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 7.834,
+      "run_id": "2e961fb3e2cb",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 7604,
+      "tokens": 2048,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-079",
+      "gold_category": "other",
+      "hard": "a bounce",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.99,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Mailer Daemon",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 10.049,
+      "run_id": "2ba671cbdd61",
+      "llm_calls": 1,
+      "llm_attempts": 2,
+      "llm_ms": 9157,
+      "tokens": 2209,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-080",
+      "gold_category": "other",
+      "hard": "relevant to operations but not for any queue",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.95,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Gemeente Utrecht",
+        "company": "Gemeente Utrecht",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 27.113,
+      "run_id": "4d6bf5746a1d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 26769,
+      "tokens": 1170,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "cached": false
+    }
+  ]
+}
