@@ -376,6 +376,8 @@ def render_pdf(invoice: Invoice, path: Path) -> None:
         ),
     }[layout]
     pdf = _PDF(format="A4")
+    pdf.set_creation_date(dt.datetime(2026, 10, 1, tzinfo=dt.UTC))  # reproducible bytes
+    pdf.set_producer("Relay synthetic data")
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
     pdf.set_font("Helvetica", "B", 16)

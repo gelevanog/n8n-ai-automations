@@ -1,0 +1,487 @@
+{
+  "runs": {
+    "invoices_fake": {
+      "suite": "invoices",
+      "name": "fake",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T05:02:23+00:00",
+      "summary": {
+        "items": 40,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 0.21,
+        "latency_p95_s": 0.29,
+        "llm_seconds_p50": 0.0,
+        "llm_calls": 40,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "tokens": 18626,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "fake/rules": 40
+        },
+        "fields": {
+          "vendor": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "invoice_number": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "issue_date": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "due_date": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "currency": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "subtotal": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "vat_amount": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "total": {
+            "scored": 40,
+            "correct": 40,
+            "accuracy": 1.0,
+            "misses": []
+          }
+        },
+        "field_accuracy": 1.0,
+        "all_fields_right": "40/40",
+        "line_count_right": 40,
+        "decision_accuracy": 1.0,
+        "auto_posted": 27,
+        "auto_post_rate": 0.675,
+        "problem_invoices": 13,
+        "problem_invoices_auto_posted": 0,
+        "problem_invoices_auto_posted_ids": [],
+        "clean_invoices": 27,
+        "clean_invoices_sent_to_review": 0,
+        "clean_review_reasons": {},
+        "per_issue": {
+          "total_mismatch": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 2
+          },
+          "vat_mismatch": {
+            "planted": 3,
+            "flagged": 3,
+            "flagged_with_this_issue": 3
+          },
+          "line_math_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "duplicate": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 1
+          },
+          "over_limit": {
+            "planted": 2,
+            "flagged": 2,
+            "flagged_with_this_issue": 2
+          },
+          "missing_invoice_number": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "due_before_issue": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "subtotal_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          }
+        },
+        "bills_in_accounting": 27,
+        "double_posted": []
+      }
+    },
+    "triage_fake": {
+      "suite": "triage",
+      "name": "fake",
+      "model": "fake/rules",
+      "run_at": "2026-10-13T05:02:14+00:00",
+      "summary": {
+        "items": 80,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 0.22,
+        "latency_p95_s": 0.45,
+        "llm_seconds_p50": 0.0,
+        "llm_calls": 80,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "tokens": 40837,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "fake/rules": 80
+        },
+        "category_accuracy": 0.9125,
+        "auto_handled": 48,
+        "auto_handled_rate": 0.6,
+        "auto_handled_accuracy": 1.0,
+        "misrouted_automatically": 0,
+        "sent_to_review": 32,
+        "review_rate": 0.4,
+        "wrong_category": 7,
+        "wrong_caught_by_review": 7,
+        "hard_items": 28,
+        "hard_accuracy": 0.8929,
+        "per_category": {
+          "sales_lead": {
+            "items": 24,
+            "correct": 20,
+            "routed": 13,
+            "routed_correct": 13
+          },
+          "support": {
+            "items": 20,
+            "correct": 18,
+            "routed": 16,
+            "routed_correct": 16
+          },
+          "invoice": {
+            "items": 14,
+            "correct": 14,
+            "routed": 14,
+            "routed_correct": 14
+          },
+          "spam": {
+            "items": 14,
+            "correct": 13,
+            "routed": 5,
+            "routed_correct": 5
+          },
+          "other": {
+            "items": 8,
+            "correct": 8,
+            "routed": 0,
+            "routed_correct": 0
+          }
+        },
+        "confusion": {
+          "sales_lead->other": 2,
+          "sales_lead->support": 2,
+          "support->other": 1,
+          "support->invoice": 1,
+          "spam->invoice": 1
+        },
+        "fields": {
+          "name": {
+            "scored": 41,
+            "correct": 39,
+            "accuracy": 0.9512,
+            "misses": [
+              {
+                "id": "em-020",
+                "got": "Elif Yilmaz",
+                "gold": "Elif Yılmaz"
+              },
+              {
+                "id": "em-077",
+                "got": "Student Research",
+                "gold": "M. de Vries"
+              }
+            ]
+          },
+          "company": {
+            "scored": 43,
+            "correct": 8,
+            "accuracy": 0.186,
+            "misses": [
+              {
+                "id": "em-001",
+                "got": null,
+                "gold": "Fernway Tea GmbH"
+              },
+              {
+                "id": "em-003",
+                "got": null,
+                "gold": "Luma Cosmética S.L."
+              },
+              {
+                "id": "em-004",
+                "got": null,
+                "gold": "Het Stroopwafelhuis"
+              },
+              {
+                "id": "em-007",
+                "got": null,
+                "gold": "Atelier Nuage"
+              },
+              {
+                "id": "em-008",
+                "got": null,
+                "gold": "Nordic Knit"
+              },
+              {
+                "id": "em-009",
+                "got": null,
+                "gold": "Kraftwerk Candles GmbH"
+              },
+              {
+                "id": "em-010",
+                "got": null,
+                "gold": "Peak Pantry"
+              },
+              {
+                "id": "em-012",
+                "got": null,
+                "gold": "Costa Olive Estates"
+              }
+            ]
+          },
+          "product": {
+            "scored": 19,
+            "correct": 16,
+            "accuracy": 0.8421,
+            "misses": [
+              {
+                "id": "em-003",
+                "got": "stickers",
+                "gold": "mailer_boxes"
+              },
+              {
+                "id": "em-016",
+                "got": "labels",
+                "gold": "folding_cartons"
+              },
+              {
+                "id": "em-020",
+                "got": "mailer_boxes",
+                "gold": "other"
+              }
+            ]
+          },
+          "quantity": {
+            "scored": 17,
+            "correct": 15,
+            "accuracy": 0.8824,
+            "misses": [
+              {
+                "id": "em-005",
+                "got": null,
+                "gold": 4000
+              },
+              {
+                "id": "em-020",
+                "got": null,
+                "gold": 10000
+              }
+            ]
+          },
+          "order_id": {
+            "scored": 16,
+            "correct": 16,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "issue": {
+            "scored": 18,
+            "correct": 13,
+            "accuracy": 0.7222,
+            "misses": [
+              {
+                "id": "em-029",
+                "got": "shipping",
+                "gold": "account"
+              },
+              {
+                "id": "em-030",
+                "got": "shipping",
+                "gold": "order_change"
+              },
+              {
+                "id": "em-031",
+                "got": "artwork",
+                "gold": "quality"
+              },
+              {
+                "id": "em-034",
+                "got": "artwork",
+                "gold": "order_change"
+              },
+              {
+                "id": "em-038",
+                "got": "billing",
+                "gold": "shipping"
+              }
+            ]
+          },
+          "invoice_number": {
+            "scored": 13,
+            "correct": 12,
+            "accuracy": 0.9231,
+            "misses": [
+              {
+                "id": "em-050",
+                "got": null,
+                "gold": "AG2026-03413"
+              }
+            ]
+          },
+          "amount": {
+            "scored": 14,
+            "correct": 4,
+            "accuracy": 0.2857,
+            "misses": [
+              {
+                "id": "em-045",
+                "got": null,
+                "gold": 577.86
+              },
+              {
+                "id": "em-046",
+                "got": null,
+                "gold": 2205.18
+              },
+              {
+                "id": "em-048",
+                "got": null,
+                "gold": 1091.0
+              },
+              {
+                "id": "em-049",
+                "got": null,
+                "gold": 242.0
+              },
+              {
+                "id": "em-050",
+                "got": null,
+                "gold": 1187.45
+              },
+              {
+                "id": "em-051",
+                "got": null,
+                "gold": 3280.58
+              },
+              {
+                "id": "em-052",
+                "got": null,
+                "gold": 892.4
+              },
+              {
+                "id": "em-054",
+                "got": null,
+                "gold": 1370.2
+              }
+            ]
+          }
+        },
+        "field_accuracy": 0.6796,
+        "downstream_records": {
+          "crm": 13,
+          "helpdesk": 16,
+          "accounting": 10
+        },
+        "downstream_correct_system": "29/29",
+        "review_reasons": {
+          "confidence 0.67": 16,
+          "category 'other' always goes to a person": 11,
+          "confidence 0.55": 5,
+          "confidence 0.40": 3,
+          "invoice from a sender that is not in the vendor list": 2,
+          "confidence 0.79": 2,
+          "an invoice without an attachment, a number or an amount": 1,
+          "the email contains text addressed to an AI system": 1
+        }
+      }
+    }
+  },
+  "headline": [
+    {
+      "suite": "invoices",
+      "run": "fake",
+      "metric": "field extraction accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices",
+      "run": "fake",
+      "metric": "post / review decision accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices",
+      "run": "fake",
+      "metric": "problem invoices auto-posted",
+      "value": 0
+    },
+    {
+      "suite": "invoices",
+      "run": "fake",
+      "metric": "auto-posted",
+      "value": 0.675
+    },
+    {
+      "suite": "invoices",
+      "run": "fake",
+      "metric": "latency p50 (s)",
+      "value": 0.21
+    },
+    {
+      "suite": "triage",
+      "run": "fake",
+      "metric": "routing accuracy (all emails)",
+      "value": 0.9125
+    },
+    {
+      "suite": "triage",
+      "run": "fake",
+      "metric": "auto-handled",
+      "value": 0.6
+    },
+    {
+      "suite": "triage",
+      "run": "fake",
+      "metric": "accuracy of auto-handled",
+      "value": 1.0
+    },
+    {
+      "suite": "triage",
+      "run": "fake",
+      "metric": "field extraction accuracy",
+      "value": 0.6796
+    },
+    {
+      "suite": "triage",
+      "run": "fake",
+      "metric": "latency p50 (s)",
+      "value": 0.22
+    }
+  ]
+}

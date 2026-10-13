@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 import httpx
-from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
+from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
@@ -282,6 +282,14 @@ def create_app(
         since = dt.datetime.now(dt.UTC) - dt.timedelta(days=days) if days else None
         return store.metrics(since=since)
 
+    @app.post("/ops/admin/reset", dependencies=[Depends(auth)])
+    def reset() -> dict[str, Any]:
+        """Empty the ops store (the evaluation starts every suite from zero). Off unless RELAY_ALLOW_RESET=true."""
+        if not settings.allow_reset:
+            raise HTTPException(403, "reset is disabled (RELAY_ALLOW_RESET=false)")
+        store.reset()
+        return {"reset": True}
+
     @app.get("/ops/eval", dependencies=[Depends(auth)])
     def eval_summary() -> dict[str, Any]:
         path = Path(settings.results_dir) / "summary.json"
@@ -293,10 +301,9 @@ def create_app(
     # ------------------------------------------------------------------------------ Mailpit bridge
 
     @app.post("/inbound/mailpit")
-    async def mailpit_webhook(request: Request) -> dict[str, Any]:
+    def mailpit_webhook(summary: dict[str, Any], background: BackgroundTasks) -> dict[str, Any]:
         """Mailpit calls this for every message it receives. Mail to the shared inbox is fetched with its
         attachments and posted to the inbox-triage workflow as an inbound-email webhook (Postmark-style JSON)."""
-        summary = await request.json()
         message_id = summary.get("ID")
         recipients = [str(t.get("Address", "")).lower() for t in summary.get("To") or []]
         if not message_id or INBOX not in recipients:

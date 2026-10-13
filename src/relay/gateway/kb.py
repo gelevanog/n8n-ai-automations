@@ -159,6 +159,8 @@ _WORD = re.compile(r"[a-z0-9]+(?:[.,][0-9]+)?")
 
 
 def stem(word: str) -> str:
+    if len(word) > 4 and word.endswith(("xes", "ses", "zes", "ches", "shes")):
+        return word[:-2]
     for suffix in ("ings", "ing", "ies", "es", "s", "ed"):
         if len(word) > len(suffix) + 3 and word.endswith(suffix):
             return word[: -len(suffix)] + ("y" if suffix == "ies" else "")

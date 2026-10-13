@@ -25,7 +25,7 @@ def ensure_free_models(model_ids: Iterable[str]) -> None:
 def ensure_free_body(body: Mapping[str, Any]) -> None:
     """The last check before a request leaves the process: every model id in the body is free, no paid plugin."""
     ensure_free_models([body.get("model", ""), *body.get("models", [])])
-    if body.get("plugins") or body.get("web_search_options"):
+    if body.get("plugins") or "web_search_options" in body:
         raise PolicyViolationError("free-only guard: refusing a request with plugins or web search (paid features)")
 
 

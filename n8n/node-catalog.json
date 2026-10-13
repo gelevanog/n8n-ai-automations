@@ -1,0 +1,8448 @@
+{
+ "generated_by": "n8n export:nodes (see relay.workflows.validate)",
+ "n8n_version": "2.42.7",
+ "node_types": 843,
+ "nodes": {
+  "@n8n/n8n-nodes-langchain.agent": {
+   "credentials": [
+    "mySql",
+    "postgres"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6,
+    1.7,
+    1.8,
+    1.9,
+    2,
+    2.1,
+    2.2,
+    3,
+    3.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.agentTool": {
+   "credentials": [],
+   "versions": [
+    2.2,
+    3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.alibabaCloud": {
+   "credentials": [
+    "alibabaCloudApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.alibabaCloudTool": {
+   "credentials": [
+    "alibabaCloudApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.anthropic": {
+   "credentials": [
+    "anthropicApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.anthropicTool": {
+   "credentials": [
+    "anthropicApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chainLlm": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6,
+    1.7,
+    1.8,
+    1.9
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chainRetrievalQa": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6,
+    1.7
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chainSummarization": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    2.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chat": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chatHitlTool": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chatHubVectorStorePGVector": {
+   "credentials": [
+    "chatHubVectorStorePGVectorApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chatHubVectorStorePinecone": {
+   "credentials": [
+    "chatHubVectorStorePineconeApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chatHubVectorStoreQdrant": {
+   "credentials": [
+    "chatHubVectorStoreQdrantApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chatTool": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.chatTrigger": {
+   "credentials": [
+    "httpBasicAuth"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.code": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.documentBinaryInputLoader": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.documentDefaultDataLoader": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.documentGithubLoader": {
+   "credentials": [
+    "githubApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.documentJsonInputLoader": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsAwsBedrock": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsAzureOpenAi": {
+   "credentials": [
+    "azureOpenAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsCohere": {
+   "credentials": [
+    "cohereApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsDatabricks": {
+   "credentials": [
+    "databricksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini": {
+   "credentials": [
+    "googlePalmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsGoogleVertex": {
+   "credentials": [
+    "googleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference": {
+   "credentials": [
+    "huggingFaceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsLemonade": {
+   "credentials": [
+    "lemonadeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsMistralCloud": {
+   "credentials": [
+    "mistralCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsNvidia": {
+   "credentials": [
+    "nvidiaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsOllama": {
+   "credentials": [
+    "ollamaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsOpenAi": {
+   "credentials": [
+    "openAiApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.embeddingsOracleDb": {
+   "credentials": [
+    "oracleDBApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.googleGemini": {
+   "credentials": [
+    "googlePalmApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.googleGeminiTool": {
+   "credentials": [
+    "googlePalmApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.guardrails": {
+   "credentials": [],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.informationExtractor": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAlibabaCloud": {
+   "credentials": [
+    "alibabaCloudApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAnthropic": {
+   "credentials": [
+    "anthropicApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAwsBedrock": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatAzureOpenAi": {
+   "credentials": [
+    "azureEntraCognitiveServicesOAuth2Api",
+    "azureOpenAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatCohere": {
+   "credentials": [
+    "cohereApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatDatabricks": {
+   "credentials": [
+    "databricksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatDeepSeek": {
+   "credentials": [
+    "deepSeekApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatGoogleGemini": {
+   "credentials": [
+    "googlePalmApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatGoogleVertex": {
+   "credentials": [
+    "googleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatGroq": {
+   "credentials": [
+    "groqApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatLemonade": {
+   "credentials": [
+    "lemonadeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatMinimax": {
+   "credentials": [
+    "minimaxApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatMistralCloud": {
+   "credentials": [
+    "mistralCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatMoonshot": {
+   "credentials": [
+    "moonshotApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatNvidia": {
+   "credentials": [
+    "nvidiaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatOllama": {
+   "credentials": [
+    "ollamaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatOpenAi": {
+   "credentials": [
+    "openAiApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatOpenRouter": {
+   "credentials": [
+    "openRouterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatVercelAiGateway": {
+   "credentials": [
+    "vercelAiGatewayApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmChatXAiGrok": {
+   "credentials": [
+    "xAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmCohere": {
+   "credentials": [
+    "cohereApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmLemonade": {
+   "credentials": [
+    "lemonadeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmOllama": {
+   "credentials": [
+    "ollamaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmOpenAi": {
+   "credentials": [
+    "openAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.lmOpenHuggingFaceInference": {
+   "credentials": [
+    "huggingFaceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.manualChatTrigger": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.mcpClient": {
+   "credentials": [
+    "httpBearerAuth",
+    "httpHeaderAuth",
+    "httpMultipleHeadersAuth",
+    "mcpOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.mcpClientTool": {
+   "credentials": [
+    "httpBearerAuth",
+    "httpHeaderAuth",
+    "httpMultipleHeadersAuth",
+    "mcpOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.mcpRegistryClientTool": {
+   "credentials": [
+    "mcpOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.mcpTrigger": {
+   "credentials": [
+    "httpBearerAuth",
+    "httpHeaderAuth"
+   ],
+   "versions": [
+    1,
+    1.1,
+    2,
+    2.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryBufferWindow": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryChatRetriever": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryManager": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryMongoDbChat": {
+   "credentials": [
+    "mongoDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryMotorhead": {
+   "credentials": [
+    "motorheadApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryPostgresChat": {
+   "credentials": [
+    "postgres"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryRedisChat": {
+   "credentials": [
+    "redis"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryXata": {
+   "credentials": [
+    "xataApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.memoryZep": {
+   "credentials": [
+    "zepApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.microsoftAgent365Trigger": {
+   "credentials": [
+    "microsoftAgent365Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.minimax": {
+   "credentials": [
+    "minimaxApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.minimaxTool": {
+   "credentials": [
+    "minimaxApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.modelSelector": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.moonshot": {
+   "credentials": [
+    "moonshotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.moonshotTool": {
+   "credentials": [
+    "moonshotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.ollama": {
+   "credentials": [
+    "ollamaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.ollamaTool": {
+   "credentials": [
+    "ollamaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.openAi": {
+   "credentials": [
+    "openAiApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6,
+    1.7,
+    1.8,
+    2,
+    2.1,
+    2.2,
+    2.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.openAiAssistant": {
+   "credentials": [
+    "openAiApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.outputParserAutofixing": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.outputParserItemList": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.outputParserStructured": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.rerankerCohere": {
+   "credentials": [
+    "cohereApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.retrieverContextualCompression": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.retrieverMultiQuery": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.retrieverVectorStore": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.retrieverWorkflow": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.sentimentAnalysis": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.textClassifier": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.textSplitterTokenSplitter": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolCalculator": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolCode": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolExecutor": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolHttpRequest": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolSearXng": {
+   "credentials": [
+    "searXngApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolSerpApi": {
+   "credentials": [
+    "serpApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolThink": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolVectorStore": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolWikipedia": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolWolframAlpha": {
+   "credentials": [
+    "wolframAlphaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.toolWorkflow": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreAzureAISearch": {
+   "credentials": [
+    "azureAiSearchApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreChromaDB": {
+   "credentials": [
+    "chromaCloudApi",
+    "chromaSelfHostedApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreDatabricks": {
+   "credentials": [
+    "databricksOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreInMemory": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreInMemoryInsert": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreInMemoryLoad": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreMilvus": {
+   "credentials": [
+    "milvusApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreMongoDBAtlas": {
+   "credentials": [
+    "mongoDb"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreOracleDBVector": {
+   "credentials": [
+    "oracleDBApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePGVector": {
+   "credentials": [
+    "postgres"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePinecone": {
+   "credentials": [
+    "pineconeApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePineconeInsert": {
+   "credentials": [
+    "pineconeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStorePineconeLoad": {
+   "credentials": [
+    "pineconeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreQdrant": {
+   "credentials": [
+    "qdrantApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreRedis": {
+   "credentials": [
+    "redis"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabase": {
+   "credentials": [
+    "supabaseApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabaseInsert": {
+   "credentials": [
+    "supabaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreSupabaseLoad": {
+   "credentials": [
+    "supabaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreWeaviate": {
+   "credentials": [
+    "weaviateApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreZep": {
+   "credentials": [
+    "zepApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreZepInsert": {
+   "credentials": [
+    "zepApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "@n8n/n8n-nodes-langchain.vectorStoreZepLoad": {
+   "credentials": [
+    "zepApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.Brandfetch": {
+   "credentials": [
+    "brandfetchApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.BrandfetchTool": {
+   "credentials": [
+    "brandfetchApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.actionNetwork": {
+   "credentials": [
+    "actionNetworkApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.actionNetworkTool": {
+   "credentials": [
+    "actionNetworkApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.activeCampaign": {
+   "credentials": [
+    "activeCampaignApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.activeCampaignTool": {
+   "credentials": [
+    "activeCampaignApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.activeCampaignTrigger": {
+   "credentials": [
+    "activeCampaignApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.acuitySchedulingTrigger": {
+   "credentials": [
+    "acuitySchedulingApi",
+    "acuitySchedulingOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.adalo": {
+   "credentials": [
+    "adaloApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.adaloTool": {
+   "credentials": [
+    "adaloApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.affinity": {
+   "credentials": [
+    "affinityApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.affinityTool": {
+   "credentials": [
+    "affinityApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.affinityTrigger": {
+   "credentials": [
+    "affinityApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.aggregate": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.agileCrm": {
+   "credentials": [
+    "agileCrmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.agileCrmTool": {
+   "credentials": [
+    "agileCrmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.aiTransform": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.airtable": {
+   "credentials": [
+    "airtableApi",
+    "airtableOAuth2Api",
+    "airtableTokenApi"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.airtableTool": {
+   "credentials": [
+    "airtableOAuth2Api",
+    "airtableTokenApi"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.airtableTrigger": {
+   "credentials": [
+    "airtableApi",
+    "airtableOAuth2Api",
+    "airtableTokenApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.airtop": {
+   "credentials": [
+    "airtopApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.airtopTool": {
+   "credentials": [
+    "airtopApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.amqp": {
+   "credentials": [
+    "amqp"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.amqpTool": {
+   "credentials": [
+    "amqp"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.amqpTrigger": {
+   "credentials": [
+    "amqp"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.apiTemplateIo": {
+   "credentials": [
+    "apiTemplateIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.apiTemplateIoTool": {
+   "credentials": [
+    "apiTemplateIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.asana": {
+   "credentials": [
+    "asanaApi",
+    "asanaOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.asanaTool": {
+   "credentials": [
+    "asanaApi",
+    "asanaOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.asanaTrigger": {
+   "credentials": [
+    "asanaApi",
+    "asanaOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.autopilot": {
+   "credentials": [
+    "autopilotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.autopilotTool": {
+   "credentials": [
+    "autopilotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.autopilotTrigger": {
+   "credentials": [
+    "autopilotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsCertificateManager": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsCognito": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsComprehend": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsDynamoDb": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsElb": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsIam": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsLambda": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsLambdaTool": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsRekognition": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsS3": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.awsS3Tool": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.awsSes": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsSesTool": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsSns": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsSnsTool": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsSnsTrigger": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsSqs": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsTextract": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsTextractTool": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsTranscribe": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.awsTranscribeTool": {
+   "credentials": [
+    "aws",
+    "awsAssumeRole"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.azureCosmosDb": {
+   "credentials": [
+    "microsoftAzureCosmosDbSharedKeyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.azureStorage": {
+   "credentials": [
+    "azureStorageOAuth2Api",
+    "azureStorageSharedKeyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bambooHr": {
+   "credentials": [
+    "bambooHrApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bambooHrTool": {
+   "credentials": [
+    "bambooHrApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bannerbear": {
+   "credentials": [
+    "bannerbearApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.baserow": {
+   "credentials": [
+    "baserowApi",
+    "baserowTokenApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.baserowTool": {
+   "credentials": [
+    "baserowApi",
+    "baserowTokenApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.beeminder": {
+   "credentials": [
+    "beeminderApi",
+    "beeminderOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.beeminderTool": {
+   "credentials": [
+    "beeminderApi",
+    "beeminderOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bitbucketTrigger": {
+   "credentials": [
+    "bitbucketAccessTokenApi",
+    "bitbucketApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.bitly": {
+   "credentials": [
+    "bitlyApi",
+    "bitlyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bitlyTool": {
+   "credentials": [
+    "bitlyApi",
+    "bitlyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bitwarden": {
+   "credentials": [
+    "bitwardenApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bitwardenTool": {
+   "credentials": [
+    "bitwardenApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.box": {
+   "credentials": [
+    "boxOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.boxTrigger": {
+   "credentials": [
+    "boxOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bubble": {
+   "credentials": [
+    "bubbleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.bubbleTool": {
+   "credentials": [
+    "bubbleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.calTrigger": {
+   "credentials": [
+    "calApi"
+   ],
+   "versions": [
+    1,
+    2,
+    3
+   ]
+  },
+  "n8n-nodes-base.calendlyTrigger": {
+   "credentials": [
+    "calendlyApi",
+    "calendlyOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.chargebee": {
+   "credentials": [
+    "chargebeeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.chargebeeTool": {
+   "credentials": [
+    "chargebeeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.chargebeeTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.circleCi": {
+   "credentials": [
+    "circleCiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.circleCiTool": {
+   "credentials": [
+    "circleCiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ciscoWebex": {
+   "credentials": [
+    "ciscoWebexOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ciscoWebexTool": {
+   "credentials": [
+    "ciscoWebexOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ciscoWebexTrigger": {
+   "credentials": [
+    "ciscoWebexOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.citrixAdc": {
+   "credentials": [
+    "citrixAdcApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clearbit": {
+   "credentials": [
+    "clearbitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clearbitTool": {
+   "credentials": [
+    "clearbitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clickUp": {
+   "credentials": [
+    "clickUpApi",
+    "clickUpOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clickUpTool": {
+   "credentials": [
+    "clickUpApi",
+    "clickUpOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clickUpTrigger": {
+   "credentials": [
+    "clickUpApi",
+    "clickUpOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clockify": {
+   "credentials": [
+    "clockifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clockifyTool": {
+   "credentials": [
+    "clockifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.clockifyTrigger": {
+   "credentials": [
+    "clockifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.cloudflare": {
+   "credentials": [
+    "cloudflareApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.cloudflareTool": {
+   "credentials": [
+    "cloudflareApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.cockpit": {
+   "credentials": [
+    "cockpitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.cockpitTool": {
+   "credentials": [
+    "cockpitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.coda": {
+   "credentials": [
+    "codaApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.codaTool": {
+   "credentials": [
+    "codaApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.code": {
+   "credentials": [],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.coinGecko": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.coinGeckoTool": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.compareDatasets": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3
+   ]
+  },
+  "n8n-nodes-base.compression": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.compressionTool": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.confluence": {
+   "credentials": [
+    "atlassianServiceAccountApi",
+    "confluenceCloudOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.confluenceTool": {
+   "credentials": [
+    "atlassianServiceAccountApi",
+    "confluenceCloudOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.contentful": {
+   "credentials": [
+    "contentfulApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.contentfulTool": {
+   "credentials": [
+    "contentfulApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.convertKit": {
+   "credentials": [
+    "convertKitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.convertKitTool": {
+   "credentials": [
+    "convertKitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.convertKitTrigger": {
+   "credentials": [
+    "convertKitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.convertToFile": {
+   "credentials": [],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "additionalFields",
+     "allDay",
+     "binaryPropertyName",
+     "end",
+     "mode",
+     "operation",
+     "options",
+     "sourceProperty",
+     "start",
+     "title"
+    ],
+    "1.1": [
+     "additionalFields",
+     "allDay",
+     "binaryPropertyName",
+     "end",
+     "mode",
+     "operation",
+     "options",
+     "sourceProperty",
+     "start",
+     "title"
+    ]
+   },
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.copper": {
+   "credentials": [
+    "copperApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.copperTool": {
+   "credentials": [
+    "copperApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.copperTrigger": {
+   "credentials": [
+    "copperApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.cortex": {
+   "credentials": [
+    "cortexApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.crateDb": {
+   "credentials": [
+    "crateDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.crateDbTool": {
+   "credentials": [
+    "crateDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.cron": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.crypto": {
+   "credentials": [
+    "crypto"
+   ],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "action",
+     "algorithm",
+     "binaryData",
+     "binaryPropertyName",
+     "dataPropertyName",
+     "encoding",
+     "encodingType",
+     "privateKey",
+     "secret",
+     "stringLength",
+     "type",
+     "value"
+    ],
+    "2": [
+     "action",
+     "algorithm",
+     "binaryData",
+     "binaryPropertyName",
+     "cipher",
+     "dataPropertyName",
+     "encoding",
+     "encodingType",
+     "mode",
+     "stringLength",
+     "type",
+     "value"
+    ]
+   },
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.cryptoTool": {
+   "credentials": [
+    "crypto"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.currents": {
+   "credentials": [
+    "currentsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.currentsTool": {
+   "credentials": [
+    "currentsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.currentsTrigger": {
+   "credentials": [
+    "currentsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.customerIo": {
+   "credentials": [
+    "customerIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.customerIoTool": {
+   "credentials": [
+    "customerIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.customerIoTrigger": {
+   "credentials": [
+    "customerIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dataTable": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.dataTableTool": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.databricks": {
+   "credentials": [
+    "databricksApi",
+    "databricksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.databricksTool": {
+   "credentials": [
+    "databricksApi",
+    "databricksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.databricksTrigger": {
+   "credentials": [
+    "databricksApi",
+    "databricksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dateTime": {
+   "credentials": [],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.dateTimeTool": {
+   "credentials": [],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.debugHelper": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.deepL": {
+   "credentials": [
+    "deepLApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.deepLTool": {
+   "credentials": [
+    "deepLApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.demio": {
+   "credentials": [
+    "demioApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.demioTool": {
+   "credentials": [
+    "demioApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dhl": {
+   "credentials": [
+    "dhlApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dhlTool": {
+   "credentials": [
+    "dhlApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.discord": {
+   "credentials": [
+    "discordBotApi",
+    "discordOAuth2Api",
+    "discordWebhookApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.discordHitlTool": {
+   "credentials": [
+    "discordBotApi",
+    "discordOAuth2Api",
+    "discordWebhookApi"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.discordTool": {
+   "credentials": [
+    "discordBotApi",
+    "discordOAuth2Api",
+    "discordWebhookApi"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.discourse": {
+   "credentials": [
+    "discourseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.discourseTool": {
+   "credentials": [
+    "discourseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.disqus": {
+   "credentials": [
+    "disqusApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.drift": {
+   "credentials": [
+    "driftApi",
+    "driftOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.driftTool": {
+   "credentials": [
+    "driftApi",
+    "driftOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dropbox": {
+   "credentials": [
+    "dropboxApi",
+    "dropboxOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dropboxTool": {
+   "credentials": [
+    "dropboxApi",
+    "dropboxOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dropcontact": {
+   "credentials": [
+    "dropcontactApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.dropcontactTool": {
+   "credentials": [
+    "dropcontactApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.e2eTestPollingTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.editImage": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.egoi": {
+   "credentials": [
+    "egoiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.egoiTool": {
+   "credentials": [
+    "egoiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.elasticSecurity": {
+   "credentials": [
+    "elasticSecurityApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.elasticSecurityTool": {
+   "credentials": [
+    "elasticSecurityApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.elasticsearch": {
+   "credentials": [
+    "elasticsearchApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.elasticsearchTool": {
+   "credentials": [
+    "elasticsearchApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.emailReadImap": {
+   "credentials": [
+    "imap"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.emailSend": {
+   "credentials": [
+    "smtp"
+   ],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "attachments",
+     "bccEmail",
+     "ccEmail",
+     "fromEmail",
+     "html",
+     "options",
+     "subject",
+     "text",
+     "toEmail"
+    ],
+    "2": [
+     "approvalOptions",
+     "defineForm",
+     "emailFormat",
+     "formFields",
+     "fromEmail",
+     "html",
+     "jsonOutput",
+     "message",
+     "operation",
+     "options",
+     "resource",
+     "responseType",
+     "subject",
+     "text",
+     "toEmail"
+    ],
+    "2.1": [
+     "approvalOptions",
+     "defineForm",
+     "emailFormat",
+     "formFields",
+     "fromEmail",
+     "html",
+     "jsonOutput",
+     "message",
+     "operation",
+     "options",
+     "resource",
+     "responseType",
+     "subject",
+     "text",
+     "toEmail"
+    ]
+   },
+   "versions": [
+    1,
+    2,
+    2.1
+   ]
+  },
+  "n8n-nodes-base.emailSendHitlTool": {
+   "credentials": [
+    "smtp"
+   ],
+   "versions": [
+    2,
+    2.1
+   ]
+  },
+  "n8n-nodes-base.emailSendTool": {
+   "credentials": [
+    "smtp"
+   ],
+   "versions": [
+    2,
+    2.1
+   ]
+  },
+  "n8n-nodes-base.emelia": {
+   "credentials": [
+    "emeliaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.emeliaTool": {
+   "credentials": [
+    "emeliaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.emeliaTrigger": {
+   "credentials": [
+    "emeliaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.erpNext": {
+   "credentials": [
+    "erpNextApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.erpNextTool": {
+   "credentials": [
+    "erpNextApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.errorTrigger": {
+   "credentials": [],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "notice"
+    ]
+   },
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.evaluation": {
+   "credentials": [
+    "googleApi",
+    "googleSheetsOAuth2Api"
+   ],
+   "versions": [
+    4.6,
+    4.7,
+    4.8
+   ]
+  },
+  "n8n-nodes-base.evaluationTrigger": {
+   "credentials": [
+    "googleApi",
+    "googleSheetsOAuth2Api"
+   ],
+   "versions": [
+    4.6,
+    4.7
+   ]
+  },
+  "n8n-nodes-base.eventbriteTrigger": {
+   "credentials": [
+    "eventbriteApi",
+    "eventbriteOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.executeWorkflow": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "n8n-nodes-base.executeWorkflowTrigger": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.executionData": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.extractFromFile": {
+   "credentials": [],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "binaryPropertyName",
+     "destinationKey",
+     "operation",
+     "options"
+    ],
+    "1.1": [
+     "binaryPropertyName",
+     "destinationKey",
+     "operation",
+     "options"
+    ]
+   },
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.facebookGraphApi": {
+   "credentials": [
+    "facebookGraphApi",
+    "facebookGraphApiOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.facebookGraphApiTool": {
+   "credentials": [
+    "facebookGraphApi",
+    "facebookGraphApiOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.facebookLeadAdsTrigger": {
+   "credentials": [
+    "facebookLeadAdsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.facebookTrigger": {
+   "credentials": [
+    "facebookGraphAppApi",
+    "facebookGraphAppOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.figmaTrigger": {
+   "credentials": [
+    "figmaApi",
+    "figmaOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.filemaker": {
+   "credentials": [
+    "fileMaker"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.filemakerTool": {
+   "credentials": [
+    "fileMaker"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.filter": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3
+   ]
+  },
+  "n8n-nodes-base.flow": {
+   "credentials": [
+    "flowApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.flowTrigger": {
+   "credentials": [
+    "flowApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.form": {
+   "credentials": [],
+   "versions": [
+    1,
+    2.3,
+    2.4,
+    2.5
+   ]
+  },
+  "n8n-nodes-base.formIoTrigger": {
+   "credentials": [
+    "formIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.formTrigger": {
+   "credentials": [
+    "httpBasicAuth"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6
+   ]
+  },
+  "n8n-nodes-base.formstackTrigger": {
+   "credentials": [
+    "formstackApi",
+    "formstackOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.freshdesk": {
+   "credentials": [
+    "freshdeskApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.freshdeskTool": {
+   "credentials": [
+    "freshdeskApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.freshservice": {
+   "credentials": [
+    "freshserviceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.freshserviceTool": {
+   "credentials": [
+    "freshserviceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.freshworksCrm": {
+   "credentials": [
+    "freshworksCrmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.freshworksCrmTool": {
+   "credentials": [
+    "freshworksCrmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ftp": {
+   "credentials": [
+    "ftp",
+    "sftp"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.function": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.functionItem": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gSuiteAdmin": {
+   "credentials": [
+    "gSuiteAdminOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gSuiteAdminTool": {
+   "credentials": [
+    "gSuiteAdminOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.getResponse": {
+   "credentials": [
+    "getResponseApi",
+    "getResponseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.getResponseTool": {
+   "credentials": [
+    "getResponseApi",
+    "getResponseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.getResponseTrigger": {
+   "credentials": [
+    "getResponseApi",
+    "getResponseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ghost": {
+   "credentials": [
+    "ghostAdminApi",
+    "ghostContentApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ghostTool": {
+   "credentials": [
+    "ghostAdminApi",
+    "ghostContentApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.git": {
+   "credentials": [
+    "gitPassword"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.gitTool": {
+   "credentials": [
+    "gitPassword"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.github": {
+   "credentials": [
+    "githubApi",
+    "githubAppApi",
+    "githubOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.githubTool": {
+   "credentials": [
+    "githubApi",
+    "githubAppApi",
+    "githubOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.githubTrigger": {
+   "credentials": [
+    "githubApi",
+    "githubAppApi",
+    "githubOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gitlab": {
+   "credentials": [
+    "gitlabApi",
+    "gitlabOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gitlabTool": {
+   "credentials": [
+    "gitlabApi",
+    "gitlabOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gitlabTrigger": {
+   "credentials": [
+    "gitlabApi",
+    "gitlabOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gmail": {
+   "credentials": [
+    "gmailOAuth2",
+    "googleApi"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.gmailHitlTool": {
+   "credentials": [
+    "gmailOAuth2",
+    "googleApi"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.gmailTool": {
+   "credentials": [
+    "gmailOAuth2",
+    "googleApi"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.gmailTrigger": {
+   "credentials": [
+    "gmailOAuth2",
+    "googleApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "n8n-nodes-base.goToWebinar": {
+   "credentials": [
+    "goToWebinarOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.goToWebinarTool": {
+   "credentials": [
+    "goToWebinarOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gong": {
+   "credentials": [
+    "gongApi",
+    "gongOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gongTool": {
+   "credentials": [
+    "gongApi",
+    "gongOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleAds": {
+   "credentials": [
+    "googleAdsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleAdsTool": {
+   "credentials": [
+    "googleAdsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleAnalytics": {
+   "credentials": [
+    "googleAnalyticsOAuth2"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleAnalyticsTool": {
+   "credentials": [
+    "googleAnalyticsOAuth2"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.googleBigQuery": {
+   "credentials": [
+    "googleApi",
+    "googleBigQueryOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1
+   ]
+  },
+  "n8n-nodes-base.googleBigQueryTool": {
+   "credentials": [
+    "googleApi",
+    "googleBigQueryOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1
+   ]
+  },
+  "n8n-nodes-base.googleBooks": {
+   "credentials": [
+    "googleApi",
+    "googleBooksOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleBooksTool": {
+   "credentials": [
+    "googleApi",
+    "googleBooksOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleBusinessProfile": {
+   "credentials": [
+    "googleBusinessProfileOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleBusinessProfileTool": {
+   "credentials": [
+    "googleBusinessProfileOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleBusinessProfileTrigger": {
+   "credentials": [
+    "googleBusinessProfileOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleCalendar": {
+   "credentials": [
+    "googleCalendarOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "n8n-nodes-base.googleCalendarTool": {
+   "credentials": [
+    "googleCalendarOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3
+   ]
+  },
+  "n8n-nodes-base.googleCalendarTrigger": {
+   "credentials": [
+    "googleCalendarOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleChat": {
+   "credentials": [
+    "googleApi",
+    "googleChatOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleChatHitlTool": {
+   "credentials": [
+    "googleApi",
+    "googleChatOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleChatTool": {
+   "credentials": [
+    "googleApi",
+    "googleChatOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleCloudNaturalLanguage": {
+   "credentials": [
+    "googleCloudNaturalLanguageOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleCloudNaturalLanguageTool": {
+   "credentials": [
+    "googleCloudNaturalLanguageOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleCloudStorage": {
+   "credentials": [
+    "googleApi",
+    "googleCloudStorageOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.googleCloudStorageTool": {
+   "credentials": [
+    "googleApi",
+    "googleCloudStorageOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.googleContacts": {
+   "credentials": [
+    "googleContactsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleContactsTool": {
+   "credentials": [
+    "googleContactsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleDocs": {
+   "credentials": [
+    "googleApi",
+    "googleDocsOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleDocsTool": {
+   "credentials": [
+    "googleApi",
+    "googleDocsOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleDrive": {
+   "credentials": [
+    "googleApi",
+    "googleDriveOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    3
+   ]
+  },
+  "n8n-nodes-base.googleDriveTool": {
+   "credentials": [
+    "googleApi",
+    "googleDriveOAuth2Api"
+   ],
+   "versions": [
+    3
+   ]
+  },
+  "n8n-nodes-base.googleDriveTrigger": {
+   "credentials": [
+    "googleApi",
+    "googleDriveOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleFirebaseCloudFirestore": {
+   "credentials": [
+    "googleApi",
+    "googleFirebaseCloudFirestoreOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.googleFirebaseCloudFirestoreTool": {
+   "credentials": [
+    "googleApi",
+    "googleFirebaseCloudFirestoreOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.googleFirebaseRealtimeDatabase": {
+   "credentials": [
+    "googleFirebaseRealtimeDatabaseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleFirebaseRealtimeDatabaseTool": {
+   "credentials": [
+    "googleFirebaseRealtimeDatabaseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googlePerspective": {
+   "credentials": [
+    "googlePerspectiveOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googlePerspectiveTool": {
+   "credentials": [
+    "googlePerspectiveOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleSheets": {
+   "credentials": [
+    "googleApi",
+    "googleSheetsOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    3,
+    4,
+    4.1,
+    4.2,
+    4.3,
+    4.4,
+    4.5,
+    4.6,
+    4.7
+   ]
+  },
+  "n8n-nodes-base.googleSheetsTool": {
+   "credentials": [
+    "googleApi",
+    "googleSheetsOAuth2Api"
+   ],
+   "versions": [
+    3,
+    4,
+    4.1,
+    4.2,
+    4.3,
+    4.4,
+    4.5,
+    4.6,
+    4.7
+   ]
+  },
+  "n8n-nodes-base.googleSheetsTrigger": {
+   "credentials": [
+    "googleApi",
+    "googleSheetsTriggerOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleSlides": {
+   "credentials": [
+    "googleApi",
+    "googleSlidesOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleSlidesTool": {
+   "credentials": [
+    "googleApi",
+    "googleSlidesOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleTasks": {
+   "credentials": [
+    "googleTasksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleTasksTool": {
+   "credentials": [
+    "googleTasksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.googleTranslate": {
+   "credentials": [
+    "googleApi",
+    "googleTranslateOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.googleTranslateTool": {
+   "credentials": [
+    "googleApi",
+    "googleTranslateOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.gotify": {
+   "credentials": [
+    "gotifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gotifyTool": {
+   "credentials": [
+    "gotifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.grafana": {
+   "credentials": [
+    "grafanaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.grafanaTool": {
+   "credentials": [
+    "grafanaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.graphql": {
+   "credentials": [
+    "httpBasicAuth",
+    "httpCustomAuth",
+    "httpDigestAuth",
+    "httpHeaderAuth",
+    "httpQueryAuth",
+    "oAuth1Api",
+    "oAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.graphqlTool": {
+   "credentials": [
+    "httpBasicAuth",
+    "httpCustomAuth",
+    "httpDigestAuth",
+    "httpHeaderAuth",
+    "httpQueryAuth",
+    "oAuth1Api",
+    "oAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.grist": {
+   "credentials": [
+    "gristApi",
+    "gristOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gristTool": {
+   "credentials": [
+    "gristApi",
+    "gristOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.gumroadTrigger": {
+   "credentials": [
+    "gumroadApi",
+    "gumroadOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.hackerNews": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.hackerNewsTool": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.haloPSA": {
+   "credentials": [
+    "haloPSAApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.haloPSATool": {
+   "credentials": [
+    "haloPSAApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.harvest": {
+   "credentials": [
+    "harvestApi",
+    "harvestOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.harvestTool": {
+   "credentials": [
+    "harvestApi",
+    "harvestOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.helpScout": {
+   "credentials": [
+    "helpScoutOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.helpScoutTool": {
+   "credentials": [
+    "helpScoutOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.helpScoutTrigger": {
+   "credentials": [
+    "helpScoutOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.highLevel": {
+   "credentials": [
+    "highLevelApi",
+    "highLevelOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.highLevelTool": {
+   "credentials": [
+    "highLevelOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.homeAssistant": {
+   "credentials": [
+    "homeAssistantApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.homeAssistantTool": {
+   "credentials": [
+    "homeAssistantApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.html": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.htmlExtract": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.httpRequest": {
+   "credentials": [
+    "httpBasicAuth",
+    "httpDigestAuth",
+    "httpHeaderAuth",
+    "httpQueryAuth",
+    "httpSslAuth",
+    "oAuth1Api",
+    "oAuth2Api"
+   ],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "allowUnauthorizedCerts",
+     "authentication",
+     "binaryPropertyName",
+     "bodyParametersJson",
+     "bodyParametersUi",
+     "dataPropertyName",
+     "headerParametersJson",
+     "headerParametersUi",
+     "infoMessage",
+     "jsonParameters",
+     "options",
+     "queryParametersJson",
+     "queryParametersUi",
+     "requestMethod",
+     "responseFormat",
+     "sendBinaryData",
+     "url"
+    ],
+    "2": [
+     "allowUnauthorizedCerts",
+     "authentication",
+     "binaryPropertyName",
+     "bodyParametersJson",
+     "bodyParametersUi",
+     "dataPropertyName",
+     "genericAuthType",
+     "headerParametersJson",
+     "headerParametersUi",
+     "infoMessage",
+     "jsonParameters",
+     "nodeCredentialType",
+     "options",
+     "queryParametersJson",
+     "queryParametersUi",
+     "requestMethod",
+     "responseFormat",
+     "sendBinaryData",
+     "url"
+    ],
+    "3": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ],
+    "4": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ],
+    "4.1": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ],
+    "4.2": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ],
+    "4.3": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ],
+    "4.4": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ],
+    "4.5": [
+     "authentication",
+     "body",
+     "bodyParameters",
+     "contentType",
+     "cssSelector",
+     "curlImport",
+     "dataField",
+     "elementsToOmit",
+     "fields",
+     "fieldsToInclude",
+     "genericAuthType",
+     "googleApiWarning",
+     "headerParameters",
+     "infoMessage",
+     "inputDataFieldName",
+     "jsonBody",
+     "jsonHeaders",
+     "jsonQuery",
+     "maxLength",
+     "method",
+     "nodeCredentialType",
+     "onlyContent",
+     "optimizeResponse",
+     "options",
+     "provideSslCertificates",
+     "provideSslCertificatesNotice",
+     "queryParameters",
+     "rawContentType",
+     "responseType",
+     "sendBody",
+     "sendHeaders",
+     "sendQuery",
+     "specifyBody",
+     "specifyHeaders",
+     "specifyQuery",
+     "sslCertificate",
+     "truncateResponse",
+     "url"
+    ]
+   },
+   "versions": [
+    1,
+    2,
+    3,
+    4,
+    4.1,
+    4.2,
+    4.3,
+    4.4,
+    4.5
+   ]
+  },
+  "n8n-nodes-base.httpRequestTool": {
+   "credentials": [
+    "httpSslAuth"
+   ],
+   "versions": [
+    3,
+    4,
+    4.1,
+    4.2,
+    4.3,
+    4.4,
+    4.5
+   ]
+  },
+  "n8n-nodes-base.hubspot": {
+   "credentials": [
+    "hubspotApi",
+    "hubspotAppToken",
+    "hubspotOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.hubspotTool": {
+   "credentials": [
+    "hubspotApi",
+    "hubspotAppToken",
+    "hubspotOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.hubspotTrigger": {
+   "credentials": [
+    "hubspotDeveloperApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.humanticAi": {
+   "credentials": [
+    "humanticAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.humanticAiTool": {
+   "credentials": [
+    "humanticAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.hunter": {
+   "credentials": [
+    "hunterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.hunterTool": {
+   "credentials": [
+    "hunterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.iCal": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.if": {
+   "credentials": [],
+   "outputs": 2,
+   "parameters": {
+    "1": [
+     "combineOperation",
+     "conditions"
+    ],
+    "2": [
+     "conditions",
+     "looseTypeValidation",
+     "options"
+    ],
+    "2.1": [
+     "conditions",
+     "looseTypeValidation",
+     "options"
+    ],
+    "2.2": [
+     "conditions",
+     "looseTypeValidation",
+     "options"
+    ],
+    "2.3": [
+     "conditions",
+     "looseTypeValidation",
+     "options"
+    ]
+   },
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3
+   ]
+  },
+  "n8n-nodes-base.intercom": {
+   "credentials": [
+    "intercomApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.intercomTool": {
+   "credentials": [
+    "intercomApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.interval": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.invoiceNinja": {
+   "credentials": [
+    "invoiceNinjaApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.invoiceNinjaTool": {
+   "credentials": [
+    "invoiceNinjaApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.invoiceNinjaTrigger": {
+   "credentials": [
+    "invoiceNinjaApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.itemLists": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    3,
+    3.1
+   ]
+  },
+  "n8n-nodes-base.iterable": {
+   "credentials": [
+    "iterableApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.iterableTool": {
+   "credentials": [
+    "iterableApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jenkins": {
+   "credentials": [
+    "jenkinsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jenkinsTool": {
+   "credentials": [
+    "jenkinsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jinaAi": {
+   "credentials": [
+    "jinaAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jinaAiTool": {
+   "credentials": [
+    "jinaAiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jira": {
+   "credentials": [
+    "atlassianServiceAccountApi",
+    "jiraSoftwareCloudApi",
+    "jiraSoftwareCloudOAuth2Api",
+    "jiraSoftwareServerApi",
+    "jiraSoftwareServerPatApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jiraTool": {
+   "credentials": [
+    "atlassianServiceAccountApi",
+    "jiraSoftwareCloudApi",
+    "jiraSoftwareCloudOAuth2Api",
+    "jiraSoftwareServerApi",
+    "jiraSoftwareServerPatApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jiraTrigger": {
+   "credentials": [
+    "httpQueryAuth",
+    "jiraSoftwareCloudApi",
+    "jiraSoftwareCloudOAuth2Api",
+    "jiraSoftwareServerApi",
+    "jiraSoftwareServerPatApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.jotFormTrigger": {
+   "credentials": [
+    "jotFormApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jwt": {
+   "credentials": [
+    "jwtAuth"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.jwtTool": {
+   "credentials": [
+    "jwtAuth"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.kafka": {
+   "credentials": [
+    "kafka",
+    "schemaRegistryApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.kafkaTool": {
+   "credentials": [
+    "kafka",
+    "schemaRegistryApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.kafkaTrigger": {
+   "credentials": [
+    "kafka",
+    "schemaRegistryApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    2
+   ]
+  },
+  "n8n-nodes-base.keap": {
+   "credentials": [
+    "keapOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.keapTool": {
+   "credentials": [
+    "keapOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.keapTrigger": {
+   "credentials": [
+    "keapOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.koBoToolbox": {
+   "credentials": [
+    "koBoToolboxApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.koBoToolboxTool": {
+   "credentials": [
+    "koBoToolboxApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.koBoToolboxTrigger": {
+   "credentials": [
+    "koBoToolboxApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ldap": {
+   "credentials": [
+    "ldap"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ldapTool": {
+   "credentials": [
+    "ldap"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.lemlist": {
+   "credentials": [
+    "lemlistApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.lemlistTool": {
+   "credentials": [
+    "lemlistApi"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.lemlistTrigger": {
+   "credentials": [
+    "lemlistApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.limit": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.line": {
+   "credentials": [
+    "lineNotifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.lineTool": {
+   "credentials": [
+    "lineNotifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.linear": {
+   "credentials": [
+    "linearApi",
+    "linearOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.linearTool": {
+   "credentials": [
+    "linearApi",
+    "linearOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.linearTrigger": {
+   "credentials": [
+    "linearApi",
+    "linearOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.lingvaNex": {
+   "credentials": [
+    "lingvaNexApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.lingvaNexTool": {
+   "credentials": [
+    "lingvaNexApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.linkedIn": {
+   "credentials": [
+    "linkedInCommunityManagementOAuth2Api",
+    "linkedInOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.linkedInTool": {
+   "credentials": [
+    "linkedInCommunityManagementOAuth2Api",
+    "linkedInOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.loneScale": {
+   "credentials": [
+    "loneScaleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.loneScaleTool": {
+   "credentials": [
+    "loneScaleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.loneScaleTrigger": {
+   "credentials": [
+    "loneScaleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.magento2": {
+   "credentials": [
+    "magento2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.magento2Tool": {
+   "credentials": [
+    "magento2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailcheck": {
+   "credentials": [
+    "mailcheckApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailcheckTool": {
+   "credentials": [
+    "mailcheckApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailchimp": {
+   "credentials": [
+    "mailchimpApi",
+    "mailchimpOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailchimpTool": {
+   "credentials": [
+    "mailchimpApi",
+    "mailchimpOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailchimpTrigger": {
+   "credentials": [
+    "mailchimpApi",
+    "mailchimpOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailerLite": {
+   "credentials": [
+    "mailerLiteApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.mailerLiteTool": {
+   "credentials": [
+    "mailerLiteApi"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.mailerLiteTrigger": {
+   "credentials": [
+    "mailerLiteApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.mailgun": {
+   "credentials": [
+    "mailgunApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailgunTool": {
+   "credentials": [
+    "mailgunApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailjet": {
+   "credentials": [
+    "mailjetEmailApi",
+    "mailjetSmsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailjetTool": {
+   "credentials": [
+    "mailjetEmailApi",
+    "mailjetSmsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mailjetTrigger": {
+   "credentials": [
+    "mailjetEmailApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mandrill": {
+   "credentials": [
+    "mandrillApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mandrillTool": {
+   "credentials": [
+    "mandrillApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.manualTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.markdown": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.marketstack": {
+   "credentials": [
+    "marketstackApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.marketstackTool": {
+   "credentials": [
+    "marketstackApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.matrix": {
+   "credentials": [
+    "matrixApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.matrixTool": {
+   "credentials": [
+    "matrixApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mattermost": {
+   "credentials": [
+    "mattermostApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mattermostTool": {
+   "credentials": [
+    "mattermostApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mautic": {
+   "credentials": [
+    "mauticApi",
+    "mauticOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mauticTool": {
+   "credentials": [
+    "mauticApi",
+    "mauticOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mauticTrigger": {
+   "credentials": [
+    "mauticApi",
+    "mauticOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.medium": {
+   "credentials": [
+    "mediumApi",
+    "mediumOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mediumTool": {
+   "credentials": [
+    "mediumApi",
+    "mediumOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.merge": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    2.1,
+    3,
+    3.1,
+    3.2
+   ]
+  },
+  "n8n-nodes-base.messageAnAgent": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    3,
+    3.1
+   ]
+  },
+  "n8n-nodes-base.messageAnAgentTool": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    3,
+    3.1
+   ]
+  },
+  "n8n-nodes-base.messageBird": {
+   "credentials": [
+    "messageBirdApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.messageBirdTool": {
+   "credentials": [
+    "messageBirdApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.metabase": {
+   "credentials": [
+    "metabaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.metabaseTool": {
+   "credentials": [
+    "metabaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftDataverse": {
+   "credentials": [
+    "microsoftDataverseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftDataverseTool": {
+   "credentials": [
+    "microsoftDataverseOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftDynamicsCrm": {
+   "credentials": [
+    "microsoftDynamicsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftDynamicsCrmTool": {
+   "credentials": [
+    "microsoftDynamicsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftEntra": {
+   "credentials": [
+    "microsoftEntraOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftEntraTool": {
+   "credentials": [
+    "microsoftEntraOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftExcel": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftExcelOAuth2Api",
+    "microsoftOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.microsoftExcelSharePoint": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftExcelSharePointTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftExcelTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftExcelOAuth2Api",
+    "microsoftOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.microsoftGraphSecurity": {
+   "credentials": [
+    "microsoftGraphSecurityOAuth2Api",
+    "microsoftOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftGraphSecurityTool": {
+   "credentials": [
+    "microsoftGraphSecurityOAuth2Api",
+    "microsoftOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftOneDrive": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOneDriveOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.microsoftOneDriveTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOneDriveOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.microsoftOneDriveTrigger": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOneDriveOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftOutlook": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOutlookOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftOutlookHitlTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOutlookOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftOutlookTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOutlookOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftOutlookTrigger": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftOutlookOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftSharePoint": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftSharePointOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftSharePointTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftSharePointOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftSql": {
+   "credentials": [
+    "microsoftSql"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.microsoftSqlTool": {
+   "credentials": [
+    "microsoftSql"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.microsoftTeams": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftTeamsOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1,
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftTeamsHitlTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftTeamsOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftTeamsTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftTeamsOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.microsoftTeamsTrigger": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftTeamsOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftToDo": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftToDoOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.microsoftToDoTool": {
+   "credentials": [
+    "microsoftEntraServicePrincipalApi",
+    "microsoftOAuth2Api",
+    "microsoftToDoOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mindee": {
+   "credentials": [
+    "mindeeInvoiceApi",
+    "mindeeReceiptApi"
+   ],
+   "versions": [
+    1,
+    2,
+    3
+   ]
+  },
+  "n8n-nodes-base.misp": {
+   "credentials": [
+    "mispApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mispTool": {
+   "credentials": [
+    "mispApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mistralAi": {
+   "credentials": [
+    "mistralCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mistralAiTool": {
+   "credentials": [
+    "mistralCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mocean": {
+   "credentials": [
+    "moceanApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.moceanTool": {
+   "credentials": [
+    "moceanApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mondayCom": {
+   "credentials": [
+    "mondayComApi",
+    "mondayComOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mondayComTool": {
+   "credentials": [
+    "mondayComApi",
+    "mondayComOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mongoDb": {
+   "credentials": [
+    "mongoDb"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+   ]
+  },
+  "n8n-nodes-base.mongoDbTool": {
+   "credentials": [
+    "mongoDb"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+   ]
+  },
+  "n8n-nodes-base.monicaCrm": {
+   "credentials": [
+    "monicaCrmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.monicaCrmTool": {
+   "credentials": [
+    "monicaCrmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.moveBinaryData": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.mqtt": {
+   "credentials": [
+    "mqtt"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mqttTool": {
+   "credentials": [
+    "mqtt"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mqttTrigger": {
+   "credentials": [
+    "mqtt"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.msg91": {
+   "credentials": [
+    "msg91Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.msg91Tool": {
+   "credentials": [
+    "msg91Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.mySql": {
+   "credentials": [
+    "mySql"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5
+   ]
+  },
+  "n8n-nodes-base.mySqlTool": {
+   "credentials": [
+    "mySql"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5
+   ]
+  },
+  "n8n-nodes-base.n8n": {
+   "credentials": [
+    "n8nApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.n8nTrainingCustomerDatastore": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.n8nTrainingCustomerMessenger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.n8nTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.nasa": {
+   "credentials": [
+    "nasaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.nasaTool": {
+   "credentials": [
+    "nasaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.netlify": {
+   "credentials": [
+    "netlifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.netlifyTool": {
+   "credentials": [
+    "netlifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.netlifyTrigger": {
+   "credentials": [
+    "netlifyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.nextCloud": {
+   "credentials": [
+    "nextCloudApi",
+    "nextCloudOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.nextCloudTool": {
+   "credentials": [
+    "nextCloudApi",
+    "nextCloudOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.noOp": {
+   "credentials": [],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "emptyGroupAnchor"
+    ]
+   },
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.nocoDb": {
+   "credentials": [
+    "nocoDb",
+    "nocoDbApiToken"
+   ],
+   "versions": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "n8n-nodes-base.nocoDbTool": {
+   "credentials": [
+    "nocoDb",
+    "nocoDbApiToken"
+   ],
+   "versions": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "n8n-nodes-base.notion": {
+   "credentials": [
+    "notionApi",
+    "notionOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    3
+   ]
+  },
+  "n8n-nodes-base.notionTool": {
+   "credentials": [
+    "notionApi",
+    "notionOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2,
+    3
+   ]
+  },
+  "n8n-nodes-base.notionTrigger": {
+   "credentials": [
+    "notionApi",
+    "notionOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.npm": {
+   "credentials": [
+    "npmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.npmTool": {
+   "credentials": [
+    "npmApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.odoo": {
+   "credentials": [
+    "odooApi",
+    "odooApiKeyApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.odooTool": {
+   "credentials": [
+    "odooApi",
+    "odooApiKeyApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.okta": {
+   "credentials": [
+    "oktaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.oktaTool": {
+   "credentials": [
+    "oktaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.oneSimpleApi": {
+   "credentials": [
+    "oneSimpleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.oneSimpleApiTool": {
+   "credentials": [
+    "oneSimpleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.onfleet": {
+   "credentials": [
+    "onfleetApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.onfleetTool": {
+   "credentials": [
+    "onfleetApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.onfleetTrigger": {
+   "credentials": [
+    "onfleetApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.openAi": {
+   "credentials": [
+    "openAiApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.openThesaurus": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.openThesaurusTool": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.openWeatherMap": {
+   "credentials": [
+    "openWeatherMapApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.openWeatherMapTool": {
+   "credentials": [
+    "openWeatherMapApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.oracleDatabase": {
+   "credentials": [
+    "oracleDBApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.oracleDatabaseTool": {
+   "credentials": [
+    "oracleDBApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.orbit": {
+   "credentials": [
+    "orbitApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.oura": {
+   "credentials": [
+    "ouraApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ouraTool": {
+   "credentials": [
+    "ouraApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.paddle": {
+   "credentials": [
+    "paddleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.paddleTool": {
+   "credentials": [
+    "paddleApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pagerDuty": {
+   "credentials": [
+    "pagerDutyApi",
+    "pagerDutyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pagerDutyTool": {
+   "credentials": [
+    "pagerDutyApi",
+    "pagerDutyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.payPal": {
+   "credentials": [
+    "payPalApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.payPalTrigger": {
+   "credentials": [
+    "payPalApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.peekalink": {
+   "credentials": [
+    "peekalinkApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.peekalinkTool": {
+   "credentials": [
+    "peekalinkApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.perplexity": {
+   "credentials": [
+    "perplexityApi"
+   ],
+   "versions": [
+    1,
+    2,
+    3
+   ]
+  },
+  "n8n-nodes-base.perplexityTool": {
+   "credentials": [
+    "perplexityApi"
+   ],
+   "versions": [
+    1,
+    2,
+    3
+   ]
+  },
+  "n8n-nodes-base.phantombuster": {
+   "credentials": [
+    "phantombusterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.phantombusterTool": {
+   "credentials": [
+    "phantombusterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.philipsHue": {
+   "credentials": [
+    "philipsHueOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.philipsHueTool": {
+   "credentials": [
+    "philipsHueOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pipedrive": {
+   "credentials": [
+    "pipedriveApi",
+    "pipedriveOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.pipedriveTool": {
+   "credentials": [
+    "pipedriveApi",
+    "pipedriveOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.pipedriveTrigger": {
+   "credentials": [
+    "httpBasicAuth",
+    "pipedriveApi",
+    "pipedriveOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.plivo": {
+   "credentials": [
+    "plivoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.plivoTool": {
+   "credentials": [
+    "plivoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.postBin": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.postBinTool": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.postHog": {
+   "credentials": [
+    "postHogApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.postHogTool": {
+   "credentials": [
+    "postHogApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.postgres": {
+   "credentials": [
+    "postgres"
+   ],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "additionalFields",
+     "columns",
+     "oldVersionNotice",
+     "operation",
+     "query",
+     "returnFields",
+     "schema",
+     "table",
+     "updateKey"
+    ],
+    "2": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.1": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.2": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.3": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.4": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.5": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.6": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ],
+    "2.7": [
+     "columnToMatchOn",
+     "columns",
+     "combineConditions",
+     "dataMode",
+     "deleteCommand",
+     "limit",
+     "notice",
+     "operation",
+     "options",
+     "query",
+     "resource",
+     "restartSequences",
+     "returnAll",
+     "schema",
+     "sort",
+     "table",
+     "valueToMatchOn",
+     "valuesToSend",
+     "where"
+    ]
+   },
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6,
+    2.7
+   ]
+  },
+  "n8n-nodes-base.postgresTool": {
+   "credentials": [
+    "postgres"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6,
+    2.7
+   ]
+  },
+  "n8n-nodes-base.postgresTrigger": {
+   "credentials": [
+    "postgres"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.postmarkTrigger": {
+   "credentials": [
+    "postmarkApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.profitWell": {
+   "credentials": [
+    "profitWellApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.profitWellTool": {
+   "credentials": [
+    "profitWellApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushbullet": {
+   "credentials": [
+    "pushbulletOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushbulletTool": {
+   "credentials": [
+    "pushbulletOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushcut": {
+   "credentials": [
+    "pushcutApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushcutTool": {
+   "credentials": [
+    "pushcutApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushcutTrigger": {
+   "credentials": [
+    "pushcutApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushover": {
+   "credentials": [
+    "pushoverApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.pushoverTool": {
+   "credentials": [
+    "pushoverApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.questDb": {
+   "credentials": [
+    "questDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.questDbTool": {
+   "credentials": [
+    "questDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.quickChart": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.quickChartTool": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.quickbase": {
+   "credentials": [
+    "quickbaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.quickbaseTool": {
+   "credentials": [
+    "quickbaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.quickbooks": {
+   "credentials": [
+    "quickBooksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.quickbooksTool": {
+   "credentials": [
+    "quickBooksOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.rabbitmq": {
+   "credentials": [
+    "rabbitmq"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.rabbitmqTool": {
+   "credentials": [
+    "rabbitmq"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.rabbitmqTrigger": {
+   "credentials": [
+    "rabbitmq"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.raindrop": {
+   "credentials": [
+    "raindropOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.raindropTool": {
+   "credentials": [
+    "raindropOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.readBinaryFile": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.readBinaryFiles": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.readPDF": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.readWriteFile": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.reddit": {
+   "credentials": [
+    "redditOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.redditTool": {
+   "credentials": [
+    "redditOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.redis": {
+   "credentials": [
+    "redis"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.redisTool": {
+   "credentials": [
+    "redis"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.redisTrigger": {
+   "credentials": [
+    "redis"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.removeDuplicates": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    2
+   ]
+  },
+  "n8n-nodes-base.renameKeys": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.respondToWebhook": {
+   "credentials": [
+    "jwtAuth"
+   ],
+   "parameters": {
+    "1": [
+     "contentTypeNotice",
+     "credentials",
+     "enableResponseOutput",
+     "generalNotice",
+     "inputFieldName",
+     "options",
+     "payload",
+     "redirectURL",
+     "respondWith",
+     "responseBody",
+     "responseDataSource",
+     "webhookNotice"
+    ],
+    "1.1": [
+     "contentTypeNotice",
+     "credentials",
+     "enableResponseOutput",
+     "generalNotice",
+     "inputFieldName",
+     "options",
+     "payload",
+     "redirectURL",
+     "respondWith",
+     "responseBody",
+     "responseDataSource",
+     "webhookNotice"
+    ],
+    "1.2": [
+     "contentTypeNotice",
+     "credentials",
+     "enableResponseOutput",
+     "generalNotice",
+     "inputFieldName",
+     "options",
+     "payload",
+     "redirectURL",
+     "respondWith",
+     "responseBody",
+     "responseDataSource",
+     "webhookNotice"
+    ],
+    "1.3": [
+     "contentTypeNotice",
+     "credentials",
+     "enableResponseOutput",
+     "generalNotice",
+     "inputFieldName",
+     "options",
+     "payload",
+     "redirectURL",
+     "respondWith",
+     "responseBody",
+     "responseDataSource",
+     "webhookNotice"
+    ],
+    "1.4": [
+     "contentTypeNotice",
+     "credentials",
+     "enableResponseOutput",
+     "generalNotice",
+     "inputFieldName",
+     "options",
+     "payload",
+     "redirectURL",
+     "respondWith",
+     "responseBody",
+     "responseDataSource",
+     "webhookNotice"
+    ],
+    "1.5": [
+     "contentTypeNotice",
+     "credentials",
+     "enableResponseOutput",
+     "generalNotice",
+     "inputFieldName",
+     "options",
+     "payload",
+     "redirectURL",
+     "respondWith",
+     "responseBody",
+     "responseDataSource",
+     "webhookNotice"
+    ]
+   },
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+   ]
+  },
+  "n8n-nodes-base.rocketchat": {
+   "credentials": [
+    "rocketchatApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.rocketchatTool": {
+   "credentials": [
+    "rocketchatApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.rssFeedRead": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.rssFeedReadTool": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.rssFeedReadTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.rundeck": {
+   "credentials": [
+    "rundeckApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.rundeckTool": {
+   "credentials": [
+    "rundeckApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.s3": {
+   "credentials": [
+    "s3"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.s3Tool": {
+   "credentials": [
+    "s3"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.salesforce": {
+   "credentials": [
+    "salesforceJwtApi",
+    "salesforceOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.salesforceTool": {
+   "credentials": [
+    "salesforceJwtApi",
+    "salesforceOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.salesforceTrigger": {
+   "credentials": [
+    "salesforceJwtApi",
+    "salesforceOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.salesmate": {
+   "credentials": [
+    "salesmateApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.salesmateTool": {
+   "credentials": [
+    "salesmateApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.scheduleTrigger": {
+   "credentials": [],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "misfireGraceSeconds",
+     "misfirePolicy",
+     "notice",
+     "rule",
+     "skipDurableScheduler"
+    ],
+    "1.1": [
+     "misfireGraceSeconds",
+     "misfirePolicy",
+     "notice",
+     "rule",
+     "skipDurableScheduler"
+    ],
+    "1.2": [
+     "misfireGraceSeconds",
+     "misfirePolicy",
+     "notice",
+     "rule",
+     "skipDurableScheduler"
+    ],
+    "1.3": [
+     "misfireGraceSeconds",
+     "misfirePolicy",
+     "notice",
+     "rule",
+     "skipDurableScheduler"
+    ],
+    "1.4": [
+     "misfireGraceSeconds",
+     "misfirePolicy",
+     "notice",
+     "rule",
+     "skipDurableScheduler"
+    ]
+   },
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4
+   ]
+  },
+  "n8n-nodes-base.seaTable": {
+   "credentials": [
+    "seaTableApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.seaTableTool": {
+   "credentials": [
+    "seaTableApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.seaTableTrigger": {
+   "credentials": [
+    "seaTableApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.securityScorecard": {
+   "credentials": [
+    "securityScorecardApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.securityScorecardTool": {
+   "credentials": [
+    "securityScorecardApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.segment": {
+   "credentials": [
+    "segmentApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.segmentTool": {
+   "credentials": [
+    "segmentApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendGrid": {
+   "credentials": [
+    "sendGridApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendGridTool": {
+   "credentials": [
+    "sendGridApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendInBlue": {
+   "credentials": [
+    "sendInBlueApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendInBlueTool": {
+   "credentials": [
+    "sendInBlueApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendInBlueTrigger": {
+   "credentials": [
+    "sendInBlueApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendy": {
+   "credentials": [
+    "sendyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sendyTool": {
+   "credentials": [
+    "sendyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sentryIo": {
+   "credentials": [
+    "sentryIoApi",
+    "sentryIoOAuth2Api",
+    "sentryIoServerApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sentryIoTool": {
+   "credentials": [
+    "sentryIoApi",
+    "sentryIoOAuth2Api",
+    "sentryIoServerApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.serviceNow": {
+   "credentials": [
+    "serviceNowBasicApi",
+    "serviceNowOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.serviceNowTool": {
+   "credentials": [
+    "serviceNowBasicApi",
+    "serviceNowOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.set": {
+   "credentials": [],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "keepOnlySet",
+     "options",
+     "values"
+    ],
+    "2": [
+     "keepOnlySet",
+     "options",
+     "values"
+    ],
+    "3": [
+     "assignments",
+     "duplicateCount",
+     "duplicateItem",
+     "duplicateWarning",
+     "excludeFields",
+     "fields",
+     "include",
+     "includeFields",
+     "includeOtherFields",
+     "jsonOutput",
+     "mode",
+     "options"
+    ],
+    "3.1": [
+     "assignments",
+     "duplicateCount",
+     "duplicateItem",
+     "duplicateWarning",
+     "excludeFields",
+     "fields",
+     "include",
+     "includeFields",
+     "includeOtherFields",
+     "jsonOutput",
+     "mode",
+     "options"
+    ],
+    "3.2": [
+     "assignments",
+     "duplicateCount",
+     "duplicateItem",
+     "duplicateWarning",
+     "excludeFields",
+     "fields",
+     "include",
+     "includeFields",
+     "includeOtherFields",
+     "jsonOutput",
+     "mode",
+     "options"
+    ],
+    "3.3": [
+     "assignments",
+     "duplicateCount",
+     "duplicateItem",
+     "duplicateWarning",
+     "excludeFields",
+     "fields",
+     "include",
+     "includeFields",
+     "includeOtherFields",
+     "jsonOutput",
+     "mode",
+     "options"
+    ],
+    "3.4": [
+     "assignments",
+     "duplicateCount",
+     "duplicateItem",
+     "duplicateWarning",
+     "excludeFields",
+     "fields",
+     "include",
+     "includeFields",
+     "includeOtherFields",
+     "jsonOutput",
+     "mode",
+     "options"
+    ],
+    "3.5": [
+     "assignments",
+     "duplicateCount",
+     "duplicateItem",
+     "duplicateWarning",
+     "excludeFields",
+     "fields",
+     "include",
+     "includeFields",
+     "includeOtherFields",
+     "jsonOutput",
+     "mode",
+     "options"
+    ]
+   },
+   "versions": [
+    1,
+    2,
+    3,
+    3.1,
+    3.2,
+    3.3,
+    3.4,
+    3.5
+   ]
+  },
+  "n8n-nodes-base.shopify": {
+   "credentials": [
+    "shopifyAccessTokenApi",
+    "shopifyApi",
+    "shopifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.shopifyTool": {
+   "credentials": [
+    "shopifyAccessTokenApi",
+    "shopifyApi",
+    "shopifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.shopifyTrigger": {
+   "credentials": [
+    "shopifyAccessTokenApi",
+    "shopifyApi",
+    "shopifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.signl4": {
+   "credentials": [
+    "signl4Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.signl4Tool": {
+   "credentials": [
+    "signl4Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.simulate": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.simulateTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.slack": {
+   "credentials": [
+    "slackApi",
+    "slackOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6,
+    2.7
+   ]
+  },
+  "n8n-nodes-base.slackHitlTool": {
+   "credentials": [
+    "slackApi",
+    "slackOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6,
+    2.7
+   ]
+  },
+  "n8n-nodes-base.slackTool": {
+   "credentials": [
+    "slackApi",
+    "slackOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6,
+    2.7
+   ]
+  },
+  "n8n-nodes-base.slackTrigger": {
+   "credentials": [
+    "slackApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sms77": {
+   "credentials": [
+    "sms77Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.sms77Tool": {
+   "credentials": [
+    "sms77Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.snowflake": {
+   "credentials": [
+    "snowflake",
+    "snowflakeOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.snowflakeTool": {
+   "credentials": [
+    "snowflake",
+    "snowflakeOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.sort": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.splitInBatches": {
+   "credentials": [],
+   "versions": [
+    1,
+    2,
+    3
+   ]
+  },
+  "n8n-nodes-base.splitOut": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.splunk": {
+   "credentials": [
+    "splunkApi"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.splunkTool": {
+   "credentials": [
+    "splunkApi"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.spotify": {
+   "credentials": [
+    "spotifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.spotifyTool": {
+   "credentials": [
+    "spotifyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.spreadsheetFile": {
+   "credentials": [],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.sseTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.ssh": {
+   "credentials": [
+    "sshPassword",
+    "sshPrivateKey"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stackby": {
+   "credentials": [
+    "stackbyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stackbyTool": {
+   "credentials": [
+    "stackbyApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stickyNote": {
+   "credentials": [],
+   "outputs": 0,
+   "parameters": {
+    "1": [
+     "color",
+     "content",
+     "height",
+     "width"
+    ]
+   },
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stopAndError": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.storyblok": {
+   "credentials": [
+    "storyblokContentApi",
+    "storyblokManagementApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.storyblokTool": {
+   "credentials": [
+    "storyblokContentApi",
+    "storyblokManagementApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.strapi": {
+   "credentials": [
+    "strapiApi",
+    "strapiTokenApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.strapiTool": {
+   "credentials": [
+    "strapiApi",
+    "strapiTokenApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.strava": {
+   "credentials": [
+    "stravaOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.stravaTool": {
+   "credentials": [
+    "stravaOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.stravaTrigger": {
+   "credentials": [
+    "stravaOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stripe": {
+   "credentials": [
+    "stripeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stripeTool": {
+   "credentials": [
+    "stripeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.stripeTrigger": {
+   "credentials": [
+    "stripeApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.summarize": {
+   "credentials": [],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.supabase": {
+   "credentials": [
+    "supabaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.supabaseTool": {
+   "credentials": [
+    "supabaseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.surveyMonkeyTrigger": {
+   "credentials": [
+    "surveyMonkeyApi",
+    "surveyMonkeyOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.switch": {
+   "credentials": [],
+   "outputs": 4,
+   "parameters": {
+    "1": [
+     "dataType",
+     "fallbackOutput",
+     "mode",
+     "output",
+     "rules",
+     "value1"
+    ],
+    "2": [
+     "dataType",
+     "fallbackOutput",
+     "mode",
+     "output",
+     "outputsAmount",
+     "rules",
+     "value1"
+    ],
+    "3": [
+     "looseTypeValidation",
+     "mode",
+     "numberOutputs",
+     "options",
+     "output",
+     "rules"
+    ],
+    "3.1": [
+     "looseTypeValidation",
+     "mode",
+     "numberOutputs",
+     "options",
+     "output",
+     "rules"
+    ],
+    "3.2": [
+     "looseTypeValidation",
+     "mode",
+     "numberOutputs",
+     "options",
+     "output",
+     "rules"
+    ],
+    "3.3": [
+     "looseTypeValidation",
+     "mode",
+     "numberOutputs",
+     "options",
+     "output",
+     "rules"
+    ],
+    "3.4": [
+     "looseTypeValidation",
+     "mode",
+     "numberOutputs",
+     "options",
+     "output",
+     "rules"
+    ]
+   },
+   "versions": [
+    1,
+    2,
+    3,
+    3.1,
+    3.2,
+    3.3,
+    3.4
+   ]
+  },
+  "n8n-nodes-base.syncroMsp": {
+   "credentials": [
+    "syncroMspApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.syncroMspTool": {
+   "credentials": [
+    "syncroMspApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.taiga": {
+   "credentials": [
+    "taigaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.taigaTool": {
+   "credentials": [
+    "taigaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.taigaTrigger": {
+   "credentials": [
+    "taigaApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.tapfiliate": {
+   "credentials": [
+    "tapfiliateApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.tapfiliateTool": {
+   "credentials": [
+    "tapfiliateApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.telegram": {
+   "credentials": [
+    "telegramApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.telegramHitlTool": {
+   "credentials": [
+    "telegramApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.telegramTool": {
+   "credentials": [
+    "telegramApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2
+   ]
+  },
+  "n8n-nodes-base.telegramTrigger": {
+   "credentials": [
+    "telegramApi"
+   ],
+   "versions": [
+    1,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5
+   ]
+  },
+  "n8n-nodes-base.theHive": {
+   "credentials": [
+    "theHiveApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.theHiveProject": {
+   "credentials": [
+    "theHiveProjectApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.theHiveProjectTool": {
+   "credentials": [
+    "theHiveProjectApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.theHiveProjectTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.theHiveTool": {
+   "credentials": [
+    "theHiveApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.theHiveTrigger": {
+   "credentials": [],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.timeSaved": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.timescaleDb": {
+   "credentials": [
+    "timescaleDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.timescaleDbTool": {
+   "credentials": [
+    "timescaleDb"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.todoist": {
+   "credentials": [
+    "todoistApi",
+    "todoistOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.todoistTool": {
+   "credentials": [
+    "todoistApi",
+    "todoistOAuth2Api"
+   ],
+   "versions": [
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.togglTrigger": {
+   "credentials": [
+    "togglApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.totp": {
+   "credentials": [
+    "totpApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.totpTool": {
+   "credentials": [
+    "totpApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.travisCi": {
+   "credentials": [
+    "travisCiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.travisCiTool": {
+   "credentials": [
+    "travisCiApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.trello": {
+   "credentials": [
+    "trelloApi",
+    "trelloOAuth1Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.trelloTool": {
+   "credentials": [
+    "trelloApi",
+    "trelloOAuth1Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.trelloTrigger": {
+   "credentials": [
+    "trelloApi",
+    "trelloOAuth1Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twake": {
+   "credentials": [
+    "twakeCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twakeTool": {
+   "credentials": [
+    "twakeCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twilio": {
+   "credentials": [
+    "twilioApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twilioTool": {
+   "credentials": [
+    "twilioApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twilioTrigger": {
+   "credentials": [
+    "twilioApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twist": {
+   "credentials": [
+    "twistOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twistTool": {
+   "credentials": [
+    "twistOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.twitter": {
+   "credentials": [
+    "twitterOAuth1Api",
+    "twitterOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.twitterTool": {
+   "credentials": [
+    "twitterOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.typeformTrigger": {
+   "credentials": [
+    "typeformApi",
+    "typeformOAuth2Api"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.unleashedSoftware": {
+   "credentials": [
+    "unleashedSoftwareApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.unleashedSoftwareTool": {
+   "credentials": [
+    "unleashedSoftwareApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.uplead": {
+   "credentials": [
+    "upleadApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.upleadTool": {
+   "credentials": [
+    "upleadApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.uproc": {
+   "credentials": [
+    "uprocApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.uprocTool": {
+   "credentials": [
+    "uprocApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.uptimeRobot": {
+   "credentials": [
+    "uptimeRobotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.uptimeRobotTool": {
+   "credentials": [
+    "uptimeRobotApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.urlScanIo": {
+   "credentials": [
+    "urlScanIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.urlScanIoTool": {
+   "credentials": [
+    "urlScanIoApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.venafiTlsProtectCloud": {
+   "credentials": [
+    "venafiTlsProtectCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.venafiTlsProtectCloudTool": {
+   "credentials": [
+    "venafiTlsProtectCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.venafiTlsProtectCloudTrigger": {
+   "credentials": [
+    "venafiTlsProtectCloudApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.venafiTlsProtectDatacenter": {
+   "credentials": [
+    "venafiTlsProtectDatacenterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.venafiTlsProtectDatacenterTool": {
+   "credentials": [
+    "venafiTlsProtectDatacenterApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.vero": {
+   "credentials": [
+    "veroApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.veroTool": {
+   "credentials": [
+    "veroApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.vonage": {
+   "credentials": [
+    "vonageApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.vonageTool": {
+   "credentials": [
+    "vonageApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wait": {
+   "credentials": [
+    "httpBasicAuth",
+    "httpHeaderAuth",
+    "jwtAuth"
+   ],
+   "outputs": 1,
+   "parameters": {
+    "1": [
+     "amount",
+     "dateTime",
+     "formDescription",
+     "formFields",
+     "formNotice",
+     "formTitle",
+     "httpMethod",
+     "incomingAuthentication",
+     "limitType",
+     "limitWaitTime",
+     "maxDateAndTime",
+     "options",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "resume",
+     "resumeAmount",
+     "resumeUnit",
+     "unit",
+     "webhookNotice"
+    ],
+    "1.1": [
+     "amount",
+     "dateTime",
+     "formDescription",
+     "formFields",
+     "formNotice",
+     "formTitle",
+     "httpMethod",
+     "incomingAuthentication",
+     "limitType",
+     "limitWaitTime",
+     "maxDateAndTime",
+     "options",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "resume",
+     "resumeAmount",
+     "resumeUnit",
+     "unit",
+     "webhookNotice"
+    ]
+   },
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.webflow": {
+   "credentials": [
+    "webflowApi",
+    "webflowOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.webflowTool": {
+   "credentials": [
+    "webflowOAuth2Api"
+   ],
+   "versions": [
+    2
+   ]
+  },
+  "n8n-nodes-base.webflowTrigger": {
+   "credentials": [
+    "webflowApi",
+    "webflowOAuth2Api"
+   ],
+   "versions": [
+    1,
+    2
+   ]
+  },
+  "n8n-nodes-base.webhook": {
+   "credentials": [
+    "httpBasicAuth",
+    "httpHeaderAuth",
+    "jwtAuth"
+   ],
+   "parameters": {
+    "1": [
+     "authentication",
+     "contentTypeNotice",
+     "httpMethod",
+     "multipleMethods",
+     "options",
+     "path",
+     "requireExecuteAccess",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "webhookNotice",
+     "webhookStreamingNotice"
+    ],
+    "1.1": [
+     "authentication",
+     "contentTypeNotice",
+     "httpMethod",
+     "multipleMethods",
+     "options",
+     "path",
+     "requireExecuteAccess",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "webhookNotice",
+     "webhookStreamingNotice"
+    ],
+    "2": [
+     "authentication",
+     "contentTypeNotice",
+     "httpMethod",
+     "multipleMethods",
+     "options",
+     "path",
+     "requireExecuteAccess",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "webhookNotice",
+     "webhookStreamingNotice"
+    ],
+    "2.1": [
+     "authentication",
+     "contentTypeNotice",
+     "httpMethod",
+     "multipleMethods",
+     "options",
+     "path",
+     "requireExecuteAccess",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "webhookNotice",
+     "webhookStreamingNotice"
+    ],
+    "2.2": [
+     "authentication",
+     "contentTypeNotice",
+     "httpMethod",
+     "multipleMethods",
+     "options",
+     "path",
+     "requireExecuteAccess",
+     "responseBinaryPropertyName",
+     "responseCode",
+     "responseData",
+     "responseMode",
+     "webhookNotice",
+     "webhookStreamingNotice"
+    ]
+   },
+   "versions": [
+    1,
+    1.1,
+    2,
+    2.1,
+    2.2
+   ]
+  },
+  "n8n-nodes-base.wekan": {
+   "credentials": [
+    "wekanApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wekanTool": {
+   "credentials": [
+    "wekanApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.whatsApp": {
+   "credentials": [
+    "whatsAppApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.whatsAppHitlTool": {
+   "credentials": [
+    "whatsAppApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.whatsAppTool": {
+   "credentials": [
+    "whatsAppApi"
+   ],
+   "versions": [
+    1,
+    1.1
+   ]
+  },
+  "n8n-nodes-base.whatsAppTrigger": {
+   "credentials": [
+    "whatsAppTriggerApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wise": {
+   "credentials": [
+    "wiseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wiseTrigger": {
+   "credentials": [
+    "wiseApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wooCommerce": {
+   "credentials": [
+    "wooCommerceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wooCommerceTool": {
+   "credentials": [
+    "wooCommerceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wooCommerceTrigger": {
+   "credentials": [
+    "wooCommerceApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wordpress": {
+   "credentials": [
+    "wordpressApi",
+    "wordpressOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wordpressTool": {
+   "credentials": [
+    "wordpressApi",
+    "wordpressOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.workableTrigger": {
+   "credentials": [
+    "workableApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.workflowTrigger": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.writeBinaryFile": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.wufooTrigger": {
+   "credentials": [
+    "wufooApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.xero": {
+   "credentials": [
+    "xeroOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.xeroTool": {
+   "credentials": [
+    "xeroOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.xml": {
+   "credentials": [],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.youTube": {
+   "credentials": [
+    "youTubeOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.youTubeTool": {
+   "credentials": [
+    "youTubeOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.yourls": {
+   "credentials": [
+    "yourlsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.yourlsTool": {
+   "credentials": [
+    "yourlsApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zammad": {
+   "credentials": [
+    "zammadBasicAuthApi",
+    "zammadTokenAuthApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zammadTool": {
+   "credentials": [
+    "zammadBasicAuthApi",
+    "zammadTokenAuthApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zendesk": {
+   "credentials": [
+    "zendeskApi",
+    "zendeskOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zendeskTool": {
+   "credentials": [
+    "zendeskApi",
+    "zendeskOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zendeskTrigger": {
+   "credentials": [
+    "zendeskApi",
+    "zendeskOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zohoCrm": {
+   "credentials": [
+    "zohoOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zohoCrmTool": {
+   "credentials": [
+    "zohoOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zoom": {
+   "credentials": [
+    "zoomApi",
+    "zoomOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zoomTool": {
+   "credentials": [
+    "zoomApi",
+    "zoomOAuth2Api"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zulip": {
+   "credentials": [
+    "zulipApi"
+   ],
+   "versions": [
+    1
+   ]
+  },
+  "n8n-nodes-base.zulipTool": {
+   "credentials": [
+    "zulipApi"
+   ],
+   "versions": [
+    1
+   ]
+  }
+ }
+}

@@ -1,0 +1,3547 @@
+{
+  "name": "fake",
+  "suite": "triage",
+  "run_at": "2026-10-13T05:02:14+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 80,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 0.22,
+    "latency_p95_s": 0.45,
+    "llm_seconds_p50": 0.0,
+    "llm_calls": 80,
+    "llm_calls_per_item": 1.0,
+    "invalid_model_outputs": 0,
+    "tokens": 40837,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "fake/rules": 80
+    },
+    "category_accuracy": 0.9125,
+    "auto_handled": 48,
+    "auto_handled_rate": 0.6,
+    "auto_handled_accuracy": 1.0,
+    "misrouted_automatically": 0,
+    "sent_to_review": 32,
+    "review_rate": 0.4,
+    "wrong_category": 7,
+    "wrong_caught_by_review": 7,
+    "hard_items": 28,
+    "hard_accuracy": 0.8929,
+    "per_category": {
+      "sales_lead": {
+        "items": 24,
+        "correct": 20,
+        "routed": 13,
+        "routed_correct": 13
+      },
+      "support": {
+        "items": 20,
+        "correct": 18,
+        "routed": 16,
+        "routed_correct": 16
+      },
+      "invoice": {
+        "items": 14,
+        "correct": 14,
+        "routed": 14,
+        "routed_correct": 14
+      },
+      "spam": {
+        "items": 14,
+        "correct": 13,
+        "routed": 5,
+        "routed_correct": 5
+      },
+      "other": {
+        "items": 8,
+        "correct": 8,
+        "routed": 0,
+        "routed_correct": 0
+      }
+    },
+    "confusion": {
+      "sales_lead->other": 2,
+      "sales_lead->support": 2,
+      "support->other": 1,
+      "support->invoice": 1,
+      "spam->invoice": 1
+    },
+    "fields": {
+      "name": {
+        "scored": 41,
+        "correct": 39,
+        "accuracy": 0.9512,
+        "misses": [
+          {
+            "id": "em-020",
+            "got": "Elif Yilmaz",
+            "gold": "Elif Yılmaz"
+          },
+          {
+            "id": "em-077",
+            "got": "Student Research",
+            "gold": "M. de Vries"
+          }
+        ]
+      },
+      "company": {
+        "scored": 43,
+        "correct": 8,
+        "accuracy": 0.186,
+        "misses": [
+          {
+            "id": "em-001",
+            "got": null,
+            "gold": "Fernway Tea GmbH"
+          },
+          {
+            "id": "em-003",
+            "got": null,
+            "gold": "Luma Cosmética S.L."
+          },
+          {
+            "id": "em-004",
+            "got": null,
+            "gold": "Het Stroopwafelhuis"
+          },
+          {
+            "id": "em-007",
+            "got": null,
+            "gold": "Atelier Nuage"
+          },
+          {
+            "id": "em-008",
+            "got": null,
+            "gold": "Nordic Knit"
+          },
+          {
+            "id": "em-009",
+            "got": null,
+            "gold": "Kraftwerk Candles GmbH"
+          },
+          {
+            "id": "em-010",
+            "got": null,
+            "gold": "Peak Pantry"
+          },
+          {
+            "id": "em-012",
+            "got": null,
+            "gold": "Costa Olive Estates"
+          }
+        ]
+      },
+      "product": {
+        "scored": 19,
+        "correct": 16,
+        "accuracy": 0.8421,
+        "misses": [
+          {
+            "id": "em-003",
+            "got": "stickers",
+            "gold": "mailer_boxes"
+          },
+          {
+            "id": "em-016",
+            "got": "labels",
+            "gold": "folding_cartons"
+          },
+          {
+            "id": "em-020",
+            "got": "mailer_boxes",
+            "gold": "other"
+          }
+        ]
+      },
+      "quantity": {
+        "scored": 17,
+        "correct": 15,
+        "accuracy": 0.8824,
+        "misses": [
+          {
+            "id": "em-005",
+            "got": null,
+            "gold": 4000
+          },
+          {
+            "id": "em-020",
+            "got": null,
+            "gold": 10000
+          }
+        ]
+      },
+      "order_id": {
+        "scored": 16,
+        "correct": 16,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "issue": {
+        "scored": 18,
+        "correct": 13,
+        "accuracy": 0.7222,
+        "misses": [
+          {
+            "id": "em-029",
+            "got": "shipping",
+            "gold": "account"
+          },
+          {
+            "id": "em-030",
+            "got": "shipping",
+            "gold": "order_change"
+          },
+          {
+            "id": "em-031",
+            "got": "artwork",
+            "gold": "quality"
+          },
+          {
+            "id": "em-034",
+            "got": "artwork",
+            "gold": "order_change"
+          },
+          {
+            "id": "em-038",
+            "got": "billing",
+            "gold": "shipping"
+          }
+        ]
+      },
+      "invoice_number": {
+        "scored": 13,
+        "correct": 12,
+        "accuracy": 0.9231,
+        "misses": [
+          {
+            "id": "em-050",
+            "got": null,
+            "gold": "AG2026-03413"
+          }
+        ]
+      },
+      "amount": {
+        "scored": 14,
+        "correct": 4,
+        "accuracy": 0.2857,
+        "misses": [
+          {
+            "id": "em-045",
+            "got": null,
+            "gold": 577.86
+          },
+          {
+            "id": "em-046",
+            "got": null,
+            "gold": 2205.18
+          },
+          {
+            "id": "em-048",
+            "got": null,
+            "gold": 1091.0
+          },
+          {
+            "id": "em-049",
+            "got": null,
+            "gold": 242.0
+          },
+          {
+            "id": "em-050",
+            "got": null,
+            "gold": 1187.45
+          },
+          {
+            "id": "em-051",
+            "got": null,
+            "gold": 3280.58
+          },
+          {
+            "id": "em-052",
+            "got": null,
+            "gold": 892.4
+          },
+          {
+            "id": "em-054",
+            "got": null,
+            "gold": 1370.2
+          }
+        ]
+      }
+    },
+    "field_accuracy": 0.6796,
+    "downstream_records": {
+      "crm": 13,
+      "helpdesk": 16,
+      "accounting": 10
+    },
+    "downstream_correct_system": "29/29",
+    "review_reasons": {
+      "confidence 0.67": 16,
+      "category 'other' always goes to a person": 11,
+      "confidence 0.55": 5,
+      "confidence 0.40": 3,
+      "invoice from a sender that is not in the vendor list": 2,
+      "confidence 0.79": 2,
+      "an invoice without an attachment, a number or an amount": 1,
+      "the email contains text addressed to an AI system": 1
+    }
+  },
+  "items": [
+    {
+      "id": "em-001",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Lena Fischer",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": 1500,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Lena Fischer",
+        "company": "Fernway Tea GmbH",
+        "product": "mailer_boxes",
+        "quantity": 1500
+      },
+      "seconds": 0.542,
+      "run_id": "7d9baa6d6fc7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 4,
+      "tokens": 564,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-002",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.91,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Marcus Oyelaran",
+        "company": "Marcus Oyelaran\nBrightbark Ltd",
+        "product": "folding_cartons",
+        "quantity": 5000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Marcus Oyelaran",
+        "company": "Brightbark Ltd",
+        "product": "folding_cartons",
+        "quantity": 5000
+      },
+      "seconds": 0.249,
+      "run_id": "99a657ac21ea",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 539,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-003",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Sofia Marín",
+        "company": null,
+        "product": "stickers",
+        "quantity": 2000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Sofia Marín",
+        "company": "Luma Cosmética S.L.",
+        "product": "mailer_boxes",
+        "quantity": 2000
+      },
+      "seconds": 0.257,
+      "run_id": "54ccf83d347b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 555,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-004",
+      "gold_category": "sales_lead",
+      "hard": "Dutch",
+      "language": "nl",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Daan de Vries",
+        "company": null,
+        "product": "paper_bags",
+        "quantity": 3000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Daan de Vries",
+        "company": "Het Stroopwafelhuis",
+        "product": "paper_bags",
+        "quantity": 3000
+      },
+      "seconds": 0.265,
+      "run_id": "86a7f66fe2c0",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 525,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-005",
+      "gold_category": "sales_lead",
+      "hard": "a reorder quoting an order number looks like support",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Priya Raman",
+        "company": "Priya Raman\nOrbit Brew Coffee Co.",
+        "product": "mailer_boxes",
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Priya Raman",
+        "company": "Orbit Brew Coffee Co.",
+        "product": "mailer_boxes",
+        "quantity": 4000
+      },
+      "seconds": 0.326,
+      "run_id": "bde7fdabbe4f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 544,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-006",
+      "gold_category": "sales_lead",
+      "hard": "one-line lead with no details",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Tom Becker",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Tom Becker",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": null
+      },
+      "seconds": 0.309,
+      "run_id": "389c426d89fd",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 484,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-007",
+      "gold_category": "sales_lead",
+      "hard": "partnership enquiry, no product",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.97,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Amélie Laurent",
+        "company": null,
+        "product": "labels",
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Amélie Laurent",
+        "company": "Atelier Nuage",
+        "product": null,
+        "quantity": null
+      },
+      "seconds": 0.218,
+      "run_id": "b6477757e35b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 545,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-008",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Jonas Lindqvist",
+        "company": null,
+        "product": "tissue_paper",
+        "quantity": 2000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Jonas Lindqvist",
+        "company": "Nordic Knit",
+        "product": "tissue_paper",
+        "quantity": 2000
+      },
+      "seconds": 0.219,
+      "run_id": "cf169695da9d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 522,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-009",
+      "gold_category": "sales_lead",
+      "hard": "German",
+      "language": "de",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Hannah Weber",
+        "company": null,
+        "product": "folding_cartons",
+        "quantity": 8000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Hannah Weber",
+        "company": "Kraftwerk Candles GmbH",
+        "product": "folding_cartons",
+        "quantity": 8000
+      },
+      "seconds": 0.152,
+      "run_id": "07170d205878",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 538,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-010",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Ethan Cole",
+        "company": null,
+        "product": "labels",
+        "quantity": 20000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Ethan Cole",
+        "company": "Peak Pantry",
+        "product": "labels",
+        "quantity": 20000
+      },
+      "seconds": 0.237,
+      "run_id": "a8422cdb5a4f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 534,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-011",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.4,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person",
+        "confidence 0.40 below 0.75"
+      ],
+      "fields": {
+        "name": "Chloé Martin",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Chloé Martin",
+        "company": "Petit Pois",
+        "product": "mailer_boxes",
+        "quantity": 1200
+      },
+      "seconds": 0.173,
+      "run_id": "c442580caa40",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 521,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-012",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Rafael Costa",
+        "company": null,
+        "product": "folding_cartons",
+        "quantity": 600,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Rafael Costa",
+        "company": "Costa Olive Estates",
+        "product": "folding_cartons",
+        "quantity": 600
+      },
+      "seconds": 0.223,
+      "run_id": "59ec4f0e136e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 529,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-013",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Mia Johansson",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": 3000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Mia Johansson",
+        "company": "Greenloop Apparel ApS",
+        "product": "mailer_boxes",
+        "quantity": 3000
+      },
+      "seconds": 0.288,
+      "run_id": "8ff967155227",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 532,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-014",
+      "gold_category": "sales_lead",
+      "hard": "negotiation in a reply thread",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.91,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Oliver Grant",
+        "company": null,
+        "product": "paper_bags",
+        "quantity": 2500,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Oliver Grant",
+        "company": "Grant & Sons Bakery",
+        "product": "paper_bags",
+        "quantity": 2500
+      },
+      "seconds": 0.277,
+      "run_id": "b59ea609b0cd",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 535,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-015",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Yuki Tanaka",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": 300,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Yuki Tanaka",
+        "company": "Matcha Mori",
+        "product": "mailer_boxes",
+        "quantity": 300
+      },
+      "seconds": 0.276,
+      "run_id": "2aea55e10e72",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 522,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-016",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Grace Okafor",
+        "company": null,
+        "product": "labels",
+        "quantity": 12000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Grace Okafor",
+        "company": "Okafor Skin Ltd",
+        "product": "folding_cartons",
+        "quantity": 12000
+      },
+      "seconds": 0.308,
+      "run_id": "f296ac5ee4d1",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 546,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-017",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Lukas Novak",
+        "company": "Lukas Novák\nPrague Roasters s.r.o.",
+        "product": "labels",
+        "quantity": 5000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Lukas Novák",
+        "company": "Prague Roasters s.r.o.",
+        "product": "labels",
+        "quantity": 5000
+      },
+      "seconds": 0.279,
+      "run_id": "29338ce2c4f3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 518,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-018",
+      "gold_category": "sales_lead",
+      "hard": "a complaint and a new order in one email (the order wins)",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "support",
+      "confidence": 0.55,
+      "route": "review",
+      "reasons": [
+        "confidence 0.55 below 0.75"
+      ],
+      "fields": {
+        "name": "Isabella Rossi",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-46002",
+        "issue": "other",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Isabella Rossi",
+        "company": "Rossi Pasta Fresca",
+        "product": "folding_cartons",
+        "quantity": 4000
+      },
+      "seconds": 0.273,
+      "run_id": "9d696f877c9d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 539,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-019",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "support",
+      "confidence": 0.55,
+      "route": "review",
+      "reasons": [
+        "confidence 0.55 below 0.75"
+      ],
+      "fields": {
+        "name": "Noah Williams",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Noah Williams",
+        "company": "Urban Hive",
+        "product": "labels",
+        "quantity": 2000
+      },
+      "seconds": 0.246,
+      "run_id": "b8f4afbe0881",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 499,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-020",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "sales_lead",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Elif Yilmaz",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Elif Yılmaz",
+        "company": "Anatolia Spice Co.",
+        "product": "other",
+        "quantity": 10000
+      },
+      "seconds": 0.313,
+      "run_id": "b8f0f286aedc",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 518,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-021",
+      "gold_category": "sales_lead",
+      "hard": "a size the KB says is too large",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.4,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person",
+        "confidence 0.40 below 0.75"
+      ],
+      "fields": {
+        "name": "Ben Carter",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Ben Carter",
+        "company": "Carter Bikes",
+        "product": "mailer_boxes",
+        "quantity": 500
+      },
+      "seconds": 0.244,
+      "run_id": "d1baca145e9b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 499,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-022",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Anna Kowalska",
+        "company": null,
+        "product": "mailer_boxes",
+        "quantity": 1000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Anna Kowalska",
+        "company": "Kowalska Ceramics",
+        "product": "mailer_boxes",
+        "quantity": 1000
+      },
+      "seconds": 0.268,
+      "run_id": "e1c3693ff8b0",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 524,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-023",
+      "gold_category": "sales_lead",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Felix Braun",
+        "company": null,
+        "product": "paper_bags",
+        "quantity": 6000,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Felix Braun",
+        "company": "Braun Events",
+        "product": "paper_bags",
+        "quantity": 6000
+      },
+      "seconds": 0.245,
+      "run_id": "0010d1048449",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 528,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-024",
+      "gold_category": "sales_lead",
+      "hard": "vague; asks for products partly outside the range",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "sales_lead",
+      "confidence": 0.79,
+      "route": "crm",
+      "reasons": [],
+      "fields": {
+        "name": "Zara Ahmed",
+        "company": null,
+        "product": "paper_bags",
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Zara Ahmed",
+        "company": "Zest Juice",
+        "product": "paper_bags",
+        "quantity": null
+      },
+      "seconds": 0.177,
+      "run_id": "03760fa36f05",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 521,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-025",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Kevin Moreau",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47715",
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Kevin Moreau",
+        "company": "Moreau Wines",
+        "order_id": "KP-47715",
+        "issue": "shipping"
+      },
+      "seconds": 0.208,
+      "run_id": "c55096ddd56a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 503,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-026",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Sara Lindgren",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48102",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Sara Lindgren",
+        "company": "Lindgren Home",
+        "order_id": "KP-48102",
+        "issue": "damage"
+      },
+      "seconds": 0.165,
+      "run_id": "bdc62dbc93ec",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 508,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-027",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.4,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person",
+        "confidence 0.40 below 0.75"
+      ],
+      "fields": {
+        "name": "Paul Dubois",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Paul Dubois",
+        "company": null,
+        "order_id": null,
+        "issue": "artwork"
+      },
+      "seconds": 0.151,
+      "run_id": "afafffe9383e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 496,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-028",
+      "gold_category": "support",
+      "hard": "a question about our invoice to a customer, not a supplier bill",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "support",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Laura Bianchi",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-46780",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Laura Bianchi",
+        "company": "Bianchi Design S.r.l.",
+        "order_id": "KP-46780",
+        "issue": "billing"
+      },
+      "seconds": 0.176,
+      "run_id": "1d3e65cd8307",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 531,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-029",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Mark Jansen",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Mark Jansen",
+        "company": null,
+        "order_id": null,
+        "issue": "account"
+      },
+      "seconds": 0.196,
+      "run_id": "183ce8f35fc8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 494,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-030",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Eva Horvath",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48333",
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Eva Horvath",
+        "company": null,
+        "order_id": "KP-48333",
+        "issue": "order_change"
+      },
+      "seconds": 0.17,
+      "run_id": "30bc17ff26f5",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 506,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-031",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "James O'Neill",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47201",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "James O'Neill",
+        "company": "O'Neill Distillery",
+        "order_id": "KP-47201",
+        "issue": "quality"
+      },
+      "seconds": 0.215,
+      "run_id": "48ae60c33d39",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 513,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-032",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Nina Petrova",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48410",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Nina Petrova",
+        "company": null,
+        "order_id": "KP-48410",
+        "issue": "artwork"
+      },
+      "seconds": 0.218,
+      "run_id": "203291c8ef2f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 499,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-033",
+      "gold_category": "support",
+      "hard": "Spanish; a short delivery",
+      "language": "es",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Carlos Ruiz",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47950",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Carlos Ruiz",
+        "company": "Ruiz Chocolates",
+        "order_id": "KP-47950",
+        "issue": "damage"
+      },
+      "seconds": 0.249,
+      "run_id": "17e9b015a395",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 505,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-034",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Emma Schulz",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48501",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Emma Schulz",
+        "company": "Schulz Optik",
+        "order_id": "KP-48501",
+        "issue": "order_change"
+      },
+      "seconds": 0.223,
+      "run_id": "be8317be6089",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 498,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-035",
+      "gold_category": "support",
+      "hard": "mentions an invoice but is a customer request",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "support",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Victor Lambert",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-45992",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Victor Lambert",
+        "company": null,
+        "order_id": "KP-45992",
+        "issue": "billing"
+      },
+      "seconds": 0.241,
+      "run_id": "3b19e5240ba9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 501,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-036",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Olga Smirnova",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48288",
+        "issue": "shipping",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Olga Smirnova",
+        "company": null,
+        "order_id": "KP-48288",
+        "issue": "shipping"
+      },
+      "seconds": 0.212,
+      "run_id": "96d41c004e44",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 497,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-037",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "invoice",
+      "confidence": 0.55,
+      "route": "review",
+      "reasons": [
+        "invoice from a sender that is not in the vendor list",
+        "an invoice without an attachment, a number or an amount",
+        "confidence 0.55 below 0.75"
+      ],
+      "fields": {
+        "name": "Henrik Dahl",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Henrik Dahl",
+        "company": "Dahl Audio",
+        "order_id": null,
+        "issue": "account"
+      },
+      "seconds": 0.201,
+      "run_id": "2c5962d14be2",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 509,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-038",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Fatima Zahra",
+        "company": "Fatima Zahra\nZahra Argan Ltd",
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48120",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Fatima Zahra",
+        "company": "Zahra Argan Ltd",
+        "order_id": "KP-48120",
+        "issue": "shipping"
+      },
+      "seconds": 0.147,
+      "run_id": "83fed6da347a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 530,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-039",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.97,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Peter Novak",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-47833",
+        "issue": "quality",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Peter Novak",
+        "company": null,
+        "order_id": "KP-47833",
+        "issue": "quality"
+      },
+      "seconds": 0.178,
+      "run_id": "7a9af3c74251",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 511,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-040",
+      "gold_category": "support",
+      "hard": "mentions an amount and a refund",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Ines Duarte",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48455",
+        "issue": "billing",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Ines Duarte",
+        "company": "Duarte Surf",
+        "order_id": "KP-48455",
+        "issue": "billing"
+      },
+      "seconds": 0.173,
+      "run_id": "7447196d23c8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 508,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-041",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Robert King",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48490",
+        "issue": "artwork",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Robert King",
+        "company": null,
+        "order_id": "KP-48490",
+        "issue": "artwork"
+      },
+      "seconds": 0.185,
+      "run_id": "46104080b1ad",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 511,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-042",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Aisha Bello",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48010",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Aisha Bello",
+        "company": null,
+        "order_id": "KP-48010",
+        "issue": "damage"
+      },
+      "seconds": 0.179,
+      "run_id": "10643cc416ce",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 490,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-043",
+      "gold_category": "support",
+      "hard": "German",
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.91,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Martin Keller",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": "KP-48177",
+        "issue": "damage",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Martin Keller",
+        "company": "Keller Uhren",
+        "order_id": "KP-48177",
+        "issue": "damage"
+      },
+      "seconds": 0.168,
+      "run_id": "a514c864692f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 501,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-044",
+      "gold_category": "support",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "support",
+      "confidence": 0.79,
+      "route": "helpdesk",
+      "reasons": [],
+      "fields": {
+        "name": "Julia Novak",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": "other",
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Julia Novak",
+        "company": null,
+        "order_id": null,
+        "issue": "other"
+      },
+      "seconds": 0.129,
+      "run_id": "64e1a57f72e1",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 496,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-045",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Inkwell Accounts",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "RE-2026-03295",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03295",
+        "amount": 577.86,
+        "currency": "EUR"
+      },
+      "seconds": 0.81,
+      "run_id": "29865eb9f400",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 517,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-046",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Inkwell Accounts",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "RE-2026-03296",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03296",
+        "amount": 2205.18,
+        "currency": "EUR"
+      },
+      "seconds": 0.445,
+      "run_id": "5b2ef237a48d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 503,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-047",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Swiftline Billing",
+        "company": "Swiftline Logistics Ltd",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "SL2026-02911",
+        "amount": 852.54
+      },
+      "gold_fields": {
+        "company": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02911",
+        "amount": 852.54,
+        "currency": "GBP"
+      },
+      "seconds": 0.449,
+      "run_id": "e6b7bb549136",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 519,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-048",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Cloudforge Billing",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "CF-2026-02855",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02855",
+        "amount": 1091.0,
+        "currency": "USD"
+      },
+      "seconds": 0.365,
+      "run_id": "edef03786fec",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 511,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-049",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "nl",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Hollandse Energie",
+        "company": "Hollandse Energie B.V.",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "HE-2026-03085",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03085",
+        "amount": 242.0,
+        "currency": "EUR"
+      },
+      "seconds": 0.368,
+      "run_id": "21623e4b6693",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 519,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-050",
+      "gold_category": "invoice",
+      "hard": "informal, no number in the email (only in the PDF)",
+      "language": "nl",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Atelier Groen",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03413",
+        "amount": 1187.45,
+        "currency": "EUR"
+      },
+      "seconds": 0.365,
+      "run_id": "aa32bdfa19bd",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 498,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-051",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "VP-2026-02857",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02857",
+        "amount": 3280.58,
+        "currency": "EUR"
+      },
+      "seconds": 0.396,
+      "run_id": "b71c78edead7",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 520,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-052",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Swiftline Billing",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "SL2026-02912",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02912",
+        "amount": 892.4,
+        "currency": "GBP"
+      },
+      "seconds": 0.334,
+      "run_id": "ab4a839999d9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 494,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-053",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Cloudforge Billing",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "CF-2026-02857",
+        "amount": 145
+      },
+      "gold_fields": {
+        "company": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02857",
+        "amount": 145.0,
+        "currency": "USD"
+      },
+      "seconds": 0.452,
+      "run_id": "162c7db0f355",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 501,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-054",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Hollandse Energie",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "HE-2026-03086",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03086",
+        "amount": 1370.2,
+        "currency": "EUR"
+      },
+      "seconds": 0.322,
+      "run_id": "88bad81fc85d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 497,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-055",
+      "gold_category": "invoice",
+      "hard": "a reminder without an attachment",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.91,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper",
+        "company": "Veldhoven Paper B.V.",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "VP-2026-02790",
+        "amount": 1946.2
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02790",
+        "amount": 1946.2,
+        "currency": "EUR"
+      },
+      "seconds": 0.174,
+      "run_id": "bc852c8f508f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 541,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-056",
+      "gold_category": "invoice",
+      "hard": "French",
+      "language": "fr",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Atelier Groen",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "AG2026-03416",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03416",
+        "amount": 248.17,
+        "currency": "EUR"
+      },
+      "seconds": 0.506,
+      "run_id": "5b23d7f5ed57",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 503,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-057",
+      "gold_category": "invoice",
+      "hard": "a statement of account, not a single invoice",
+      "language": "de",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Inkwell Accounts",
+        "company": "Inkwell Supplies GmbH",
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "RE-2026-03295",
+        "amount": 2783.04
+      },
+      "gold_fields": {
+        "company": "Inkwell Supplies GmbH",
+        "invoice_number": null,
+        "amount": 2783.04,
+        "currency": "EUR"
+      },
+      "seconds": 0.238,
+      "run_id": "ed82ffe268d8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 519,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-058",
+      "gold_category": "invoice",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "invoice",
+      "confidence": 0.97,
+      "route": "accounting",
+      "reasons": [],
+      "fields": {
+        "name": "Veldhoven Paper",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": "VP-2026-02864",
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02864",
+        "amount": 3805.81,
+        "currency": "EUR"
+      },
+      "seconds": 0.5,
+      "run_id": "4816566487db",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 500,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-059",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.90"
+      ],
+      "fields": {
+        "name": "Rank Rocket SEO",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.196,
+      "run_id": "add90e761d4a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 511,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-060",
+      "gold_category": "spam",
+      "hard": "phishing",
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.91,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Microsoft 365 Team",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.177,
+      "run_id": "09b84ca35def",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 491,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-061",
+      "gold_category": "spam",
+      "hard": "phishing disguised as an invoice",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "invoice",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "invoice from a sender that is not in the vendor list",
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Accounts Department",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": 4850
+      },
+      "gold_fields": {},
+      "seconds": 0.151,
+      "run_id": "9fceb075aa3d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 526,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-062",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.55,
+      "route": "review",
+      "reasons": [
+        "confidence 0.55 below 0.90"
+      ],
+      "fields": {
+        "name": "Lisa from LeadGenix",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.117,
+      "run_id": "450d5a505a90",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 499,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-063",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.97,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Crypto Wealth",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.158,
+      "run_id": "44244719823e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 486,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-064",
+      "gold_category": "spam",
+      "hard": "phishing that mimics a carrier",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.79,
+      "route": "review",
+      "reasons": [
+        "confidence 0.79 below 0.90"
+      ],
+      "fields": {
+        "name": "DHL Express",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.149,
+      "run_id": "ced9bfdfe051",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 490,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-065",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.90"
+      ],
+      "fields": {
+        "name": "Web Design Pro",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.184,
+      "run_id": "0965d4016a4a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 500,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-066",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.55,
+      "route": "review",
+      "reasons": [
+        "confidence 0.55 below 0.90"
+      ],
+      "fields": {
+        "name": "Prince Adewale",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.178,
+      "run_id": "cc0befc4f97d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 488,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-067",
+      "gold_category": "spam",
+      "hard": "a directory scam that mentions invoices",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.90"
+      ],
+      "fields": {
+        "name": "Packaging Expo",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.19,
+      "run_id": "b5f160dd2a92",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 502,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-068",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "confidence 0.67 below 0.90"
+      ],
+      "fields": {
+        "name": "Office Supplies Deals",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.22,
+      "run_id": "6d7fa90ef12b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 490,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-069",
+      "gold_category": "spam",
+      "hard": "prompt injection aimed at the classifier",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "spam",
+      "confidence": 0.79,
+      "route": "review",
+      "reasons": [
+        "the email contains text addressed to an AI system",
+        "confidence 0.79 below 0.90"
+      ],
+      "fields": {
+        "name": "IT Support",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.342,
+      "run_id": "199347bfb2a5",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 507,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-070",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.91,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Survey Rewards",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.172,
+      "run_id": "71b486258d72",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 485,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-071",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.97,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Apex Funding",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.134,
+      "run_id": "14d07314da77",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 490,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-072",
+      "gold_category": "spam",
+      "hard": null,
+      "language": "en",
+      "http": 200,
+      "error": null,
+      "status": "routed",
+      "category": "spam",
+      "confidence": 0.91,
+      "route": "archive",
+      "reasons": [],
+      "fields": {
+        "name": "Ivy from TalentHub",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.14,
+      "run_id": "18a3990c1e90",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 488,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-073",
+      "gold_category": "other",
+      "hard": "a supplier newsletter",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.91,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Veldhoven Paper News",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "company": "Veldhoven Paper B.V."
+      },
+      "seconds": 0.173,
+      "run_id": "2baeaac96338",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 502,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-074",
+      "gold_category": "other",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.79,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Tim Vos",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Tim Vos"
+      },
+      "seconds": 0.164,
+      "run_id": "c21ec80a4670",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 501,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-075",
+      "gold_category": "other",
+      "hard": "an auto-reply from a colleague",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person",
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Jonas Berg",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "Jonas Berg"
+      },
+      "seconds": 0.161,
+      "run_id": "58d10ae40128",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 492,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-076",
+      "gold_category": "other",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.79,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Utrecht Business Club",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.118,
+      "run_id": "49874b0d2833",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 492,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-077",
+      "gold_category": "other",
+      "hard": "a polite request that is neither lead nor support",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.91,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Student Research",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {
+        "name": "M. de Vries"
+      },
+      "seconds": 0.173,
+      "run_id": "51f7784b37e5",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 496,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-078",
+      "gold_category": "other",
+      "hard": null,
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.79,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Kestrel Facilities",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.16,
+      "run_id": "1262e6e04adc",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 487,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-079",
+      "gold_category": "other",
+      "hard": "a bounce",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.67,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person",
+        "confidence 0.67 below 0.75"
+      ],
+      "fields": {
+        "name": "Mailer Daemon",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.202,
+      "run_id": "2a74139fdbd9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 485,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "em-080",
+      "gold_category": "other",
+      "hard": "relevant to operations but not for any queue",
+      "language": "en",
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "category": "other",
+      "confidence": 0.79,
+      "route": "review",
+      "reasons": [
+        "category 'other' always goes to a person"
+      ],
+      "fields": {
+        "name": "Gemeente Utrecht",
+        "company": null,
+        "product": null,
+        "quantity": null,
+        "order_id": null,
+        "issue": null,
+        "invoice_number": null,
+        "amount": null
+      },
+      "gold_fields": {},
+      "seconds": 0.186,
+      "run_id": "7509d4241ca4",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 499,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    }
+  ]
+}

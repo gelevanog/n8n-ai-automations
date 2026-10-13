@@ -1,0 +1,1906 @@
+{
+  "name": "fake",
+  "suite": "invoices",
+  "run_at": "2026-10-13T05:02:23+00:00",
+  "model": "fake/rules",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 40,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 0.21,
+    "latency_p95_s": 0.29,
+    "llm_seconds_p50": 0.0,
+    "llm_calls": 40,
+    "llm_calls_per_item": 1.0,
+    "invalid_model_outputs": 0,
+    "tokens": 18626,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "fake/rules": 40
+    },
+    "fields": {
+      "vendor": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "invoice_number": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "issue_date": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "due_date": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "currency": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "subtotal": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "vat_amount": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "total": {
+        "scored": 40,
+        "correct": 40,
+        "accuracy": 1.0,
+        "misses": []
+      }
+    },
+    "field_accuracy": 1.0,
+    "all_fields_right": "40/40",
+    "line_count_right": 40,
+    "decision_accuracy": 1.0,
+    "auto_posted": 27,
+    "auto_post_rate": 0.675,
+    "problem_invoices": 13,
+    "problem_invoices_auto_posted": 0,
+    "problem_invoices_auto_posted_ids": [],
+    "clean_invoices": 27,
+    "clean_invoices_sent_to_review": 0,
+    "clean_review_reasons": {},
+    "per_issue": {
+      "total_mismatch": {
+        "planted": 2,
+        "flagged": 2,
+        "flagged_with_this_issue": 2
+      },
+      "vat_mismatch": {
+        "planted": 3,
+        "flagged": 3,
+        "flagged_with_this_issue": 3
+      },
+      "line_math_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "duplicate": {
+        "planted": 2,
+        "flagged": 2,
+        "flagged_with_this_issue": 1
+      },
+      "over_limit": {
+        "planted": 2,
+        "flagged": 2,
+        "flagged_with_this_issue": 2
+      },
+      "missing_invoice_number": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "due_before_issue": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "subtotal_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      }
+    },
+    "bills_in_accounting": 27,
+    "double_posted": []
+  },
+  "items": [
+    {
+      "id": "inv-001",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03295",
+        "issue_date": "2026-06-03",
+        "due_date": "2026-07-03",
+        "currency": "EUR",
+        "subtotal": 577.86,
+        "vat_amount": 0.0,
+        "total": 577.86
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03295",
+        "issue_date": "2026-06-03",
+        "due_date": "2026-07-03",
+        "currency": "EUR",
+        "subtotal": 577.86,
+        "vat_amount": 0,
+        "total": 577.86
+      },
+      "lines": 2,
+      "seconds": 0.387,
+      "run_id": "102c15d19520",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 1,
+      "tokens": 478,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-002",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03296",
+        "issue_date": "2026-06-06",
+        "due_date": "2026-07-06",
+        "currency": "EUR",
+        "subtotal": 2205.18,
+        "vat_amount": 0.0,
+        "total": 2205.18
+      },
+      "gold_lines": 4,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03296",
+        "issue_date": "2026-06-06",
+        "due_date": "2026-07-06",
+        "currency": "EUR",
+        "subtotal": 2205.18,
+        "vat_amount": 0,
+        "total": 2205.18
+      },
+      "lines": 4,
+      "seconds": 0.386,
+      "run_id": "046f6df0ef59",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 556,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-003",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02911",
+        "issue_date": "2026-06-09",
+        "due_date": "2026-07-09",
+        "currency": "GBP",
+        "subtotal": 852.54,
+        "vat_amount": 0.0,
+        "total": 852.54
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02911",
+        "issue_date": "2026-06-09",
+        "due_date": "2026-07-09",
+        "currency": "GBP",
+        "subtotal": 852.54,
+        "vat_amount": 0,
+        "total": 852.54
+      },
+      "lines": 3,
+      "seconds": 0.22,
+      "run_id": "7d9d9bd8e6dc",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 494,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-004",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02855",
+        "issue_date": "2026-06-11",
+        "due_date": "2026-07-11",
+        "currency": "USD",
+        "subtotal": 1081.0,
+        "vat_amount": 0.0,
+        "total": 1091.0
+      },
+      "gold_lines": 3,
+      "expected": "review",
+      "planted": [
+        "total_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "total_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02855",
+        "issue_date": "2026-06-11",
+        "due_date": "2026-07-11",
+        "currency": "USD",
+        "subtotal": 1081,
+        "vat_amount": 0,
+        "total": 1091
+      },
+      "lines": 3,
+      "seconds": 0.137,
+      "run_id": "dd53dce5fdbe",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 497,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-005",
+      "gold": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03085",
+        "issue_date": "2026-06-14",
+        "due_date": "2026-06-28",
+        "currency": "EUR",
+        "subtotal": 200.0,
+        "vat_amount": 42.0,
+        "total": 242.0
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03085",
+        "issue_date": "2026-06-14",
+        "due_date": "2026-06-28",
+        "currency": "EUR",
+        "subtotal": 200,
+        "vat_amount": 42,
+        "total": 242
+      },
+      "lines": 1,
+      "seconds": 0.233,
+      "run_id": "4a622e0a2e1b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 406,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-006",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03413",
+        "issue_date": "2026-06-17",
+        "due_date": "2026-07-17",
+        "currency": "EUR",
+        "subtotal": 1089.4,
+        "vat_amount": 98.05,
+        "total": 1187.45
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03413",
+        "issue_date": "2026-06-17",
+        "due_date": "2026-07-17",
+        "currency": "EUR",
+        "subtotal": 1089.4,
+        "vat_amount": 98.05,
+        "total": 1187.45
+      },
+      "lines": 2,
+      "seconds": 0.196,
+      "run_id": "9000efb95505",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 461,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-007",
+      "gold": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02857",
+        "issue_date": "2026-06-20",
+        "due_date": "2026-07-04",
+        "currency": "EUR",
+        "subtotal": 2711.22,
+        "vat_amount": 569.36,
+        "total": 3280.58
+      },
+      "gold_lines": 4,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02857",
+        "issue_date": "2026-06-20",
+        "due_date": "2026-07-04",
+        "currency": "EUR",
+        "subtotal": 2711.22,
+        "vat_amount": 569.36,
+        "total": 3280.58
+      },
+      "lines": 4,
+      "seconds": 0.21,
+      "run_id": "08def1f58ca9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 526,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-008",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03416",
+        "issue_date": "2026-06-23",
+        "due_date": "2026-07-23",
+        "currency": "EUR",
+        "subtotal": 223.58,
+        "vat_amount": 24.59,
+        "total": 248.17
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "vat_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "vat_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03416",
+        "issue_date": "2026-06-23",
+        "due_date": "2026-07-23",
+        "currency": "EUR",
+        "subtotal": 223.58,
+        "vat_amount": 24.59,
+        "total": 248.17
+      },
+      "lines": 1,
+      "seconds": 0.214,
+      "run_id": "013bf2e14c7b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 423,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-009",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02912",
+        "issue_date": "2026-06-26",
+        "due_date": "2026-07-26",
+        "currency": "GBP",
+        "subtotal": 892.4,
+        "vat_amount": 0.0,
+        "total": 892.4
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02912",
+        "issue_date": "2026-06-26",
+        "due_date": "2026-07-26",
+        "currency": "GBP",
+        "subtotal": 892.4,
+        "vat_amount": 0,
+        "total": 892.4
+      },
+      "lines": 1,
+      "seconds": 0.266,
+      "run_id": "e22b232325fa",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 425,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-010",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02857",
+        "issue_date": "2026-06-28",
+        "due_date": "2026-07-28",
+        "currency": "USD",
+        "subtotal": 145.0,
+        "vat_amount": 0.0,
+        "total": 145.0
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02857",
+        "issue_date": "2026-06-28",
+        "due_date": "2026-07-28",
+        "currency": "USD",
+        "subtotal": 145,
+        "vat_amount": 0,
+        "total": 145
+      },
+      "lines": 1,
+      "seconds": 0.269,
+      "run_id": "9a0b61a73677",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 420,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-011",
+      "gold": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03086",
+        "issue_date": "2026-07-03",
+        "due_date": "2026-08-02",
+        "currency": "EUR",
+        "subtotal": 1132.4,
+        "vat_amount": 237.8,
+        "total": 1370.2
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03086",
+        "issue_date": "2026-07-03",
+        "due_date": "2026-08-02",
+        "currency": "EUR",
+        "subtotal": 1132.4,
+        "vat_amount": 237.8,
+        "total": 1370.2
+      },
+      "lines": 2,
+      "seconds": 0.248,
+      "run_id": "875d1f70f802",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 444,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-012",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03420",
+        "issue_date": "2026-07-04",
+        "due_date": "2026-08-03",
+        "currency": "EUR",
+        "subtotal": 1272.78,
+        "vat_amount": 114.55,
+        "total": 1387.33
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "line_math_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "line_math_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03420",
+        "issue_date": "2026-07-04",
+        "due_date": "2026-08-03",
+        "currency": "EUR",
+        "subtotal": 1272.78,
+        "vat_amount": 114.55,
+        "total": 1387.33
+      },
+      "lines": 2,
+      "seconds": 0.157,
+      "run_id": "8e84b74e3b8d",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 461,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-013",
+      "gold": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02864",
+        "issue_date": "2026-07-07",
+        "due_date": "2026-08-06",
+        "currency": "EUR",
+        "subtotal": 3145.3,
+        "vat_amount": 660.51,
+        "total": 3805.81
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02864",
+        "issue_date": "2026-07-07",
+        "due_date": "2026-08-06",
+        "currency": "EUR",
+        "subtotal": 3145.3,
+        "vat_amount": 660.51,
+        "total": 3805.81
+      },
+      "lines": 3,
+      "seconds": 0.207,
+      "run_id": "f62a57b83101",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 496,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-014",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03304",
+        "issue_date": "2026-07-12",
+        "due_date": "2026-07-26",
+        "currency": "EUR",
+        "subtotal": 2048.5,
+        "vat_amount": 0.0,
+        "total": 2048.5
+      },
+      "gold_lines": 4,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03304",
+        "issue_date": "2026-07-12",
+        "due_date": "2026-07-26",
+        "currency": "EUR",
+        "subtotal": 2048.5,
+        "vat_amount": 0,
+        "total": 2048.5
+      },
+      "lines": 4,
+      "seconds": 0.215,
+      "run_id": "32deb5362982",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 555,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-015",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02912",
+        "issue_date": "2026-06-26",
+        "due_date": "2026-07-26",
+        "currency": "GBP",
+        "subtotal": 892.4,
+        "vat_amount": 0.0,
+        "total": 892.4
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "duplicate"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "duplicate"
+      ],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02912",
+        "issue_date": "2026-06-26",
+        "due_date": "2026-07-26",
+        "currency": "GBP",
+        "subtotal": 892.4,
+        "vat_amount": 0,
+        "total": 892.4
+      },
+      "lines": 1,
+      "seconds": 0.204,
+      "run_id": "07f8d881330e",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 433,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-016",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02862",
+        "issue_date": "2026-07-18",
+        "due_date": "2026-08-17",
+        "currency": "USD",
+        "subtotal": 1602.0,
+        "vat_amount": 0.0,
+        "total": 1602.0
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02862",
+        "issue_date": "2026-07-18",
+        "due_date": "2026-08-17",
+        "currency": "USD",
+        "subtotal": 1602,
+        "vat_amount": 0,
+        "total": 1602
+      },
+      "lines": 3,
+      "seconds": 0.251,
+      "run_id": "314ba869b643",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 497,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-017",
+      "gold": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03088",
+        "issue_date": "2026-07-20",
+        "due_date": "2026-08-19",
+        "currency": "EUR",
+        "subtotal": 744.0,
+        "vat_amount": 156.24,
+        "total": 900.24
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03088",
+        "issue_date": "2026-07-20",
+        "due_date": "2026-08-19",
+        "currency": "EUR",
+        "subtotal": 744,
+        "vat_amount": 156.24,
+        "total": 900.24
+      },
+      "lines": 1,
+      "seconds": 0.192,
+      "run_id": "f61daa3d8686",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 407,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-018",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03428",
+        "issue_date": "2026-07-22",
+        "due_date": "2026-08-05",
+        "currency": "EUR",
+        "subtotal": 5525.0,
+        "vat_amount": 497.25,
+        "total": 6022.25
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "over_limit"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "over_limit"
+      ],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03428",
+        "issue_date": "2026-07-22",
+        "due_date": "2026-08-05",
+        "currency": "EUR",
+        "subtotal": 5525,
+        "vat_amount": 497.25,
+        "total": 6022.25
+      },
+      "lines": 2,
+      "seconds": 0.231,
+      "run_id": "452c462787fb",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 461,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-019",
+      "gold": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02870",
+        "issue_date": "2026-07-27",
+        "due_date": "2026-08-26",
+        "currency": "EUR",
+        "subtotal": 975.04,
+        "vat_amount": 204.76,
+        "total": 1179.8
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02870",
+        "issue_date": "2026-07-27",
+        "due_date": "2026-08-26",
+        "currency": "EUR",
+        "subtotal": 975.04,
+        "vat_amount": 204.76,
+        "total": 1179.8
+      },
+      "lines": 1,
+      "seconds": 0.256,
+      "run_id": "9ee1d013e240",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 411,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-020",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03310",
+        "issue_date": "2026-07-30",
+        "due_date": "2026-08-29",
+        "currency": "EUR",
+        "subtotal": 246.66,
+        "vat_amount": 0.0,
+        "total": 246.66
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03310",
+        "issue_date": "2026-07-30",
+        "due_date": "2026-08-29",
+        "currency": "EUR",
+        "subtotal": 246.66,
+        "vat_amount": 0,
+        "total": 246.66
+      },
+      "lines": 1,
+      "seconds": 0.233,
+      "run_id": "6870bcd10e7b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 438,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-021",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": null,
+        "issue_date": "2026-07-31",
+        "due_date": "2026-08-14",
+        "currency": "GBP",
+        "subtotal": 697.15,
+        "vat_amount": 0.0,
+        "total": 697.15
+      },
+      "gold_lines": 3,
+      "expected": "review",
+      "planted": [
+        "missing_invoice_number"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "missing_invoice_number",
+        "low_confidence"
+      ],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": null,
+        "issue_date": "2026-07-31",
+        "due_date": "2026-08-14",
+        "currency": "GBP",
+        "subtotal": 697.15,
+        "vat_amount": 0,
+        "total": 697.15
+      },
+      "lines": 3,
+      "seconds": 0.266,
+      "run_id": "26ee2399a610",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 487,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-022",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02918",
+        "issue_date": "2026-08-05",
+        "due_date": "2026-09-04",
+        "currency": "GBP",
+        "subtotal": 876.13,
+        "vat_amount": 0.0,
+        "total": 876.13
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02918",
+        "issue_date": "2026-08-05",
+        "due_date": "2026-09-04",
+        "currency": "GBP",
+        "subtotal": 876.13,
+        "vat_amount": 0,
+        "total": 876.13
+      },
+      "lines": 2,
+      "seconds": 0.236,
+      "run_id": "e1328ca56a98",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 459,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-023",
+      "gold": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03089",
+        "issue_date": "2026-08-07",
+        "due_date": "2026-08-21",
+        "currency": "EUR",
+        "subtotal": 674.5,
+        "vat_amount": 141.65,
+        "total": 816.15
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03089",
+        "issue_date": "2026-08-07",
+        "due_date": "2026-08-21",
+        "currency": "EUR",
+        "subtotal": 674.5,
+        "vat_amount": 141.65,
+        "total": 816.15
+      },
+      "lines": 2,
+      "seconds": 0.288,
+      "run_id": "96b386beea9a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 445,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-024",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03430",
+        "issue_date": "2026-08-10",
+        "due_date": "2026-09-09",
+        "currency": "EUR",
+        "subtotal": 925.4,
+        "vat_amount": 83.29,
+        "total": 1098.69
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "total_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "total_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03430",
+        "issue_date": "2026-08-10",
+        "due_date": "2026-09-09",
+        "currency": "EUR",
+        "subtotal": 925.4,
+        "vat_amount": 83.29,
+        "total": 1098.69
+      },
+      "lines": 2,
+      "seconds": 0.295,
+      "run_id": "c08221bc1c0f",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 460,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-025",
+      "gold": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02871",
+        "issue_date": "2026-08-13",
+        "due_date": "2026-08-27",
+        "currency": "EUR",
+        "subtotal": 3804.65,
+        "vat_amount": 798.98,
+        "total": 4603.63
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02871",
+        "issue_date": "2026-08-13",
+        "due_date": "2026-08-27",
+        "currency": "EUR",
+        "subtotal": 3804.65,
+        "vat_amount": 798.98,
+        "total": 4603.63
+      },
+      "lines": 3,
+      "seconds": 0.284,
+      "run_id": "2b29ab9c83e8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 485,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-026",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03314",
+        "issue_date": "2026-08-17",
+        "due_date": "2026-09-16",
+        "currency": "EUR",
+        "subtotal": 1228.5,
+        "vat_amount": 0.0,
+        "total": 1228.5
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03314",
+        "issue_date": "2026-08-17",
+        "due_date": "2026-09-16",
+        "currency": "EUR",
+        "subtotal": 1228.5,
+        "vat_amount": 0,
+        "total": 1228.5
+      },
+      "lines": 3,
+      "seconds": 0.287,
+      "run_id": "e55f0b175ed9",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 516,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-027",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02922",
+        "issue_date": "2026-08-19",
+        "due_date": "2026-09-18",
+        "currency": "GBP",
+        "subtotal": 512.03,
+        "vat_amount": 97.29,
+        "total": 609.32
+      },
+      "gold_lines": 3,
+      "expected": "review",
+      "planted": [
+        "vat_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "vat_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02922",
+        "issue_date": "2026-08-19",
+        "due_date": "2026-09-18",
+        "currency": "GBP",
+        "subtotal": 512.03,
+        "vat_amount": 97.29,
+        "total": 609.32
+      },
+      "lines": 3,
+      "seconds": 0.166,
+      "run_id": "e1f4e4905399",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 495,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-028",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02865",
+        "issue_date": "2026-08-21",
+        "due_date": "2026-09-20",
+        "currency": "USD",
+        "subtotal": 546.0,
+        "vat_amount": 0.0,
+        "total": 546.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02865",
+        "issue_date": "2026-08-21",
+        "due_date": "2026-09-20",
+        "currency": "USD",
+        "subtotal": 546,
+        "vat_amount": 0,
+        "total": 546
+      },
+      "lines": 2,
+      "seconds": 0.176,
+      "run_id": "0532fdb8f12b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 465,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-029",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03439",
+        "issue_date": "2026-08-25",
+        "due_date": "2026-09-24",
+        "currency": "EUR",
+        "subtotal": 1128.4,
+        "vat_amount": 101.56,
+        "total": 1229.96
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03439",
+        "issue_date": "2026-08-25",
+        "due_date": "2026-09-24",
+        "currency": "EUR",
+        "subtotal": 1128.4,
+        "vat_amount": 101.56,
+        "total": 1229.96
+      },
+      "lines": 2,
+      "seconds": 0.194,
+      "run_id": "24f4409aa963",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 461,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-030",
+      "gold": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03440",
+        "issue_date": "2026-08-29",
+        "due_date": "2026-08-13",
+        "currency": "EUR",
+        "subtotal": 1014.8,
+        "vat_amount": 91.33,
+        "total": 1106.13
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "due_before_issue"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "due_before_issue"
+      ],
+      "extracted": {
+        "vendor": "Atelier Groen V.O.F.",
+        "invoice_number": "AG2026-03440",
+        "issue_date": "2026-08-29",
+        "due_date": "2026-08-13",
+        "currency": "EUR",
+        "subtotal": 1014.8,
+        "vat_amount": 91.33,
+        "total": 1106.13
+      },
+      "lines": 2,
+      "seconds": 0.183,
+      "run_id": "873f488e7da2",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 460,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-031",
+      "gold": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02875",
+        "issue_date": "2026-08-30",
+        "due_date": "2026-09-29",
+        "currency": "EUR",
+        "subtotal": 2718.0,
+        "vat_amount": 570.78,
+        "total": 3288.78
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02875",
+        "issue_date": "2026-08-30",
+        "due_date": "2026-09-29",
+        "currency": "EUR",
+        "subtotal": 2718,
+        "vat_amount": 570.78,
+        "total": 3288.78
+      },
+      "lines": 2,
+      "seconds": 0.274,
+      "run_id": "59b74aed86fb",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 455,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-032",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02922",
+        "issue_date": "2026-08-19",
+        "due_date": "2026-09-18",
+        "currency": "GBP",
+        "subtotal": 512.03,
+        "vat_amount": 97.29,
+        "total": 609.32
+      },
+      "gold_lines": 3,
+      "expected": "review",
+      "planted": [
+        "duplicate"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "vat_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02922",
+        "issue_date": "2026-08-19",
+        "due_date": "2026-09-18",
+        "currency": "GBP",
+        "subtotal": 512.03,
+        "vat_amount": 97.29,
+        "total": 609.32
+      },
+      "lines": 3,
+      "seconds": 0.189,
+      "run_id": "c9244b43d361",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 503,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-033",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02924",
+        "issue_date": "2026-09-07",
+        "due_date": "2026-10-07",
+        "currency": "GBP",
+        "subtotal": 601.44,
+        "vat_amount": 0.0,
+        "total": 601.44
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02924",
+        "issue_date": "2026-09-07",
+        "due_date": "2026-10-07",
+        "currency": "GBP",
+        "subtotal": 601.44,
+        "vat_amount": 0,
+        "total": 601.44
+      },
+      "lines": 1,
+      "seconds": 0.206,
+      "run_id": "6b28110faa92",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 417,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-034",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02866",
+        "issue_date": "2026-09-09",
+        "due_date": "2026-09-23",
+        "currency": "USD",
+        "subtotal": 245.0,
+        "vat_amount": 0.0,
+        "total": 245.0
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02866",
+        "issue_date": "2026-09-09",
+        "due_date": "2026-09-23",
+        "currency": "USD",
+        "subtotal": 245,
+        "vat_amount": 0,
+        "total": 245
+      },
+      "lines": 1,
+      "seconds": 0.181,
+      "run_id": "a1725b8e1588",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 425,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-035",
+      "gold": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03095",
+        "issue_date": "2026-09-13",
+        "due_date": "2026-10-13",
+        "currency": "EUR",
+        "subtotal": 8745.4,
+        "vat_amount": 1836.53,
+        "total": 10581.93
+      },
+      "gold_lines": 3,
+      "expected": "review",
+      "planted": [
+        "over_limit"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "over_limit"
+      ],
+      "extracted": {
+        "vendor": "Hollandse Energie B.V.",
+        "invoice_number": "HE-2026-03095",
+        "issue_date": "2026-09-13",
+        "due_date": "2026-10-13",
+        "currency": "EUR",
+        "subtotal": 8745.4,
+        "vat_amount": 1836.53,
+        "total": 10581.93
+      },
+      "lines": 3,
+      "seconds": 0.189,
+      "run_id": "505cc46b3740",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 483,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-036",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03322",
+        "issue_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "currency": "EUR",
+        "subtotal": 648.45,
+        "vat_amount": 0.0,
+        "total": 648.45
+      },
+      "gold_lines": 1,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03322",
+        "issue_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "currency": "EUR",
+        "subtotal": 648.45,
+        "vat_amount": 0,
+        "total": 648.45
+      },
+      "lines": 1,
+      "seconds": 0.152,
+      "run_id": "2a4e091e6a40",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 435,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-037",
+      "gold": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02884",
+        "issue_date": "2026-09-18",
+        "due_date": "2026-10-18",
+        "currency": "EUR",
+        "subtotal": 3227.68,
+        "vat_amount": 677.81,
+        "total": 3905.49
+      },
+      "gold_lines": 3,
+      "expected": "review",
+      "planted": [
+        "subtotal_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "subtotal_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Veldhoven Paper B.V.",
+        "invoice_number": "VP-2026-02884",
+        "issue_date": "2026-09-18",
+        "due_date": "2026-10-18",
+        "currency": "EUR",
+        "subtotal": 3227.68,
+        "vat_amount": 677.81,
+        "total": 3905.49
+      },
+      "lines": 3,
+      "seconds": 0.168,
+      "run_id": "0fbf17246cf8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 496,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-038",
+      "gold": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03327",
+        "issue_date": "2026-09-22",
+        "due_date": "2026-10-06",
+        "currency": "EUR",
+        "subtotal": 944.18,
+        "vat_amount": 0.0,
+        "total": 944.18
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Inkwell Supplies GmbH",
+        "invoice_number": "RE-2026-03327",
+        "issue_date": "2026-09-22",
+        "due_date": "2026-10-06",
+        "currency": "EUR",
+        "subtotal": 944.18,
+        "vat_amount": 0,
+        "total": 944.18
+      },
+      "lines": 3,
+      "seconds": 0.179,
+      "run_id": "19f7900a6df3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 515,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-039",
+      "gold": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02926",
+        "issue_date": "2026-09-24",
+        "due_date": "2026-10-08",
+        "currency": "GBP",
+        "subtotal": 62.04,
+        "vat_amount": 11.79,
+        "total": 73.83
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "vat_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "vat_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Swiftline Logistics Ltd",
+        "invoice_number": "SL2026-02926",
+        "issue_date": "2026-09-24",
+        "due_date": "2026-10-08",
+        "currency": "GBP",
+        "subtotal": 62.04,
+        "vat_amount": 11.79,
+        "total": 73.83
+      },
+      "lines": 1,
+      "seconds": 0.139,
+      "run_id": "ba98fb8c2f6b",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 418,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    },
+    {
+      "id": "inv-040",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02874",
+        "issue_date": "2026-09-26",
+        "due_date": "2026-10-26",
+        "currency": "USD",
+        "subtotal": 788.0,
+        "vat_amount": 0.0,
+        "total": 788.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02874",
+        "issue_date": "2026-09-26",
+        "due_date": "2026-10-26",
+        "currency": "USD",
+        "subtotal": 788,
+        "vat_amount": 0,
+        "total": 788
+      },
+      "lines": 2,
+      "seconds": 0.218,
+      "run_id": "b981622f8201",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 0,
+      "tokens": 457,
+      "cost_usd": 0.0,
+      "models": [
+        "fake/rules"
+      ],
+      "schema_valid": true,
+      "cached": false
+    }
+  ]
+}

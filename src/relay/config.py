@@ -117,6 +117,8 @@ class Settings(BaseSettings):
     # ---- API
     api_token: str = ""
     """If set, every /ops and /ai request needs `Authorization: Bearer <token>` or `X-Relay-Token`."""
+    allow_reset: bool = True
+    """POST /ops/admin/reset empties the ops store (used by the evaluation). Switch off outside a demo."""
     cors_origins: Annotated[list[str], NoDecode] = Field(default_factory=lambda: ["http://localhost:3000"])
     results_dir: Path = Path("results")
 

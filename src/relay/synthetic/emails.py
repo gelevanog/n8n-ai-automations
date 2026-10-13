@@ -50,6 +50,13 @@ def _e(n: int, category: str, name: str, address: str, subject: str, body: str, 
 
 
 def build_emails() -> list[Email]:
+    emails = _written()
+    for email in emails:
+        _visible_invoice_fields(email)
+    return emails
+
+
+def _written() -> list[Email]:
     e = _e
     return [
         # ------------------------------------------------------------------ sales leads (24)
@@ -1181,6 +1188,20 @@ Nieuw Guinea.""",
             hard="relevant to operations but not for any queue",
         ),
     ]
+
+
+def _visible_invoice_fields(email: Email) -> None:
+    """Triage sees the email, not the PDF: gold invoice numbers and amounts count only where the email states them
+    (the attachment is read later, by the invoice intake workflow, and scored there)."""
+    if email.category != "invoice":
+        return
+    from relay.gateway.textutil import grounded_number, grounded_text
+
+    source = f"{email.subject}\n{email.body}"
+    if not grounded_text(email.fields.get("invoice_number"), source):
+        email.fields["invoice_number"] = None
+    if not grounded_number(email.fields.get("amount"), source):
+        email.fields["amount"] = None
 
 
 def email_payload(email: Email, invoices_dir: Path | None = None) -> dict[str, Any]:
