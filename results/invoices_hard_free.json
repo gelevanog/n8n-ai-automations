@@ -1,0 +1,683 @@
+{
+  "name": "free",
+  "suite": "invoices_hard",
+  "run_at": "2026-10-14T02:10:04+00:00",
+  "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+  "free_only": true,
+  "transport": "n8n webhooks",
+  "summary": {
+    "items": 12,
+    "errors": 0,
+    "error_rate": 0.0,
+    "latency_p50_s": 9.92,
+    "latency_p95_s": 15.79,
+    "llm_seconds_p50": 9.55,
+    "llm_calls": 12,
+    "llm_calls_per_item": 1.0,
+    "invalid_model_outputs": 0,
+    "provider_errors_retried": 0,
+    "tokens": 18372,
+    "cost_usd": 0.0,
+    "cost_per_item_usd": 0.0,
+    "models": {
+      "nvidia/nemotron-3-super-120b-a12b:free": 12
+    },
+    "fields": {
+      "vendor": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "invoice_number": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "issue_date": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "due_date": {
+        "scored": 12,
+        "correct": 11,
+        "accuracy": 0.9167,
+        "misses": [
+          {
+            "id": "hinv-06",
+            "got": null,
+            "gold": "2026-09-12"
+          }
+        ]
+      },
+      "currency": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "subtotal": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "vat_amount": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      },
+      "total": {
+        "scored": 12,
+        "correct": 12,
+        "accuracy": 1.0,
+        "misses": []
+      }
+    },
+    "field_accuracy": 0.9896,
+    "all_fields_right": "11/12",
+    "line_count_right": 12,
+    "decision_accuracy": 1.0,
+    "auto_posted": 6,
+    "auto_post_rate": 0.5,
+    "problem_invoices": 6,
+    "problem_invoices_auto_posted": 0,
+    "problem_invoices_auto_posted_ids": [],
+    "clean_invoices": 6,
+    "clean_invoices_sent_to_review": 0,
+    "clean_review_reasons": {},
+    "per_issue": {
+      "credit_note": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "total_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "bank_details_changed": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "vat_id_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "ai_directed_text": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      },
+      "vat_mismatch": {
+        "planted": 1,
+        "flagged": 1,
+        "flagged_with_this_issue": 1
+      }
+    },
+    "bills_in_accounting": 6,
+    "double_posted": []
+  },
+  "items": [
+    {
+      "id": "hinv-01",
+      "gold": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0918",
+        "issue_date": "2026-09-03",
+        "due_date": "2026-10-03",
+        "currency": "EUR",
+        "subtotal": 1839.0,
+        "vat_amount": 0.0,
+        "total": 1839.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0918",
+        "issue_date": "2026-09-03",
+        "due_date": "2026-10-03",
+        "currency": "EUR",
+        "subtotal": 1839,
+        "vat_amount": 0,
+        "total": 1839
+      },
+      "lines": 2,
+      "seconds": 9.674,
+      "run_id": "67d8b366fde6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 9107,
+      "tokens": 1684,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-02",
+      "gold": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0952",
+        "issue_date": "2026-09-17",
+        "due_date": "2026-10-17",
+        "currency": "EUR",
+        "subtotal": 1472.5,
+        "vat_amount": 0.0,
+        "total": 1472.5
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0952",
+        "issue_date": "2026-09-17",
+        "due_date": "2026-10-17",
+        "currency": "EUR",
+        "subtotal": 1472.5,
+        "vat_amount": 0,
+        "total": 1472.5
+      },
+      "lines": 3,
+      "seconds": 14.254,
+      "run_id": "4b97fa021de0",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 14055,
+      "tokens": 1717,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-03",
+      "gold": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-311",
+        "issue_date": "2026-09-30",
+        "due_date": "2026-10-30",
+        "currency": "EUR",
+        "subtotal": 1274.4,
+        "vat_amount": 245.26,
+        "total": 1519.66
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-311",
+        "issue_date": "2026-09-30",
+        "due_date": "2026-10-30",
+        "currency": "EUR",
+        "subtotal": 1274.4,
+        "vat_amount": 245.26,
+        "total": 1519.66
+      },
+      "lines": 2,
+      "seconds": 19.721,
+      "run_id": "510439a50a37",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 19557,
+      "tokens": 1738,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-04",
+      "gold": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0447",
+        "issue_date": "2026-09-08",
+        "due_date": "2026-09-22",
+        "currency": "GBP",
+        "subtotal": 866.0,
+        "vat_amount": 0.0,
+        "total": 866.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0447",
+        "issue_date": "2026-09-08",
+        "due_date": "2026-09-22",
+        "currency": "GBP",
+        "subtotal": 866,
+        "vat_amount": 0,
+        "total": 866
+      },
+      "lines": 2,
+      "seconds": 15.79,
+      "run_id": "ee674dbe8482",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 15584,
+      "tokens": 1679,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-05",
+      "gold": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0461",
+        "issue_date": "2026-09-24",
+        "due_date": "2026-10-08",
+        "currency": "GBP",
+        "subtotal": 1053.5,
+        "vat_amount": 0.0,
+        "total": 1053.5
+      },
+      "gold_lines": 3,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0461",
+        "issue_date": "2026-09-24",
+        "due_date": "2026-10-08",
+        "currency": "GBP",
+        "subtotal": 1053.5,
+        "vat_amount": 0,
+        "total": 1053.5
+      },
+      "lines": 3,
+      "seconds": 8.516,
+      "run_id": "cfe39639c9ac",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 8317,
+      "tokens": 1461,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-06",
+      "gold": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": "CN-2026-0042",
+        "issue_date": "2026-09-12",
+        "due_date": "2026-09-12",
+        "currency": "EUR",
+        "subtotal": -240.0,
+        "vat_amount": -50.4,
+        "total": -290.4
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "credit_note"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "ungrounded_total",
+        "credit_note"
+      ],
+      "extracted": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": "CN-2026-0042",
+        "issue_date": "2026-09-12",
+        "due_date": null,
+        "currency": "EUR",
+        "subtotal": -240,
+        "vat_amount": -50.4,
+        "total": -290.4
+      },
+      "lines": 1,
+      "seconds": 7.403,
+      "run_id": "075e8a582308",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 7189,
+      "tokens": 1311,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-07",
+      "gold": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0977",
+        "issue_date": "2026-09-29",
+        "due_date": "2026-10-29",
+        "currency": "EUR",
+        "subtotal": 1458.0,
+        "vat_amount": 0.0,
+        "total": 1508.0
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "total_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "total_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Papierhaus Nord GmbH",
+        "invoice_number": "PN-26-0977",
+        "issue_date": "2026-09-29",
+        "due_date": "2026-10-29",
+        "currency": "EUR",
+        "subtotal": 1458,
+        "vat_amount": 0,
+        "total": 1508
+      },
+      "lines": 2,
+      "seconds": 10.161,
+      "run_id": "bbf111b43a4a",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 9985,
+      "tokens": 1568,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-08",
+      "gold": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": "RFP-26-1180",
+        "issue_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "currency": "EUR",
+        "subtotal": 855.0,
+        "vat_amount": 179.55,
+        "total": 1034.55
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "bank_details_changed"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "bank_details_changed"
+      ],
+      "extracted": {
+        "vendor": "Rotterdam Freight Partners B.V.",
+        "invoice_number": "RFP-26-1180",
+        "issue_date": "2026-09-15",
+        "due_date": "2026-10-15",
+        "currency": "EUR",
+        "subtotal": 855,
+        "vat_amount": 179.55,
+        "total": 1034.55
+      },
+      "lines": 1,
+      "seconds": 5.49,
+      "run_id": "bbf5336d0822",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5317,
+      "tokens": 1267,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-09",
+      "gold": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-318",
+        "issue_date": "2026-10-02",
+        "due_date": "2026-11-01",
+        "currency": "EUR",
+        "subtotal": 420.0,
+        "vat_amount": 88.2,
+        "total": 508.2
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "vat_id_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "vat_id_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-318",
+        "issue_date": "2026-10-02",
+        "due_date": "2026-11-01",
+        "currency": "EUR",
+        "subtotal": 420,
+        "vat_amount": 88.2,
+        "total": 508.2
+      },
+      "lines": 1,
+      "seconds": 6.953,
+      "run_id": "83d1ef2d8343",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 6826,
+      "tokens": 1269,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-10",
+      "gold": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0470",
+        "issue_date": "2026-10-01",
+        "due_date": "2026-10-15",
+        "currency": "GBP",
+        "subtotal": 420.0,
+        "vat_amount": 0.0,
+        "total": 420.0
+      },
+      "gold_lines": 1,
+      "expected": "review",
+      "planted": [
+        "ai_directed_text"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "ai_directed_text"
+      ],
+      "extracted": {
+        "vendor": "Brightwave Studio Ltd",
+        "invoice_number": "BW-0470",
+        "issue_date": "2026-10-01",
+        "due_date": "2026-10-15",
+        "currency": "GBP",
+        "subtotal": 420,
+        "vat_amount": 0,
+        "total": 420
+      },
+      "lines": 1,
+      "seconds": 5.211,
+      "run_id": "0b68b7de01c8",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 5089,
+      "tokens": 1240,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-11",
+      "gold": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02901",
+        "issue_date": "2026-10-01",
+        "due_date": "2026-10-31",
+        "currency": "USD",
+        "subtotal": 644.0,
+        "vat_amount": 0.0,
+        "total": 644.0
+      },
+      "gold_lines": 2,
+      "expected": "auto_post",
+      "planted": [],
+      "http": 200,
+      "error": null,
+      "status": "posted",
+      "issues": [],
+      "extracted": {
+        "vendor": "Cloudforge Software Inc.",
+        "invoice_number": "CF-2026-02901",
+        "issue_date": "2026-10-01",
+        "due_date": "2026-10-31",
+        "currency": "USD",
+        "subtotal": 644,
+        "vat_amount": 0,
+        "total": 644
+      },
+      "lines": 2,
+      "seconds": 10.701,
+      "run_id": "002903b205e6",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 10536,
+      "tokens": 1741,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    },
+    {
+      "id": "hinv-12",
+      "gold": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-324",
+        "issue_date": "2026-10-06",
+        "due_date": "2026-11-05",
+        "currency": "EUR",
+        "subtotal": 336.0,
+        "vat_amount": 64.88,
+        "total": 400.88
+      },
+      "gold_lines": 2,
+      "expected": "review",
+      "planted": [
+        "vat_mismatch"
+      ],
+      "http": 202,
+      "error": null,
+      "status": "review",
+      "issues": [
+        "vat_mismatch"
+      ],
+      "extracted": {
+        "vendor": "Lumen Facilities B.V.",
+        "invoice_number": "LF-2026-324",
+        "issue_date": "2026-10-06",
+        "due_date": "2026-11-05",
+        "currency": "EUR",
+        "subtotal": 336,
+        "vat_amount": 64.88,
+        "total": 400.88
+      },
+      "lines": 2,
+      "seconds": 14.104,
+      "run_id": "6bc9c5a796b3",
+      "llm_calls": 1,
+      "llm_attempts": 1,
+      "llm_ms": 13954,
+      "tokens": 1697,
+      "cost_usd": 0.0,
+      "models": [
+        "nvidia/nemotron-3-super-120b-a12b:free"
+      ],
+      "schema_valid": true,
+      "provider_errors": 0,
+      "cached": false
+    }
+  ]
+}

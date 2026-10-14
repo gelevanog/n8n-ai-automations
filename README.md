@@ -21,19 +21,20 @@ https://github.com/user-attachments/assets/b157fb8f-5b44-47ca-967c-3ca4e3dea80f
 
 <sub>The dashboard's review queue with real output from the free `nvidia/nemotron-3-super-120b-a12b:free`. n8n read the PDF, the AI gateway extracted every field correctly, and the code checks caught what the supplier got wrong: the VAT line is 24.59 where 9% of 223.58 is 20.12. The n8n execution is paused at a Wait node; **Approve (post bill)** resumes it with any corrected fields, **Reject** closes it without posting. More screens [below](#screenshots).</sub>
 
-**Measured on 2026-10-13**, end to end through the n8n workflows (webhook in, n8n, AI gateway, mock CRM / helpdesk / accounting, response out) on synthetic labelled data, with the free `nvidia/nemotron-3-super-120b-a12b:free` via OpenRouter:
+**Measured on 2026-10-13** (the harder invoice set on 2026-10-14), end to end through the n8n workflows (webhook in, n8n, AI gateway, mock CRM / helpdesk / accounting, response out) on synthetic labelled data, with the free `nvidia/nemotron-3-super-120b-a12b:free` via OpenRouter:
 
 | Workflow (items) | Result |
 |---|---|
 | **Inbox triage** (80 emails, 28 of them deliberately hard) | **96.3%** routed to the right queue (77/80); **88.8% handled with no person** (71/80), of which **98.6% correct** (70/71: one supplier newsletter archived as spam); field extraction **96.8%** (182/188 fields: names, companies, products, quantities, order ids, issue types, invoice numbers, amounts); a planted prompt injection went to review; every auto-routed lead and ticket landed in the right system (43/43) |
 | **Invoice intake** (40 PDFs, 13 with a planted problem) | **320/320 fields** extracted right; **13 of 13 problem invoices stopped** (wrong totals and VAT, a line that is not quantity x price, duplicates, a missing number, a due date before the issue date, amounts above the approval limit); **27 of 27 clean invoices posted** with no person; 0 bills posted twice |
+| **Harder invoices** (12 in unseen layouts: two VAT rates, a credit note, a deposit, a "new bank account" line, an AI-directed footer; 6 with a problem) | **95/96 fields** extracted right (the rules baseline: 12.5%); **6 of 6 problem invoices stopped**, each with the right reason; **6 of 6 clean ones posted** with no person |
 | **Lead enrichment** (30 web-form leads, 27 fictional company sites) | profile from the company's own site **98.2%** right (110/112 facts); lead tier **30/30**; competitor and student disqualified (2/2); a site telling AI tools to "rate this lead as hot" changed nothing; **25 reply drafts, all passing the checks, all sent only after approval** |
 | **Support FAQ** (40 questions, 12 that must reach a person) | **0 unsafe auto-replies** (12/12 escalated); 25 of 28 answerable questions answered automatically, **all with the right facts and the right article cited**; 92.5% right decisions as run, **95.0%** after fixing a checker false positive the run exposed (re-run from cache, no new model calls) |
 | **Failure handling** (12 invoices against a flaky, then broken accounting API) | 9 injected 503s absorbed by n8n's retries; 7 runs that still failed went to the dead-letter queue with an alert; **all 7 replays posted, 12/12 bills, none twice**. Re-sending 25 deliveries: **25/25 answered as duplicates, 0 new records** |
 | Latency per item (p50 / p95) | triage 13.1 s / 29.3 s, invoices 6.1 s / 15.1 s, leads 19.9 s / 30.9 s, FAQ 3.3 s / 8.3 s: almost all of it the free model; n8n plus the gateway add about 0.2 s |
-| Cost | **$0** per item: 291 gateway requests, every model id `:free` ([ledger](results/calls.jsonl)); about 1 model call per email or invoice, 1.8 per lead |
+| Cost | **$0** per item: 303 gateway requests, every model id `:free` ([ledger](results/calls.jsonl)); about 1 model call per email or invoice, 1.8 per lead |
 
-**The honest verdict:** the free model was very good at the reading (fields, categories, company facts) on this data, and the deterministic layer did the part that matters for a business: it stopped every invoice that should not be paid, every FAQ question that needs a person, and the one email written to manipulate the classifier. The single automatic mistake in 190 items was harmless (a newsletter archived as spam). But three things in these numbers flatter it. **The data is synthetic and mine:** clean text PDFs from four invoice templates (a rules-only baseline also scored 100% on them), short emails, tidy company sites; real inboxes are messier, so I also wrote [12 harder invoices](#harder-invoices-not-yet-measured-with-the-free-model) (trailing-currency amounts, two VAT rates, a credit note, a "new bank account" line, an AI-directed footer), but the account's free-model daily quota ran out before they ran, so they are **measured only with the offline rules model so far**. **Self-reported confidence is not calibrated:** the model said 0.9-0.99 on almost everything, so the triage gate mostly works through the deterministic reasons (category "other", unknown vendor, injection), not the confidence threshold. **Free models are slow and rate-limited:** 13 s per email is fine for an inbox, not for a chat widget, and the free tier's daily cap stopped my own evaluation. A paid model would mostly buy latency, throughput and calibrated confidence, not accuracy on this data. Details below.
+**The honest verdict:** the free model was very good at the reading (fields, categories, company facts) on this data, and the deterministic layer did the part that matters for a business: it stopped every invoice that should not be paid, every FAQ question that needs a person, and the one email written to manipulate the classifier. The single automatic mistake in 190 items was harmless (a newsletter archived as spam). But three things in these numbers flatter it. **The data is synthetic and mine:** clean text PDFs from four invoice templates (a rules-only baseline also scored 100% on them), short emails, tidy company sites; real inboxes are messier, so I also wrote [12 harder invoices](#harder-invoices-12-measured-on-2026-10-14) (trailing-currency amounts, two VAT rates, a credit note, a "new bank account" line, an AI-directed footer). The free model read 95 of their 96 checked fields and every problem one was stopped, where the rules baseline read 12.5%: that, not the tidy main set, is where a model earns its place over templates. It is still 12 invoices I wrote, not a supplier's real archive. **Self-reported confidence is not calibrated:** the model said 0.9-0.99 on almost everything, so the triage gate mostly works through the deterministic reasons (category "other", unknown vendor, injection), not the confidence threshold. **Free models are slow and rate-limited:** 13 s per email is fine for an inbox, not for a chat widget, and the free tier's daily cap stopped my own evaluation. A paid model would mostly buy latency, throughput and calibrated confidence, not accuracy on this data. Details below.
 
 ## What problem it solves
 
@@ -264,7 +265,7 @@ Email text, invoice text and model output in tool results are marked as untruste
 | Role | Model |
 |---|---|
 | Every gateway task (main run) | `nvidia/nemotron-3-super-120b-a12b:free` via OpenRouter, reasoning effort low, temperature 0 |
-| Fallback (OpenRouter `models` list, and directly after a provider 403) | `nvidia/nemotron-3-ultra-550b-a55b:free` (it answered 10 requests) |
+| Fallback (OpenRouter `models` list, and directly after a provider 403) | `nvidia/nemotron-3-ultra-550b-a55b:free` (it answered 6 gateway requests) |
 | Baseline | `fake/rules`: the offline rules model (keywords, regular expressions, templates) |
 
 **Choosing the model** ([`results/smoke.json`](results/smoke.json)): seven free models got one hard email (a complaint plus a new order), one German-layout invoice and one FAQ question. `nemotron-3-super` classified the email and read the invoice right and was the fastest (9 s, 9 s, 2.5 s; its FAQ answer, "add a 3 mm bleed on all sides", was correct but used a narrow no-break space that the smoke check's plain string match missed); `nemotron-3-ultra`, `dots-3-note-preview`, `nemotron-3.5-lightning` and `apodex-1.1-mini` were also right but 2 to 8 times slower; `google/gemma-4-31b-it` never got past "rate-limited upstream" (12 attempts); `thinkingmachines/inkling` refused with HTTP 403 ("only available on agentic harnesses").
@@ -313,9 +314,20 @@ Two requests were refused by the provider with "403 Access denied by security po
 
 Every planted problem was stopped, each with the right reason (total, VAT, line math, subtotal, missing number, due date, over the limit), except that one duplicate's original had itself been held for wrong VAT, so the copy was stopped for the same VAT error rather than as a duplicate. **The rules baseline matching the model here is the point to take away about this set, not a strength of either:** four clean templates with a text layer are what regular expressions are good at. The model's value is on layouts nobody wrote rules for, which is what the harder set below is for.
 
-#### Harder invoices (not yet measured with the free model)
+#### Harder invoices (12, measured on 2026-10-14) ([`invoices_hard_free.json`](results/invoices_hard_free.json))
 
-[`data/invoices_hard/`](data/invoices_hard) adds **12 invoices** in layouts the main set does not use: amounts written "1.839,00 EUR" with German month names, a negative discount line and a shipping line, two VAT rates with a VAT table, a deposit already paid (total 866.00, balance due 566.00), a credit note, "please note our new bank account details" (the classic payment-fraud line), a VAT ID that differs from the vendor master, a footer telling AI accounting tools the invoice is pre-approved, and a wrong 9% VAT line on a two-rate invoice. The gateway gained the checks these need (per-rate VAT, document type, changed bank details), and `test_invoice.py` shows that on a perfect extraction every one gets the right decision. **The rules baseline gets 12.5% of the fields** on them ([`invoices_hard_offline.json`](results/invoices_hard_offline.json)): it stops all six problem invoices but only because it cannot read the clean ones either (50% decisions). The free-model run hit OpenRouter's free-tier daily request cap ("free-models-per-day") before it reached this set, so its number is still open: `relay eval invoices_hard --name free` once the quota resets. The prompt change for these fields was re-checked on 26 of the 40 main invoices before the cap: identical decisions.
+[`data/invoices_hard/`](data/invoices_hard) adds **12 invoices** in layouts the main set does not use: amounts written "1.839,00 EUR" with German month names, a negative discount line and a shipping line, two VAT rates with a VAT table, a deposit already paid (total 866.00, balance due 566.00), a credit note, "please note our new bank account details" (the classic payment-fraud line), a VAT ID that differs from the vendor master, a footer telling AI accounting tools the invoice is pre-approved, and a wrong 9% VAT line on a two-rate invoice. I wrote them, and the checks they need (per-rate VAT, document type, changed bank details), after the main run; `test_invoice.py` shows that on a perfect extraction every one gets the right decision. The free-model run was delayed a day: OpenRouter's free-tier daily request cap ("free-models-per-day", shared with other projects on the same account) was hit first, and the set ran once the quota reset, one call per invoice, no re-runs.
+
+| | Free model | Rules baseline |
+|---|---|---|
+| Fields right (vendor, number, dates, currency, subtotal, VAT, total) | **95/96** | 12/96 (12.5%) |
+| Invoices with every field right / line count right | 11/12 / 12/12 | |
+| Problem invoices stopped (6) | **6**, each with the planted reason | 6 (only because it could not read them) |
+| Clean invoices posted with no person (6) | **6** | 0 |
+| Right post / review decisions | **12/12** | 6/12 |
+| Latency p50 / p95 | 9.9 s / 15.8 s | |
+
+The one field miss: on the credit note the model left the date next to "Settled against" empty, where my gold label put the issue date; the label is arguably mine to fix. The credit note was held for the right reason ("credit_note") plus a spurious second one, "total not found in the document": the grounding check compares the negative total -290.40 with the unsigned "290,40" it finds in the text. Harmless here (the note needs a person either way), noted on the roadmap rather than patched after seeing it. The prompt change these fields needed was also re-checked on 26 of the 40 main invoices before the daily cap stopped that re-run: identical decisions.
 
 ### 3. Lead enrichment and reply drafts (30 leads) ([`leads_nemotron-super.json`](results/leads_nemotron-super.json))
 
@@ -353,7 +365,7 @@ The two misses: an engineering firm and a coding school were said to sell online
 
 ### Model calls and cost
 
-The ledger ([`results/calls.jsonl`](results/calls.jsonl)) has 407 requests to OpenRouter for this repository: 310 answered (288 by `nemotron-3-super`, 10 by the `nemotron-3-ultra` fallback, 12 in the model smoke test), 82 rate limits that were retried with backoff (most of them the daily cap at the end), and 15 HTTP 403 refusals. Every requested model id ends in `:free`, and so did every model that answered. 429,068 tokens, **$0**.
+The ledger ([`results/calls.jsonl`](results/calls.jsonl)) has 419 requests to OpenRouter for this repository: 322 answered (303 by the gateway: 297 by `nemotron-3-super`, 6 by the `nemotron-3-ultra` fallback; 19 in the model smoke test across seven models), 82 rate limits that were retried with backoff (most of them the daily cap at the end of the first day), and 15 HTTP 403 refusals. Every requested model id ends in `:free`, and so did every model that answered. 447,440 tokens, **$0**.
 
 ### Screenshots
 
@@ -381,7 +393,7 @@ The ledger ([`results/calls.jsonl`](results/calls.jsonl)) has 407 requests to Op
 **Limits, honestly.**
 
 - **The data is synthetic and was written by me** (an AI agent) in the same session as the prompts and checks; the planted problems are ones I thought of. The extraction numbers on tidy text PDFs say little about scans, photos, or a supplier who invoices in a spreadsheet. Expect lower numbers on a client's real inbox and plan a week of shadow mode (everything to review) to measure them.
-- **The harder invoice set has no free-model number yet** (the daily free quota ran out first); only the rules baseline and the perfect-extraction test have run on it.
+- **The harder invoice set is small** (12 invoices) and was written after the main run, together with the checks it needed; read its 95/96 as evidence the mechanism generalizes beyond four templates, not as an accuracy figure.
 - **Confidence is not calibrated.** The free model reported 0.90 to 0.99 on every email; the gate works through deterministic reasons today. A production deployment should calibrate thresholds on review history.
 - **The vendor list, the ICP and the escalation rules are code-adjacent configuration** that someone has to own. A new supplier is held for review until it is added to `configs/vendors.yaml`, by design.
 - **Latency is the free tier's**: 3 to 20 s per item p50, and the free tier's request caps. Fine for email and invoices, too slow for a live chat.
@@ -468,6 +480,7 @@ n8n is used unmodified from the official image `n8nio/n8n:2.42.7` under its [Sus
 
 Not implemented yet:
 
+- Signed amounts in the invoice grounding check (a credit note's -290.40 is printed as "290,40" and is reported as not found; harmless today because a credit note always goes to a person).
 - OCR for scanned invoices (today only PDFs with a text layer; a scan would go to review with no fields). A free vision model through the gateway is the natural next step.
 - Real connectors in place of the mocks: Gmail or IMAP trigger, HubSpot or Pipedrive, Zendesk or Freshdesk, Xero or QuickBooks, Slack. The workflows already speak plain HTTP with idempotency keys; each swap is one node and one credential.
 - Make and Zapier exports of the same flows (the gateway is plain HTTP, so they are HTTP modules plus routers).

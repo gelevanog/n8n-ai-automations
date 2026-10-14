@@ -300,6 +300,135 @@
         "duplicate_p50_seconds": 0.14
       }
     },
+    "invoices_hard_free": {
+      "suite": "invoices_hard",
+      "name": "free",
+      "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+      "run_at": "2026-10-14T02:10:04+00:00",
+      "summary": {
+        "items": 12,
+        "errors": 0,
+        "error_rate": 0.0,
+        "latency_p50_s": 9.92,
+        "latency_p95_s": 15.79,
+        "llm_seconds_p50": 9.55,
+        "llm_calls": 12,
+        "llm_calls_per_item": 1.0,
+        "invalid_model_outputs": 0,
+        "provider_errors_retried": 0,
+        "tokens": 18372,
+        "cost_usd": 0.0,
+        "cost_per_item_usd": 0.0,
+        "models": {
+          "nvidia/nemotron-3-super-120b-a12b:free": 12
+        },
+        "fields": {
+          "vendor": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "invoice_number": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "issue_date": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "due_date": {
+            "scored": 12,
+            "correct": 11,
+            "accuracy": 0.9167,
+            "misses": [
+              {
+                "id": "hinv-06",
+                "got": null,
+                "gold": "2026-09-12"
+              }
+            ]
+          },
+          "currency": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "subtotal": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "vat_amount": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          },
+          "total": {
+            "scored": 12,
+            "correct": 12,
+            "accuracy": 1.0,
+            "misses": []
+          }
+        },
+        "field_accuracy": 0.9896,
+        "all_fields_right": "11/12",
+        "line_count_right": 12,
+        "decision_accuracy": 1.0,
+        "auto_posted": 6,
+        "auto_post_rate": 0.5,
+        "problem_invoices": 6,
+        "problem_invoices_auto_posted": 0,
+        "problem_invoices_auto_posted_ids": [],
+        "clean_invoices": 6,
+        "clean_invoices_sent_to_review": 0,
+        "clean_review_reasons": {},
+        "per_issue": {
+          "credit_note": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "total_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "bank_details_changed": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "vat_id_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "ai_directed_text": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          },
+          "vat_mismatch": {
+            "planted": 1,
+            "flagged": 1,
+            "flagged_with_this_issue": 1
+          }
+        },
+        "bills_in_accounting": 6,
+        "double_posted": [],
+        "fresh_items": 12,
+        "latency_fresh_p50_s": 9.92,
+        "latency_fresh_p95_s": 15.79
+      }
+    },
     "invoices_hard_offline": {
       "suite": "invoices_hard",
       "name": "offline",
@@ -1673,6 +1802,27 @@
       "key": "latency_p50_s",
       "metric": "latency p50 (s)",
       "value": 0.24
+    },
+    {
+      "suite": "invoices_hard",
+      "run": "free",
+      "key": "field_accuracy",
+      "metric": "field extraction accuracy",
+      "value": 0.9896
+    },
+    {
+      "suite": "invoices_hard",
+      "run": "free",
+      "key": "decision_accuracy",
+      "metric": "post / review decision accuracy",
+      "value": 1.0
+    },
+    {
+      "suite": "invoices_hard",
+      "run": "free",
+      "key": "problem_invoices_auto_posted",
+      "metric": "problem invoices auto-posted",
+      "value": 0
     },
     {
       "suite": "invoices_hard",
